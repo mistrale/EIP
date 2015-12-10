@@ -1,0 +1,90 @@
+﻿<Page
+    x:Class="Caritathelp.Inscription"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Caritathelp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="Assets/Inscription.png"/>
+        </Grid.Background>
+        <TextBox x:ConnectionId='1' x:Name="NameTextBox" 
+                 HorizontalAlignment="Left" 
+                 Margin="25,101,0,0" 
+                 TextWrapping="Wrap" 
+                                            
+                 Text="Nom"
+                 VerticalAlignment="Top"
+                 Height="57" Width="159"
+                 FontSize="29.333"
+                 Background="White"
+                 Foreground="#FF5C5555" />
+        <TextBox x:ConnectionId='2' x:Name="FirstNameTextBox" 
+        	HorizontalAlignment="Left" 
+        	Margin="215,101,0,0" 
+        	TextWrapping="Wrap" 
+        	                           
+        	Text="Prénom"
+        	VerticalAlignment="Top"
+        	Height="57" Width="163"
+        	FontSize="29.333"
+        	Background="White"
+        	Foreground="#FF5C5555" />
+        <TextBox x:ConnectionId='3' x:Name="EmailTextBox" 
+        	HorizontalAlignment="Left" 
+        	Margin="25,237,0,0" 
+        	TextWrapping="Wrap" 
+        	                           
+        	Text="Email"
+        	VerticalAlignment="Top"
+        	Height="57" Width="353"
+        	FontSize="29.333"
+        	Background="White"
+        	Foreground="#FF5C5555" />
+        <PasswordBox x:ConnectionId='4' x:Name="PasswordPasswordBox"
+            Password=""
+            PlaceholderText="Password"
+        	HorizontalAlignment="Left" 
+        	Margin="25,315,0,0"  
+        	                               
+        	VerticalAlignment="Top"
+        	Height="57" Width="353"
+        	FontSize="29.333"
+        	Background="White"
+        	Foreground="#FF5C5555" />
+        <PasswordBox x:ConnectionId='5' x:Name="PasswordConfirmationPasswordBox"
+            Password=""
+            PlaceholderText="Confirmation Password"
+            HorizontalAlignment="Left" 
+        	Margin="25,397,0,0"  
+        	                               
+        	VerticalAlignment="Top"
+        	Height="57" Width="353"
+        	FontSize="29.333"
+        	Background="White"
+        	Foreground="#FF5C5555" />
+        <Button x:ConnectionId='6' x:Name="RegisterButton"
+                Content="S'enregistrer" HorizontalAlignment="Left" 
+                Margin="25,465,0,0" VerticalAlignment="Top"
+                                      
+                Height="77" Width="353" Background="#FF4C4949" BorderThickness="0"/>
+        <TextBlock x:Name="warningTextBlock"
+                   HorizontalAlignment="Left" Margin="25,549,0,0"
+                   TextWrapping="Wrap" VerticalAlignment="Top" 
+                   Height="61" Width="353" FontSize="26.667" FontWeight="Bold" Foreground="#FFDA1313"
+                   />
+        <ProgressRing HorizontalAlignment="Left"
+                      Margin="175,573,0,0" VerticalAlignment="Top"
+                      Name="progressBar"
+                      Background="Transparent"/>
+        <DatePicker HorizontalAlignment="Left" Margin="25,169,0,0"
+                    VerticalAlignment="Top" Height="46" Width="353"
+                    Name="DateBox" Background="White"
+                    Foreground="Black"/>
+    </Grid>
+</Page>
+

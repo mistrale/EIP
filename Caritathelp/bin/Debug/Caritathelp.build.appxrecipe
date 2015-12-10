@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>SIKORAV</Machine>
+    <WindowsUser>audes_000</WindowsUser>
+    <TargetPlatformIdentifier>WindowsPhoneApp</TargetPlatformIdentifier>
+    <TargetOsVersion>6.3</TargetOsVersion>
+    <TargetOsDescription>Windows Phone 8.1</TargetOsDescription>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <PackageIdentityName>e057ce99-977e-4007-b8c0-f06a6e239167</PackageIdentityName>
+    <IntermediateOutputPath>C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\obj\Debug\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\bin\Debug\Caritathelp.exe">
+      <PackagePath>Caritathelp.exe</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\packages\Newtonsoft.Json.7.0.1\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll">
+      <PackagePath>Newtonsoft.Json.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\Assets\AlertButton.png">
+      <PackagePath>Assets\AlertButton.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\Assets\AssociationButton.png">
+      <PackagePath>Assets\AssociationButton.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\Assets\Background.png">
+      <PackagePath>Assets\Background.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\Assets\ChatButton.png">
+      <PackagePath>Assets\ChatButton.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\Assets\EventButton.png">
+      <PackagePath>Assets\EventButton.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\Assets\FriendsButton.png">
+      <PackagePath>Assets\FriendsButton.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\Assets\HomeButton.png">
+      <PackagePath>Assets\HomeButton.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\Assets\Inscription.png">
+      <PackagePath>Assets\Inscription.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\Assets\Logo.scale-240.png">
+      <PackagePath>Assets\Logo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\Assets\LogoutButton.png">
+      <PackagePath>Assets\LogoutButton.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\Assets\OptionButton.png">
+      <PackagePath>Assets\OptionButton.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\Assets\ProfilButton.png">
+      <PackagePath>Assets\ProfilButton.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\Assets\SmallLogo.scale-240.png">
+      <PackagePath>Assets\SmallLogo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\Assets\SplashScreen.scale-240.png">
+      <PackagePath>Assets\SplashScreen.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\Assets\Square71x71Logo.scale-240.png">
+      <PackagePath>Assets\Square71x71Logo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\Assets\StoreLogo.scale-240.png">
+      <PackagePath>Assets\StoreLogo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\Assets\WideLogo.scale-240.png">
+      <PackagePath>Assets\WideLogo.scale-240.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\Assets\WtfButton.png">
+      <PackagePath>Assets\WtfButton.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\bin\Debug\Caritathelp.xr.xml">
+      <PackagePath>Caritathelp.xr.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\bin\Debug\App.xbf">
+      <PackagePath>App.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\bin\Debug\Accueil.xbf">
+      <PackagePath>Accueil.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\bin\Debug\Inscription.xbf">
+      <PackagePath>Inscription.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\bin\Debug\MainPage.xbf">
+      <PackagePath>MainPage.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\bin\Debug\Profil.xbf">
+      <PackagePath>Profil.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\Caritathelp\Caritathelp\bin\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
