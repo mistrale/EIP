@@ -57,8 +57,10 @@ namespace Caritathelp
             var values = new List<KeyValuePair<string, string>>
                     {
 
-                        new KeyValuePair<string, string>("mail", Email.Text),
-                        new KeyValuePair<string, string>("password", Password.Password)
+                        //new KeyValuePair<string, string>("mail", Email.Text),
+                        //new KeyValuePair<string, string>("password", Password.Password)
+                        new KeyValuePair<string, string>("mail", "dsikorav12@gmail.com"),
+                        new KeyValuePair<string, string>("password", "password")
                     };
             var httpClient = new HttpClient(new HttpClientHandler());
             try
@@ -85,6 +87,14 @@ namespace Caritathelp
                         localSettings.Values["mail"] = message.response.mail;
                         localSettings.Values["firstname"] = message.response.firstname;
                         localSettings.Values["lastname"] = message.response.lastname;
+                        localSettings.Values["city"] = message.response.city;
+                        localSettings.Values["birdthday"] = message.response.birthday;
+                        localSettings.Values["genre"] = message.response.genre;
+                        localSettings.Values["allowgps"] = message.response.allowgps;
+                        localSettings.Values["password"] = Password.Password;
+                        localSettings.Values["id"] = message.response.id;
+                        localSettings.Values["token"] = message.response.token;
+                        localSettings.Values["notificationsFriends"] = message.response.notifications.add_friend.Count;
                         this.Frame.Navigate(typeof(Accueil));
                     }
                     catch (System.Exception e)

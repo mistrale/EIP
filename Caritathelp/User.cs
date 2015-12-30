@@ -6,9 +6,19 @@ using System.Threading.Tasks;
 
 namespace Caritathelp
 {
-    public class Notification
+
+    public class AddFriend
     {
-        public IList<string> add_friends;
+        public int id_notif { get; set; }
+        public int id_sendr { get; set; }
+        public string mail { get; set; }
+        public string firstname { get; set; }
+        public string lastname { get; set; }
+    }
+
+    public class Notifications
+    {
+        public IList<AddFriend> add_friend;
     }
     class User
     {
@@ -23,6 +33,6 @@ namespace Caritathelp
         public string latitue { get; set; }
         public string longitude { get; set; }
         public bool allowgps { get; set; }
-        public Notification notifications { get; set; }
+        public Notifications notifications { get; set; }
     }
 }

@@ -59,6 +59,18 @@ namespace Caritathelp.Caritathelp_XamlTypeInfo
             {
                 xamlType = CreateXamlType(typeIndex);
             }
+            var userXamlType = xamlType as global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType;
+            if(xamlType == null || (userXamlType != null && userXamlType.IsReturnTypeStub && !userXamlType.IsLocalType))
+            {
+                global::Windows.UI.Xaml.Markup.IXamlType libXamlType = CheckOtherMetadataProvidersForType(type);
+                if (libXamlType != null)
+                {
+                    if(libXamlType.IsConstructible || xamlType == null)
+                    {
+                        xamlType = libXamlType;
+                    }
+                }
+            }
             if (xamlType != null)
             {
                 _xamlTypeCacheByName.Add(xamlType.FullName, xamlType);
@@ -82,6 +94,18 @@ namespace Caritathelp.Caritathelp_XamlTypeInfo
             if(typeIndex != -1)
             {
                 xamlType = CreateXamlType(typeIndex);
+            }
+            var userXamlType = xamlType as global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType;
+            if(xamlType == null || (userXamlType != null && userXamlType.IsReturnTypeStub && !userXamlType.IsLocalType))
+            {
+                global::Windows.UI.Xaml.Markup.IXamlType libXamlType = CheckOtherMetadataProvidersForName(typeName);
+                if (libXamlType != null)
+                {
+                    if(libXamlType.IsConstructible || xamlType == null)
+                    {
+                        xamlType = libXamlType;
+                    }
+                }
             }
             if (xamlType != null)
             {
@@ -124,21 +148,35 @@ namespace Caritathelp.Caritathelp_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[6];
+            _typeNameTable = new string[13];
             _typeNameTable[0] = "Caritathelp.Accueil";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
             _typeNameTable[3] = "Caritathelp.Inscription";
             _typeNameTable[4] = "Caritathelp.MainPage";
-            _typeNameTable[5] = "Caritathelp.Profil";
+            _typeNameTable[5] = "Caritathelp.Notification";
+            _typeNameTable[6] = "Caritathelp.Profil";
+            _typeNameTable[7] = "Caritathelp.Research";
+            _typeNameTable[8] = "Caritathelp.Common.NavigationHelper";
+            _typeNameTable[9] = "Windows.UI.Xaml.DependencyObject";
+            _typeNameTable[10] = "Caritathelp.Common.ObservableDictionary";
+            _typeNameTable[11] = "Object";
+            _typeNameTable[12] = "String";
 
-            _typeTable = new global::System.Type[6];
+            _typeTable = new global::System.Type[13];
             _typeTable[0] = typeof(global::Caritathelp.Accueil);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
             _typeTable[3] = typeof(global::Caritathelp.Inscription);
             _typeTable[4] = typeof(global::Caritathelp.MainPage);
-            _typeTable[5] = typeof(global::Caritathelp.Profil);
+            _typeTable[5] = typeof(global::Caritathelp.Notification);
+            _typeTable[6] = typeof(global::Caritathelp.Profil);
+            _typeTable[7] = typeof(global::Caritathelp.Research);
+            _typeTable[8] = typeof(global::Caritathelp.Common.NavigationHelper);
+            _typeTable[9] = typeof(global::Windows.UI.Xaml.DependencyObject);
+            _typeTable[10] = typeof(global::Caritathelp.Common.ObservableDictionary);
+            _typeTable[11] = typeof(global::System.Object);
+            _typeTable[12] = typeof(global::System.String);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -176,7 +214,17 @@ namespace Caritathelp.Caritathelp_XamlTypeInfo
         private object Activate_0_Accueil() { return new global::Caritathelp.Accueil(); }
         private object Activate_3_Inscription() { return new global::Caritathelp.Inscription(); }
         private object Activate_4_MainPage() { return new global::Caritathelp.MainPage(); }
-        private object Activate_5_Profil() { return new global::Caritathelp.Profil(); }
+        private object Activate_5_Notification() { return new global::Caritathelp.Notification(); }
+        private object Activate_6_Profil() { return new global::Caritathelp.Profil(); }
+        private object Activate_7_Research() { return new global::Caritathelp.Research(); }
+        private object Activate_10_ObservableDictionary() { return new global::Caritathelp.Common.ObservableDictionary(); }
+        private void MapAdd_10_ObservableDictionary(object instance, object key, object item)
+        {
+            var collection = (global::System.Collections.Generic.IDictionary<global::System.String, global::System.Object>)instance;
+            var newKey = (global::System.String)key;
+            var newItem = (global::System.Object)item;
+            collection.Add(newKey, newItem);
+        }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -217,22 +265,144 @@ namespace Caritathelp.Caritathelp_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 5:   //  Caritathelp.Profil
+            case 5:   //  Caritathelp.Notification
                 userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_5_Profil;
+                userType.Activator = Activate_5_Notification;
                 userType.SetIsLocalType();
                 xamlType = userType;
+                break;
+
+            case 6:   //  Caritathelp.Profil
+                userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_6_Profil;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 7:   //  Caritathelp.Research
+                userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_7_Research;
+                userType.AddMemberName("NavigationHelper");
+                userType.AddMemberName("DefaultViewModel");
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 8:   //  Caritathelp.Common.NavigationHelper
+                userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObject"));
+                userType.SetIsReturnTypeStub();
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 9:   //  Windows.UI.Xaml.DependencyObject
+                xamlType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 10:   //  Caritathelp.Common.ObservableDictionary
+                userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.DictionaryAdd = MapAdd_10_ObservableDictionary;
+                userType.SetIsReturnTypeStub();
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 11:   //  Object
+                xamlType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 12:   //  String
+                xamlType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
             }
             return xamlType;
         }
 
+        private global::System.Collections.Generic.List<global::Windows.UI.Xaml.Markup.IXamlMetadataProvider> _otherProviders;
+        private global::System.Collections.Generic.List<global::Windows.UI.Xaml.Markup.IXamlMetadataProvider> OtherProviders
+        {
+            get
+            {
+                if(_otherProviders == null)
+                {
+                    _otherProviders = new global::System.Collections.Generic.List<global::Windows.UI.Xaml.Markup.IXamlMetadataProvider>();
+                    global::Windows.UI.Xaml.Markup.IXamlMetadataProvider provider;
+                    provider = new global::Caliburn.Micro.XamlMetadataProvider() as global::Windows.UI.Xaml.Markup.IXamlMetadataProvider;
+                    _otherProviders.Add(provider); 
+                }
+                return _otherProviders;
+            }
+        }
 
+        private global::Windows.UI.Xaml.Markup.IXamlType CheckOtherMetadataProvidersForName(string typeName)
+        {
+            global::Windows.UI.Xaml.Markup.IXamlType xamlType = null;
+            global::Windows.UI.Xaml.Markup.IXamlType foundXamlType = null;
+            foreach(global::Windows.UI.Xaml.Markup.IXamlMetadataProvider xmp in OtherProviders)
+            {
+                xamlType = xmp.GetXamlType(typeName);
+                if(xamlType != null)
+                {
+                    if(xamlType.IsConstructible)    // not Constructible means it might be a Return Type Stub
+                    {
+                        return xamlType;
+                    }
+                    foundXamlType = xamlType;
+                }
+            }
+            return foundXamlType;
+        }
+
+        private global::Windows.UI.Xaml.Markup.IXamlType CheckOtherMetadataProvidersForType(global::System.Type type)
+        {
+            global::Windows.UI.Xaml.Markup.IXamlType xamlType = null;
+            global::Windows.UI.Xaml.Markup.IXamlType foundXamlType = null;
+            foreach(global::Windows.UI.Xaml.Markup.IXamlMetadataProvider xmp in OtherProviders)
+            {
+                xamlType = xmp.GetXamlType(type);
+                if(xamlType != null)
+                {
+                    if(xamlType.IsConstructible)    // not Constructible means it might be a Return Type Stub
+                    {
+                        return xamlType;
+                    }
+                    foundXamlType = xamlType;
+                }
+            }
+            return foundXamlType;
+        }
+
+        private object get_0_Research_NavigationHelper(object instance)
+        {
+            var that = (global::Caritathelp.Research)instance;
+            return that.NavigationHelper;
+        }
+        private object get_1_Research_DefaultViewModel(object instance)
+        {
+            var that = (global::Caritathelp.Research)instance;
+            return that.DefaultViewModel;
+        }
 
         private global::Windows.UI.Xaml.Markup.IXamlMember CreateXamlMember(string longMemberName)
         {
             global::Caritathelp.Caritathelp_XamlTypeInfo.XamlMember xamlMember = null;
-            // No Local Properties
+            global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType userType;
+
+            switch (longMemberName)
+            {
+            case "Caritathelp.Research.NavigationHelper":
+                userType = (global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Caritathelp.Research");
+                xamlMember = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlMember(this, "NavigationHelper", "Caritathelp.Common.NavigationHelper");
+                xamlMember.Getter = get_0_Research_NavigationHelper;
+                xamlMember.SetIsReadOnly();
+                break;
+            case "Caritathelp.Research.DefaultViewModel":
+                userType = (global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Caritathelp.Research");
+                xamlMember = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlMember(this, "DefaultViewModel", "Caritathelp.Common.ObservableDictionary");
+                xamlMember.Getter = get_1_Research_DefaultViewModel;
+                xamlMember.SetIsReadOnly();
+                break;
+            }
             return xamlMember;
         }
     }
@@ -557,5 +727,9 @@ namespace Caritathelp.Caritathelp_XamlTypeInfo
         }
     }
 }
+
+
+
+
 
 

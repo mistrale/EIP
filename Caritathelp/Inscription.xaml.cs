@@ -22,10 +22,6 @@ namespace Caritathelp
     /// </summary>
     public sealed partial class Inscription : Page
     {
-        class Error
-        {
-            public IList<string> mail { get; set; }
-        }
 
         class RequeteResponse
         {
@@ -79,7 +75,7 @@ namespace Caritathelp
                 warningTextBlock.Text = "CofirmationPassword empty.";
                 return false;
             }
-            if (!PasswordPasswordBox.Password.Equals(PasswordPasswordBox.Password, StringComparison.Ordinal))
+            if (!PasswordPasswordBox.Password.Equals(PasswordConfirmationPasswordBox.Password, StringComparison.Ordinal))
             {
                 warningTextBlock.Text = "Password doesn't match.";
                 return false;
@@ -134,6 +130,8 @@ namespace Caritathelp
 
         public void Register_click(object sender, RoutedEventArgs e)
         {
+            if (!checkRegistrationField())
+                return;
             progressBar.IsActive = true;
             createNewUser();
             warningTextBlock.Text = "";       
@@ -165,5 +163,6 @@ namespace Caritathelp
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
+
     }
 }

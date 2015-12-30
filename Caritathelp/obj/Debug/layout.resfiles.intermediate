@@ -1,4 +1,5 @@
 Assets\AlertButton.png
+Assets\AlertButtonNotified.png
 Assets\AssociationButton.png
 Assets\Background.png
 Assets\ChatButton.png
@@ -8,6 +9,7 @@ Assets\HomeButton.png
 Assets\Inscription.png
 Assets\Logo.scale-240.png
 Assets\LogoutButton.png
+Assets\magnify.png
 Assets\OptionButton.png
 Assets\ProfilButton.png
 Assets\SmallLogo.scale-240.png
@@ -21,4 +23,6 @@ App.xbf
 Caritathelp.xr.xml
 Inscription.xbf
 MainPage.xbf
+Notification.xbf
 Profil.xbf
+Research.xbf

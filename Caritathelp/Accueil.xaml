@@ -20,25 +20,37 @@
                 <Border BorderBrush="#000000" BorderThickness="0.5" Grid.Row="0" Grid.Column="0" Margin="0,0,0,0.333">
 
                 </Border>
-                <Border BorderBrush="#000000" BorderThickness="1" Grid.Column="0" Margin="0,58,0,0.333" Grid.RowSpan="2"/>
+                <Border BorderBrush="#000000" BorderThickness="1" Grid.Column="0" Margin="0,58,0,0.333" Grid.RowSpan="2">
+                    <TextBox x:Name="warningTextBox" Margin="0" 
+                             TextWrapping="Wrap" Text="" 
+                             VerticalAlignment="Stretch" 
+                             Foreground="#FFDC4545"/>
+                </Border>
+                <Border BorderBrush="#000000" BorderThickness="1" Grid.Column="0" Margin="0,58,0,0.333" Grid.RowSpan="2">
+                    <Button x:Name="button1" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="151.167,-58.833,138.167,34.167" BorderThickness="0" RenderTransformOrigin="0.622,0.467" Click="button1_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="ms-appx:/Assets/magnify.png" Stretch="Uniform"/>
+                        </Button.Background>
+                    </Button>
+                </Border>
             </Grid>
         </Border>
         <TextBox x:Name="searchTextBox" HorizontalAlignment="Left"
                  Margin="10,10,0,0" TextWrapping="Wrap"
-                 Text="Recherche" VerticalAlignment="Top" Width="206"
-                 Background="#FFB6D7A8" BorderThickness="0"
-                 FontStyle="Italic" FontWeight="Light"
-                 GotFocus="TextBox_GotFocus"/>
+                 Text="Recherche" VerticalAlignment="Top" Width="164"
+                 Background="#00A9DF94" BorderThickness="0"
+                 Height="38" Foreground="White" FontSize="24" GotFocus="searchTextBox_GotFocus"/>
         <Button x:Name="alertButton" HorizontalAlignment="Left"
-                Margin="182,0,0,0" VerticalAlignment="Top" 
-                Width="85" Height="68" BorderThickness="0" RenderTransformOrigin="0.197,0.435">
+                Margin="208,0,0,0" VerticalAlignment="Top" 
+                Click="notificationButtonClick"
+                Width="79" Height="57" BorderThickness="0" RenderTransformOrigin="0.197,0.435">
             <Button.Background>
                 <ImageBrush ImageSource="Assets/AlertButton.png" Stretch="Uniform"/>
             </Button.Background>
         </Button>
         <Button x:Name="chatButton" HorizontalAlignment="Left"
-                Margin="253,0,0,0" VerticalAlignment="Top"
-                Height="68" Width="26" BorderThickness="0"
+                Margin="263,0,0,0" VerticalAlignment="Top"
+                Height="57" Width="105" BorderThickness="0"
                 RenderTransformOrigin="0.498,0.451" Foreground="#FFB34040">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="Assets/ChatButton.png"/>
@@ -128,9 +140,6 @@
                 </Button>
             </Grid>
         </Border>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left"
-                 Margin="216,211,0,0" TextWrapping="Wrap"
-                 Text="TextBox" VerticalAlignment="Top"/>
         <Button x:Name="LogoutButton" Content=""
                 HorizontalAlignment="Left"
                 Margin="316,-5,-25,0" VerticalAlignment="Top"
@@ -141,6 +150,14 @@
             <Button.Background>
                 <ImageBrush ImageSource="Assets/LogoutButton.png"
                             Stretch="Uniform"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="alertButtonNotity" Content=""
+                HorizontalAlignment="Left" Margin="208,0,0,0"
+                VerticalAlignment="Top" Click="notificationButtonClick"
+                RenderTransformOrigin="0.38,0.334" BorderThickness="0" Visibility="Collapsed">
+            <Button.Background>
+                <ImageBrush Stretch="Uniform" ImageSource="Assets/AlertButtonNotified.png"/>
             </Button.Background>
         </Button>
     </Grid>
