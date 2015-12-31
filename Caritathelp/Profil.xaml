@@ -253,5 +253,15 @@
                 <ImageBrush Stretch="Uniform" ImageSource="Assets/AlertButtonNotified.png"/>
             </Button.Background>
         </Button>
+        <Button x:Name="removeFriendButton" Content="Supprimer" 
+        	HorizontalAlignment="Left" Margin="8,418,0,0"
+        	VerticalAlignment="Top" Height="64" Width="382"
+        	Click="removeFriendButtonClick"
+        	Background="#FF7CBC63" BorderBrush="#FF030202" Visibility="Collapsed"/>
+        <Button x:Name="acceptFriendButton" Content="Accepter l'invitation" 
+        	HorizontalAlignment="Left" Margin="8,428,0,0"
+        	VerticalAlignment="Top" Height="64" Width="382"
+        	Click="acceptFriendButtonClick"
+        	Background="#FF7CBC63" BorderBrush="#FF030202" Visibility="Collapsed"/>
     </Grid>
 </Page>

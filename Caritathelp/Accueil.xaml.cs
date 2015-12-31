@@ -34,6 +34,8 @@ namespace Caritathelp
     {
         bool isVisibile = false;
         private bool flag;
+        bool doCoroutine = true;
+        private Notifications notifs;
 
         class RequeteResponse
         {
@@ -49,56 +51,57 @@ namespace Caritathelp
 
         private async void getNotification()
         {
-            var httpClient = new HttpClient(new HttpClientHandler());
-            try
+            if (doCoroutine)
             {
-                string id = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
-                var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + id + "{?token}");
-                template.AddParameter("id", id);
-                template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
-                var uri = template.Resolve();
-                Debug.WriteLine(uri);
-
-                HttpResponseMessage response = await httpClient.GetAsync(uri);
-                response.EnsureSuccessStatusCode();
-                responseString = await response.Content.ReadAsStringAsync();
-                System.Diagnostics.Debug.WriteLine(responseString.ToString());
-                message = JsonConvert.DeserializeObject<RequeteResponse>(responseString);
-                if (Int32.Parse(message.status) != 200)
+                var httpClient = new HttpClient(new HttpClientHandler());
+                try
                 {
+                    string id = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
+                    var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + id + "{?token}");
+                    template.AddParameter("id", id);
+                    template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
+                    var uri = template.Resolve();
+                    Debug.WriteLine(uri);
 
-                }
-                else
-                {
-                    Debug.WriteLine(message.response.notifications.add_friend.Count);
-                    if (message.response.notifications.add_friend.Count > (int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["notificationsFriends"])
+                    HttpResponseMessage response = await httpClient.GetAsync(uri);
+                    response.EnsureSuccessStatusCode();
+                    responseString = await response.Content.ReadAsStringAsync();
+                    System.Diagnostics.Debug.WriteLine(responseString.ToString());
+                    message = JsonConvert.DeserializeObject<RequeteResponse>(responseString);
+                    if (Int32.Parse(message.status) != 200)
                     {
-                        flag = true;
-                        updateGUI();
-                        Windows.Storage.ApplicationData.Current.LocalSettings.Values["notificationsFriends"] = message.response.notifications.add_friend.Count;
-                        Debug.WriteLine("On a recu une nouvelle notification !");
+
                     }
                     else
                     {
-                        flag = false;
-                        updateGUI();
-                        Debug.WriteLine("0 nouvelles notificaitons");
+                        if (message.response.notifications.add_friend.Count > notifs.add_friend.Count)
+                        {
+                            flag = true;
+                            updateGUI();
+                            Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"] = JsonConvert.SerializeObject(message.response.notifications);
+                            Debug.WriteLine("On a recu une nouvelle notification !");
+                        }
+                        else
+                        {
+                            flag = false;
+                            updateGUI();
+                            Debug.WriteLine("0 nouvelles notificaitons");
+                        }
                     }
                 }
+                catch (HttpRequestException e)
+                {
+                }
+                catch (JsonReaderException e)
+                {
+                    System.Diagnostics.Debug.WriteLine(responseString);
+                    Debug.WriteLine("Failed to read json");
+                }
+                catch (JsonSerializationException e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.Message);
+                }
             }
-            catch (HttpRequestException e)
-            {
-            }
-            catch (JsonReaderException e)
-            {
-                System.Diagnostics.Debug.WriteLine(responseString);
-                Debug.WriteLine("Failed to read json");
-            }
-            catch (JsonSerializationException e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.Message);
-            }
-            Debug.WriteLine(message.status);
         }
 
         private async Task updateGUI()
@@ -162,6 +165,7 @@ namespace Caritathelp
 
         public void logoutButtonClick(object sender, RoutedEventArgs e)
         {
+            doCoroutine = false;
             Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("mail");
             Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("firstname");
             Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("lastname");
@@ -172,7 +176,7 @@ namespace Caritathelp
             Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("id");
             Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("password");
             Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("token");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("notificationsFriends");
+            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("notifications");
             this.Frame.Navigate(typeof(MainPage));
         }
 
@@ -239,6 +243,8 @@ namespace Caritathelp
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             loadCoroutine();
+            notifs = JsonConvert.DeserializeObject<Notifications>((string)(Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"]));
+
         }
 
         private void searchTextBox_GotFocus(object sender, RoutedEventArgs e)

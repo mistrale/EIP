@@ -31,28 +31,42 @@ namespace Caritathelp
     public sealed partial class Profil : Page
     {
         bool isMyProfil = false;
-        bool isFriend = false;
         bool isVisibile = false;
         private string id;
         private bool flag;
+        bool doCoroutine = true;
+        private Notifications notifs;
+
+        class Friends
+        {
+            public IList<Friend> friends { get; set; }
+        }
+
+        class SimpleResponse
+        {
+            public string status { get; set; }
+            public string message { get; set; }
+            public string response { get; set; }
+        }
 
         class RequeteResponse
         {
-
             public string status { get; set; }
             public string message { get; set; }
             public User response { get; set; }
-
         }
 
         class FriendResponse
         {
             public string status { get; set; }
             public string message { get; set; }
-            public Friend response { get; set; }
+            public Friends response { get; set; }
         }
 
         private RequeteResponse message;
+        private RequeteResponse user;
+        private FriendResponse friends;
+        private SimpleResponse simpleResponse;
         private string responseString;
 
         private async void sendRequestToFriend()
@@ -65,19 +79,18 @@ namespace Caritathelp
                     {
                         new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"])
                     };
-                    string url = ("http://52.31.151.160:3000/volunteers/" + id + "/addfriend" + "{?token}");
+                    string url = ("http://52.31.151.160:3000/volunteers/" + id + "/addfriend");
                     HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
                     response.EnsureSuccessStatusCode();
                     responseString = await response.Content.ReadAsStringAsync();
-                    System.Diagnostics.Debug.WriteLine(responseString.ToString());
                     message = JsonConvert.DeserializeObject<RequeteResponse>(responseString);
                     if (Int32.Parse(message.status) != 200)
                     {
-                        Frame.Navigate(typeof(Profil), id);
+                        warningTextBox.Text = message.message;
                     }
                     else
                     {
-                        warningTextBox.Text = message.message;
+                        Frame.Navigate(typeof(Profil), id);
                     }
                     Debug.WriteLine(message);
                 }
@@ -94,7 +107,6 @@ namespace Caritathelp
                 {
                     System.Diagnostics.Debug.WriteLine(e.Message);
                 }
-                Debug.WriteLine(message.status);
             }
         }
 
@@ -103,8 +115,8 @@ namespace Caritathelp
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                string id = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
-                var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + id + "/friends" + "{?token}");
+                string mydID = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
+                var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + mydID+ "/friends" + "{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
@@ -112,19 +124,83 @@ namespace Caritathelp
                 HttpResponseMessage response = await httpClient.GetAsync(uri);
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
-                System.Diagnostics.Debug.WriteLine(responseString.ToString());
-                message = JsonConvert.DeserializeObject<RequeteResponse>(responseString);
-                if (Int32.Parse(message.status) != 200)
+                friends = JsonConvert.DeserializeObject<FriendResponse>(responseString);
+                if (Int32.Parse(friends.status) != 200)
                 {
 
                 }
                 else
                 {
+                    var friend = friends.response.friends.FirstOrDefault(c => c.id.ToString().Equals(id));
+                    if (friend != null)
+                    {
+                        addFriendButton.Visibility = Visibility.Collapsed;
+                        removeFriendButton.Visibility = Visibility.Visible;
+                        acceptFriendButton.Visibility = Visibility.Collapsed;
+                    } else
+                    {
+                        var notif = notifs.add_friend.FirstOrDefault(c => c.id_sender.ToString().Equals(id));
+                        if (notif != null)
+                        {
+                            addFriendButton.Visibility = Visibility.Collapsed;
+                            acceptFriendButton.Visibility = Visibility.Visible;
+
+                        }
+                        else
+                        {
+                            if (!id.ToString().Equals((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString()))
+                                addFriendButton.Visibility = Visibility.Visible;
+                            acceptFriendButton.Visibility = Visibility.Collapsed;
+                        }
+                        removeFriendButton.Visibility = Visibility.Collapsed;
+                    }
+                }
+            }
+            catch (HttpRequestException e)
+            {
+            }
+            catch (JsonReaderException e)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+                Debug.WriteLine("Failed to read json");
+            }
+            catch (JsonSerializationException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+        }
+
+        private async void acceptFriend()
+        {
+            var httpClient = new HttpClient(new HttpClientHandler());
+            string myID = ((int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]).ToString();
+            var user = notifs.add_friend.FirstOrDefault(c => c.id_sender.ToString().Equals(id));
+            try
+            {
+                var values = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]),
+                        new KeyValuePair<string, string>("notif_add_friend_id", user.id_notif.ToString()),
+                        new KeyValuePair<string, string>("acceptance", "true")
+                    };
+                string url = ("http://52.31.151.160:3000/volunteers/" + myID + "/respondfriend");
+                HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync();
+                message = JsonConvert.DeserializeObject<RequeteResponse>(responseString);
+                if (Int32.Parse(message.status) != 200)
+                {
+                    warningTextBox.Text = message.message;
+                }
+                else
+                {
+                    Frame.Navigate(typeof(Profil), id);
                 }
                 Debug.WriteLine(message);
             }
             catch (HttpRequestException e)
             {
+                Debug.WriteLine(e.Message);
             }
             catch (JsonReaderException e)
             {
@@ -135,45 +211,30 @@ namespace Caritathelp
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
-            Debug.WriteLine(message.status);
         }
 
-        private async void getNotification()
+        private async void removeFriend()
         {
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                string id = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
-                var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + id + "{?token}");
-                template.AddParameter("id", id);
+                var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + id + "/deletefriend" + "{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
 
-                HttpResponseMessage response = await httpClient.GetAsync(uri);
+                HttpResponseMessage response = await httpClient.DeleteAsync(uri);
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
                 System.Diagnostics.Debug.WriteLine(responseString.ToString());
-                message = JsonConvert.DeserializeObject<RequeteResponse>(responseString);
-                if (Int32.Parse(message.status) != 200)
+                simpleResponse = JsonConvert.DeserializeObject<SimpleResponse>(responseString);
+                if (Int32.Parse(simpleResponse.status) != 200)
                 {
 
                 }
                 else
                 {
-                    if (message.response.notifications.add_friend.Count > (int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["notificationsFriends"])
-                    {
-                        flag = true;
-                        updateGUI();
-                        Windows.Storage.ApplicationData.Current.LocalSettings.Values["notificationsFriends"] = message.response.notifications.add_friend.Count;
-                        Debug.WriteLine("On a recu une nouvelle notification !");
-                    }
-                    else
-                    {
-                        flag = false;
-                        updateGUI();
-                        Debug.WriteLine("0 nouvelles notificaitons");
-                    }
+                    Frame.Navigate(typeof(Profil), id);
                 }
             }
             catch (HttpRequestException e)
@@ -187,6 +248,60 @@ namespace Caritathelp
             catch (JsonSerializationException e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+        }
+
+        private async void getNotification()
+        {
+            if (doCoroutine)
+            {
+                var httpClient = new HttpClient(new HttpClientHandler());
+                try
+                {
+                    string id = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
+                    var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + id + "{?token}");
+                    template.AddParameter("id", id);
+                    template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
+                    var uri = template.Resolve();
+                    Debug.WriteLine(uri);
+
+                    HttpResponseMessage response = await httpClient.GetAsync(uri);
+                    response.EnsureSuccessStatusCode();
+                    responseString = await response.Content.ReadAsStringAsync();
+                    message = JsonConvert.DeserializeObject<RequeteResponse>(responseString);
+                    if (Int32.Parse(message.status) != 200)
+                    {
+
+                    }
+                    else
+                    {
+                        if (message.response.notifications.add_friend.Count > notifs.add_friend.Count)
+                        {
+                            flag = true;
+                            updateGUI();
+                            Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"] = JsonConvert.SerializeObject(message.response.notifications);
+                            Debug.WriteLine("On a recu une nouvelle notification !");
+                        }
+                        else
+                        {
+                            flag = false;
+                            updateGUI();
+                            Debug.WriteLine("0 nouvelles notificaitons");
+                        }
+                    }
+                }
+                catch (HttpRequestException e)
+                {
+                }
+                catch (JsonReaderException e)
+                {
+                    System.Diagnostics.Debug.WriteLine(responseString);
+                    Debug.WriteLine("Failed to read json");
+                }
+                catch (JsonSerializationException e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.Message);
+                }
             }
         }
 
@@ -300,6 +415,7 @@ namespace Caritathelp
 
         public void logoutButtonClick(object sender, RoutedEventArgs e)
         {
+            doCoroutine = false;
             Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("mail");
             Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("firstname");
             Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("lastname");
@@ -310,7 +426,7 @@ namespace Caritathelp
             Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("id");
             Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("password");
             Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("token");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("notificationsFriends");
+            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("notifications");
             this.Frame.Navigate(typeof(MainPage));
         }
 
@@ -362,45 +478,120 @@ namespace Caritathelp
             tb.Text = string.Empty;
         }
 
-        private void initializeInformations()
+        private async void getInformation()
         {
-            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            GenreBox.Items.Add("Femme");
-            GenreBox.Items.Add("Homme");
-            GenreBox.Items.Add("M. / Mme.");
-
-            emailEdit.Text = (string)localSettings.Values["mail"];
-            firstNameEdit.Text = (string)localSettings.Values["firstname"];
-            lastNameEdit.Text = (string)localSettings.Values["lastname"];
-            if (localSettings.Values["city"] != null)
-                cityEdit.Text = (string)localSettings.Values["city"];
-            if (localSettings.Values["birthday"] != null)
-                birthdayEdit.Date = (DateTime)Convert.ToDateTime(localSettings.Values["birdtday"]);
-            if (localSettings.Values["genre"] != null)
+            var httpClient = new HttpClient(new HttpClientHandler());
+            try
             {
-                if ((string)localSettings.Values["genre"] == "Femme")
-                    GenreBox.SelectedIndex = 0;
-                else if ((string)localSettings.Values["genre"] == "Homme")
-                    GenreBox.SelectedIndex = 1;
+                var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + id + "{?token}");
+                template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
+                var uri = template.Resolve();
+                Debug.WriteLine(uri);
+
+                HttpResponseMessage response = await httpClient.GetAsync(uri);
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine(responseString.ToString());
+                user = JsonConvert.DeserializeObject<RequeteResponse>(responseString);
+                if (Int32.Parse(user.status) != 200)
+                {
+
+                }
                 else
-                    GenreBox.SelectedIndex = 2;
+                {
+                    var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+                    GenreBox.Items.Add("Femme");
+                    GenreBox.Items.Add("Homme");
+                    GenreBox.Items.Add("M. / Mme.");
+
+                    emailEdit.Text = user.response.mail;
+                    firstNameEdit.Text = user.response.firstname;
+                    lastNameEdit.Text = user.response.lastname;
+                    if (user.response.city != null)
+                        cityEdit.Text = user.response.city;
+                    if (user.response.birthday != null)
+                        birthdayEdit.Date = (DateTime)Convert.ToDateTime(user.response.birthday);
+                    if (user.response.genre != null)
+                    {
+                        if (user.response.genre == "Femme")
+                            GenreBox.SelectedIndex = 0;
+                        else if (user.response.genre == "Homme")
+                            GenreBox.SelectedIndex = 1;
+                        else
+                            GenreBox.SelectedIndex = 2;
+                    }
+                    else
+                        GenreBox.SelectedIndex = 2;
+                    bool allowed = user.response.allowgps;
+                    if (allowed)
+                        allowGPSEdit.IsChecked = true;
+                    else
+                        allowGPSEdit.IsChecked = false;
+                    passwordEdit.Password = (string)localSettings.Values["password"];
+                    if (id.Equals((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString()))
+                    {
+
+                        isMyProfil = true;
+                    }
+                    else
+                    {
+                        isMyProfil = false;
+                    }
+                    if (!isMyProfil)
+                    {
+                        emailEdit.IsHitTestVisible = false;
+                        firstNameEdit.IsHitTestVisible = false;
+                        lastNameEdit.IsHitTestVisible = false;
+                        birthdayEdit.IsHitTestVisible = false;
+                        GenreBox.IsHitTestVisible = false;
+                        cityEdit.IsHitTestVisible = false;
+                        passwordConfirmationEdit.Visibility = Visibility.Collapsed;
+                        passwordEdit.Visibility = Visibility.Collapsed;
+                        passwordText.Visibility = Visibility.Collapsed;
+                        passwordConfirmationText.Visibility = Visibility.Collapsed;
+                        allowGPSEdit.Visibility = Visibility.Collapsed;
+                        addFriendButton.Visibility = Visibility.Visible;
+                        sendMsgButton.Visibility = Visibility.Visible;
+                        editProfilButton.Visibility = Visibility.Collapsed;
+
+                    }
+                    else
+                    {
+                        emailEdit.IsHitTestVisible = true;
+                        firstNameEdit.IsHitTestVisible = true;
+                        lastNameEdit.IsHitTestVisible = true;
+                        birthdayEdit.IsHitTestVisible = true;
+                        GenreBox.IsHitTestVisible = true;
+                        cityEdit.IsHitTestVisible = true;
+                        addFriendButton.Visibility = Visibility.Collapsed;
+                        sendMsgButton.Visibility = Visibility.Collapsed;
+                        passwordConfirmationEdit.Visibility = Visibility.Visible;
+                        passwordEdit.Visibility = Visibility.Visible;
+                        passwordText.Visibility = Visibility.Visible;
+                        passwordConfirmationText.Visibility = Visibility.Visible;
+                        allowGPSEdit.Visibility = Visibility.Visible;
+                        editProfilButton.Visibility = Visibility.Visible;
+                    }
+                    getFriends();
+                }
             }
-            else
-                GenreBox.SelectedIndex = 2;
-            bool allowed = (bool)localSettings.Values["allowgps"];
-            if (allowed)
-                allowGPSEdit.IsChecked = true;
-            else
-                allowGPSEdit.IsChecked = false;
-            passwordEdit.Password = (string)localSettings.Values["password"];
-            passwordConfirmationEdit.Password = (string)localSettings.Values["password"];
+            catch (HttpRequestException e)
+            {
+            }
+            catch (JsonReaderException e)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+                Debug.WriteLine("Failed to read json");
+            }
+            catch (JsonSerializationException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
         }
 
         public Profil()
         {
             this.InitializeComponent();
-            initializeInformations();
-
         }
 
         /// <summary>
@@ -411,51 +602,9 @@ namespace Caritathelp
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             loadCoroutine();
-            getFriends();
             id = e.Parameter as string;
-            if (id.Equals((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString())) 
-            {
-
-                isMyProfil = true;
-            } else
-            {
-                isMyProfil = false;
-            }
-            if (!isMyProfil)
-            {
-                emailEdit.IsHitTestVisible = false;
-                firstNameEdit.IsHitTestVisible = false;
-                lastNameEdit.IsHitTestVisible = false;
-                birthdayEdit.IsHitTestVisible = false;
-                GenreBox.IsHitTestVisible = false;
-                cityEdit.IsHitTestVisible = false;
-                passwordConfirmationEdit.Visibility = Visibility.Collapsed;
-                passwordEdit.Visibility = Visibility.Collapsed;
-                passwordText.Visibility = Visibility.Collapsed;
-                passwordConfirmationText.Visibility = Visibility.Collapsed;
-                allowGPSEdit.Visibility = Visibility.Collapsed;
-                addFriendButton.Visibility = Visibility.Visible;
-                sendMsgButton.Visibility = Visibility.Visible;
-                editProfilButton.Visibility = Visibility.Collapsed;
-
-            }
-            else
-            {
-                emailEdit.IsHitTestVisible = true;
-                firstNameEdit.IsHitTestVisible = true;
-                lastNameEdit.IsHitTestVisible = true;
-                birthdayEdit.IsHitTestVisible = true;
-                GenreBox.IsHitTestVisible = true;
-                cityEdit.IsHitTestVisible = true;
-                addFriendButton.Visibility = Visibility.Collapsed;
-                sendMsgButton.Visibility = Visibility.Collapsed;
-                passwordConfirmationEdit.Visibility = Visibility.Visible;
-                passwordEdit.Visibility = Visibility.Visible;
-                passwordText.Visibility = Visibility.Visible;
-                passwordConfirmationText.Visibility = Visibility.Visible;
-                allowGPSEdit.Visibility = Visibility.Visible;
-                editProfilButton.Visibility = Visibility.Visible;
-            }
+            notifs = JsonConvert.DeserializeObject<Notifications>((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"]);
+            getInformation();
         }
 
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -491,7 +640,6 @@ namespace Caritathelp
                 Loading.IsActive = false;
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
-                Debug.WriteLine(responseString);
                 message = JsonConvert.DeserializeObject<RequeteResponse>(responseString);
                 if (Int32.Parse(message.status) != 200)
                 {
@@ -560,6 +708,16 @@ namespace Caritathelp
             TextBox tb = (TextBox)sender;
             tb.Text = string.Empty;
             searchTextBox.Foreground = new SolidColorBrush(Colors.Black);
+        }
+
+        private void acceptFriendButtonClick(object sender, RoutedEventArgs e)
+        {
+            acceptFriend();
+        }
+
+        private void removeFriendButtonClick(object sender, RoutedEventArgs e)
+        {
+            removeFriend();
         }
     }
 }

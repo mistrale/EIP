@@ -10,7 +10,7 @@ namespace Caritathelp
     public class AddFriend
     {
         public int id_notif { get; set; }
-        public int id_sendr { get; set; }
+        public int id_sender { get; set; }
         public string mail { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }

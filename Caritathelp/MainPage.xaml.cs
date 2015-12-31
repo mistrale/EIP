@@ -94,7 +94,7 @@ namespace Caritathelp
                         localSettings.Values["password"] = Password.Password;
                         localSettings.Values["id"] = message.response.id;
                         localSettings.Values["token"] = message.response.token;
-                        localSettings.Values["notificationsFriends"] = message.response.notifications.add_friend.Count;
+                        localSettings.Values["notifications"] = JsonConvert.SerializeObject(message.response.notifications);
                         this.Frame.Navigate(typeof(Accueil));
                     }
                     catch (System.Exception e)
