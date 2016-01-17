@@ -39,7 +39,7 @@ namespace Caritathelp
 
         class Friends
         {
-            public IList<Friend> friends { get; set; }
+            public IList<FriendShip> friends { get; set; }
         }
 
         class SimpleResponse
@@ -92,7 +92,6 @@ namespace Caritathelp
                     {
                         Frame.Navigate(typeof(Profil), id);
                     }
-                    Debug.WriteLine(message);
                 }
                 catch (HttpRequestException e)
                 {
@@ -119,8 +118,6 @@ namespace Caritathelp
                 var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + mydID+ "/friends" + "{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
-                Debug.WriteLine(uri);
-
                 HttpResponseMessage response = await httpClient.GetAsync(uri);
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
@@ -131,6 +128,7 @@ namespace Caritathelp
                 }
                 else
                 {
+                    Debug.WriteLine("Ami : " + responseString);
                     var friend = friends.response.friends.FirstOrDefault(c => c.id.ToString().Equals(id));
                     if (friend != null)
                     {
@@ -144,13 +142,14 @@ namespace Caritathelp
                         {
                             addFriendButton.Visibility = Visibility.Collapsed;
                             acceptFriendButton.Visibility = Visibility.Visible;
-
+                            denyFriendButton.Visibility = Visibility.Visible;
                         }
                         else
                         {
                             if (!id.ToString().Equals((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString()))
                                 addFriendButton.Visibility = Visibility.Visible;
                             acceptFriendButton.Visibility = Visibility.Collapsed;
+                            denyFriendButton.Visibility = Visibility.Collapsed;
                         }
                         removeFriendButton.Visibility = Visibility.Collapsed;
                     }
@@ -158,6 +157,50 @@ namespace Caritathelp
             }
             catch (HttpRequestException e)
             {
+            }
+            catch (JsonReaderException e)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+                Debug.WriteLine("Failed to read json");
+            }
+            catch (JsonSerializationException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+        }
+
+        private async void denyFriend()
+        {
+            var httpClient = new HttpClient(new HttpClientHandler());
+            string myID = ((int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]).ToString();
+            var user = notifs.add_friend.FirstOrDefault(c => c.id_sender.ToString().Equals(id));
+            try
+            {
+                var values = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]),
+                        new KeyValuePair<string, string>("notif_add_friend_id", user.id_notif.ToString()),
+                        new KeyValuePair<string, string>("acceptance", "false")
+                    };
+                string url = ("http://52.31.151.160:3000/volunteers/" + myID + "/respondfriend");
+                Debug.WriteLine(url);
+                HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync();
+                message = JsonConvert.DeserializeObject<RequeteResponse>(responseString);
+                if (Int32.Parse(message.status) != 200)
+                {
+                    warningTextBox.Text = message.message;
+                }
+                else
+                {
+                    Frame.Navigate(typeof(Profil), id);
+                }
+                Debug.WriteLine(message);
+            }
+            catch (HttpRequestException e)
+            {
+                Debug.WriteLine(e.Message);
             }
             catch (JsonReaderException e)
             {
@@ -247,6 +290,8 @@ namespace Caritathelp
             }
             catch (JsonSerializationException e)
             {
+                System.Diagnostics.Debug.WriteLine(responseString);
+                Debug.WriteLine("Failed to read json");
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
         }
@@ -280,12 +325,14 @@ namespace Caritathelp
                             flag = true;
                             updateGUI();
                             Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"] = JsonConvert.SerializeObject(message.response.notifications);
+                            notifs = message.response.notifications;
                             Debug.WriteLine("On a recu une nouvelle notification !");
                         }
                         else
                         {
                             flag = false;
                             updateGUI();
+                            notifs = message.response.notifications;
                             Debug.WriteLine("0 nouvelles notificaitons");
                         }
                     }
@@ -308,7 +355,6 @@ namespace Caritathelp
         private async Task updateGUI()
         {
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => {
-                Debug.WriteLine(message);
                 if (flag)
                 {
                     alertButtonNotity.Visibility = Visibility.Visible;
@@ -453,7 +499,7 @@ namespace Caritathelp
 
         public void friendsButtonClick(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(Friend));
         }
 
         public void setVisibility(object sender, RoutedEventArgs e)
@@ -528,6 +574,7 @@ namespace Caritathelp
                     else
                         allowGPSEdit.IsChecked = false;
                     passwordEdit.Password = (string)localSettings.Values["password"];
+                    passwordConfirmationEdit.Password = (string)localSettings.Values["password"];
                     if (id.Equals((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString()))
                     {
 
@@ -585,6 +632,7 @@ namespace Caritathelp
             }
             catch (JsonSerializationException e)
             {
+                Debug.WriteLine(responseString);
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
         }
@@ -603,6 +651,7 @@ namespace Caritathelp
         {
             loadCoroutine();
             id = e.Parameter as string;
+            Debug.WriteLine(id);
             notifs = JsonConvert.DeserializeObject<Notifications>((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"]);
             getInformation();
         }
@@ -626,10 +675,10 @@ namespace Caritathelp
                         new KeyValuePair<string, string>("password", passwordEdit.Password),
                         new KeyValuePair<string, string>("firstname", firstNameEdit.Text),
                         new KeyValuePair<string, string>("lastname", lastNameEdit.Text),
-                        new KeyValuePair<string, string>("birtyhday", birthdayEdit.Date.ToString()),
+                        new KeyValuePair<string, string>("birthday", birthdayEdit.Date.ToString()),
                         new KeyValuePair<string, string>("genre", GenreBox.SelectedValue.ToString()),
                         new KeyValuePair<string, string>("allowgps", allowGPSEdit.IsChecked.ToString()),
-                        new KeyValuePair<string, string>("genre", GenreBox.SelectedValue.ToString()),
+                        new KeyValuePair<string, string>("city", cityEdit.Text),
                         new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"])
                     };
 
@@ -654,11 +703,11 @@ namespace Caritathelp
                         localSettings.Values["firstname"] = firstNameEdit.Text;
                         localSettings.Values["lastname"] = lastNameEdit.Text;
                         localSettings.Values["city"] = cityEdit.Text;
-                        localSettings.Values["birdthday"] = birthdayEdit.Date.ToString();
+                        localSettings.Values["birthday"] = birthdayEdit.Date.ToString();
                         localSettings.Values["genre"] = GenreBox.SelectedValue ;
                         localSettings.Values["allowgps"] = allowGPSEdit.IsChecked;
                         localSettings.Values["password"] = passwordEdit.Password;
-                        this.Frame.Navigate(typeof(Profil));
+                        Frame.Navigate(typeof(Profil), (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString());
                     }
                     catch (System.Exception e)
                     {
@@ -713,6 +762,11 @@ namespace Caritathelp
         private void acceptFriendButtonClick(object sender, RoutedEventArgs e)
         {
             acceptFriend();
+        }
+
+        private void denyFriendButtonClick(object sender, RoutedEventArgs e)
+        {
+            denyFriend();
         }
 
         private void removeFriendButtonClick(object sender, RoutedEventArgs e)

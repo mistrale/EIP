@@ -72,6 +72,7 @@
                                                  
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch" 
+                                              
                     Margin="189,-1,100,1" BorderThickness="0">
                     <Button.Background>
                         <ImageBrush Stretch="Uniform" ImageSource="Assets/FriendsButton.png"/>

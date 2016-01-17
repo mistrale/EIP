@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Caritathelp
 {
-    class Friend
+    class FriendShip
     {
         public int id { get; set; }
         public string email { get; set; }

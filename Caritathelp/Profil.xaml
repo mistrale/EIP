@@ -72,7 +72,8 @@
                 <Button x:Name="friendsButton"
                     GotFocus="friendsButtonClick"
                     HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Stretch" 
+                    VerticalAlignment="Stretch"
+                    Click="friendsButtonClick"
                     Margin="189,-1,100,1" BorderThickness="0">
                     <Button.Background>
                         <ImageBrush Stretch="Uniform" ImageSource="Assets/FriendsButton.png"/>
@@ -262,6 +263,11 @@
         	HorizontalAlignment="Left" Margin="8,428,0,0"
         	VerticalAlignment="Top" Height="64" Width="382"
         	Click="acceptFriendButtonClick"
+        	Background="#FF7CBC63" BorderBrush="#FF030202" Visibility="Collapsed"/>
+        <Button x:Name="denyFriendButton" Content="Refuser l'invitation" 
+        	HorizontalAlignment="Left" Margin="8,481,0,0"
+        	VerticalAlignment="Top" Height="64" Width="382"
+        	Click="denyFriendButtonClick"
         	Background="#FF7CBC63" BorderBrush="#FF030202" Visibility="Collapsed"/>
     </Grid>
 </Page>

@@ -106,13 +106,15 @@ namespace Caritathelp
                         {
                             flag = true;
                             updateGUI();
-                            Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"] = message.response.notifications.add_friend.Count;
+                            notifs = message.response.notifications;
+                            Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"] = JsonConvert.SerializeObject(message.response.notifications);
                             Debug.WriteLine("On a recu une nouvelle notification !");
                         }
                         else
                         {
                             flag = false;
                             updateGUI();
+                            notifs = message.response.notifications;
                             Debug.WriteLine("0 nouvelles notificaitons");
                         }
                     }
@@ -128,6 +130,10 @@ namespace Caritathelp
                 catch (JsonSerializationException e)
                 {
                     System.Diagnostics.Debug.WriteLine(e.Message);
+                }
+                catch (NullReferenceException e)
+                {
+                    Debug.WriteLine(e.Message);
                 }
             }
         }
@@ -183,7 +189,7 @@ namespace Caritathelp
 
         public void friendsButtonClick(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(Friend));
         }
 
         public void setVisibility(object sender, RoutedEventArgs e)
@@ -249,6 +255,8 @@ namespace Caritathelp
             }
             catch (JsonSerializationException e)
             {
+                System.Diagnostics.Debug.WriteLine(responseString);
+                Debug.WriteLine("Failed to read json");
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
             initResearch(userList.response.Count);

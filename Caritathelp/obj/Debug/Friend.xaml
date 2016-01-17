@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Caritathelp.Notification"
+    x:Class="Caritathelp.Friend"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Caritathelp"
@@ -72,7 +72,7 @@
                 <Button x:ConnectionId='10' x:Name="friendsButton"
                                                  
                     HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Stretch" 
+                    VerticalAlignment="Stretch"
                                               
                     Margin="189,-1,100,1" BorderThickness="0">
                     <Button.Background>

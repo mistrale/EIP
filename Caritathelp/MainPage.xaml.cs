@@ -59,8 +59,8 @@ namespace Caritathelp
 
                         //new KeyValuePair<string, string>("mail", Email.Text),
                         //new KeyValuePair<string, string>("password", Password.Password)
-                        new KeyValuePair<string, string>("mail", "dsikorav12@gmail.com"),
-                        new KeyValuePair<string, string>("password", "password")
+                        new KeyValuePair<string, string>("mail", Email.Text),
+                        new KeyValuePair<string, string>("password", Password.Password)
                     };
             var httpClient = new HttpClient(new HttpClientHandler());
             try
@@ -159,6 +159,11 @@ namespace Caritathelp
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
+        }
+
+        private void Email_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -129,6 +129,7 @@ namespace Caritathelp
                         {
                             flag = true;
                             updateGUI();
+                            notifs = message.response.notifications;
                             Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"] = JsonConvert.SerializeObject(message.response.notifications);
                             Debug.WriteLine("On a recu une nouvelle notification !");
                         }
@@ -136,6 +137,7 @@ namespace Caritathelp
                         {
                             flag = false;
                             updateGUI();
+                            notifs = message.response.notifications;
                             Debug.WriteLine("0 nouvelles notificaitons");
                         }
                     }
@@ -255,7 +257,7 @@ namespace Caritathelp
 
         public void friendsButtonClick(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(Friend));
         }
 
         public void setVisibility(object sender, RoutedEventArgs e)

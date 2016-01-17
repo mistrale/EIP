@@ -90,6 +90,9 @@
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Friend.cs" />
+    <Compile Include="Friend.xaml.cs">
+      <DependentUpon>Friend.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Inscription.xaml.cs">
       <DependentUpon>Inscription.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,7 @@
       <DependentUpon>Profil.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Publication.cs" />
     <Compile Include="Research.xaml.cs">
       <DependentUpon>Research.xaml</DependentUpon>
     </Compile>
@@ -143,6 +147,10 @@
     <Page Include="Accueil.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Friend.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Inscription.xaml">
       <Generator>MSBuild:Compile</Generator>

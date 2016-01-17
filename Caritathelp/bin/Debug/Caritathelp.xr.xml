@@ -12,6 +12,7 @@
       <RootProperty Name="Children" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Height" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Width" />
       <RootProperty Name="RowDefinitions" />
@@ -50,6 +51,7 @@
       <RootProperty Name="IsHitTestVisible" />
       <RootProperty Name="RenderTransformOrigin" />
       <RootEvent Name="GotFocus" />
+      <RootEvent Name="TextChanged" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Button">
       <RootProperty Name="HorizontalAlignment" />
@@ -68,6 +70,21 @@
       <RootEvent Name="Click" />
       <RootEvent Name="GotFocus" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
+      <RootProperty Name="Name" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="VerticalScrollBarVisibility" />
+      <RootProperty Name="VerticalScrollMode" />
+      <RootProperty Name="AllowDrop" />
+      <RootProperty Name="BringIntoViewOnFocusChange" />
+      <RootProperty Name="HorizontalScrollMode" />
+      <RootProperty Name="IsHoldingEnabled" />
+      <RootProperty Name="Content" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Media.ImageBrush">
       <RootProperty Name="Stretch" />
       <RootProperty Name="ImageSource" />
@@ -76,6 +93,7 @@
       <RootProperty Name="Height" />
     </RootType>
     <RootType FullName="Caritathelp.Accueil" />
+    <RootType FullName="Caritathelp.Friend" />
     <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
       <RootProperty Name="Password" />
       <RootProperty Name="PlaceholderText" />
@@ -159,19 +177,6 @@
       <RootProperty Name="BorderBrush" />
     </RootType>
     <RootType FullName="Caritathelp.Profil" />
-    <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="VerticalScrollBarVisibility" />
-      <RootProperty Name="VerticalScrollMode" />
-      <RootProperty Name="AllowDrop" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="BringIntoViewOnFocusChange" />
-      <RootProperty Name="HorizontalScrollMode" />
-      <RootProperty Name="IsHoldingEnabled" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="Content" />
-    </RootType>
     <RootType FullName="Caritathelp.Research" />
   </Roots.RootTypes>
 </Roots>

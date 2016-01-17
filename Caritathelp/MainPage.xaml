@@ -17,15 +17,15 @@
                  Margin="42,204,0,0" 
                  TextWrapping="Wrap" 
                  GotFocus="TextBox_GotFocus"
-                 Text="Email"
+                 Text="dsikorav12@gmail.com"
                  VerticalAlignment="Top"
                  Height="57" Width="303"
                  FontSize="25.333"
                  Background="White"
-                 Foreground="#FF5C5555" />
+                 Foreground="#FF5C5555" TextChanged="Email_TextChanged" />
         <PasswordBox x:Name="Password" 
                  HorizontalAlignment="Left"
-                 Password="Password"
+                 Password="password"
                  Margin="42,287,0,0"  
                  FontSize="29.333"
                  Background="White"

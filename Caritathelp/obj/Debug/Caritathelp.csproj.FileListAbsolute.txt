@@ -123,3 +123,8 @@ C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\Notification.g.cs
 C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\Notification.xaml
 C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\Notification.xbf
 C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\Notification.xbf
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\Friend.g.i.cs
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\Friend.g.cs
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\Friend.xaml
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\Friend.xbf
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\Friend.xbf

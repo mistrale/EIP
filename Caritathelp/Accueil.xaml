@@ -72,7 +72,8 @@
                 <Button x:Name="friendsButton"
                     GotFocus="friendsButtonClick"
                     HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Stretch" 
+                    VerticalAlignment="Stretch"
+                    Click="friendsButtonClick"
                     Margin="189,-1,100,1" BorderThickness="0">
                     <Button.Background>
                         <ImageBrush Stretch="Uniform" ImageSource="Assets/FriendsButton.png"/>
@@ -160,5 +161,16 @@
                 <ImageBrush Stretch="Uniform" ImageSource="Assets/AlertButtonNotified.png"/>
             </Button.Background>
         </Button>
+        <Grid HorizontalAlignment="Left" Height="100" 
+              Margin="10,98,0,0" VerticalAlignment="Top" Width="380">
+            <TextBox x:Name="publication" HorizontalAlignment="Left"
+                     Margin="77,10,-7,0" TextWrapping="Wrap"
+                     Text="Publier ..." VerticalAlignment="Top"
+                     Width="310" Height="80"/>
+        </Grid>
+        <ScrollViewer HorizontalAlignment="Left" Name="scroll"
+                      Height="362" Margin="10,208,0,0" 
+                      VerticalAlignment="Top" Width="380">
+        </ScrollViewer>
     </Grid>
 </Page>

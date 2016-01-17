@@ -27,7 +27,7 @@
                              Foreground="#FFDC4545"/>
                 </Border>
                 <Border BorderBrush="#000000" BorderThickness="1" Grid.Column="0" Margin="0,58,0,0.333" Grid.RowSpan="2">
-                    <Button x:ConnectionId='17' x:Name="button1" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="151.167,-58.833,138.167,34.167" BorderThickness="0" RenderTransformOrigin="0.622,0.467"                      >
+                    <Button x:ConnectionId='18' x:Name="button1" Content="" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="151.167,-58.833,138.167,34.167" BorderThickness="0" RenderTransformOrigin="0.622,0.467"                      >
                         <Button.Background>
                             <ImageBrush ImageSource="ms-appx:/Assets/magnify.png" Stretch="Uniform"/>
                         </Button.Background>
@@ -60,7 +60,7 @@
                 BorderThickness="1"
                 Margin="0,570,0,0" Background="#FFB6D7A8">
             <Grid>
-                <Button x:ConnectionId='13' x:Name="optionButton"
+                <Button x:ConnectionId='14' x:Name="optionButton"
                                             
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch" 
@@ -69,16 +69,17 @@
                         <ImageBrush Stretch="Uniform" ImageSource="Assets/OptionButton.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:ConnectionId='14' x:Name="friendsButton"
+                <Button x:ConnectionId='15' x:Name="friendsButton"
                                                  
                     HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Stretch" 
+                    VerticalAlignment="Stretch"
+                                              
                     Margin="189,-1,100,1" BorderThickness="0">
                     <Button.Background>
                         <ImageBrush Stretch="Uniform" ImageSource="Assets/FriendsButton.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:ConnectionId='15' x:Name="profilButton"
+                <Button x:ConnectionId='16' x:Name="profilButton"
                                                 
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch" 
@@ -87,7 +88,7 @@
                         <ImageBrush Stretch="Uniform" ImageSource="Assets/ProfilButton.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:ConnectionId='16' x:Name="homeButton"
+                <Button x:ConnectionId='17' x:Name="homeButton"
                                               
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch" 
@@ -102,7 +103,7 @@
                 BorderThickness="1" Margin="0,570,0,0"
                 Visibility="Collapsed">
             <Grid>
-                <Button x:ConnectionId='9' x:Name="passportButton"
+                <Button x:ConnectionId='10' x:Name="passportButton"
                                                   
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch" 
@@ -111,7 +112,7 @@
                         <ImageBrush Stretch="Uniform" ImageSource="Assets/WtfButton.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:ConnectionId='10' x:Name="associationButton"
+                <Button x:ConnectionId='11' x:Name="associationButton"
                                                      
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch" 
@@ -120,7 +121,7 @@
                         <ImageBrush Stretch="Uniform" ImageSource="Assets/AssociationButton.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:ConnectionId='11' x:Name="wtf2Button"
+                <Button x:ConnectionId='12' x:Name="wtf2Button"
                                               
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch" 
@@ -129,7 +130,7 @@
                         <ImageBrush Stretch="Uniform" ImageSource="Assets/EventButton.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:ConnectionId='12' x:Name="eventButton"
+                <Button x:ConnectionId='13' x:Name="eventButton"
                                                
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch" 
@@ -262,6 +263,11 @@
         	HorizontalAlignment="Left" Margin="8,428,0,0"
         	VerticalAlignment="Top" Height="64" Width="382"
         	                               
+        	Background="#FF7CBC63" BorderBrush="#FF030202" Visibility="Collapsed"/>
+        <Button x:ConnectionId='9' x:Name="denyFriendButton" Content="Refuser l'invitation" 
+        	HorizontalAlignment="Left" Margin="8,481,0,0"
+        	VerticalAlignment="Top" Height="64" Width="382"
+        	                             
         	Background="#FF7CBC63" BorderBrush="#FF030202" Visibility="Collapsed"/>
     </Grid>
 </Page>
