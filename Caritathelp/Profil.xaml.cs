@@ -30,12 +30,8 @@ namespace Caritathelp
     /// </summary>
     public sealed partial class Profil : Page
     {
-        bool isMyProfil = false;
-        bool isVisibile = false;
         private string id;
-        private bool flag;
-        bool doCoroutine = true;
-        private Notifications notifs;
+        private bool isMyProfil;
 
         class Friends
         {
@@ -49,12 +45,6 @@ namespace Caritathelp
             public string response { get; set; }
         }
 
-        class RequeteResponse
-        {
-            public string status { get; set; }
-            public string message { get; set; }
-            public User response { get; set; }
-        }
 
         class FriendResponse
         {
@@ -63,11 +53,9 @@ namespace Caritathelp
             public Friends response { get; set; }
         }
 
-        private RequeteResponse message;
         private RequeteResponse user;
         private FriendResponse friends;
         private SimpleResponse simpleResponse;
-        private string responseString;
 
         private async void sendRequestToFriend()
         {
@@ -296,121 +284,6 @@ namespace Caritathelp
             }
         }
 
-        private async void getNotification()
-        {
-            if (doCoroutine)
-            {
-                var httpClient = new HttpClient(new HttpClientHandler());
-                try
-                {
-                    string id = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
-                    var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + id + "{?token}");
-                    template.AddParameter("id", id);
-                    template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
-                    var uri = template.Resolve();
-                    Debug.WriteLine(uri);
-
-                    HttpResponseMessage response = await httpClient.GetAsync(uri);
-                    response.EnsureSuccessStatusCode();
-                    responseString = await response.Content.ReadAsStringAsync();
-                    message = JsonConvert.DeserializeObject<RequeteResponse>(responseString);
-                    if (Int32.Parse(message.status) != 200)
-                    {
-
-                    }
-                    else
-                    {
-                        if (message.response.notifications.add_friend.Count > notifs.add_friend.Count)
-                        {
-                            flag = true;
-                            updateGUI();
-                            Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"] = JsonConvert.SerializeObject(message.response.notifications);
-                            notifs = message.response.notifications;
-                            Debug.WriteLine("On a recu une nouvelle notification !");
-                        }
-                        else
-                        {
-                            flag = false;
-                            updateGUI();
-                            notifs = message.response.notifications;
-                            Debug.WriteLine("0 nouvelles notificaitons");
-                        }
-                    }
-                }
-                catch (HttpRequestException e)
-                {
-                }
-                catch (JsonReaderException e)
-                {
-                    System.Diagnostics.Debug.WriteLine(responseString);
-                    Debug.WriteLine("Failed to read json");
-                }
-                catch (JsonSerializationException e)
-                {
-                    System.Diagnostics.Debug.WriteLine(e.Message);
-                }
-            }
-        }
-
-        private async Task updateGUI()
-        {
-            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => {
-                if (flag)
-                {
-                    alertButtonNotity.Visibility = Visibility.Visible;
-                    alertButton.Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    alertButtonNotity.Visibility = Visibility.Collapsed;
-                    alertButton.Visibility = Visibility;
-                }
-            });
-        }
-
-        public void CheckStatus(Object stateInfo)
-        {
-            AutoResetEvent autoEvent = (AutoResetEvent)stateInfo;
-            getNotification();
-            autoEvent.Set();
-        }
-
-        public void loadCoroutine()
-        {
-            AutoResetEvent autoEvent = new AutoResetEvent(false);
-
-            // Create an inferred delegate that invokes methods for the timer.
-            TimerCallback tcb = this.CheckStatus;
-
-            // Create a timer that signals the delegate to invoke 
-            // CheckStatus after one second, and every 1/4 second 
-            // thereafter.
-            Timer stateTimer = new Timer(tcb, autoEvent, 1000, 10000);
-
-            // When autoEvent signals, change the period to every
-            // 1/2 second.
-            autoEvent.WaitOne(1000);
-
-            // When autoEvent signals the second time, dispose of 
-            // the timer.
-            autoEvent.WaitOne(10000);
-        }
-
-        public void notificationButtonClick(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(Notification));
-        }
-
-        public void passportButtonClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void eventButtonClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         public static bool ValidateEmail(string str)
         {
             // Return true if strIn is in valid e-mail format.
@@ -459,71 +332,6 @@ namespace Caritathelp
             return true;
         }
 
-        public void logoutButtonClick(object sender, RoutedEventArgs e)
-        {
-            doCoroutine = false;
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("mail");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("firstname");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("lastname");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("city");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("genre");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("allowedgps");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("birthday");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("id");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("password");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("token");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("notifications");
-            this.Frame.Navigate(typeof(MainPage));
-        }
-
-        public void wtf2ButtonClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void associationButtonClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
-        public void homeButtonClick(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(Accueil));
-        }
-
-        public void profilButtonClick(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(Profil), (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString());
-        }
-
-        public void friendsButtonClick(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(Friend));
-        }
-
-        public void setVisibility(object sender, RoutedEventArgs e)
-        {
-            if (isVisibile)
-            {
-                secondBorder.Visibility = Visibility.Collapsed;
-                firstBorder.Margin = new Thickness(0, 570, 0, 0);
-                isVisibile = false;
-            }
-            else
-            {
-                isVisibile = true;
-                firstBorder.Margin = new Thickness(0, 500, 0, 70);
-                secondBorder.Visibility = Visibility.Visible;
-            }
-        }
-
-        public void TextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox tb = (TextBox)sender;
-            tb.Text = string.Empty;
-        }
-
         private async void getInformation()
         {
             var httpClient = new HttpClient(new HttpClientHandler());
@@ -546,8 +354,8 @@ namespace Caritathelp
                 else
                 {
                     var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-                    GenreBox.Items.Add("Femme");
-                    GenreBox.Items.Add("Homme");
+                    GenreBox.Items.Add("f");
+                    GenreBox.Items.Add("m");
                     GenreBox.Items.Add("M. / Mme.");
 
                     emailEdit.Text = user.response.mail;
@@ -557,19 +365,23 @@ namespace Caritathelp
                         cityEdit.Text = user.response.city;
                     if (user.response.birthday != null)
                         birthdayEdit.Date = (DateTime)Convert.ToDateTime(user.response.birthday);
-                    if (user.response.genre != null)
+                    if (user.response.gender != null)
                     {
-                        if (user.response.genre == "Femme")
+                        Debug.WriteLine("Tatatatatataaaaaaaaaaaaaaaaa");
+                        if (user.response.gender.Equals("f", StringComparison.Ordinal))
                             GenreBox.SelectedIndex = 0;
-                        else if (user.response.genre == "Homme")
+                        else if (user.response.gender.Equals("m", StringComparison.Ordinal))
+                        {
                             GenreBox.SelectedIndex = 1;
+                            Debug.WriteLine("On est un mal");
+                        }
                         else
                             GenreBox.SelectedIndex = 2;
                     }
                     else
                         GenreBox.SelectedIndex = 2;
-                    bool allowed = user.response.allowgps;
-                    if (allowed)
+                    string allowed = user.response.allowgps;
+                    if (allowed.Equals("true", StringComparison.Ordinal))
                         allowGPSEdit.IsChecked = true;
                     else
                         allowGPSEdit.IsChecked = false;
@@ -676,7 +488,7 @@ namespace Caritathelp
                         new KeyValuePair<string, string>("firstname", firstNameEdit.Text),
                         new KeyValuePair<string, string>("lastname", lastNameEdit.Text),
                         new KeyValuePair<string, string>("birthday", birthdayEdit.Date.ToString()),
-                        new KeyValuePair<string, string>("genre", GenreBox.SelectedValue.ToString()),
+                        new KeyValuePair<string, string>("gender", GenreBox.SelectedValue.ToString()),
                         new KeyValuePair<string, string>("allowgps", allowGPSEdit.IsChecked.ToString()),
                         new KeyValuePair<string, string>("city", cityEdit.Text),
                         new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"])
@@ -704,7 +516,7 @@ namespace Caritathelp
                         localSettings.Values["lastname"] = lastNameEdit.Text;
                         localSettings.Values["city"] = cityEdit.Text;
                         localSettings.Values["birthday"] = birthdayEdit.Date.ToString();
-                        localSettings.Values["genre"] = GenreBox.SelectedValue ;
+                        localSettings.Values["gender"] = GenreBox.SelectedValue ;
                         localSettings.Values["allowgps"] = allowGPSEdit.IsChecked;
                         localSettings.Values["password"] = passwordEdit.Password;
                         Frame.Navigate(typeof(Profil), (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString());
@@ -746,18 +558,7 @@ namespace Caritathelp
             sendRequestToFriend();
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values["search"] = searchTextBox.Text;
-            Frame.Navigate(typeof(Research));
-        }
 
-        private void searchTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox tb = (TextBox)sender;
-            tb.Text = string.Empty;
-            searchTextBox.Foreground = new SolidColorBrush(Colors.Black);
-        }
 
         private void acceptFriendButtonClick(object sender, RoutedEventArgs e)
         {
@@ -772,6 +573,173 @@ namespace Caritathelp
         private void removeFriendButtonClick(object sender, RoutedEventArgs e)
         {
             removeFriend();
+        }
+
+        private void searchTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            searchTextBox.Foreground = new SolidColorBrush(Colors.Black);
+        }
+
+        public void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+        }
+
+        public void associationButtonClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public void messageButtonClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public void moreButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Options));
+        }
+
+        public void homeButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Accueil));
+        }
+
+        private void search_Click(object sender, RoutedEventArgs e)
+        {
+            Windows.Storage.ApplicationData.Current.LocalSettings.Values["search"] = searchTextBox.Text;
+            Frame.Navigate(typeof(Research));
+        }
+
+        public void alertButtonClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Notification));
+        }
+
+        bool isVisibile = false;
+        private bool flag;
+        bool doCoroutine = true;
+        private Notifications notifs;
+
+        class RequeteResponse
+        {
+
+            public string status { get; set; }
+            public string message { get; set; }
+            public User response { get; set; }
+
+        }
+
+        private RequeteResponse message;
+        private string responseString;
+
+        private async void getNotification()
+        {
+            if (doCoroutine)
+            {
+                var httpClient = new HttpClient(new HttpClientHandler());
+                try
+                {
+                    string id = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
+                    var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + id + "{?token}");
+                    template.AddParameter("id", id);
+                    template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
+                    var uri = template.Resolve();
+                    Debug.WriteLine(uri);
+
+                    HttpResponseMessage response = await httpClient.GetAsync(uri);
+                    response.EnsureSuccessStatusCode();
+                    responseString = await response.Content.ReadAsStringAsync();
+                    System.Diagnostics.Debug.WriteLine(responseString.ToString());
+                    message = JsonConvert.DeserializeObject<RequeteResponse>(responseString);
+                    if (Int32.Parse(message.status) != 200)
+                    {
+
+                    }
+                    else
+                    {
+                        if (message.response.notifications.add_friend.Count > notifs.add_friend.Count)
+                        {
+                            flag = true;
+                            updateGUI();
+                            notifs = message.response.notifications;
+                            Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"] = JsonConvert.SerializeObject(message.response.notifications);
+                            Debug.WriteLine("On a recu une nouvelle notification !");
+                        }
+                        else
+                        {
+                            flag = false;
+                            updateGUI();
+                            notifs = message.response.notifications;
+                            Debug.WriteLine("0 nouvelles notificaitons");
+                        }
+                    }
+                }
+                catch (HttpRequestException e)
+                {
+                }
+                catch (JsonReaderException e)
+                {
+                    System.Diagnostics.Debug.WriteLine(responseString);
+                    Debug.WriteLine("Failed to read json");
+                }
+                catch (JsonSerializationException e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.Message);
+                }
+                catch (NullReferenceException e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+            }
+        }
+
+        private async Task updateGUI()
+        {
+            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => {
+                Debug.WriteLine(message);
+                if (flag)
+                {
+                    alertButtonNotity.Visibility = Visibility.Visible;
+                    alertButton.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    alertButtonNotity.Visibility = Visibility.Collapsed;
+                    alertButton.Visibility = Visibility;
+                }
+            });
+        }
+
+        public void CheckStatus(Object stateInfo)
+        {
+            AutoResetEvent autoEvent = (AutoResetEvent)stateInfo;
+            getNotification();
+            autoEvent.Set();
+        }
+
+        public void loadCoroutine()
+        {
+            AutoResetEvent autoEvent = new AutoResetEvent(false);
+
+            // Create an inferred delegate that invokes methods for the timer.
+            TimerCallback tcb = this.CheckStatus;
+
+            // Create a timer that signals the delegate to invoke 
+            // CheckStatus after one second, and every 1/4 second 
+            // thereafter.
+            Timer stateTimer = new Timer(tcb, autoEvent, 1000, 10000);
+
+            // When autoEvent signals, change the period to every
+            // 1/2 second.
+            autoEvent.WaitOne(1000);
+
+            // When autoEvent signals the second time, dispose of 
+            // the timer.
+            autoEvent.WaitOne(10000);
         }
     }
 }

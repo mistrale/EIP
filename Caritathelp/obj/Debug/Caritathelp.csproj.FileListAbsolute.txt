@@ -128,3 +128,13 @@ C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\Friend.g.cs
 C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\Friend.xaml
 C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\Friend.xbf
 C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\Friend.xbf
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\FinalInscription.xbf
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\FinalInscription.g.i.cs
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\FinalInscription.g.cs
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\FinalInscription.xaml
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\FinalInscription.xbf
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\Options.g.i.cs
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\Options.g.cs
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\Options.xaml
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\Options.xbf
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\Options.xbf

@@ -16,6 +16,7 @@
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Width" />
       <RootProperty Name="RowDefinitions" />
+      <RootProperty Name="RenderTransformOrigin" />
       <RootProperty Name="Name" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
@@ -32,7 +33,7 @@
       <RootProperty Name="Name" />
       <RootProperty Name="Height" />
       <RootProperty Name="Background" />
-      <RootProperty Name="Visibility" />
+      <RootProperty Name="VerticalAlignment" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="HorizontalAlignment" />
@@ -54,21 +55,20 @@
       <RootEvent Name="TextChanged" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Button">
+      <RootProperty Name="Content" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Margin" />
       <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="BorderThickness" />
       <RootProperty Name="RenderTransformOrigin" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="Foreground" />
-      <RootProperty Name="Content" />
+      <RootProperty Name="BorderThickness" />
       <RootProperty Name="Visibility" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
       <RootProperty Name="FontSize" />
+      <RootProperty Name="Foreground" />
       <RootProperty Name="BorderBrush" />
       <RootEvent Name="Click" />
-      <RootEvent Name="GotFocus" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
       <RootProperty Name="Name" />
@@ -77,14 +77,15 @@
       <RootProperty Name="Margin" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Width" />
+      <RootProperty Name="Content" />
       <RootProperty Name="VerticalScrollBarVisibility" />
       <RootProperty Name="VerticalScrollMode" />
       <RootProperty Name="AllowDrop" />
       <RootProperty Name="BringIntoViewOnFocusChange" />
       <RootProperty Name="HorizontalScrollMode" />
       <RootProperty Name="IsHoldingEnabled" />
-      <RootProperty Name="Content" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ContentPresenter" />
     <RootType FullName="Windows.UI.Xaml.Media.ImageBrush">
       <RootProperty Name="Stretch" />
       <RootProperty Name="ImageSource" />
@@ -93,20 +94,32 @@
       <RootProperty Name="Height" />
     </RootType>
     <RootType FullName="Caritathelp.Accueil" />
-    <RootType FullName="Caritathelp.Friend" />
     <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
-      <RootProperty Name="Password" />
-      <RootProperty Name="PlaceholderText" />
       <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Password" />
       <RootProperty Name="Margin" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="Width" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="Background" />
       <RootProperty Name="Foreground" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
       <RootProperty Name="BorderBrush" />
       <RootEvent Name="GotFocus" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.CheckBox">
+      <RootProperty Name="Content" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="IsChecked" />
+      <RootProperty Name="BorderBrush" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBlock">
       <RootProperty Name="HorizontalAlignment" />
@@ -115,9 +128,10 @@
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Height" />
       <RootProperty Name="Width" />
-      <RootProperty Name="FontSize" />
-      <RootProperty Name="FontWeight" />
       <RootProperty Name="Foreground" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="TextAlignment" />
+      <RootProperty Name="Text" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
       <RootProperty Name="Name" />
@@ -128,6 +142,8 @@
       <RootProperty Name="Height" />
       <RootProperty Name="Width" />
     </RootType>
+    <RootType FullName="Caritathelp.FinalInscription" />
+    <RootType FullName="Caritathelp.Friend" />
     <RootType FullName="Windows.UI.Xaml.Controls.DatePicker">
       <RootProperty Name="Name" />
       <RootProperty Name="HorizontalAlignment" />
@@ -138,17 +154,6 @@
       <RootProperty Name="Background" />
       <RootProperty Name="Foreground" />
     </RootType>
-    <RootType FullName="Caritathelp.Inscription" />
-    <RootType FullName="Windows.UI.Xaml.Controls.HyperlinkButton">
-      <RootProperty Name="Margin" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="FontSize" />
-      <RootProperty Name="FontStyle" />
-      <RootProperty Name="Content" />
-      <RootEvent Name="Click" />
-    </RootType>
-    <RootType FullName="Caritathelp.MainPage" />
-    <RootType FullName="Caritathelp.Notification" />
     <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Margin" />
@@ -162,20 +167,28 @@
       <RootProperty Name="BorderThickness" />
       <RootEvent Name="SelectionChanged" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.CheckBox">
-      <RootProperty Name="HorizontalAlignment" />
+    <RootType FullName="Caritathelp.Inscription" />
+    <RootType FullName="Windows.UI.Xaml.Controls.HyperlinkButton">
       <RootProperty Name="Margin" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Foreground" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="BorderThickness" />
       <RootProperty Name="Width" />
-      <RootProperty Name="Content" />
       <RootProperty Name="FontSize" />
-      <RootProperty Name="IsChecked" />
-      <RootProperty Name="BorderBrush" />
+      <RootProperty Name="FontStyle" />
+      <RootProperty Name="Content" />
+      <RootEvent Name="Click" />
     </RootType>
+    <RootType FullName="Caritathelp.MainPage" />
+    <RootType FullName="Caritathelp.Notification" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Image">
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Source" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="RenderTransformOrigin" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.NullExtension" />
+    <RootType FullName="Caritathelp.Options" />
     <RootType FullName="Caritathelp.Profil" />
     <RootType FullName="Caritathelp.Research" />
   </Roots.RootTypes>

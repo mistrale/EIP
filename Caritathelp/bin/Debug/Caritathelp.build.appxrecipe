@@ -48,6 +48,9 @@
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\Assets\AlertButtonNotified.png">
       <PackagePath>Assets\AlertButtonNotified.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\Assets\association.png">
+      <PackagePath>Assets\association.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\Assets\AssociationButton.png">
       <PackagePath>Assets\AssociationButton.png</PackagePath>
     </AppxPackagedFile>
@@ -63,14 +66,17 @@
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\Assets\FriendsButton.png">
       <PackagePath>Assets\FriendsButton.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\Assets\home.png">
+      <PackagePath>Assets\home.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\Assets\HomeButton.png">
       <PackagePath>Assets\HomeButton.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\Assets\Inscription.png">
       <PackagePath>Assets\Inscription.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\Assets\Logo.scale-240.png">
-      <PackagePath>Assets\Logo.scale-240.png</PackagePath>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\Assets\logo.png">
+      <PackagePath>Assets\logo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\Assets\LogoutButton.png">
@@ -79,8 +85,20 @@
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\Assets\magnify.png">
       <PackagePath>Assets\magnify.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\Assets\message.png">
+      <PackagePath>Assets\message.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\Assets\next.png">
+      <PackagePath>Assets\next.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\Assets\notif.png">
+      <PackagePath>Assets\notif.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\Assets\OptionButton.png">
       <PackagePath>Assets\OptionButton.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\Assets\plus.png">
+      <PackagePath>Assets\plus.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\Assets\ProfilButton.png">
       <PackagePath>Assets\ProfilButton.png</PackagePath>
@@ -117,6 +135,9 @@
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\Accueil.xbf">
       <PackagePath>Accueil.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\FinalInscription.xbf">
+      <PackagePath>FinalInscription.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\Friend.xbf">
       <PackagePath>Friend.xbf</PackagePath>
     </AppxPackagedFile>
@@ -128,6 +149,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\Notification.xbf">
       <PackagePath>Notification.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\Options.xbf">
+      <PackagePath>Options.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\Profil.xbf">
       <PackagePath>Profil.xbf</PackagePath>

@@ -28,11 +28,11 @@ namespace Caritathelp
         public string firstname { get; set; }
         public string lastname { get; set; }
         public string birthday { get; set; }
-        public string genre { get; set; }
+        public string gender { get; set; }
         public string city { get; set; }
         public string latitue { get; set; }
         public string longitude { get; set; }
-        public bool allowgps { get; set; }
+        public string allowgps { get; set; }
         public Notifications notifications { get; set; }
     }
 }

@@ -23,24 +23,6 @@ namespace Caritathelp
     public sealed partial class Inscription : Page
     {
 
-        class RequeteResponse
-        {
-
-            public string status { get; set; }
-            public string message { get; set; }
-            public User response { get; set; }
-
-        }
-
-        private RequeteResponse message;
-        private string responseString;
-
-        public static bool ValidateEmail(string str)
-        {
-            // Return true if strIn is in valid e-mail format.
-            return Regex.IsMatch(str, @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
-        }
-
         private bool checkRegistrationField()
         {
             if (NameTextBox.Text == String.Empty || NameTextBox.Text.Equals("Nom", StringComparison.Ordinal))
@@ -54,87 +36,26 @@ namespace Caritathelp
                 warningTextBlock.Text = "FirstName empty.";
                 return false;
             }
-            if (EmailTextBox.Text == String.Empty || EmailTextBox.Text.Equals("Email", StringComparison.Ordinal))
+            if (City.Text == String.Empty || City.Text.Equals("Ville", StringComparison.Ordinal))
             {
-                warningTextBlock.Text = "Email empty.";
-                return false;
-            }
-            if (!ValidateEmail(EmailTextBox.Text))
-            {
-                warningTextBlock.Text = "Invalid email.";
-                return false;
-            }
-            if (PasswordPasswordBox.Password == String.Empty || PasswordPasswordBox.Password.Equals("Password", StringComparison.Ordinal))
-            {
-                warningTextBlock.Text = "Password empty.";
-                return false;
-            }
-            if (PasswordConfirmationPasswordBox.Password == String.Empty
-                || PasswordConfirmationPasswordBox.Password.Equals("Confirmation Password", StringComparison.Ordinal))
-            {
-                warningTextBlock.Text = "CofirmationPassword empty.";
-                return false;
-            }
-            if (!PasswordPasswordBox.Password.Equals(PasswordConfirmationPasswordBox.Password, StringComparison.Ordinal))
-            {
-                warningTextBlock.Text = "Password doesn't match.";
+                warningTextBlock.Text = "City empty";
                 return false;
             }
             return true;
-        }
-
-        private async void createNewUser()
-        {
-            string url = "http://52.31.151.160:3000/volunteers/";
-            var values = new List<KeyValuePair<string, string>>
-                    {
-                        new KeyValuePair<string, string>("lastname", NameTextBox.Text),
-                        new KeyValuePair<string, string>("firstname", FirstNameTextBox.Text),
-                        new KeyValuePair<string, string>("mail", EmailTextBox.Text),
-                        new KeyValuePair<string, string>("birthday", DateBox.ToString()),
-                        new KeyValuePair<string, string>("password", PasswordPasswordBox.Password)
-                    };
-            var httpClient = new HttpClient(new HttpClientHandler());
-            try
-            {
-                HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
-                progressBar.IsActive = false;
-                response.EnsureSuccessStatusCode();
-                responseString = await response.Content.ReadAsStringAsync();
-                System.Diagnostics.Debug.WriteLine(responseString.ToString());
-                message = JsonConvert.DeserializeObject<RequeteResponse>(responseString);
-
-                if (Int32.Parse(message.status) != 200)
-                {
-                    warningTextBlock.Text = message.message;
-                }
-                else
-                {
-                    this.Frame.Navigate(typeof(MainPage));
-                }
-            }
-            catch (HttpRequestException e)
-            {
-                progressBar.IsActive = false;
-                warningTextBlock.Text = e.Message;
-            }
-            catch (JsonReaderException e)
-            {
-                System.Diagnostics.Debug.WriteLine(responseString);
-            }
-            catch (JsonSerializationException e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.Message);
-            }
         }
 
         public void Register_click(object sender, RoutedEventArgs e)
         {
             if (!checkRegistrationField())
                 return;
-            progressBar.IsActive = true;
-            createNewUser();
-            warningTextBlock.Text = "";       
+            warningTextBlock.Text = "";
+            var settings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            settings.Values["firstname"] = FirstNameTextBox.Text;
+            settings.Values["lastname"] = NameTextBox.Text;
+            settings.Values["city"] = City.Text;
+            settings.Values["genre"] = GenreBox.SelectedValue.ToString();
+            settings.Values["birthday"] = birthday.ToString();
+            this.Frame.Navigate(typeof(FinalInscription));
         }
 
 
@@ -153,6 +74,10 @@ namespace Caritathelp
         public Inscription()
         {
             this.InitializeComponent();
+            GenreBox.Items.Add("M. / Mme.");
+            GenreBox.Items.Add("m");
+            GenreBox.Items.Add("f");
+            GenreBox.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -163,6 +88,5 @@ namespace Caritathelp
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
-
     }
 }

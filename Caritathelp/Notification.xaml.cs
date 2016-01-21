@@ -29,19 +29,7 @@ namespace Caritathelp
     /// </summary>
     public sealed partial class Notification : Page
     {
-        bool isVisibile = false;
-        private bool flag;
-        bool doCoroutine = false;
-        private Notifications notifs;
 
-        class RequeteResponse
-        {
-
-            public string status { get; set; }
-            public string message { get; set; }
-            public User response { get; set; }
-
-        }
 
         class Friends
         {
@@ -55,9 +43,7 @@ namespace Caritathelp
             public Friends response { get; set; }
         }
 
-        private RequeteResponse message;
         private FriendResponse friends;
-        private string responseString;
 
         private async void getFriends()
         {
@@ -99,6 +85,84 @@ namespace Caritathelp
             }
             Debug.WriteLine(friends.status);
         }
+
+        public Notification()
+        {
+            this.InitializeComponent();
+        }
+
+        /// <summary>
+        /// Invoked when this page is about to be displayed in a Frame.
+        /// </summary>
+        /// <param name="e">Event data that describes how this page was reached.
+        /// This parameter is typically used to configure the page.</param>
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            loadCoroutine();
+            getFriends();
+            notifs = JsonConvert.DeserializeObject<Notifications>((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"]);
+        }
+
+        private void searchTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            searchTextBox.Foreground = new SolidColorBrush(Colors.Black);
+        }
+
+        public void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+        }
+
+        public void associationButtonClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public void messageButtonClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public void moreButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Options));
+        }
+
+        public void homeButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Accueil));
+        }
+
+        private void search_Click(object sender, RoutedEventArgs e)
+        {
+            Windows.Storage.ApplicationData.Current.LocalSettings.Values["search"] = searchTextBox.Text;
+            Frame.Navigate(typeof(Research));
+        }
+
+        public void alertButtonClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Notification));
+        }
+
+        bool isVisibile = false;
+        private bool flag;
+        bool doCoroutine = true;
+        private Notifications notifs;
+
+        class RequeteResponse
+        {
+
+            public string status { get; set; }
+            public string message { get; set; }
+            public User response { get; set; }
+
+        }
+
+        private RequeteResponse message;
+        private string responseString;
 
         private async void getNotification()
         {
@@ -154,6 +218,10 @@ namespace Caritathelp
                 {
                     System.Diagnostics.Debug.WriteLine(e.Message);
                 }
+                catch (NullReferenceException e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
             }
         }
 
@@ -200,116 +268,6 @@ namespace Caritathelp
             // When autoEvent signals the second time, dispose of 
             // the timer.
             autoEvent.WaitOne(10000);
-        }
-
-        public void notificationButtonClick(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(Notification));
-        }
-
-        public void passportButtonClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void eventButtonClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void logoutButtonClick(object sender, RoutedEventArgs e)
-        {
-    doCoroutine = false;
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("mail");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("firstname");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("lastname");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("city");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("genre");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("allowedgps");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("birthday");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("id");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("password");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("token");
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("notifications");
-            this.Frame.Navigate(typeof(MainPage));
-        }
-
-        public void wtf2ButtonClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void associationButtonClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
-        public void homeButtonClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void profilButtonClick(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(Profil), (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString());
-        }
-
-        public void friendsButtonClick(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(Friend));
-        }
-
-        public void setVisibility(object sender, RoutedEventArgs e)
-        {
-            if (isVisibile)
-            {
-                secondBorder.Visibility = Visibility.Collapsed;
-                firstBorder.Margin = new Thickness(0, 570, 0, 0);
-                isVisibile = false;
-            }
-            else
-            {
-                isVisibile = true;
-                firstBorder.Margin = new Thickness(0, 500, 0, 70);
-                secondBorder.Visibility = Visibility.Visible;
-            }
-        }
-
-        public void TextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox tb = (TextBox)sender;
-            tb.Text = string.Empty;
-        }
-
-        public Notification()
-        {
-            this.InitializeComponent();
-        }
-
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.
-        /// This parameter is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            loadCoroutine();
-            getFriends();
-            notifs = JsonConvert.DeserializeObject<Notifications>((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"]);
-        }
-
-        private void searchTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox tb = (TextBox)sender;
-            tb.Text = string.Empty;
-            searchTextBox.Foreground = new SolidColorBrush(Colors.Black);
-        }
-
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            Windows.Storage.ApplicationData.Current.LocalSettings.Values["search"] = searchTextBox.Text;
-            Frame.Navigate(typeof(Research));
         }
     }
 }

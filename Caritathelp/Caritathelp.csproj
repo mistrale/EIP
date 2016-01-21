@@ -89,6 +89,9 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="FinalInscription.xaml.cs">
+      <DependentUpon>FinalInscription.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Friend.cs" />
     <Compile Include="Friend.xaml.cs">
       <DependentUpon>Friend.xaml</DependentUpon>
@@ -101,6 +104,9 @@
     </Compile>
     <Compile Include="Notification.xaml.cs">
       <DependentUpon>Notification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Options.xaml.cs">
+      <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
     <Compile Include="Profil.xaml.cs">
       <DependentUpon>Profil.xaml</DependentUpon>
@@ -120,17 +126,23 @@
   <ItemGroup>
     <Content Include="Assets\AlertButton.png" />
     <Content Include="Assets\AlertButtonNotified.png" />
+    <Content Include="Assets\association.png" />
     <Content Include="Assets\AssociationButton.png" />
     <Content Include="Assets\Background.png" />
     <Content Include="Assets\ChatButton.png" />
     <Content Include="Assets\EventButton.png" />
     <Content Include="Assets\FriendsButton.png" />
+    <Content Include="Assets\home.png" />
     <Content Include="Assets\HomeButton.png" />
     <Content Include="Assets\Inscription.png" />
-    <Content Include="Assets\Logo.scale-240.png" />
+    <Content Include="Assets\logo.png" />
     <Content Include="Assets\LogoutButton.png" />
     <Content Include="Assets\magnify.png" />
+    <Content Include="Assets\message.png" />
+    <Content Include="Assets\next.png" />
+    <Content Include="Assets\notif.png" />
     <Content Include="Assets\OptionButton.png" />
+    <Content Include="Assets\plus.png" />
     <Content Include="Assets\ProfilButton.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
@@ -148,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="FinalInscription.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Friend.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -161,6 +177,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Notification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Options.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

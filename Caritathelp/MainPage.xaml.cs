@@ -89,7 +89,7 @@ namespace Caritathelp
                         localSettings.Values["lastname"] = message.response.lastname;
                         localSettings.Values["city"] = message.response.city;
                         localSettings.Values["birdthday"] = message.response.birthday;
-                        localSettings.Values["genre"] = message.response.genre;
+                        localSettings.Values["gender"] = message.response.gender;
                         localSettings.Values["allowgps"] = message.response.allowgps;
                         localSettings.Values["password"] = Password.Password;
                         localSettings.Values["id"] = message.response.id;

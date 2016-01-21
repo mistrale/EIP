@@ -1,0 +1,151 @@
+﻿<Page
+    x:Class="Caritathelp.Options"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Caritathelp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="White">
+        <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,0,547">
+            <Grid x:Name="Menu" HorizontalAlignment="Left" Height="93"
+              VerticalAlignment="Top" Width="400" 
+              Background="#FFB6D7A8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.250*"/>
+                    <RowDefinition Height="0.150*"/>
+                </Grid.RowDefinitions>
+                <Border BorderBrush="#000000" BorderThickness="0.5" Grid.Row="0" Grid.Column="0" Margin="0,0,0,0.333">
+
+                </Border>
+                <Border BorderBrush="#000000" BorderThickness="1" Grid.Column="0" Margin="0,58,0,0.333" Grid.RowSpan="2">
+                    <TextBox x:Name="warningTextBox" Margin="0" 
+                             TextWrapping="Wrap" Text="" 
+                             VerticalAlignment="Stretch" 
+                             Foreground="#FFDC4545"/>
+                </Border>
+                <Border BorderBrush="#000000" BorderThickness="1" Grid.Column="0" Margin="0,58,0,0.333" Grid.RowSpan="2">
+                    <Button x:ConnectionId='11' x:Name="searchButton" Content=""
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Margin="288.167,-55.833,1.167,31.167"
+                            BorderThickness="0"
+                            RenderTransformOrigin="0.622,0.467"
+                                                >
+                        <Button.Background>
+                            <ImageBrush ImageSource="ms-appx:/Assets/magnify.png" Stretch="Uniform"/>
+                        </Button.Background>
+                    </Button>
+                </Border>
+            </Grid>
+        </Border>
+        <TextBox x:ConnectionId='1' x:Name="searchTextBox" HorizontalAlignment="Left"
+                 Margin="10,10,0,0" TextWrapping="Wrap"
+                 Text="Recherche" VerticalAlignment="Top" Width="299"
+                 Background="#00A9DF94" BorderThickness="0"
+                 Height="38" Foreground="White" FontSize="24"                                  />
+        <Border Name="firstBorder" Height="70" BorderBrush="Black"
+                BorderThickness="1"
+                Margin="0,570,0,0" Background="White">
+            <Grid>
+                <Button x:ConnectionId='6' x:Name="optionButton"
+                                           
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Stretch" 
+                    Margin="298,0,-9,0" BorderThickness="0">
+                    <Button.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="Assets/plus.png"/>
+                    </Button.Background>
+                </Button>
+                <Button x:ConnectionId='7' x:Name="alertButton"
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Stretch"
+                                            
+                    Margin="228,0,61,0" BorderThickness="0">
+                    <Button.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="Assets/notif.png"/>
+                    </Button.Background>
+                </Button>
+                <Button x:ConnectionId='8' x:Name="messageButton"
+                                              
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Stretch" 
+                    Margin="142,0,147,0" BorderThickness="0">
+                    <Button.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="Assets/message.png"/>
+                    </Button.Background>
+                </Button>
+                <Button x:ConnectionId='9' x:Name="homeButton"
+                                           
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Stretch" 
+                    Margin="0,-1,289,1" BorderThickness="0">
+                    <Button.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="Assets/home.png"/>
+                    </Button.Background>
+                </Button>
+                <Button x:ConnectionId='10' x:Name="associationButton"
+                	HorizontalAlignment="Stretch" 
+                	VerticalAlignment="Stretch"
+                	                              
+                	Margin="72,0,237,0" BorderThickness="0">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assets/association.png" Stretch="UniformToFill"/>
+                    </Button.Background>
+                </Button>
+            </Grid>
+        </Border>
+        <Button x:Name="alertButtonNotity" Content=""
+                HorizontalAlignment="Left" Margin="208,0,0,0"
+                VerticalAlignment="Top"
+                RenderTransformOrigin="0.38,0.334" BorderThickness="0" Visibility="Collapsed">
+            <Button.Background>
+                <ImageBrush Stretch="Uniform" ImageSource="Assets/AlertButtonNotified.png"/>
+            </Button.Background>
+        </Button>
+        <Grid HorizontalAlignment="Left" Height="453" 
+              Margin="0,112,0,0" VerticalAlignment="Top" Width="400">
+            <Button x:ConnectionId='2' x:Name="myassociationButton" 
+                    Content="Mes associations"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Width="400" Height="60"
+                                                    
+                    Foreground="#FF292828" Background="{x:Null}"/>
+            <Button x:ConnectionId='3' x:Name="friendsButton" Content="Mes amis"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                                             
+                    Width="400" Margin="0,63,0,0" Height="60"
+                    Foreground="#FF292828" Background="{x:Null}"/>
+            <Button x:ConnectionId='4' x:Name="profilButton" Content="Gestion de compte"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top"
+                    Width="400" Margin="0,177,0,0" Height="60"
+                                             
+                    Foreground="#FF292828" Background="{x:Null}"/>
+            <Button x:ConnectionId='5' x:Name="disconnectButton" Content="Déconnexion"
+                                                 
+                    HorizontalAlignment="Left" VerticalAlignment="Top"
+                    Width="400" Margin="0,285,0,0" Height="60" Foreground="#FF292828" Background="{x:Null}"/>
+            <Image x:Name="image" HorizontalAlignment="Left" Height="51" VerticalAlignment="Top" Width="71" Source="Assets/logo.png" Margin="0,10,0,0"/>
+
+            <Border BorderBrush="Black" BorderThickness="1" Height="66" VerticalAlignment="Top"/>
+            <Border BorderBrush="Black" BorderThickness="1" Height="66" VerticalAlignment="Top" Margin="0,176,0,0"/>
+            <Border BorderBrush="Black" BorderThickness="1" Height="66" VerticalAlignment="Top" Margin="0,66,0,0"/>
+            <Image x:Name="image1" HorizontalAlignment="Left" Height="56" Margin="340,10,0,0" VerticalAlignment="Top" Width="50" RenderTransformOrigin="0.513,0.622" Source="Assets/next.png"/>
+            <Image x:Name="image_Copy" HorizontalAlignment="Left" Height="56" VerticalAlignment="Top" Width="71" Source="Assets/logo.png" RenderTransformOrigin="0.552,1.525" Margin="0,71,0,0"/>
+            <Image x:Name="image1_Copy" HorizontalAlignment="Left" Height="56" Margin="340,72,0,0" VerticalAlignment="Top" Width="50" RenderTransformOrigin="0.513,0.622" Source="Assets/next.png"/>
+            <Grid HorizontalAlignment="Left" Height="43" Margin="0,133,0,0" VerticalAlignment="Top" Width="400" Background="#FFB6D7A8" RenderTransformOrigin="0.438,4.015"/>
+            <Image x:Name="image_Copy1" HorizontalAlignment="Left" Height="56" VerticalAlignment="Top" Width="71" Source="Assets/logo.png" RenderTransformOrigin="0.552,1.525" Margin="0,181,0,0"/>
+            <Image x:Name="image1_Copy1" HorizontalAlignment="Left" Height="56" Margin="340,186,0,0" VerticalAlignment="Top" Width="50" RenderTransformOrigin="0.513,0.622" Source="Assets/next.png"/>
+            <Grid HorizontalAlignment="Left" Height="43" Margin="0,242,0,0" VerticalAlignment="Top" Width="400" Background="#FFB6D7A8" RenderTransformOrigin="0.438,4.015"/>
+            <Border BorderBrush="Black" BorderThickness="1" Height="66" VerticalAlignment="Top" Margin="0,285,0,0"/>
+            <Image x:Name="image_Copy2" HorizontalAlignment="Left" Height="56" VerticalAlignment="Top" Width="71" Source="Assets/logo.png" RenderTransformOrigin="0.552,1.525" Margin="0,290,0,0"/>
+            <Image x:Name="image1_Copy2" HorizontalAlignment="Left" Height="56" Margin="340,290,0,0" VerticalAlignment="Top" Width="50" RenderTransformOrigin="0.513,0.622" Source="Assets/next.png"/>
+        </Grid>
+    </Grid>
+</Page>
+
