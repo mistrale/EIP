@@ -85,10 +85,17 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Association.cs" />
+    <Compile Include="AssociationProfil.xaml.cs">
+      <DependentUpon>AssociationProfil.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="CreateAssociation.xaml.cs">
+      <DependentUpon>CreateAssociation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FinalInscription.xaml.cs">
       <DependentUpon>FinalInscription.xaml</DependentUpon>
     </Compile>
@@ -101,6 +108,9 @@
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyAssociations.xaml.cs">
+      <DependentUpon>MyAssociations.xaml</DependentUpon>
     </Compile>
     <Compile Include="Notification.xaml.cs">
       <DependentUpon>Notification.xaml</DependentUpon>
@@ -160,6 +170,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="AssociationProfil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreateAssociation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FinalInscription.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -175,6 +193,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MyAssociations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Notification.xaml">
       <SubType>Designer</SubType>

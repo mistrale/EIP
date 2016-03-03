@@ -16,8 +16,8 @@
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Width" />
       <RootProperty Name="RowDefinitions" />
-      <RootProperty Name="RenderTransformOrigin" />
       <RootProperty Name="Name" />
+      <RootProperty Name="RenderTransformOrigin" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
       <RootMethod Name="GetColumn" />
@@ -47,6 +47,7 @@
       <RootProperty Name="Height" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="FontSize" />
+      <RootProperty Name="TextAlignment" />
       <RootProperty Name="BorderBrush" />
       <RootProperty Name="IsReadOnly" />
       <RootProperty Name="IsHitTestVisible" />
@@ -63,10 +64,10 @@
       <RootProperty Name="BorderThickness" />
       <RootProperty Name="Visibility" />
       <RootProperty Name="Background" />
+      <RootProperty Name="Foreground" />
       <RootProperty Name="Height" />
       <RootProperty Name="Width" />
       <RootProperty Name="FontSize" />
-      <RootProperty Name="Foreground" />
       <RootProperty Name="BorderBrush" />
       <RootEvent Name="Click" />
     </RootType>
@@ -94,6 +95,17 @@
       <RootProperty Name="Height" />
     </RootType>
     <RootType FullName="Caritathelp.Accueil" />
+    <RootType FullName="Caritathelp.AssociationProfil" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
+      <RootProperty Name="Name" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Background" />
+    </RootType>
+    <RootType FullName="Caritathelp.CreateAssociation" />
     <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Password" />
@@ -133,15 +145,6 @@
       <RootProperty Name="TextAlignment" />
       <RootProperty Name="Text" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
-      <RootProperty Name="Name" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="Width" />
-    </RootType>
     <RootType FullName="Caritathelp.FinalInscription" />
     <RootType FullName="Caritathelp.Friend" />
     <RootType FullName="Windows.UI.Xaml.Controls.DatePicker">
@@ -177,6 +180,7 @@
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Caritathelp.MainPage" />
+    <RootType FullName="Caritathelp.MyAssociations" />
     <RootType FullName="Caritathelp.Notification" />
     <RootType FullName="Windows.UI.Xaml.Controls.Image">
       <RootProperty Name="HorizontalAlignment" />

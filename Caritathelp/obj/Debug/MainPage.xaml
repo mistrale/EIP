@@ -25,7 +25,7 @@
                  Foreground="#FF5C5555"                                 />
         <PasswordBox x:ConnectionId='2' x:Name="Password" 
                  HorizontalAlignment="Left"
-                 Password="password"
+                 Password="dafuq2012"
                  Margin="42,287,0,0"  
                  FontSize="29.333"
                  Background="White"
@@ -64,7 +64,8 @@
                  Width="303" Height="78" Background="Transparent"
                  Foreground="Red" BorderThickness="0"/>
         <ProgressRing HorizontalAlignment="Left"
-                      Margin="170,554,0,0" VerticalAlignment="Top"
+                      Margin="170,554,0,0" 
+                      VerticalAlignment="Top"
                       Background="Transparent" Name="Loading"/>
     </Grid>
 </Page>

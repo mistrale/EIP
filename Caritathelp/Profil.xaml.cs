@@ -71,6 +71,7 @@ namespace Caritathelp
                     HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
                     response.EnsureSuccessStatusCode();
                     responseString = await response.Content.ReadAsStringAsync();
+
                     message = JsonConvert.DeserializeObject<RequeteResponse>(responseString);
                     if (Int32.Parse(message.status) != 200)
                     {
@@ -337,6 +338,7 @@ namespace Caritathelp
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
+
                 var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + id + "{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
@@ -444,8 +446,11 @@ namespace Caritathelp
             }
             catch (JsonSerializationException e)
             {
-                Debug.WriteLine(responseString);
+                Debug.WriteLine("WTFFFFFFFFFFFFF");
                 System.Diagnostics.Debug.WriteLine(e.Message);
+                System.Diagnostics.Debug.WriteLine(responseString);
+                System.Diagnostics.Debug.WriteLine("WTFFFF");
+
             }
         }
 
@@ -461,10 +466,10 @@ namespace Caritathelp
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            loadCoroutine();
+   //         loadCoroutine();
             id = e.Parameter as string;
             Debug.WriteLine(id);
-            notifs = JsonConvert.DeserializeObject<Notifications>((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"]);
+     //       notifs = JsonConvert.DeserializeObject<Notifications>((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"]);
             getInformation();
         }
 
@@ -480,7 +485,7 @@ namespace Caritathelp
 
         private async void updateProfil()
         {
-            string url = "http://52.31.151.160:3000/volunteers/" + ((int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]).ToString();
+            string url = "http://52.31.151.160:3000/volunteers/" + ((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]);
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("mail", emailEdit.Text),
@@ -661,21 +666,7 @@ namespace Caritathelp
                     }
                     else
                     {
-                        if (message.response.notifications.add_friend.Count > notifs.add_friend.Count)
-                        {
-                            flag = true;
-                            updateGUI();
-                            notifs = message.response.notifications;
-                            Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"] = JsonConvert.SerializeObject(message.response.notifications);
-                            Debug.WriteLine("On a recu une nouvelle notification !");
-                        }
-                        else
-                        {
-                            flag = false;
-                            updateGUI();
-                            notifs = message.response.notifications;
-                            Debug.WriteLine("0 nouvelles notificaitons");
-                        }
+
                     }
                 }
                 catch (HttpRequestException e)

@@ -83,7 +83,6 @@ namespace Caritathelp
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
-            Debug.WriteLine(friends.status);
         }
 
         public Notification()
@@ -189,21 +188,7 @@ namespace Caritathelp
                     }
                     else
                     {
-                        if (message.response.notifications.add_friend.Count > notifs.add_friend.Count)
-                        {
-                            flag = true;
-                            updateGUI();
-                            notifs = message.response.notifications;
-                            Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"] = JsonConvert.SerializeObject(message.response.notifications);
-                            Debug.WriteLine("On a recu une nouvelle notification !");
-                        }
-                        else
-                        {
-                            flag = false;
-                            updateGUI();
-                            notifs = message.response.notifications;
-                            Debug.WriteLine("0 nouvelles notificaitons");
-                        }
+
                     }
                 }
                 catch (HttpRequestException e)

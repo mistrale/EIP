@@ -90,7 +90,10 @@ namespace Caritathelp
                 Debug.WriteLine("Failed to read json");
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
-            initResearch(userList.response.Count);
+            if (userList != null)
+                initResearch(userList.response.Count);
+            else
+                initResearch(0);
         }
 
         private void UserButtonClick(object sender, RoutedEventArgs e)
@@ -197,8 +200,8 @@ namespace Caritathelp
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
-            loadCoroutine();
-            notifs = JsonConvert.DeserializeObject<Notifications>((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"]);
+       //     loadCoroutine();
+        //    notifs = JsonConvert.DeserializeObject<Notifications>((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"]);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -294,21 +297,7 @@ namespace Caritathelp
                     }
                     else
                     {
-                        if (message.response.notifications.add_friend.Count > notifs.add_friend.Count)
-                        {
-                            flag = true;
-                            updateGUI();
-                            notifs = message.response.notifications;
-                            Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"] = JsonConvert.SerializeObject(message.response.notifications);
-                            Debug.WriteLine("On a recu une nouvelle notification !");
-                        }
-                        else
-                        {
-                            flag = false;
-                            updateGUI();
-                            notifs = message.response.notifications;
-                            Debug.WriteLine("0 nouvelles notificaitons");
-                        }
+
                     }
                 }
                 catch (HttpRequestException e)

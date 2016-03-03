@@ -22,7 +22,7 @@ namespace Caritathelp
     }
     class User
     {
-        public int id { get; set; }
+        public string id { get; set; }
         public string mail { get; set; }
         public string token { get; set; }
         public string firstname { get; set; }
@@ -33,6 +33,7 @@ namespace Caritathelp
         public string latitue { get; set; }
         public string longitude { get; set; }
         public string allowgps { get; set; }
-        public Notifications notifications { get; set; }
+        public string allow_notifications { get; set; }
+         public Notifications notifications { get; set; }
     }
 }

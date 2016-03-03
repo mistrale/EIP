@@ -100,7 +100,8 @@
         <Button x:Name="alertButtonNotity" Content=""
                 HorizontalAlignment="Left" Margin="208,0,0,0"
                 VerticalAlignment="Top"
-                RenderTransformOrigin="0.38,0.334" BorderThickness="0" Visibility="Collapsed">
+                RenderTransformOrigin="0.38,0.334"
+                BorderThickness="0" Visibility="Collapsed">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="Assets/AlertButtonNotified.png"/>
             </Button.Background>
