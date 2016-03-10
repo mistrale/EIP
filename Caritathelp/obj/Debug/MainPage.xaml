@@ -17,7 +17,7 @@
                  Margin="42,204,0,0" 
                  TextWrapping="Wrap" 
                                             
-                 Text="dsikorav12@gmail.com"
+                 Text="tata6@gmail.com"
                  VerticalAlignment="Top"
                  Height="57" Width="303"
                  FontSize="25.333"
@@ -25,7 +25,7 @@
                  Foreground="#FF5C5555"                                 />
         <PasswordBox x:ConnectionId='2' x:Name="Password" 
                  HorizontalAlignment="Left"
-                 Password="dafuq2012"
+                 Password="tata"
                  Margin="42,287,0,0"  
                  FontSize="29.333"
                  Background="White"

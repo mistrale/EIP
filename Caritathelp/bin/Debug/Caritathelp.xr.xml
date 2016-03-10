@@ -65,10 +65,10 @@
       <RootProperty Name="Visibility" />
       <RootProperty Name="Background" />
       <RootProperty Name="Foreground" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="FontSize" />
       <RootProperty Name="BorderBrush" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="FontSize" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
@@ -95,6 +95,15 @@
       <RootProperty Name="Height" />
     </RootType>
     <RootType FullName="Caritathelp.Accueil" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Image">
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Source" />
+      <RootProperty Name="RenderTransformOrigin" />
+    </RootType>
     <RootType FullName="Caritathelp.AssociationProfil" />
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
       <RootProperty Name="Name" />
@@ -182,15 +191,6 @@
     <RootType FullName="Caritathelp.MainPage" />
     <RootType FullName="Caritathelp.MyAssociations" />
     <RootType FullName="Caritathelp.Notification" />
-    <RootType FullName="Windows.UI.Xaml.Controls.Image">
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="Source" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="RenderTransformOrigin" />
-    </RootType>
     <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.NullExtension" />
     <RootType FullName="Caritathelp.Options" />
     <RootType FullName="Caritathelp.Profil" />
