@@ -9,7 +9,7 @@ namespace Caritathelp
     class FriendShip
     {
         public int id { get; set; }
-        public string email { get; set; }
+        public string mail { get; set; }
         public string lastname { get; set; }
         public string firstname { get; set; }
     }

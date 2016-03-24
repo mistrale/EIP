@@ -97,9 +97,9 @@ namespace Caritathelp
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            loadCoroutine();
+      //      loadCoroutine();
             getFriends();
-            notifs = JsonConvert.DeserializeObject<Notifications>((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"]);
+    //        notifs = JsonConvert.DeserializeObject<Notifications>((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"]);
         }
 
         private void searchTextBox_GotFocus(object sender, RoutedEventArgs e)

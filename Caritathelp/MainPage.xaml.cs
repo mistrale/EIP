@@ -77,10 +77,6 @@ namespace Caritathelp
                 }
                 else
                 {
-                    Email.Text = "Email";
-                    Password.Password = "password";
-
-
                     try
                     {
                         var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
@@ -94,14 +90,15 @@ namespace Caritathelp
                         localSettings.Values["password"] = Password.Password;
                         localSettings.Values["id"] = message.response.id;
                         localSettings.Values["token"] = message.response.token;
-  //                      localSettings.Values["notifications"] = JsonConvert.SerializeObject(message.response.notifications);
+                        //                      localSettings.Values["notifications"] = JsonConvert.SerializeObject(message.response.notifications);
                         this.Frame.Navigate(typeof(Accueil));
                     }
                     catch (System.Exception e)
                     {
                         System.Diagnostics.Debug.WriteLine(e.Message);
                     }
-
+                    Email.Text = "Email";
+                    Password.Password = "password";
                 }
             }
             catch (HttpRequestException e)

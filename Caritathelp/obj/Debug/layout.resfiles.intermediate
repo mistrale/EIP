@@ -29,12 +29,16 @@ App.xbf
 AssociationProfil.xbf
 Caritathelp.xr.xml
 CreateAssociation.xbf
+EventCreation.xbf
+EventProfil.xbf
 FinalInscription.xbf
 Friend.xbf
+GestionAssociation.xbf
 Inscription.xbf
 MainPage.xbf
 MyAssociations.xbf
 Notification.xbf
+NotificationAssociation.xbf
 Options.xbf
 Profil.xbf
 Research.xbf

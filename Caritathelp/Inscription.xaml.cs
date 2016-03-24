@@ -22,6 +22,15 @@ namespace Caritathelp
     /// </summary>
     public sealed partial class Inscription : Page
     {
+        public TextBox Name
+        {
+            get { return NameTextBox; }
+        }
+
+        public TextBlock Warning
+        {
+            get { return warningTextBlock; }
+        }
 
         private bool checkRegistrationField()
         {
@@ -44,7 +53,7 @@ namespace Caritathelp
             return true;
         }
 
-        public void Register_click(object sender, RoutedEventArgs e)
+        public void Register_click()
         {
             if (!checkRegistrationField())
                 return;
@@ -56,6 +65,11 @@ namespace Caritathelp
             settings.Values["genre"] = GenreBox.SelectedValue.ToString();
             settings.Values["birthday"] = birthday.ToString();
             this.Frame.Navigate(typeof(FinalInscription));
+        }
+
+        public void Register_click(object sender, RoutedEventArgs e)
+        {
+            Register_click();
         }
 
 

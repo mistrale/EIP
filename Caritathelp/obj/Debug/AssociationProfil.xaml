@@ -27,7 +27,7 @@
                              Foreground="#FFDC4545"/>
                 </Border>
                 <Border BorderBrush="#000000" BorderThickness="1" Grid.Column="0" Margin="0,58,0,0.333" Grid.RowSpan="2">
-                    <Button x:ConnectionId='8' x:Name="searchButton" Content=""
+                    <Button x:ConnectionId='12' x:Name="searchButton" Content=""
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             Margin="288.167,-55.833,1.167,31.167"
@@ -50,7 +50,7 @@
                 BorderThickness="1"
                 Margin="0,570,0,0" Background="White">
             <Grid>
-                <Button x:ConnectionId='3' x:Name="optionButton"
+                <Button x:ConnectionId='7' x:Name="optionButton"
                                            
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch" 
@@ -59,7 +59,7 @@
                         <ImageBrush ImageSource="ms-appx:/Assets/plus.png" Stretch="Uniform"/>
                     </Button.Background>
                 </Button>
-                <Button x:ConnectionId='4' x:Name="alertButton"
+                <Button x:ConnectionId='8' x:Name="alertButton"
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch"
                                             
@@ -68,7 +68,7 @@
                         <ImageBrush Stretch="Uniform" ImageSource="Assets/notif.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:ConnectionId='5' x:Name="messageButton"
+                <Button x:ConnectionId='9' x:Name="messageButton"
                                               
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch" 
@@ -77,7 +77,7 @@
                         <ImageBrush Stretch="Uniform" ImageSource="Assets/message.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:ConnectionId='6' x:Name="homeButton"
+                <Button x:ConnectionId='10' x:Name="homeButton"
                                            
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch" 
@@ -86,7 +86,7 @@
                         <ImageBrush Stretch="Uniform" ImageSource="Assets/home.png"/>
                     </Button.Background>
                 </Button>
-                <Button x:ConnectionId='7' x:Name="associationButton"
+                <Button x:ConnectionId='11' x:Name="associationButton"
                 	HorizontalAlignment="Stretch" 
                 	VerticalAlignment="Stretch"
                 	                              
@@ -120,7 +120,8 @@
                 BorderBrush="#FFC0D7A8" Width="135"
                 Background="#FFC0D7A8" BorderThickness="0"
                 Height="75"                    />
-        <Button x:Name="eventButton" Content="Evènements"
+        <Button x:ConnectionId='3' x:Name="eventButton" Content="Evènements"
+                                  
                 HorizontalAlignment="Left" Margin="135,286,0,0"
                 VerticalAlignment="Top" Foreground="White"
                 BorderBrush="#FFC0D7A8" Width="126"
@@ -133,14 +134,32 @@
                 Height="74" Background="#FFC0D7A8"/>
         <ScrollViewer HorizontalAlignment="Left"
                       Name="scroll"
-                      Height="208" Margin="10,357,0,0"
+                      Height="145" Margin="10,420,0,0"
                       VerticalAlignment="Top" Width="380"/>
-        <Button x:Name="button" HorizontalAlignment="Left"
+        <Button x:ConnectionId='4' x:Name="OptionsButton"
+                                               
+                HorizontalAlignment="Left"
                 Margin="291,104,0,0" VerticalAlignment="Top"
                 Width="72" BorderThickness="0" Height="60" RenderTransformOrigin="0.758,0.481">
             <Button.Background>
                 <ImageBrush ImageSource="Assets/OptionButton.png" Stretch="None"/>
             </Button.Background>
+        </Button>
+        <Button x:ConnectionId='5' x:Name="joinAssociationButton"
+                                            
+                Content="Rejoindre l'association"
+                HorizontalAlignment="Left" 
+                Margin="10,347,0,0" VerticalAlignment="Top"
+                Background="#FFC0D7A8" BorderThickness="0"
+                Height="77" Width="380" Visibility="Collapsed">
+        </Button>
+        <Button x:ConnectionId='6' x:Name="leaveAssociationButton"
+                                             
+                Content="Quitter l'association"
+                HorizontalAlignment="Left" 
+                Margin="10,347,0,0" VerticalAlignment="Top"
+                Background="#FFC0D7A8" BorderThickness="0"
+                Height="77" Width="380" Visibility="Collapsed">
         </Button>
     </Grid>
 </Page>

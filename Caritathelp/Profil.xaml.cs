@@ -48,7 +48,7 @@ namespace Caritathelp
 
         class FriendResponse
         {
-            public string status { get; set; }
+            public int status { get; set; }
             public string message { get; set; }
             public Friends response { get; set; }
         }
@@ -110,8 +110,10 @@ namespace Caritathelp
                 HttpResponseMessage response = await httpClient.GetAsync(uri);
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine(uri);
+                Debug.WriteLine(responseString);
                 friends = JsonConvert.DeserializeObject<FriendResponse>(responseString);
-                if (Int32.Parse(friends.status) != 200)
+                if (friends.status != 200)
                 {
 
                 }
@@ -155,6 +157,8 @@ namespace Caritathelp
             catch (JsonSerializationException e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
+                Debug.WriteLine("Fail in getting friends");
+
             }
         }
 
@@ -199,6 +203,8 @@ namespace Caritathelp
             catch (JsonSerializationException e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
+                Debug.WriteLine("Fail in deny friends");
+
             }
         }
 
@@ -242,6 +248,7 @@ namespace Caritathelp
             catch (JsonSerializationException e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
+                Debug.WriteLine("Fail in accept friends");
             }
         }
 
@@ -450,7 +457,6 @@ namespace Caritathelp
                 System.Diagnostics.Debug.WriteLine(e.Message);
                 System.Diagnostics.Debug.WriteLine(responseString);
                 System.Diagnostics.Debug.WriteLine("WTFFFF");
-
             }
         }
 
@@ -485,6 +491,8 @@ namespace Caritathelp
 
         private async void updateProfil()
         {
+            Debug.WriteLine("On va update le profil");
+            Debug.WriteLine(passwordEdit.Password);
             string url = "http://52.31.151.160:3000/volunteers/" + ((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]);
             var values = new List<KeyValuePair<string, string>>
                     {
@@ -524,6 +532,7 @@ namespace Caritathelp
                         localSettings.Values["gender"] = GenreBox.SelectedValue ;
                         localSettings.Values["allowgps"] = allowGPSEdit.IsChecked;
                         localSettings.Values["password"] = passwordEdit.Password;
+                        Debug.WriteLine(passwordEdit.Password);
                         Frame.Navigate(typeof(Profil), (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString());
                     }
                     catch (System.Exception e)
@@ -546,6 +555,7 @@ namespace Caritathelp
             {
                 Loading.IsActive = false;
                 System.Diagnostics.Debug.WriteLine(e.Message);
+                Debug.WriteLine("Fail in update profil");
             }
         }
 

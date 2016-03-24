@@ -54,11 +54,97 @@ namespace Caritathelp
             public IList<Member> response { get; set; }
         }
 
+        class Event
+        {
+            public int id { get; set; }
+            public string title { get; set; }
+            public string place { get; set; }
+        }
+
+        class EventRequest
+        {
+            public int status { get; set; }
+            public string message { get; set; }
+            public IList<Event> response { get; set; }
+        }
+
         private Grid membersGrid;
         private Grid eventsGrid;
         private AssociationRequest assoc;
         private MemberRequest members;
+        private EventRequest events;
 
+        public void joinAssociationClick(object send, RoutedEventArgs e)
+        {
+
+        }
+
+        public void leaveAssociationClick(object send, RoutedEventArgs e)
+        {
+
+        }
+
+        public void optionsAssociationClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(GestionAssociation));
+        }
+
+        private async void getEvent()
+        {
+            var httpClient = new HttpClient(new HttpClientHandler());
+            try
+            {
+                var template = new UriTemplate("http://52.31.151.160:3000/associations/" + id + "/events" + "{?token}");
+                template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
+                var uri = template.Resolve();
+                Debug.WriteLine(uri);
+
+                HttpResponseMessage response = await httpClient.GetAsync(uri);
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine(responseString.ToString());
+                events = JsonConvert.DeserializeObject<EventRequest>(responseString);
+                if (events.status != 200)
+                {
+
+                }
+                else
+                {
+                    eventsGrid.Height = events.response.Count * 100;
+                    eventsGrid.Width = 375;
+                    for (int i = 0; i < events.response.Count; ++i)
+                        eventsGrid.RowDefinitions.Add(new RowDefinition());
+                    eventsGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                    for (int x = 0; x < events.response.Count; ++x)
+                    {
+                        Button btn = new Button();
+                        btn.Height = 100;
+                        btn.Width = eventsGrid.Width;
+                        btn.HorizontalAlignment = HorizontalAlignment.Stretch;
+                        btn.Click += new RoutedEventHandler(EventButtonClick);
+                        btn.Content = events.response[x].title;
+                        btn.Background = new SolidColorBrush(Color.FromArgb(0xFF, 124, 188, 99));
+                        Grid.SetColumn(btn, 1);
+                        Grid.SetRow(btn, x);
+                        eventsGrid.Children.Add(btn);
+                        eventsGrid.Visibility = Visibility.Visible;
+                    }
+                }
+            }
+            catch (HttpRequestException e)
+            {
+            }
+            catch (JsonReaderException e)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+                Debug.WriteLine("Failed to read json");
+            }
+            catch (JsonSerializationException e)
+            {
+                Debug.WriteLine(responseString);
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+        }
 
         private async void getMember()
         {
@@ -118,6 +204,14 @@ namespace Caritathelp
             }
         }
 
+        private void EventButtonClick(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            int x = Grid.GetRow(button);
+            string id = events.response[x].id.ToString();
+            Frame.Navigate(typeof(EventProfil), id);
+        }
+
         private void UserButtonClick(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -127,10 +221,18 @@ namespace Caritathelp
             // identify which button was clicked and perform necessary actions
         }
 
+        public void eventClick(object sender, RoutedEventArgs e)
+        {
+            scroll.Content = eventsGrid;
+            membersGrid.Visibility = Visibility.Collapsed;
+            eventsGrid.Visibility = Visibility.Visible;
+        }
+
         public void memberClick(object sender, RoutedEventArgs e)
         {
             scroll.Content = membersGrid;
             membersGrid.Visibility = Visibility.Visible;
+            eventsGrid.Visibility = Visibility.Collapsed;
         }
 
         private async void getInformation()
@@ -155,6 +257,20 @@ namespace Caritathelp
                 else
                 {
                     titleText.Text = assoc.response.name;
+                    
+                    Windows.Storage.ApplicationData.Current.LocalSettings.Values["currentAssociation"] = id.ToString();
+                    if (assoc.response.rights.Equals("owner", StringComparison.Ordinal)
+                        || assoc.response.rights.Equals("admin", StringComparison.Ordinal))
+                    {
+                        OptionsButton.Visibility = Visibility.Visible;
+                        
+                    }
+                    else
+                        OptionsButton.Visibility = Visibility.Collapsed;
+                    if (assoc.response.rights.Equals("none", StringComparison.Ordinal))
+                        joinAssociationButton.Visibility = Visibility.Visible;
+                    else
+                        leaveAssociationButton.Visibility = Visibility.Visible;
                 }
             }
             catch (HttpRequestException e)
@@ -187,6 +303,7 @@ namespace Caritathelp
      //       notifs = JsonConvert.DeserializeObject<Notifications>((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"]);
             getInformation();
             getMember();
+            getEvent();
         }
 
         private void searchTextBox_GotFocus(object sender, RoutedEventArgs e)

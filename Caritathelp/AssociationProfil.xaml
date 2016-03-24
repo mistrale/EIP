@@ -121,6 +121,7 @@
                 Background="#FFC0D7A8" BorderThickness="0"
                 Height="75" Click="memberClick"/>
         <Button x:Name="eventButton" Content="Evènements"
+                Click="eventClick"
                 HorizontalAlignment="Left" Margin="135,286,0,0"
                 VerticalAlignment="Top" Foreground="White"
                 BorderBrush="#FFC0D7A8" Width="126"
@@ -133,14 +134,32 @@
                 Height="74" Background="#FFC0D7A8"/>
         <ScrollViewer HorizontalAlignment="Left"
                       Name="scroll"
-                      Height="208" Margin="10,357,0,0"
+                      Height="145" Margin="10,420,0,0"
                       VerticalAlignment="Top" Width="380"/>
-        <Button x:Name="button" HorizontalAlignment="Left"
+        <Button x:Name="OptionsButton"
+                Click="optionsAssociationClick"
+                HorizontalAlignment="Left"
                 Margin="291,104,0,0" VerticalAlignment="Top"
                 Width="72" BorderThickness="0" Height="60" RenderTransformOrigin="0.758,0.481">
             <Button.Background>
                 <ImageBrush ImageSource="Assets/OptionButton.png" Stretch="None"/>
             </Button.Background>
+        </Button>
+        <Button x:Name="joinAssociationButton"
+                Click="joinAssociationClick"
+                Content="Rejoindre l'association"
+                HorizontalAlignment="Left" 
+                Margin="10,347,0,0" VerticalAlignment="Top"
+                Background="#FFC0D7A8" BorderThickness="0"
+                Height="77" Width="380" Visibility="Collapsed">
+        </Button>
+        <Button x:Name="leaveAssociationButton"
+                Click="leaveAssociationClick"
+                Content="Quitter l'association"
+                HorizontalAlignment="Left" 
+                Margin="10,347,0,0" VerticalAlignment="Top"
+                Background="#FFC0D7A8" BorderThickness="0"
+                Height="77" Width="380" Visibility="Collapsed">
         </Button>
     </Grid>
 </Page>

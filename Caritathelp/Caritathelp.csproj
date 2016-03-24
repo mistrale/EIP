@@ -96,12 +96,22 @@
     <Compile Include="CreateAssociation.xaml.cs">
       <DependentUpon>CreateAssociation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Event.cs" />
+    <Compile Include="EventCreation.xaml.cs">
+      <DependentUpon>EventCreation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EventProfil.xaml.cs">
+      <DependentUpon>EventProfil.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FinalInscription.xaml.cs">
       <DependentUpon>FinalInscription.xaml</DependentUpon>
     </Compile>
     <Compile Include="Friend.cs" />
     <Compile Include="Friend.xaml.cs">
       <DependentUpon>Friend.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GestionAssociation.xaml.cs">
+      <DependentUpon>GestionAssociation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Inscription.xaml.cs">
       <DependentUpon>Inscription.xaml</DependentUpon>
@@ -114,6 +124,9 @@
     </Compile>
     <Compile Include="Notification.xaml.cs">
       <DependentUpon>Notification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationAssociation.xaml.cs">
+      <DependentUpon>NotificationAssociation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
@@ -178,11 +191,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="EventCreation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EventProfil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FinalInscription.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Friend.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GestionAssociation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -199,6 +224,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Notification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NotificationAssociation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -141,11 +141,20 @@
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\CreateAssociation.xbf">
       <PackagePath>CreateAssociation.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\EventCreation.xbf">
+      <PackagePath>EventCreation.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\EventProfil.xbf">
+      <PackagePath>EventProfil.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\FinalInscription.xbf">
       <PackagePath>FinalInscription.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\Friend.xbf">
       <PackagePath>Friend.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\GestionAssociation.xbf">
+      <PackagePath>GestionAssociation.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\Inscription.xbf">
       <PackagePath>Inscription.xbf</PackagePath>
@@ -158,6 +167,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\Notification.xbf">
       <PackagePath>Notification.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\NotificationAssociation.xbf">
+      <PackagePath>NotificationAssociation.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\Options.xbf">
       <PackagePath>Options.xbf</PackagePath>
