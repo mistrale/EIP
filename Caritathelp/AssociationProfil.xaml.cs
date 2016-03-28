@@ -31,6 +31,13 @@ namespace Caritathelp
     {
         private string id;
 
+        class SimpleRequest
+        {
+            public int status { get; set; }
+            public string message { get; set;  }
+            public string response { get; set; }
+        }
+
         class Member
         {
             public string id { get; set; } 
@@ -73,11 +80,54 @@ namespace Caritathelp
         private AssociationRequest assoc;
         private MemberRequest members;
         private EventRequest events;
+        private SimpleRequest simple;
+
+        private async void joinAssociationRequest()
+        {
+            var httpClient = new HttpClient(new HttpClientHandler());
+            try
+            {
+                var values = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]),
+                        new KeyValuePair<string, string>("assoc_id", id)
+
+                    };
+                string url = ("http://52.31.151.160:3000/membership/join");
+                HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync();
+
+                simple = JsonConvert.DeserializeObject<SimpleRequest>(responseString);
+                if (simple.status != 200)
+                {
+                    warningTextBox.Text = simple.message;
+                }
+                else
+                {
+                    warningTextBox.Text = "Invitation send";
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            catch (JsonReaderException e)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+                Debug.WriteLine("Failed to read json");
+            }
+            catch (JsonSerializationException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+        }
 
         public void joinAssociationClick(object send, RoutedEventArgs e)
         {
-
+            joinAssociationRequest();
         }
+
 
         public void leaveAssociationClick(object send, RoutedEventArgs e)
         {
@@ -86,7 +136,7 @@ namespace Caritathelp
 
         public void optionsAssociationClick(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(GestionAssociation));
+            this.Frame.Navigate(typeof(GestionAssociation), id);
         }
 
         private async void getEvent()
@@ -291,6 +341,11 @@ namespace Caritathelp
         public AssociationProfil()
         {
             this.InitializeComponent();
+           
+            searchBox.Items.Add("Volontaire");
+            searchBox.Items.Add("Association");
+            searchBox.Items.Add("Event");
+            searchBox.SelectedIndex = 0;
             membersGrid = new Grid();
             eventsGrid = new Grid();
         }
@@ -341,6 +396,7 @@ namespace Caritathelp
 
         private void search_Click(object sender, RoutedEventArgs e)
         {
+            Windows.Storage.ApplicationData.Current.LocalSettings.Values["typeSearch"] = searchBox.SelectedItem.ToString();
             Windows.Storage.ApplicationData.Current.LocalSettings.Values["search"] = searchTextBox.Text;
             Frame.Navigate(typeof(Research));
         }

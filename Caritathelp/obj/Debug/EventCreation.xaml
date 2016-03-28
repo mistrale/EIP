@@ -17,7 +17,7 @@
                     <RowDefinition Height="0.250*"/>
                     <RowDefinition Height="0.150*"/>
                 </Grid.RowDefinitions>
-                <Border BorderBrush="#000000" BorderThickness="0.5" Grid.Row="0" Grid.Column="0" Margin="0,0,0,0.333">
+                <Border BorderBrush="#000000" BorderThickness="0.5" Grid.Row="0" Grid.Column="0" Margin="0,10,0,25.333" Grid.RowSpan="2">
 
                 </Border>
                 <Border BorderBrush="#000000" BorderThickness="1" Grid.Column="0" Margin="0,58,0,0.333" Grid.RowSpan="2">
@@ -30,7 +30,7 @@
                     <Button x:ConnectionId='11' x:Name="searchButton" Content=""
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
-                            Margin="288.167,-55.833,1.167,31.167"
+                            Margin="320.167,-55.833,1.167,31.167"
                             BorderThickness="0"
                             RenderTransformOrigin="0.622,0.467"
                                                 >
@@ -43,7 +43,7 @@
         </Border>
         <TextBox x:ConnectionId='1' x:Name="searchTextBox" HorizontalAlignment="Left"
                  Margin="10,10,0,0" TextWrapping="Wrap"
-                 Text="Recherche" VerticalAlignment="Top" Width="299"
+                 Text="Recherche" VerticalAlignment="Top" Width="226"
                  Background="#00A9DF94" BorderThickness="0"
                  Height="38" Foreground="White" FontSize="24"                                  />
         <Border Name="firstBorder" Height="70" BorderBrush="Black"
@@ -161,6 +161,7 @@
                 Margin="10,492,0,0" VerticalAlignment="Top"
                 Width="380" Background="#FFC0D7A8"
                 BorderThickness="0"/>
+        <ComboBox x:Name="searchBox" HorizontalAlignment="Left" Margin="213,1,0,0" VerticalAlignment="Top" Width="120" BorderThickness="0"/>
     </Grid>
 </Page>
 

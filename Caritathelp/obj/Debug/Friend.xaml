@@ -43,7 +43,7 @@
         </Border>
         <TextBox x:ConnectionId='1' x:Name="searchTextBox" HorizontalAlignment="Left"
                  Margin="10,10,0,0" TextWrapping="Wrap"
-                 Text="Recherche" VerticalAlignment="Top" Width="299"
+                 Text="Recherche" VerticalAlignment="Top" Width="212"
                  Background="#00A9DF94" BorderThickness="0"
                  Height="38" Foreground="White" FontSize="24"                                  />
         <Border Name="firstBorder" Height="70" BorderBrush="Black"
@@ -105,6 +105,8 @@
                 <ImageBrush Stretch="Uniform" ImageSource="Assets/AlertButtonNotified.png"/>
             </Button.Background>
         </Button>
+        <ComboBox x:Name="searchBox" HorizontalAlignment="Left" Margin="213,1,0,0" VerticalAlignment="Top" Width="120" BorderThickness="0"/>
+        <ScrollViewer Name="scroll" HorizontalAlignment="Left" Height="467" Margin="10,98,0,0" VerticalAlignment="Top" Width="380"/>
     </Grid>
 </Page>
 

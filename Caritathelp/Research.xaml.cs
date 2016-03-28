@@ -43,7 +43,88 @@ namespace Caritathelp
             public IList<User> response { get; set; }
         }
 
+        class AssociationListResponse
+        {
+            public int status { get; set; }
+            public string message { get; set; }
+            public IList<Association> response { get; set; }
+        }
+
         private UserListResponse userList;
+        private AssociationListResponse associationList;
+
+        private async void searchAssociation()
+        {
+            var httpClient = new HttpClient(new HttpClientHandler());
+            try
+            {
+                var template = new UriTemplate("http://52.31.151.160:3000/associations{?token}");
+                template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
+                var uri = template.Resolve();
+                Debug.WriteLine(uri);
+
+                HttpResponseMessage response = await httpClient.GetAsync(uri);
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine(responseString.ToString());
+                associationList = JsonConvert.DeserializeObject<AssociationListResponse>(responseString);
+                if (associationList.status != 200)
+                {
+                    warningTextBox.Text = associationList.message;
+                }
+                else
+                {
+                    warningTextBox.Text = " ";
+                    warningTextBox.Foreground = new SolidColorBrush(Colors.Black);
+                    warningTextBox.Background = new SolidColorBrush(Colors.Transparent);
+                    warningTextBox.HorizontalAlignment = HorizontalAlignment.Center;
+                    warningTextBox.IsHitTestVisible = false;
+                    warningTextBox.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                warningTextBox.Text = e.Message;
+            }
+            catch (JsonReaderException e)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+                Debug.WriteLine("Failed to read json");
+            }
+            catch (JsonSerializationException e)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+                Debug.WriteLine("Failed to read json");
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+            if (associationList != null)
+                initResearchAssociation(associationList.response.Count);
+            else
+                initResearchAssociation(0);
+        }
+
+        private void initResearchAssociation(int nbRows)
+        {
+            grid.Height = nbRows * 100;
+            Debug.WriteLine(nbRows);
+            grid.Width = 375;
+            for (int i = 0; i < nbRows; ++i)
+                grid.RowDefinitions.Add(new RowDefinition());
+            grid.ColumnDefinitions.Add(new ColumnDefinition());
+            for (int x = 0; x < associationList.response.Count; ++x)
+            {
+                Button btn = new Button();
+                btn.Height = 100;
+                btn.Width = grid.Width;
+                btn.HorizontalAlignment = HorizontalAlignment.Stretch;
+                btn.Click += new RoutedEventHandler(AssociationButtonClick);
+                btn.Content = associationList.response[x].name;
+                btn.Background = new SolidColorBrush(Color.FromArgb(0xFF, 124, 188, 99));
+                Grid.SetColumn(btn, 1);
+                Grid.SetRow(btn, x);
+                grid.Children.Add(btn);
+            }
+        }
 
         private async void searchUser()
         {
@@ -91,9 +172,9 @@ namespace Caritathelp
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
             if (userList != null)
-                initResearch(userList.response.Count);
+                initResearchUser(userList.response.Count);
             else
-                initResearch(0);
+                initResearchUser(0);
         }
 
         private void UserButtonClick(object sender, RoutedEventArgs e)
@@ -105,7 +186,16 @@ namespace Caritathelp
             // identify which button was clicked and perform necessary actions
         }
 
-        private  void initResearch(int nbRows)
+        private void AssociationButtonClick(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            int x = Grid.GetRow(button);
+            string id = associationList.response[x].id.ToString();
+            Frame.Navigate(typeof(AssociationProfil), id);
+            // identify which button was clicked and perform necessary actions
+        }
+
+        private  void initResearchUser(int nbRows)
         {
             grid.Height = nbRows * 100;
             grid.Width = 375;
@@ -130,13 +220,21 @@ namespace Caritathelp
         public Research()
         {
             this.InitializeComponent();
-            searchUser();
-
+            searchBox.Items.Add("Volontaire");
+            searchBox.Items.Add("Association");
+            searchBox.Items.Add("Event");
+            searchBox.SelectedIndex = 0;
+            string type = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["typeSearch"];
+            if (type.Equals("Volontaire", StringComparison.Ordinal))
+                searchUser();
+            else if (type.Equals("Association", StringComparison.Ordinal))
+                searchAssociation();
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
             Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("search");
+            Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("typeSearch");
         }
         /// <summary>
         /// Gets the <see cref="NavigationHelper"/> associated with this <see cref="Page"/>.
@@ -247,6 +345,7 @@ namespace Caritathelp
         private void search_Click(object sender, RoutedEventArgs e)
         {
             Windows.Storage.ApplicationData.Current.LocalSettings.Values["search"] = searchTextBox.Text;
+            Windows.Storage.ApplicationData.Current.LocalSettings.Values["typeSearch"] = searchBox.SelectedItem.ToString();
             Frame.Navigate(typeof(Research));
         }
 

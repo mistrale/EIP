@@ -23,6 +23,8 @@ namespace Caritathelp
     /// </summary>
     public sealed partial class GestionAssociation : Page
     {
+        private string id;
+
         public void manageMemberClick(object sender, RoutedEventArgs e)
         {
 
@@ -30,7 +32,7 @@ namespace Caritathelp
 
         public void notificationClick(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(NotificationAssociation), id);
         }
 
         public void newEventClick(object sender, RoutedEventArgs e)
@@ -46,6 +48,10 @@ namespace Caritathelp
         public GestionAssociation()
         {
             this.InitializeComponent();
+            searchBox.Items.Add("Volontaire");
+            searchBox.Items.Add("Association");
+            searchBox.Items.Add("Event");
+            searchBox.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -55,6 +61,7 @@ namespace Caritathelp
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            id = e.Parameter as string;
         }
 
         private void searchTextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -93,6 +100,7 @@ namespace Caritathelp
         private void search_Click(object sender, RoutedEventArgs e)
         {
             Windows.Storage.ApplicationData.Current.LocalSettings.Values["search"] = searchTextBox.Text;
+            Windows.Storage.ApplicationData.Current.LocalSettings.Values["typeSearch"] = searchBox.SelectedItem.ToString();
             Frame.Navigate(typeof(Research));
         }
 

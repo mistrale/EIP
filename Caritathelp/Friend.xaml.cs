@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -29,8 +30,117 @@ namespace Caritathelp
     /// </summary>
     public sealed partial class Friend : Page
     {
- 
+        class Friends
+        {
+            public IList<FriendShip> friends { get; set; }
+        }
 
+
+        class FriendResponse
+        {
+            public int status { get; set; }
+            public string message { get; set; }
+            public IList<FriendShip> response { get; set; }
+        }
+
+        private FriendResponse friends;
+
+        private void initFriends()
+        {
+            Grid mainGrid = new Grid();
+
+            mainGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            int i = 0;
+
+            while (i < friends.response.Count)
+            {
+                mainGrid.RowDefinitions.Add(new RowDefinition());
+                Grid grid = new Grid();
+
+                var row = new RowDefinition();
+                row.Height = new GridLength(50);
+                grid.RowDefinitions.Add(row);
+
+                var colum = new ColumnDefinition();
+                colum.Width = new GridLength(50);
+                grid.ColumnDefinitions.Add(colum);
+
+                grid.ColumnDefinitions.Add(new ColumnDefinition());
+
+                Button title = new Button();
+                title.Content = friends.response[i].firstname + " " + friends.response[i].lastname;
+                title.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
+                title.Tag = friends.response[i].id.ToString();
+                title.Click += new RoutedEventHandler(UserButtonClick);
+                title.Margin = new Thickness(10, 5, 10, 5);
+                title.FontSize = 14;
+
+                Image profil = new Image();
+                profil.Source = new BitmapImage(new Uri("ms-appx:///Assets/AlertButton.png"));
+
+                Grid.SetColumn(profil, 0);
+                Grid.SetRow(profil, 0);
+                grid.Children.Add(profil);
+
+                Grid.SetColumn(title, 1);
+                Grid.SetRow(title, 0);
+                grid.Children.Add(title);
+
+                Grid.SetColumn(grid, 0);
+                Grid.SetRow(grid, i);
+                mainGrid.Children.Add(grid);
+
+                i++;
+            }
+            scroll.Content = mainGrid;
+        }
+
+        private void UserButtonClick(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            string id = button.Tag.ToString();
+            Frame.Navigate(typeof(Profil), id);
+            // identify which button was clicked and perform necessary actions
+        }
+
+        private async void getFriends()
+        {
+            var httpClient = new HttpClient(new HttpClientHandler());
+            try
+            {
+                string mydID = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
+                var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + mydID + "/friends" + "{?token}");
+                template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
+                var uri = template.Resolve();
+                HttpResponseMessage response = await httpClient.GetAsync(uri);
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine(uri);
+                Debug.WriteLine(responseString);
+                friends = JsonConvert.DeserializeObject<FriendResponse>(responseString);
+                if (friends.status != 200)
+                {
+                }
+                else
+                {
+                    initFriends();
+                }
+            }
+            catch (HttpRequestException e)
+            {
+            }
+            catch (JsonReaderException e)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+                Debug.WriteLine("Failed to read json");
+            }
+            catch (JsonSerializationException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+                Debug.WriteLine("Fail in getting friends");
+
+            }
+        }
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
@@ -38,16 +148,21 @@ namespace Caritathelp
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            loadCoroutine();
-            notifs = JsonConvert.DeserializeObject<Notifications>((string)(Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"]));
+        //    loadCoroutine();
+       //notifs = JsonConvert.DeserializeObject<Notifications>((string)(Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"]));
 
         }
 
          public Friend()
         {
             this.InitializeComponent();
+            searchBox.Items.Add("Volontaire");
+            searchBox.Items.Add("Association");
+            searchBox.Items.Add("Event");
+            searchBox.SelectedIndex = 0;
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             alertButtonNotity.Visibility = Visibility.Collapsed;
+            getFriends();
         }
 
         private void searchTextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -86,6 +201,7 @@ namespace Caritathelp
         private void search_Click(object sender, RoutedEventArgs e)
         {
             Windows.Storage.ApplicationData.Current.LocalSettings.Values["search"] = searchTextBox.Text;
+            Windows.Storage.ApplicationData.Current.LocalSettings.Values["typeSearch"] = searchBox.SelectedItem.ToString();
             Frame.Navigate(typeof(Research));
         }
 

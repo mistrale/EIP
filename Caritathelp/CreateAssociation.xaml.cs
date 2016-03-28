@@ -114,6 +114,10 @@ namespace Caritathelp
         public CreateAssociation()
         {
             this.InitializeComponent();
+            searchBox.Items.Add("Volontaire");
+            searchBox.Items.Add("Association");
+            searchBox.Items.Add("Event");
+            searchBox.SelectedIndex = 0;
             warningTextBox.Text = "";
         }
 
@@ -159,6 +163,7 @@ namespace Caritathelp
 
         private void search_Click(object sender, RoutedEventArgs e)
         {
+            Windows.Storage.ApplicationData.Current.LocalSettings.Values["typeSearch"] = searchBox.SelectedItem.ToString();
             Windows.Storage.ApplicationData.Current.LocalSettings.Values["search"] = searchTextBox.Text;
             Frame.Navigate(typeof(Research));
         }

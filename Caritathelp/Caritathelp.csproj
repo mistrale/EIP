@@ -113,6 +113,7 @@
     <Compile Include="GestionAssociation.xaml.cs">
       <DependentUpon>GestionAssociation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GlobalNotification.cs" />
     <Compile Include="Inscription.xaml.cs">
       <DependentUpon>Inscription.xaml</DependentUpon>
     </Compile>
@@ -122,6 +123,7 @@
     <Compile Include="MyAssociations.xaml.cs">
       <DependentUpon>MyAssociations.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NoficiationAssoc.cs" />
     <Compile Include="Notification.xaml.cs">
       <DependentUpon>Notification.xaml</DependentUpon>
     </Compile>

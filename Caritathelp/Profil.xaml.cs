@@ -33,11 +33,6 @@ namespace Caritathelp
         private string id;
         private bool isMyProfil;
 
-        class Friends
-        {
-            public IList<FriendShip> friends { get; set; }
-        }
-
         class SimpleResponse
         {
             public string status { get; set; }
@@ -45,17 +40,24 @@ namespace Caritathelp
             public string response { get; set; }
         }
 
+        class NotificationResponse
+        {
+            public int status { get; set; }
+            public string message { get; set; }
+            public GlobalNotification response { get; set; }
+        }
 
         class FriendResponse
         {
             public int status { get; set; }
             public string message { get; set; }
-            public Friends response { get; set; }
+            public IList<FriendShip> response { get; set; }
         }
 
         private RequeteResponse user;
         private FriendResponse friends;
         private SimpleResponse simpleResponse;
+        private NotificationResponse notifs;
 
         private async void sendRequestToFriend()
         {
@@ -65,9 +67,10 @@ namespace Caritathelp
                 {
                     var values = new List<KeyValuePair<string, string>>
                     {
-                        new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"])
+                        new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]),
+                        new KeyValuePair<string, string>("volunteer_id", id)
                     };
-                    string url = ("http://52.31.151.160:3000/volunteers/" + id + "/addfriend");
+                    string url = ("http://52.31.151.160:3000/friendship/add");
                     HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
                     response.EnsureSuccessStatusCode();
                     responseString = await response.Content.ReadAsStringAsync();
@@ -120,7 +123,7 @@ namespace Caritathelp
                 else
                 {
                     Debug.WriteLine("Ami : " + responseString);
-                    var friend = friends.response.friends.FirstOrDefault(c => c.id.ToString().Equals(id));
+                    var friend = friends.response.FirstOrDefault(c => c.id.ToString().Equals(id));
                     if (friend != null)
                     {
                         addFriendButton.Visibility = Visibility.Collapsed;
@@ -128,12 +131,12 @@ namespace Caritathelp
                         acceptFriendButton.Visibility = Visibility.Collapsed;
                     } else
                     {
-                        var notif = notifs.add_friend.FirstOrDefault(c => c.id_sender.ToString().Equals(id));
+                        var notif = notifs.response.add_friend.FirstOrDefault(c => c.id.ToString().Equals(id));
                         if (notif != null)
                         {
                             addFriendButton.Visibility = Visibility.Collapsed;
                             acceptFriendButton.Visibility = Visibility.Visible;
-                            denyFriendButton.Visibility = Visibility.Visible;
+                           denyFriendButton.Visibility = Visibility.Visible;
                         }
                         else
                         {
@@ -165,17 +168,17 @@ namespace Caritathelp
         private async void denyFriend()
         {
             var httpClient = new HttpClient(new HttpClientHandler());
-            string myID = ((int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]).ToString();
-            var user = notifs.add_friend.FirstOrDefault(c => c.id_sender.ToString().Equals(id));
+            string myID = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
+            var user = notifs.response.add_friend.FirstOrDefault(c => c.id.ToString().Equals(id));
             try
             {
                 var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]),
-                        new KeyValuePair<string, string>("notif_add_friend_id", user.id_notif.ToString()),
+                        new KeyValuePair<string, string>("notif_id", user.notif_id.ToString()),
                         new KeyValuePair<string, string>("acceptance", "false")
                     };
-                string url = ("http://52.31.151.160:3000/volunteers/" + myID + "/respondfriend");
+                string url = ("http://52.31.151.160:3000/friendship/reply");
                 Debug.WriteLine(url);
                 HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
                 response.EnsureSuccessStatusCode();
@@ -211,17 +214,17 @@ namespace Caritathelp
         private async void acceptFriend()
         {
             var httpClient = new HttpClient(new HttpClientHandler());
-            string myID = ((int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]).ToString();
-            var user = notifs.add_friend.FirstOrDefault(c => c.id_sender.ToString().Equals(id));
+            string myID = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
+            var user = notifs.response.add_friend.FirstOrDefault(c => c.id.ToString().Equals(id));
             try
             {
                 var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]),
-                        new KeyValuePair<string, string>("notif_add_friend_id", user.id_notif.ToString()),
+                        new KeyValuePair<string, string>("notif_id", user.notif_id.ToString()),
                         new KeyValuePair<string, string>("acceptance", "true")
                     };
-                string url = ("http://52.31.151.160:3000/volunteers/" + myID + "/respondfriend");
+                string url = ("http://52.31.151.160:3000/friendship/reply");
                 HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
@@ -257,8 +260,9 @@ namespace Caritathelp
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + id + "/deletefriend" + "{?token}");
+                var template = new UriTemplate("http://52.31.151.160:3000/friendship/remove" + "{?token,id}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
+                template.AddParameter("id", id);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
 
@@ -463,6 +467,10 @@ namespace Caritathelp
         public Profil()
         {
             this.InitializeComponent();
+            searchBox.Items.Add("Volontaire");
+            searchBox.Items.Add("Association");
+            searchBox.Items.Add("Event");
+            searchBox.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -475,8 +483,11 @@ namespace Caritathelp
    //         loadCoroutine();
             id = e.Parameter as string;
             Debug.WriteLine(id);
+            doCoroutine = true;
+            getNotification();
      //       notifs = JsonConvert.DeserializeObject<Notifications>((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"]);
             getInformation();
+
         }
 
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -626,6 +637,7 @@ namespace Caritathelp
         private void search_Click(object sender, RoutedEventArgs e)
         {
             Windows.Storage.ApplicationData.Current.LocalSettings.Values["search"] = searchTextBox.Text;
+            Windows.Storage.ApplicationData.Current.LocalSettings.Values["typeSearch"] = searchBox.SelectedItem.ToString();
             Frame.Navigate(typeof(Research));
         }
 
@@ -637,7 +649,6 @@ namespace Caritathelp
         bool isVisibile = false;
         private bool flag;
         bool doCoroutine = true;
-        private Notifications notifs;
 
         class RequeteResponse
         {
@@ -653,14 +664,11 @@ namespace Caritathelp
 
         private async void getNotification()
         {
-            if (doCoroutine)
-            {
                 var httpClient = new HttpClient(new HttpClientHandler());
                 try
                 {
                     string id = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
-                    var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + id + "{?token}");
-                    template.AddParameter("id", id);
+                    var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + id + "/notifications{?token}");
                     template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                     var uri = template.Resolve();
                     Debug.WriteLine(uri);
@@ -669,8 +677,8 @@ namespace Caritathelp
                     response.EnsureSuccessStatusCode();
                     responseString = await response.Content.ReadAsStringAsync();
                     System.Diagnostics.Debug.WriteLine(responseString.ToString());
-                    message = JsonConvert.DeserializeObject<RequeteResponse>(responseString);
-                    if (Int32.Parse(message.status) != 200)
+                    notifs = JsonConvert.DeserializeObject<NotificationResponse>(responseString);
+                    if (notifs.status != 200)
                     {
 
                     }
@@ -695,7 +703,6 @@ namespace Caritathelp
                 {
                     Debug.WriteLine(e.Message);
                 }
-            }
         }
 
         private async Task updateGUI()

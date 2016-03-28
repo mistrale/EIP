@@ -161,5 +161,6 @@
                 Background="#FFC0D7A8" BorderThickness="0"
                 Height="77" Width="380" Visibility="Collapsed">
         </Button>
+        <ComboBox x:Name="searchBox" HorizontalAlignment="Left" Margin="213,1,0,0" VerticalAlignment="Top" Width="120" BorderThickness="0"/>
     </Grid>
 </Page>

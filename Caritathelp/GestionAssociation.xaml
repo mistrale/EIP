@@ -43,7 +43,7 @@
         </Border>
         <TextBox x:Name="searchTextBox" HorizontalAlignment="Left"
                  Margin="10,10,0,0" TextWrapping="Wrap"
-                 Text="Recherche" VerticalAlignment="Top" Width="299"
+                 Text="Recherche" VerticalAlignment="Top" Width="217"
                  Background="#00A9DF94" BorderThickness="0"
                  Height="38" Foreground="White" FontSize="24" GotFocus="searchTextBox_GotFocus"/>
         <Border Name="firstBorder" Height="70" BorderBrush="Black"
@@ -141,5 +141,7 @@
                 Margin="10,426,0,0" VerticalAlignment="Top"
                 Background="#FFC0D7A8" BorderThickness="0"
                 Width="380" Height="71"/>
+        <ComboBox x:Name="searchBox" HorizontalAlignment="Left" Margin="213,1,0,0" VerticalAlignment="Top" Width="120" BorderThickness="0"/>
     </Grid>
+    
 </Page>

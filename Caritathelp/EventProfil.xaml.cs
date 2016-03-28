@@ -87,6 +87,10 @@ namespace Caritathelp
         public EventProfil()
         {
             this.InitializeComponent();
+            searchBox.Items.Add("Volontaire");
+            searchBox.Items.Add("Association");
+            searchBox.Items.Add("Event");
+            searchBox.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -137,6 +141,7 @@ namespace Caritathelp
         private void search_Click(object sender, RoutedEventArgs e)
         {
             Windows.Storage.ApplicationData.Current.LocalSettings.Values["search"] = searchTextBox.Text;
+            Windows.Storage.ApplicationData.Current.LocalSettings.Values["typeSearch"] = searchBox.SelectedItem.ToString();
             Frame.Navigate(typeof(Research));
         }
 
