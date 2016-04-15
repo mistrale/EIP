@@ -29,29 +29,53 @@ namespace Caritathelp
     /// </summary>
     public sealed partial class Notification : Page
     {
-
-
-        class Friends
-        {
-            public IList<Friend> friends { get; set; }
-        }
-
-        class FriendResponse
+        class NotificationResponse
         {
             public string status { get; set; }
             public string message { get; set; }
-            public Friends response { get; set; }
+            public Notifications response { get; set; }
         }
 
-        private FriendResponse friends;
+        private NotificationResponse notifications;
 
-        private async void getFriends()
+        private void initNotifications(int nbRows)
+        {
+            grid.Height = nbRows * 100;
+            grid.Width = 375;
+            for (int i = 0; i < nbRows; ++i)
+                grid.RowDefinitions.Add(new RowDefinition());
+            grid.ColumnDefinitions.Add(new ColumnDefinition());
+            for (int x = 0; x < notifications.response.add_friend.Count; ++x)
+            {
+                Button btn = new Button();
+                btn.Height = 100;
+                btn.Width = grid.Width;
+                btn.HorizontalAlignment = HorizontalAlignment.Stretch;
+                btn.Click += new RoutedEventHandler(UserButtonClick);
+                btn.Content = notifications.response.add_friend[x].firstname + notifications.response.add_friend[x].lastname;
+                btn.Background = new SolidColorBrush(Color.FromArgb(0xFF, 124, 188, 99));
+                Grid.SetColumn(btn, 1);
+                Grid.SetRow(btn, x);
+                grid.Children.Add(btn);
+            }
+        }
+
+        private void UserButtonClick(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            int x = Grid.GetRow(button);
+            string id = notifications.response.add_friend[x].id.ToString();
+            Frame.Navigate(typeof(Profil), id);
+            // identify which button was clicked and perform necessary actions
+        }
+
+        private async void getNotifications()
         {
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
                 string id = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
-                var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + id + "/friends" + "{?token}");
+                var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + id + "/notifications" + "{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
@@ -60,16 +84,16 @@ namespace Caritathelp
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
                 System.Diagnostics.Debug.WriteLine(responseString.ToString());
-                friends = JsonConvert.DeserializeObject<FriendResponse>(responseString);
-                if (Int32.Parse(friends.status) != 200)
+                notifications = JsonConvert.DeserializeObject<NotificationResponse>(responseString);
+                if (Int32.Parse(notifications.status) != 200)
                 {
 
                 }
                 else
                 {
-                    Debug.WriteLine(friends.response.friends.Count);
+                    initNotifications(notifications.response.add_friend.Count);
                 }
-                Debug.WriteLine(friends);
+                Debug.WriteLine(notifications);
             }
             catch (HttpRequestException e)
             {
@@ -102,7 +126,7 @@ namespace Caritathelp
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
       //      loadCoroutine();
-            getFriends();
+            getNotifications();
     //        notifs = JsonConvert.DeserializeObject<Notifications>((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"]);
         }
 

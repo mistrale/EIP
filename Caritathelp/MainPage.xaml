@@ -17,7 +17,7 @@
                  Margin="42,204,0,0" 
                  TextWrapping="Wrap" 
                  GotFocus="TextBox_GotFocus"
-                 Text="tata1@gmail.com"
+                 Text="aude@gmail.com"
                  VerticalAlignment="Top"
                  Height="57" Width="303"
                  FontSize="25.333"
@@ -25,7 +25,7 @@
                  Foreground="#FF5C5555" TextChanged="Email_TextChanged" />
         <PasswordBox x:Name="Password" 
                  HorizontalAlignment="Left"
-                 Password="password"
+                 Password="tata"
                  Margin="42,287,0,0"  
                  FontSize="29.333"
                  Background="White"

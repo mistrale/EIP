@@ -31,12 +31,20 @@ namespace Caritathelp
         private string responseString;
         private NotificationRequest assocNotif;
         private Grid mainGrid;
+        private SimpleRequest simpleResponse;
 
         class NotificationRequest
         {
             public int status { get; set; }
             public string message { get; set; }
             public NotificationAssociationRequest response { get; set; }
+        }
+
+        class SimpleRequest
+        {
+            public int status { get; set; }
+            public string message { get; set; }
+            public string response { get; set; }
         }
 
         public NotificationAssociation()
@@ -75,17 +83,21 @@ namespace Caritathelp
                         mainGrid.RowDefinitions.Add(new RowDefinition());
                         Grid grid = new Grid();
 
+                        // name
                         var row = new RowDefinition();
                         row.Height = new GridLength(30);
                         grid.RowDefinitions.Add(row);
 
+                        // accept/refuse
                         var row2 = new RowDefinition();
                         row2.Height = new GridLength(30);
                         grid.RowDefinitions.Add(row2);
 
+                        // accept
                         var colum = new ColumnDefinition();
                         grid.ColumnDefinitions.Add(colum);
 
+                        // refuse
                         var column2 = new ColumnDefinition();
                         grid.ColumnDefinitions.Add(column2);
 
@@ -94,37 +106,33 @@ namespace Caritathelp
                         title.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
 
                         Button btnYes = new Button();
-                        btnYes.Height = 100;
-                        btnYes.Width = grid.Width;
-                        btnYes.HorizontalAlignment = HorizontalAlignment.Stretch;
                         btnYes.Tag = i;
                         btnYes.Click += new RoutedEventHandler(addUserToAssoc);
                         btnYes.Content = "Ajouter";
                         btnYes.Background = new SolidColorBrush(Color.FromArgb(0xFF, 182, 215, 168));
 
                         Button btnNo = new Button();
-                        btnYes.Height = 100;
-                        btnYes.Width = grid.Width;
-                        btnYes.HorizontalAlignment = HorizontalAlignment.Stretch;
-                        btnYes.Tag = i;
-                        btnYes.Click += new RoutedEventHandler(refuseUserToAssoc);
-                        btnYes.Content = "Refuser";
-                        btnYes.Background = new SolidColorBrush(Color.FromArgb(0xFF, 182, 215, 168));
+                        btnNo.Tag = i;
+                        btnNo.Click += new RoutedEventHandler(refuseUserToAssoc);
+                        btnNo.Content = "Refuser";
+                        btnNo.Background = new SolidColorBrush(Color.FromArgb(0xFF, 182, 215, 168));
 
-                        Grid.SetColumn(title, 1);
+                        Grid.SetColumn(title, 0);
                         Grid.SetColumnSpan(title, 2);
                         Grid.SetRow(title, 0);
                         grid.Children.Add(title);
 
-                        Grid.SetColumn(btnYes, 1);
+                        Grid.SetColumn(btnYes, 0);
                         Grid.SetRow(btnYes, 1);
                         grid.Children.Add(btnYes);
 
-                        Grid.SetColumn(btnNo, 2);
+                        Grid.SetColumn(btnNo, 1);
                         Grid.SetRow(btnNo, 1);
                         grid.Children.Add(btnNo);
 
                         mainGrid.Children.Add(grid);
+                        Grid.SetColumn(grid, 0);
+                        Grid.SetRow(grid, i);
                     }
                     scollView.Content = mainGrid;
                 }
@@ -146,21 +154,99 @@ namespace Caritathelp
             }
         }
 
-        private void addUserToAssoc(object sender, RoutedEventArgs e)
+        private async void addUserToAssoc(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
          
-            string id = button.Tag.ToString();
-            Frame.Navigate(typeof(AssociationProfil), id);
+            int i = Convert.ToInt32(button.Tag.ToString());
+            Debug.WriteLine(i);
+            string id_notif = assocNotif.response.member_request[i].notif_id.ToString();
+            var httpClient = new HttpClient(new HttpClientHandler());
+            try
+            {
+                var values = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]),
+                        new KeyValuePair<string, string>("notif_id", id_notif),
+                        new KeyValuePair<string, string>("acceptance", "true")
+                    };
+                string url = ("http://52.31.151.160:3000/membership/reply_member");
+                HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync();
+
+                simpleResponse = JsonConvert.DeserializeObject<SimpleRequest>(responseString);
+                if (simpleResponse.status != 200)
+                {
+                    warningTextBox.Text = simpleResponse.message;
+                }
+                else
+                {
+                    warningTextBox.Text = "User accepted";
+                }
+            }
+            catch (HttpRequestException f)
+            {
+                Debug.WriteLine(f.Message);
+            }
+            catch (JsonReaderException f)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+                Debug.WriteLine("Failed to read json");
+            }
+            catch (JsonSerializationException f)
+            {
+                System.Diagnostics.Debug.WriteLine(f.Message);
+            }
+            Frame.Navigate(typeof(NotificationAssociation), id);
             // identify which button was clicked and perform necessary actions
         }
 
-        private void refuseUserToAssoc(object sender, RoutedEventArgs e)
+        private async void refuseUserToAssoc(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
 
-            string id = button.Tag.ToString();
-            Frame.Navigate(typeof(AssociationProfil), id);
+            int i = Convert.ToInt32(button.Tag.ToString());
+            Debug.WriteLine(i);
+            string id_notif = assocNotif.response.member_request[i].notif_id.ToString();
+            var httpClient = new HttpClient(new HttpClientHandler());
+            try
+            {
+                var values = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]),
+                        new KeyValuePair<string, string>("notif_id", id_notif),
+                        new KeyValuePair<string, string>("acceptance", "false")
+                    };
+                string url = ("http://52.31.151.160:3000/membership/reply_member");
+                HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync();
+
+                simpleResponse = JsonConvert.DeserializeObject<SimpleRequest>(responseString);
+                if (simpleResponse.status != 200)
+                {
+                    warningTextBox.Text = simpleResponse.message;
+                }
+                else
+                {
+                    warningTextBox.Text = "User refused";
+                }
+            }
+            catch (HttpRequestException f)
+            {
+                Debug.WriteLine(f.Message);
+            }
+            catch (JsonReaderException f)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+                Debug.WriteLine("Failed to read json");
+            }
+            catch (JsonSerializationException f)
+            {
+                System.Diagnostics.Debug.WriteLine(f.Message);
+            }
+            Frame.Navigate(typeof(NotificationAssociation), id);
             // identify which button was clicked and perform necessary actions
         }
 

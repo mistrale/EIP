@@ -9,8 +9,8 @@ namespace Caritathelp
 
     public class AddFriend
     {
-        public int id_notif { get; set; }
-        public int id_sender { get; set; }
+        public int notif_id { get; set; }
+        public int id { get; set; }
         public string mail { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
@@ -34,6 +34,5 @@ namespace Caritathelp
         public string longitude { get; set; }
         public string allowgps { get; set; }
         public string allow_notifications { get; set; }
-         public Notifications notifications { get; set; }
     }
 }
