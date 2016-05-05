@@ -50,9 +50,12 @@ namespace Caritathelp
                 Button btn = new Button();
                 btn.Height = 100;
                 btn.Width = grid.Width;
-                btn.HorizontalAlignment = HorizontalAlignment.Stretch;
+                btn.Content = new TextBlock
+                {
+                    Text = notifications.response.add_friend[x].firstname + " " + notifications.response.add_friend[x].lastname + " vous a envoyé une demande d'ajout.",
+                    TextWrapping = TextWrapping.Wrap
+                };
                 btn.Click += new RoutedEventHandler(UserButtonClick);
-                btn.Content = notifications.response.add_friend[x].firstname + notifications.response.add_friend[x].lastname;
                 btn.Background = new SolidColorBrush(Color.FromArgb(0xFF, 124, 188, 99));
                 Grid.SetColumn(btn, 1);
                 Grid.SetRow(btn, x);

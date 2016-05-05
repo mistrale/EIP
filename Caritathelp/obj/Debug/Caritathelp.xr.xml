@@ -199,6 +199,7 @@
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Caritathelp.MainPage" />
+    <RootType FullName="Caritathelp.MemberAssociation" />
     <RootType FullName="Caritathelp.MyAssociations" />
     <RootType FullName="Caritathelp.Notification" />
     <RootType FullName="Caritathelp.NotificationAssociation" />

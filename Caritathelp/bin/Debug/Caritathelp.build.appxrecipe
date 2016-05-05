@@ -162,6 +162,9 @@
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\MemberAssociation.xbf">
+      <PackagePath>MemberAssociation.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\MyAssociations.xbf">
       <PackagePath>MyAssociations.xbf</PackagePath>
     </AppxPackagedFile>

@@ -173,3 +173,8 @@ C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\NotificationAssociati
 C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\NotificationAssociation.xaml
 C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\NotificationAssociation.xbf
 C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\NotificationAssociation.xbf
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\bin\Debug\MemberAssociation.xbf
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\MemberAssociation.g.i.cs
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\MemberAssociation.g.cs
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\MemberAssociation.xaml
+C:\Users\audes_000\Documents\eip\EIP\Caritathelp\obj\Debug\MemberAssociation.xbf

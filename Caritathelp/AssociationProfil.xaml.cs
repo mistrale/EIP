@@ -38,27 +38,11 @@ namespace Caritathelp
             public string response { get; set; }
         }
 
-        class Member
-        {
-            public string id { get; set; } 
-            public string mail { get; set; }
-            public string firstname { get; set; }
-            public string lastname { get; set; }
-            public string rights { get; set; }
-        }
-
         class   AssociationRequest
         {
             public string status { get; set; }
             public string message { get; set; }
             public Association response { get; set; }
-        }
-
-        class MemberRequest
-        {
-            public string status { get; set; }
-            public string message { get; set; }
-            public IList<Member> response { get; set; }
         }
 
         class Event
@@ -78,7 +62,7 @@ namespace Caritathelp
         private Grid membersGrid;
         private Grid eventsGrid;
         private AssociationRequest assoc;
-        private MemberRequest members;
+
         private EventRequest events;
         private SimpleRequest simple;
 
@@ -196,63 +180,6 @@ namespace Caritathelp
             }
         }
 
-        private async void getMember()
-        {
-            var httpClient = new HttpClient(new HttpClientHandler());
-            try
-            {
-                var template = new UriTemplate("http://52.31.151.160:3000/associations/" + id + "/members" + "{?token}");
-                template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
-                var uri = template.Resolve();
-                Debug.WriteLine(uri);
-
-                HttpResponseMessage response = await httpClient.GetAsync(uri);
-                response.EnsureSuccessStatusCode();
-                responseString = await response.Content.ReadAsStringAsync();
-                System.Diagnostics.Debug.WriteLine(responseString.ToString());
-                members = JsonConvert.DeserializeObject<MemberRequest>(responseString);
-                if (Int32.Parse(members.status) != 200)
-                {
-
-                }
-                else
-                {
-                    Debug.WriteLine(members.response.Count);
-                    membersGrid.Height = members.response.Count * 100;
-                    membersGrid.Width = 375;
-                    for (int i = 0; i < members.response.Count; ++i)
-                        membersGrid.RowDefinitions.Add(new RowDefinition());
-                    membersGrid.ColumnDefinitions.Add(new ColumnDefinition());
-                    for (int x = 0; x < members.response.Count; ++x)
-                    {
-                        Button btn = new Button();
-                        btn.Height = 100;
-                        btn.Width = membersGrid.Width;
-                        btn.HorizontalAlignment = HorizontalAlignment.Stretch;
-                        btn.Click += new RoutedEventHandler(UserButtonClick);
-                        btn.Content = members.response[x].firstname + " " + members.response[x].lastname;
-                        btn.Background = new SolidColorBrush(Color.FromArgb(0xFF, 124, 188, 99));
-                        Grid.SetColumn(btn, 1);
-                        Grid.SetRow(btn, x);
-                        membersGrid.Children.Add(btn);
-                        membersGrid.Visibility = Visibility.Visible;
-                    }
-                }
-            }
-            catch (HttpRequestException e)
-            {
-            }
-            catch (JsonReaderException e)
-            {
-                System.Diagnostics.Debug.WriteLine(responseString);
-                Debug.WriteLine("Failed to read json");
-            }
-            catch (JsonSerializationException e)
-            {
-                Debug.WriteLine(responseString);
-                System.Diagnostics.Debug.WriteLine(e.Message);
-            }
-        }
 
         private void EventButtonClick(object sender, RoutedEventArgs e)
         {
@@ -260,15 +187,6 @@ namespace Caritathelp
             int x = Grid.GetRow(button);
             string id = events.response[x].id.ToString();
             Frame.Navigate(typeof(EventProfil), id);
-        }
-
-        private void UserButtonClick(object sender, RoutedEventArgs e)
-        {
-            Button button = sender as Button;
-            int x = Grid.GetRow(button);
-            string id = members.response[x].id.ToString();
-            Frame.Navigate(typeof(Profil), id);
-            // identify which button was clicked and perform necessary actions
         }
 
         public void eventClick(object sender, RoutedEventArgs e)
@@ -280,9 +198,7 @@ namespace Caritathelp
 
         public void memberClick(object sender, RoutedEventArgs e)
         {
-            scroll.Content = membersGrid;
-            membersGrid.Visibility = Visibility.Visible;
-            eventsGrid.Visibility = Visibility.Collapsed;
+            Frame.Navigate(typeof(MemberAssociation), id);
         }
 
         private async void getInformation()
@@ -352,12 +268,8 @@ namespace Caritathelp
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-   //         loadCoroutine();
             id = e.Parameter as string;
-            Debug.WriteLine(id);
-     //       notifs = JsonConvert.DeserializeObject<Notifications>((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["notifications"]);
             getInformation();
-            getMember();
             getEvent();
         }
 

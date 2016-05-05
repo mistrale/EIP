@@ -148,7 +148,7 @@ namespace Caritathelp.Caritathelp_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[25];
+            _typeNameTable = new string[26];
             _typeNameTable[0] = "Caritathelp.Accueil";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
@@ -163,19 +163,20 @@ namespace Caritathelp.Caritathelp_XamlTypeInfo
             _typeNameTable[11] = "Windows.UI.Xaml.Controls.TextBox";
             _typeNameTable[12] = "Windows.UI.Xaml.Controls.TextBlock";
             _typeNameTable[13] = "Caritathelp.MainPage";
-            _typeNameTable[14] = "Caritathelp.MyAssociations";
-            _typeNameTable[15] = "Caritathelp.Notification";
-            _typeNameTable[16] = "Caritathelp.NotificationAssociation";
-            _typeNameTable[17] = "Caritathelp.Options";
-            _typeNameTable[18] = "Caritathelp.Profil";
-            _typeNameTable[19] = "Caritathelp.Research";
-            _typeNameTable[20] = "Caritathelp.Common.NavigationHelper";
-            _typeNameTable[21] = "Windows.UI.Xaml.DependencyObject";
-            _typeNameTable[22] = "Caritathelp.Common.ObservableDictionary";
-            _typeNameTable[23] = "Object";
-            _typeNameTable[24] = "String";
+            _typeNameTable[14] = "Caritathelp.MemberAssociation";
+            _typeNameTable[15] = "Caritathelp.MyAssociations";
+            _typeNameTable[16] = "Caritathelp.Notification";
+            _typeNameTable[17] = "Caritathelp.NotificationAssociation";
+            _typeNameTable[18] = "Caritathelp.Options";
+            _typeNameTable[19] = "Caritathelp.Profil";
+            _typeNameTable[20] = "Caritathelp.Research";
+            _typeNameTable[21] = "Caritathelp.Common.NavigationHelper";
+            _typeNameTable[22] = "Windows.UI.Xaml.DependencyObject";
+            _typeNameTable[23] = "Caritathelp.Common.ObservableDictionary";
+            _typeNameTable[24] = "Object";
+            _typeNameTable[25] = "String";
 
-            _typeTable = new global::System.Type[25];
+            _typeTable = new global::System.Type[26];
             _typeTable[0] = typeof(global::Caritathelp.Accueil);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
@@ -190,17 +191,18 @@ namespace Caritathelp.Caritathelp_XamlTypeInfo
             _typeTable[11] = typeof(global::Windows.UI.Xaml.Controls.TextBox);
             _typeTable[12] = typeof(global::Windows.UI.Xaml.Controls.TextBlock);
             _typeTable[13] = typeof(global::Caritathelp.MainPage);
-            _typeTable[14] = typeof(global::Caritathelp.MyAssociations);
-            _typeTable[15] = typeof(global::Caritathelp.Notification);
-            _typeTable[16] = typeof(global::Caritathelp.NotificationAssociation);
-            _typeTable[17] = typeof(global::Caritathelp.Options);
-            _typeTable[18] = typeof(global::Caritathelp.Profil);
-            _typeTable[19] = typeof(global::Caritathelp.Research);
-            _typeTable[20] = typeof(global::Caritathelp.Common.NavigationHelper);
-            _typeTable[21] = typeof(global::Windows.UI.Xaml.DependencyObject);
-            _typeTable[22] = typeof(global::Caritathelp.Common.ObservableDictionary);
-            _typeTable[23] = typeof(global::System.Object);
-            _typeTable[24] = typeof(global::System.String);
+            _typeTable[14] = typeof(global::Caritathelp.MemberAssociation);
+            _typeTable[15] = typeof(global::Caritathelp.MyAssociations);
+            _typeTable[16] = typeof(global::Caritathelp.Notification);
+            _typeTable[17] = typeof(global::Caritathelp.NotificationAssociation);
+            _typeTable[18] = typeof(global::Caritathelp.Options);
+            _typeTable[19] = typeof(global::Caritathelp.Profil);
+            _typeTable[20] = typeof(global::Caritathelp.Research);
+            _typeTable[21] = typeof(global::Caritathelp.Common.NavigationHelper);
+            _typeTable[22] = typeof(global::Windows.UI.Xaml.DependencyObject);
+            _typeTable[23] = typeof(global::Caritathelp.Common.ObservableDictionary);
+            _typeTable[24] = typeof(global::System.Object);
+            _typeTable[25] = typeof(global::System.String);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -245,14 +247,15 @@ namespace Caritathelp.Caritathelp_XamlTypeInfo
         private object Activate_9_GestionAssociation() { return new global::Caritathelp.GestionAssociation(); }
         private object Activate_10_Inscription() { return new global::Caritathelp.Inscription(); }
         private object Activate_13_MainPage() { return new global::Caritathelp.MainPage(); }
-        private object Activate_14_MyAssociations() { return new global::Caritathelp.MyAssociations(); }
-        private object Activate_15_Notification() { return new global::Caritathelp.Notification(); }
-        private object Activate_16_NotificationAssociation() { return new global::Caritathelp.NotificationAssociation(); }
-        private object Activate_17_Options() { return new global::Caritathelp.Options(); }
-        private object Activate_18_Profil() { return new global::Caritathelp.Profil(); }
-        private object Activate_19_Research() { return new global::Caritathelp.Research(); }
-        private object Activate_22_ObservableDictionary() { return new global::Caritathelp.Common.ObservableDictionary(); }
-        private void MapAdd_22_ObservableDictionary(object instance, object key, object item)
+        private object Activate_14_MemberAssociation() { return new global::Caritathelp.MemberAssociation(); }
+        private object Activate_15_MyAssociations() { return new global::Caritathelp.MyAssociations(); }
+        private object Activate_16_Notification() { return new global::Caritathelp.Notification(); }
+        private object Activate_17_NotificationAssociation() { return new global::Caritathelp.NotificationAssociation(); }
+        private object Activate_18_Options() { return new global::Caritathelp.Options(); }
+        private object Activate_19_Profil() { return new global::Caritathelp.Profil(); }
+        private object Activate_20_Research() { return new global::Caritathelp.Research(); }
+        private object Activate_23_ObservableDictionary() { return new global::Caritathelp.Common.ObservableDictionary(); }
+        private void MapAdd_23_ObservableDictionary(object instance, object key, object item)
         {
             var collection = (global::System.Collections.Generic.IDictionary<global::System.String, global::System.Object>)instance;
             var newKey = (global::System.String)key;
@@ -358,74 +361,81 @@ namespace Caritathelp.Caritathelp_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 14:   //  Caritathelp.MyAssociations
+            case 14:   //  Caritathelp.MemberAssociation
                 userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_14_MyAssociations;
+                userType.Activator = Activate_14_MemberAssociation;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 15:   //  Caritathelp.Notification
+            case 15:   //  Caritathelp.MyAssociations
                 userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_15_Notification;
+                userType.Activator = Activate_15_MyAssociations;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 16:   //  Caritathelp.NotificationAssociation
+            case 16:   //  Caritathelp.Notification
                 userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_16_NotificationAssociation;
+                userType.Activator = Activate_16_Notification;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 17:   //  Caritathelp.Options
+            case 17:   //  Caritathelp.NotificationAssociation
                 userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_17_Options;
+                userType.Activator = Activate_17_NotificationAssociation;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 18:   //  Caritathelp.Profil
+            case 18:   //  Caritathelp.Options
                 userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_18_Profil;
+                userType.Activator = Activate_18_Options;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 19:   //  Caritathelp.Research
+            case 19:   //  Caritathelp.Profil
                 userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_19_Research;
+                userType.Activator = Activate_19_Profil;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 20:   //  Caritathelp.Research
+                userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_20_Research;
                 userType.AddMemberName("NavigationHelper");
                 userType.AddMemberName("DefaultViewModel");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 20:   //  Caritathelp.Common.NavigationHelper
+            case 21:   //  Caritathelp.Common.NavigationHelper
                 userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.DependencyObject"));
                 userType.SetIsReturnTypeStub();
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 21:   //  Windows.UI.Xaml.DependencyObject
+            case 22:   //  Windows.UI.Xaml.DependencyObject
                 xamlType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 22:   //  Caritathelp.Common.ObservableDictionary
+            case 23:   //  Caritathelp.Common.ObservableDictionary
                 userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.DictionaryAdd = MapAdd_22_ObservableDictionary;
+                userType.DictionaryAdd = MapAdd_23_ObservableDictionary;
                 userType.SetIsReturnTypeStub();
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 23:   //  Object
+            case 24:   //  Object
                 xamlType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 24:   //  String
+            case 25:   //  String
                 xamlType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
             }
@@ -863,6 +873,8 @@ namespace Caritathelp.Caritathelp_XamlTypeInfo
         }
     }
 }
+
+
 
 
 
