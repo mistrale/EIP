@@ -7,8 +7,13 @@ using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Tavis.UriTemplates;
+using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -16,6 +21,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -34,6 +40,15 @@ namespace Caritathelp.Event
             public EventModel response { get; set; }
         }
 
+        class PictureRequest
+        {
+            public int status { get; set; }
+            public string message { get; set; }
+            public All.Picture response { get; set; }
+        }
+
+        private string event_id;
+        private PictureRequest pictures;
         private EventRequest events;
         private string id;
         private string responseString;
@@ -52,6 +67,65 @@ namespace Caritathelp.Event
         public EventInformation()
         {
             this.InitializeComponent();
+        }
+
+        private async void uploadLogo()
+        {
+            string Base64String = "";
+
+            if (storageFileWP != null)
+            {
+                IRandomAccessStream fileStream = await storageFileWP.OpenAsync(FileAccessMode.Read);
+                var reader = new DataReader(fileStream.GetInputStreamAt(0));
+                await reader.LoadAsync((uint)fileStream.Size);
+                byte[] byteArray = new byte[fileStream.Size];
+                reader.ReadBytes(byteArray);
+                Base64String = Convert.ToBase64String(byteArray);
+            }
+            else
+            {
+                Frame.Navigate(typeof(EventProfil), event_id);
+                return;
+            }
+            string url = "http://52.31.151.160:3000/pictures/";
+            var values = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("file", Base64String),
+                        new KeyValuePair<string, string>("filename", storageFileWP.Name.ToString()),
+                        new KeyValuePair<string, string>("event_id", event_id),
+                        new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"])
+                    };
+            var httpClient = new HttpClient(new HttpClientHandler());
+            try
+            {
+                HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine(responseString);
+                pictures = JsonConvert.DeserializeObject<PictureRequest>(responseString);
+                if (pictures.status != 200)
+                {
+                    warning.Text = pictures.message;
+                }
+                else
+                {
+                    Debug.WriteLine("Logo add");
+                    Frame.Navigate(typeof(EventInformation), event_id);
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                warning.Text = e.Message;
+                Debug.WriteLine(e.Message);
+            }
+            catch (JsonReaderException e)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+            }
+            catch (JsonSerializationException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
         }
 
         private async void updateEvent()
@@ -85,6 +159,8 @@ namespace Caritathelp.Event
                 else
                 {
                     warning.Text = "Evènement modifié !";
+                    event_id = events.response.id.ToString();
+                    uploadLogo();
                 }
             }
             catch (HttpRequestException e)
@@ -208,11 +284,95 @@ namespace Caritathelp.Event
             }
         }
 
+        private void viewActivated(CoreApplicationView sender, IActivatedEventArgs args1)
+        {
+            FileOpenPickerContinuationEventArgs args = args1 as FileOpenPickerContinuationEventArgs;
+
+            if (args != null)
+            {
+                if (args.Files.Count == 0) return;
+
+                view.Activated -= viewActivated;
+                storageFileWP = args.Files[0];
+
+            }
+            logoText.Text = storageFileWP.Name.ToString();
+        }
+
+        CoreApplicationView view;
+        StorageFile storageFileWP;
+
+        public void chooseFileClick(object sender, RoutedEventArgs e)
+        {
+            view = CoreApplication.GetCurrentView();
+
+            string ImagePath = string.Empty;
+            FileOpenPicker filePicker = new FileOpenPicker();
+            filePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            filePicker.ViewMode = PickerViewMode.Thumbnail;
+
+            // Filter to include a sample subset of file types
+            filePicker.FileTypeFilter.Clear();
+            filePicker.FileTypeFilter.Add(".pdf");
+            filePicker.FileTypeFilter.Add(".png");
+            filePicker.FileTypeFilter.Add(".jpeg");
+            filePicker.FileTypeFilter.Add(".jpg");
+            filePicker.FileTypeFilter.Add(".gif");
+            filePicker.PickSingleFileAndContinue();
+            view.Activated += viewActivated;
+        }
+
+        private async void getPicture()
+        {
+            var httpClient = new HttpClient(new HttpClientHandler());
+            try
+            {
+                var template = new UriTemplate("http://52.31.151.160:3000/events/" + id + "/main_picture{?token}");
+                template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
+                var uri = template.Resolve();
+                Debug.WriteLine(uri);
+
+                HttpResponseMessage response = await httpClient.GetAsync(uri);
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine(responseString.ToString());
+                pictures = JsonConvert.DeserializeObject<PictureRequest>(responseString);
+                if (pictures.status != 200)
+                {
+
+                }
+                else
+                {
+                    if (pictures.response != null)
+                    {
+                        ImageBrush myBrush = new ImageBrush();
+                        myBrush.ImageSource =
+                            new BitmapImage(new Uri("http://52.31.151.160:3000" + pictures.response.picture_path.thumb.url, UriKind.Absolute));
+                        logo.Fill = myBrush;
+                    }
+                }
+            }
+            catch (HttpRequestException e)
+            {
+            }
+            catch (JsonReaderException e)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+                Debug.WriteLine("Failed to read json");
+            }
+            catch (JsonSerializationException e)
+            {
+                Debug.WriteLine(responseString);
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             id = e.Parameter as string;
             warning.Text = "";
             getInformations();
+            getPicture();
         }
     }
 }

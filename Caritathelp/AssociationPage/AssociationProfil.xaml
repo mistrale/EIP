@@ -34,7 +34,7 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Ellipse Margin="116,69,109,408.333" Grid.Row="1">
+        <Ellipse Name="logo" Margin="116,69,109,408.333" Grid.Row="1">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
             </Ellipse.Fill>

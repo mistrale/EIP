@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -57,6 +58,14 @@ namespace Caritathelp.Volunteer
 
         }
 
+        class PictureRequest
+        {
+            public int status { get; set; }
+            public string message { get; set; }
+            public All.Picture response { get; set; }
+        }
+
+        private PictureRequest picture;
         private UserResponse message;
         private UserResponse user;
         private FriendResponse friends;
@@ -394,6 +403,51 @@ namespace Caritathelp.Volunteer
             Frame.Navigate(typeof(All.Research));
         }
 
+        private async void getPicture()
+        {
+            var httpClient = new HttpClient(new HttpClientHandler());
+            try
+            {
+                var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + id + "/main_picture{?token}");
+                template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
+                var uri = template.Resolve();
+                Debug.WriteLine(uri);
+
+                HttpResponseMessage response = await httpClient.GetAsync(uri);
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine(responseString.ToString());
+                picture = JsonConvert.DeserializeObject<PictureRequest>(responseString);
+                if (picture.status != 200)
+                {
+
+                }
+                else
+                {
+                    if (picture.response != null)
+                    {
+                        ImageBrush myBrush = new ImageBrush();
+                        myBrush.ImageSource =
+                            new BitmapImage(new Uri("http://52.31.151.160:3000" + picture.response.picture_path.thumb.url, UriKind.Absolute));
+                        logo.Fill = myBrush;
+                    }
+                }
+            }
+            catch (HttpRequestException e)
+            {
+            }
+            catch (JsonReaderException e)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+                Debug.WriteLine("Failed to read json");
+            }
+            catch (JsonSerializationException e)
+            {
+                Debug.WriteLine(responseString);
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+        }
+
         private async void getInformation()
         {
             var httpClient = new HttpClient(new HttpClientHandler());
@@ -418,6 +472,7 @@ namespace Caritathelp.Volunteer
                 {
                     nameTextBox.Text = user.response.firstname + " " + user.response.lastname;
                     getFriends();
+                    getPicture();
                 }
             }
             catch (HttpRequestException e)

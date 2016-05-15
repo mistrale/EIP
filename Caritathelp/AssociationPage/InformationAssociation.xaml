@@ -40,11 +40,11 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Ellipse HorizontalAlignment="Left"
+        <Ellipse Name="logo" HorizontalAlignment="Left"
                  Height="126" Margin="129,84,0,0" Stroke="Black"
                  VerticalAlignment="Top" Width="145">
             <Ellipse.Fill>
-                <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
+                <ImageBrush  ImageSource="ms-appx:/Assets/Logo.png"/>
             </Ellipse.Fill>
         </Ellipse>
         <local:Menu HorizontalAlignment="Left" Margin="0,589,0,0" VerticalAlignment="Top" Width="400"/>

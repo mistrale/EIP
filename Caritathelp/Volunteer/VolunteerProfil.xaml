@@ -76,7 +76,7 @@
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/assoc.png"/>
             </Button.Background>
         </Button>
-        <Ellipse HorizontalAlignment="Left" Height="143" Margin="122,88,0,0" VerticalAlignment="Top" Width="164">
+        <Ellipse Name="logo" HorizontalAlignment="Left" Height="143" Margin="122,88,0,0" VerticalAlignment="Top" Width="164">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
             </Ellipse.Fill>

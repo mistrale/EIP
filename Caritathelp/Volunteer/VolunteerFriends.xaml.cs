@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Tavis.UriTemplates;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
@@ -25,8 +28,17 @@ namespace Caritathelp.Volunteer
     /// </summary>
     public sealed partial class VolunteerFriends : Page
     {
+        class PictureRequest
+        {
+            public int status { get; set; }
+            public string message { get; set; }
+            public All.Picture response { get; set; }
+        }
+
+        private PictureRequest pictures;
         Grid friendsGrid;
         friendsStruct tmp;
+        private string responseString;
 
         public void goBack(object sender, RoutedEventArgs e)
         {
@@ -36,6 +48,50 @@ namespace Caritathelp.Volunteer
         public VolunteerFriends()
         {
             this.InitializeComponent();
+        }
+
+        private async void getPicture(int id, Image btn)
+        {
+            var httpClient = new HttpClient(new HttpClientHandler());
+            try
+            {
+                var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + id + "/main_picture{?token}");
+                template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
+                var uri = template.Resolve();
+                Debug.WriteLine(uri);
+
+                HttpResponseMessage response = await httpClient.GetAsync(uri);
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine(responseString.ToString());
+                pictures = JsonConvert.DeserializeObject<PictureRequest>(responseString);
+                if (pictures.status != 200)
+                {
+
+                }
+                else
+                {
+                    if (pictures.response != null)
+                    {
+                        btn.Source = new BitmapImage(new Uri("http://52.31.151.160:3000" + pictures.response.picture_path.thumb.url, UriKind.Absolute));
+                    }
+                    else
+                        btn.Source = new BitmapImage(new Uri("ms-appx:/Assets/avatar.png"));
+                }
+            }
+            catch (HttpRequestException e)
+            {
+            }
+            catch (JsonReaderException e)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+                Debug.WriteLine("Failed to read json");
+            }
+            catch (JsonSerializationException e)
+            {
+                Debug.WriteLine(responseString);
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
         }
 
         private void UserButtonClick(object sender, RoutedEventArgs e)
@@ -64,16 +120,16 @@ namespace Caritathelp.Volunteer
 
                 // row
                 var row = new RowDefinition();
-                row.Height = new GridLength(50);
+                row.Height = new GridLength(55);
                 grid.RowDefinitions.Add(row);
 
                 var row2 = new RowDefinition();
-                row2.Height = new GridLength(40);
+                row2.Height = new GridLength(45);
                 grid.RowDefinitions.Add(row2);
 
                 //column
                 var colum = new ColumnDefinition();
-                colum.Width = new GridLength(80);
+                colum.Width = new GridLength(100);
                 grid.ColumnDefinitions.Add(colum);
 
                 var column2 = new ColumnDefinition();
@@ -107,9 +163,10 @@ namespace Caritathelp.Volunteer
                 grid.Children.Add(friend);
 
                 Image btn = new Image();
-                btn.Source = new BitmapImage(new Uri("ms-appx:/Assets/avatar.png"));
-                btn.Height = 80;
-                btn.Width = 80;
+                getPicture(tmp.friends[x].id, btn);
+                btn.Stretch = Stretch.Fill;
+                btn.Height = 100;
+                btn.Width = 100;
                 Grid.SetColumn(btn, 0);
                 Grid.SetRow(btn, 0);
                 Grid.SetRowSpan(btn, 2);

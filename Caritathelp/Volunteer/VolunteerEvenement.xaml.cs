@@ -34,6 +34,14 @@ namespace Caritathelp.Volunteer
             public IList<EventModel> response { get; set; }
         }
 
+        class PictureRequest
+        {
+            public int status { get; set; }
+            public string message { get; set; }
+            public All.Picture response { get; set; }
+        }
+
+        private PictureRequest pictures;
         private Grid eventsGrid;
         private EventRequest events;
         private string responseString;
@@ -54,6 +62,50 @@ namespace Caritathelp.Volunteer
             int x = Convert.ToInt32(button.Tag.ToString());
             string id = events.response[x].id.ToString();
             Frame.Navigate(typeof(EventProfil), id);
+        }
+
+        private async void getPicture(int id, Image btn)
+        {
+            var httpClient = new HttpClient(new HttpClientHandler());
+            try
+            {
+                var template = new UriTemplate("http://52.31.151.160:3000/events/" + id.ToString() + "/main_picture{?token}");
+                template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
+                var uri = template.Resolve();
+                Debug.WriteLine(uri);
+
+                HttpResponseMessage response = await httpClient.GetAsync(uri);
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine(responseString.ToString());
+                pictures = JsonConvert.DeserializeObject<PictureRequest>(responseString);
+                if (pictures.status != 200)
+                {
+
+                }
+                else
+                {
+                    if (pictures.response != null)
+                    {
+                        btn.Source = new BitmapImage(new Uri("http://52.31.151.160:3000" + pictures.response.picture_path.thumb.url, UriKind.Absolute));
+                    }
+                    else
+                        btn.Source = new BitmapImage(new Uri("ms-appx:/Assets/avatar.png"));
+                }
+            }
+            catch (HttpRequestException e)
+            {
+            }
+            catch (JsonReaderException e)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+                Debug.WriteLine("Failed to read json");
+            }
+            catch (JsonSerializationException e)
+            {
+                Debug.WriteLine(responseString);
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
         }
 
         private async void getEvent()
@@ -96,11 +148,9 @@ namespace Caritathelp.Volunteer
                         grid.RowDefinitions.Add(row);
 
                         var row2 = new RowDefinition();
-                        row2.Height = new GridLength(30);
                         grid.RowDefinitions.Add(row2);
 
                         var row3 = new RowDefinition();
-                        row3.Height = new GridLength(30);
                         grid.RowDefinitions.Add(row3);
 
                         //column
@@ -144,9 +194,11 @@ namespace Caritathelp.Volunteer
                         Grid.SetRow(friends, 2);
                         grid.Children.Add(friends);
 
-                        // image
                         Image btn = new Image();
-                        btn.Source = new BitmapImage(new Uri("ms-appx:/Assets/avatar.png"));
+                        getPicture(events.response[x].id, btn);
+                        btn.Stretch = Stretch.Fill;
+                        btn.Width = 100;
+                        btn.Height = 100;
                         Grid.SetColumn(btn, 0);
                         Grid.SetRow(btn, 0);
                         Grid.SetRowSpan(btn, 3);

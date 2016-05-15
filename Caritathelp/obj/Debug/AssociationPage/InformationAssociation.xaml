@@ -40,15 +40,15 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Ellipse HorizontalAlignment="Left"
+        <Ellipse Name="logo" HorizontalAlignment="Left"
                  Height="126" Margin="129,84,0,0" Stroke="Black"
                  VerticalAlignment="Top" Width="145">
             <Ellipse.Fill>
-                <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
+                <ImageBrush  ImageSource="ms-appx:/Assets/Logo.png"/>
             </Ellipse.Fill>
         </Ellipse>
         <local:Menu HorizontalAlignment="Left" Margin="0,589,0,0" VerticalAlignment="Top" Width="400"/>
-        <TextBox x:Name="title" HorizontalAlignment="Left" Margin="10,215,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" BorderBrush="{x:Null}" Width="380" Height="43" Foreground="#FF4BAF50" TextAlignment="Center" Background="{x:Null}"/>
+        <TextBox x:Name="title" HorizontalAlignment="Left" Margin="10,215,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" BorderBrush="{x:Null}" Width="380" Height="43" Foreground="#FF4BAF50" TextAlignment="Center" Background="{x:Null}" IsReadOnly="True" IsHitTestVisible="False"/>
         <Grid HorizontalAlignment="Left" Height="49" Margin="1,-1,0,0" VerticalAlignment="Top" Width="399" Background="#FF4BAF50"/>
         <Button x:ConnectionId='3' x:Name="Back" Content="Previous"
                 HorizontalAlignment="Left" VerticalAlignment="Top"
@@ -59,7 +59,7 @@
                  Text="Informations" VerticalAlignment="Top"
                  Background="{x:Null}"
                  Foreground="White" Height="43" FontSize="24"
-                 FontWeight="Bold" IsReadOnly="True" TextAlignment="Center" Margin="72,1,53,0" BorderBrush="{x:Null}"/>
+                 FontWeight="Bold" IsReadOnly="True" TextAlignment="Center" Margin="72,1,53,0" BorderBrush="{x:Null}" IsHitTestVisible="False"/>
     </Grid>
 </Page>
 

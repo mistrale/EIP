@@ -7,8 +7,13 @@ using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
+using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -38,7 +43,109 @@ namespace Caritathelp.Volunteer
 
         }
 
+        class PictureRequest
+        {
+            public int status { get; set; }
+            public string message { get; set; }
+            public All.Picture response { get; set; }
+        }
+
+        private PictureRequest pictures;
         private RequeteResponse message;
+
+        private async void uploadLogo()
+        {
+            string Base64String = "";
+
+            if (storageFileWP != null)
+            {
+                IRandomAccessStream fileStream = await storageFileWP.OpenAsync(FileAccessMode.Read);
+                var reader = new DataReader(fileStream.GetInputStreamAt(0));
+                await reader.LoadAsync((uint)fileStream.Size);
+                byte[] byteArray = new byte[fileStream.Size];
+                reader.ReadBytes(byteArray);
+                Base64String = Convert.ToBase64String(byteArray);
+            }
+            else
+            {
+                return;
+            }
+            string url = "http://52.31.151.160:3000/pictures/";
+            var values = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("file", Base64String),
+                        new KeyValuePair<string, string>("filename", storageFileWP.Name.ToString()),
+                        new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"])
+                    };
+            var httpClient = new HttpClient(new HttpClientHandler());
+            try
+            {
+                HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine(responseString);
+                pictures = JsonConvert.DeserializeObject<PictureRequest>(responseString);
+                if (pictures.status != 200)
+                {
+                    warningTextBox.Text = pictures.message;
+                }
+                else
+                {
+                    Frame.Navigate(typeof(VolunteerProfil), tmp.id);
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                warningTextBox.Text = e.Message;
+                Debug.WriteLine(e.Message);
+            }
+            catch (JsonReaderException e)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+            }
+            catch (JsonSerializationException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+        }
+
+        private void viewActivated(CoreApplicationView sender, IActivatedEventArgs args1)
+        {
+            FileOpenPickerContinuationEventArgs args = args1 as FileOpenPickerContinuationEventArgs;
+
+            if (args != null)
+            {
+                if (args.Files.Count == 0) return;
+
+                view.Activated -= viewActivated;
+                storageFileWP = args.Files[0];
+
+            }
+            logoText.Text = storageFileWP.Name.ToString();
+        }
+
+        CoreApplicationView view;
+        StorageFile storageFileWP;
+
+        public void chooseFileClick(object sender, RoutedEventArgs e)
+        {
+            view = CoreApplication.GetCurrentView();
+
+            string ImagePath = string.Empty;
+            FileOpenPicker filePicker = new FileOpenPicker();
+            filePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            filePicker.ViewMode = PickerViewMode.Thumbnail;
+
+            // Filter to include a sample subset of file types
+            filePicker.FileTypeFilter.Clear();
+            filePicker.FileTypeFilter.Add(".pdf");
+            filePicker.FileTypeFilter.Add(".png");
+            filePicker.FileTypeFilter.Add(".jpeg");
+            filePicker.FileTypeFilter.Add(".jpg");
+            filePicker.FileTypeFilter.Add(".gif");
+            filePicker.PickSingleFileAndContinue();
+            view.Activated += viewActivated;
+        }
 
         public void goBack(object sender, RoutedEventArgs e)
         {
@@ -102,13 +209,13 @@ namespace Caritathelp.Volunteer
                         localSettings.Values["gender"] = GenreBox.SelectedValue.ToString();
                         localSettings.Values["allowgps"] = allowGPSEdit.IsChecked.ToString();
                         localSettings.Values["password"] = passwordEdit.Password;
-                        warningTextBox.Text = "Profil modifié";
                     }
                     catch (System.Exception e)
                     {
                         System.Diagnostics.Debug.WriteLine(e.Message);
                     }
-
+                    warningTextBox.Text = "Profil modifiée !";
+                    uploadLogo();
                 }
             }
             catch (HttpRequestException e)
@@ -198,6 +305,8 @@ namespace Caritathelp.Volunteer
                 GenreBox.IsHitTestVisible = false;
                 cityEdit.IsHitTestVisible = false;
                 allowGPSEdit.IsHitTestVisible = false;
+                logoText.Visibility = Visibility.Collapsed;
+                button1.Visibility = Visibility.Collapsed;
             }
             emailEdit.Text = tmp.user.mail;
             firstNameEdit.Text = tmp.user.firstname;

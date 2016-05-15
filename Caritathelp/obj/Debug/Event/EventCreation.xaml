@@ -25,7 +25,7 @@
                              Foreground="#FFDC4545"/>
                 </Border>
                 <Border BorderBrush="#000000" BorderThickness="1" Grid.Column="0" Margin="0,58,0,0.333" Grid.RowSpan="2">
-                    <Button x:ConnectionId='5' x:Name="searchButton" Content=""
+                    <Button x:ConnectionId='6' x:Name="searchButton" Content=""
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             Margin="320.167,-55.833,1.167,31.167"
@@ -62,10 +62,10 @@
                                             
                  VerticalAlignment="Top" Width="380" 
                  BorderBrush="#FF4BAF50" 
-                 Foreground="#FF4BAF50" Height="175" 
+                 Foreground="#FF4BAF50" Height="129" 
                  TextAlignment="Center"/>
         <TextBox x:ConnectionId='3' x:Name="eventPlaceText" HorizontalAlignment="Left"
-                 Margin="10,335,0,0" TextWrapping="Wrap"
+                 Margin="10,291,0,0" TextWrapping="Wrap"
                  Text="Lieu de l'évènement"
                                             
                  VerticalAlignment="Top" Width="380" 
@@ -73,14 +73,14 @@
                  Foreground="#FF4BAF50" Height="48" 
                  TextAlignment="Center"/>
         <TextBox x:Name="endText" HorizontalAlignment="Left"
-                 Margin="208,388,0,0" TextWrapping="Wrap"
+                 Margin="208,352,0,0" TextWrapping="Wrap"
                  Text="Date de fin" VerticalAlignment="Top"
                  Background="#FF4BAF50"
                  BorderThickness="0" Foreground="White"
                  Width="182" IsReadOnly="True"
                  TextAlignment="Center"/>
         <TextBox x:Name="beginText" HorizontalAlignment="Left"
-                 Margin="10,388,0,0" TextWrapping="Wrap"
+                 Margin="12,350,0,0" TextWrapping="Wrap"
                  Text="Date de début" VerticalAlignment="Top"
                  Background="#FF4BAF50"
                  BorderThickness="0" Foreground="White"
@@ -88,25 +88,28 @@
                  TextAlignment="Center"/>
         <DatePicker HorizontalAlignment="Left"
                     Name="endDate"
-                    Margin="208,417,0,0"
+                    Margin="208,385,0,0"
                     VerticalAlignment="Top" Width="182"
                     Foreground="#FF4BAF50"/>
         <DatePicker HorizontalAlignment="Left"
                     Name="beginDate"
-                    Margin="10,417,0,0"
+                    Margin="10,383,0,0"
                     VerticalAlignment="Top"
                     Foreground="#FF4BAF50" Width="181" DayFormat="{}{day.integer}"/>
         <Button x:ConnectionId='4' x:Name="createEventButton"
                 Content="Créer un évènement"
                 HorizontalAlignment="Left"
                                         
-                Margin="10,505,0,0" VerticalAlignment="Top"
+                Margin="12,531,0,0" VerticalAlignment="Top"
                 Width="380" Background="#FF4BAF50"
-                BorderThickness="0" Height="73"/>
-        <TimePicker Name="timeBegin" HorizontalAlignment="Left" Margin="10,461,0,0" VerticalAlignment="Top" Height="61" Foreground="#FF4BAF50" Width="181"/>
-        <TimePicker Name="timeEnd" HorizontalAlignment="Left" Margin="208,461,0,0" VerticalAlignment="Top" Height="61" Foreground="#FF4BAF50" Width="182"/>
+                BorderThickness="0" Height="61"/>
+        <TimePicker Name="timeBegin" HorizontalAlignment="Left" Margin="10,433,0,0" VerticalAlignment="Top" Height="61" Foreground="#FF4BAF50" Width="181"/>
+        <TimePicker Name="timeEnd" HorizontalAlignment="Left" Margin="208,435,0,0" VerticalAlignment="Top" Height="61" Foreground="#FF4BAF50" Width="182"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="75,10,0,0" TextWrapping="Wrap" Text="Création d'évènement" VerticalAlignment="Top" Height="34" Width="267" TextAlignment="Center" FontSize="24" FontWeight="Bold"/>
         <local:Menu HorizontalAlignment="Left" Margin="0,592,0,0" VerticalAlignment="Top" Width="400"/>
+        <TextBox x:Name="logoText" HorizontalAlignment="Left" Margin="15,494,0,0" TextWrapping="Wrap" Text="Logo" VerticalAlignment="Top" Width="175" Foreground="#FF4BAF50" BorderBrush="#FF4BAF50"/>
+        <Button x:ConnectionId='5'                         x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="210,484,0,0" VerticalAlignment="Top" Width="181" Background="#FF4BAF50" BorderThickness="0"/>
+
     </Grid>
 </Page>
 

@@ -64,7 +64,7 @@
                       Margin="170,554,0,0" 
                       VerticalAlignment="Top"
                       Background="Transparent" Name="Loading"/>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="105" Margin="19,65,0,0" VerticalAlignment="Top" Width="113" Stretch="Fill" Source="ms-appx:///Assets/2017_logo_caritathelp.png" RenderTransformOrigin="0.7,0.544"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="105" Margin="19,65,0,0" VerticalAlignment="Top" Width="113" Source="ms-appx:///Assets/2017_logo_caritathelp.png" RenderTransformOrigin="0.7,0.544" Stretch="Fill"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="131,101,0,0" TextWrapping="Wrap" Text="Caritathelp" VerticalAlignment="Top" Height="54" Width="212" TextAlignment="Center" FontWeight="Bold" FontSize="36"/>
     </Grid>
 </Page>

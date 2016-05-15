@@ -125,8 +125,8 @@
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Width" />
       <RootProperty Name="Source" />
-      <RootProperty Name="Stretch" />
       <RootProperty Name="RenderTransformOrigin" />
+      <RootProperty Name="Stretch" />
     </RootType>
     <RootType FullName="Caritathelp.All.Options" />
     <RootType FullName="Windows.UI.Xaml.Shapes.Rectangle">
@@ -139,6 +139,7 @@
       <RootProperty Name="Stroke" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Shapes.Ellipse">
+      <RootProperty Name="Name" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Fill" />
       <RootProperty Name="HorizontalAlignment" />
