@@ -142,8 +142,7 @@ namespace Caritathelp.Volunteer
                 }
                 else
                 {
-                    Debug.WriteLine("Ami : " + responseString);
-                    var friend = friends.response.FirstOrDefault(c => c.id.ToString().Equals(id));
+                    var friend = friends.response.FirstOrDefault(c => c.id.ToString().Equals((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString()));
                     if (friend != null)
                     {
                         removeButton.Visibility = Visibility.Visible;

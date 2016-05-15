@@ -62,13 +62,20 @@ namespace Caritathelp.All
         private AssociationListResponse associationList;
         private string responseString;
 
-        private async void searchAssociation()
+        private Grid eventsGrid;
+        private Grid assocGrid;
+        private Grid userGrid;
+        private Grid main;
+
+        private async Task searchAssociation()
         {
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://52.31.151.160:3000/associations{?token}");
+                string search = searchBox.Text;
+                var template = new UriTemplate("http://52.31.151.160:3000/associations/search{?research,token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
+                template.AddParameter("research", search);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
 
@@ -107,13 +114,15 @@ namespace Caritathelp.All
                 initResearchAssociation(0);
         }
 
-        private async void searchEvent()
+        private async Task searchEvent()
         {
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://52.31.151.160:3000/events{?token}");
+                string search = searchBox.Text;
+                var template = new UriTemplate("http://52.31.151.160:3000/events/search{?research,token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
+                template.AddParameter("research", search);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
 
@@ -154,52 +163,50 @@ namespace Caritathelp.All
 
         private void initResearchEvent(int nbRows)
         {
-            Grid grid = new Grid();
-            grid.Height = nbRows * 100;
+            eventsGrid = new Grid();
+            eventsGrid.Height = nbRows * 100;
             Debug.WriteLine(nbRows);
-            grid.Width = 375;
+            eventsGrid.Width = 375;
             for (int i = 0; i < nbRows; ++i)
-                grid.RowDefinitions.Add(new RowDefinition());
-            grid.ColumnDefinitions.Add(new ColumnDefinition());
+                eventsGrid.RowDefinitions.Add(new RowDefinition());
+            eventsGrid.ColumnDefinitions.Add(new ColumnDefinition());
             for (int x = 0; x < events.response.Count; ++x)
             {
                 Button btn = new Button();
                 btn.Height = 100;
-                btn.Width = grid.Width;
+                btn.Width = eventsGrid.Width;
                 btn.HorizontalAlignment = HorizontalAlignment.Stretch;
                 btn.Click += new RoutedEventHandler(EventButtonClick);
                 btn.Content = events.response[x].title;
                 btn.Background = new SolidColorBrush(Color.FromArgb(0xFF, 75, 175, 80));
                 Grid.SetColumn(btn, 1);
                 Grid.SetRow(btn, x);
-                grid.Children.Add(btn);
+                eventsGrid.Children.Add(btn);
             }
-            scroll.Content = grid;
         }
 
         private void initResearchAssociation(int nbRows)
         {
-            Grid grid = new Grid();
-            grid.Height = nbRows * 100;
+            assocGrid = new Grid();
+            assocGrid.Height = nbRows * 100;
             Debug.WriteLine(nbRows);
-            grid.Width = 375;
+            assocGrid.Width = 375;
             for (int i = 0; i < nbRows; ++i)
-                grid.RowDefinitions.Add(new RowDefinition());
-            grid.ColumnDefinitions.Add(new ColumnDefinition());
+                assocGrid.RowDefinitions.Add(new RowDefinition());
+            assocGrid.ColumnDefinitions.Add(new ColumnDefinition());
             for (int x = 0; x < associationList.response.Count; ++x)
             {
                 Button btn = new Button();
                 btn.Height = 100;
-                btn.Width = grid.Width;
+                btn.Width = assocGrid.Width;
                 btn.HorizontalAlignment = HorizontalAlignment.Stretch;
                 btn.Click += new RoutedEventHandler(AssociationButtonClick);
                 btn.Content = associationList.response[x].name;
                 btn.Background = new SolidColorBrush(Color.FromArgb(0xFF, 75, 175, 80));
                 Grid.SetColumn(btn, 1);
                 Grid.SetRow(btn, x);
-                grid.Children.Add(btn);
+                assocGrid.Children.Add(btn);
             }
-            scroll.Content = grid;
         }
 
         private void EventButtonClick(object sender, RoutedEventArgs e)
@@ -211,7 +218,7 @@ namespace Caritathelp.All
             // identify which button was clicked and perform necessary actions
         }
 
-        private async void searchUser()
+        private async Task searchUser()
         {
             var httpClient = new HttpClient(new HttpClientHandler());
             try
@@ -234,7 +241,6 @@ namespace Caritathelp.All
                 }
                 else
                 {
-                    resultatText.Text = "Résultat pour : " + searchBox.Text;
                 }
             }
             catch (HttpRequestException e)
@@ -278,26 +284,25 @@ namespace Caritathelp.All
 
         private void initResearchUser(int nbRows)
         {
-            Grid grid = new Grid();
-            grid.Height = nbRows * 100;
-            grid.Width = 375;
+            userGrid = new Grid();
+            userGrid.Height = nbRows * 100;
+            userGrid.Width = 375;
             for (int i = 0; i < nbRows; ++i)
-                grid.RowDefinitions.Add(new RowDefinition());
-            grid.ColumnDefinitions.Add(new ColumnDefinition());
+                userGrid.RowDefinitions.Add(new RowDefinition());
+            userGrid.ColumnDefinitions.Add(new ColumnDefinition());
             for (int x = 0; x < userList.response.Count; ++x)
             {
                 Button btn = new Button();
                 btn.Height = 100;
-                btn.Width = grid.Width;
+                btn.Width = userGrid.Width;
                 btn.HorizontalAlignment = HorizontalAlignment.Stretch;
                 btn.Click += new RoutedEventHandler(UserButtonClick);
                 btn.Content = userList.response[x].firstname + " " + userList.response[x].lastname;
                 btn.Background = new SolidColorBrush(Color.FromArgb(0xFF, 75, 175, 80));
                 Grid.SetColumn(btn, 1);
                 Grid.SetRow(btn, x);
-                grid.Children.Add(btn);
+                userGrid.Children.Add(btn);
             }
-            scroll.Content = grid;
         }
 
         private void searchTextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -306,14 +311,46 @@ namespace Caritathelp.All
             tb.Text = string.Empty;
         }
 
-        private void search_Click(object sender, RoutedEventArgs e)
+        private async void search_Click(object sender, RoutedEventArgs e)
         {
             if (comboBox.SelectedIndex == 1)
-                searchUser();
+            {
+                await searchUser();
+                scroll.Content = userGrid;
+            }
             else if (comboBox.SelectedIndex == 2)
-                searchAssociation();
+            {
+                await searchAssociation();
+                scroll.Content = assocGrid;
+            }
             else if (comboBox.SelectedIndex == 3)
-                searchEvent();
+            {
+                await searchEvent();
+                scroll.Content = eventsGrid;
+            }
+            else
+            {
+                await searchEvent();
+                await searchUser();
+                await searchAssociation();
+                main = new Grid();
+                main.Width = 375;
+                main.RowDefinitions.Add(new RowDefinition());
+                main.RowDefinitions.Add(new RowDefinition());
+                main.RowDefinitions.Add(new RowDefinition());
+                main.ColumnDefinitions.Add(new ColumnDefinition());
+                Grid.SetColumn(userGrid, 1);
+                Grid.SetRow(userGrid, 0);
+                main.Children.Add(userGrid);
+                Grid.SetColumn(assocGrid, 1);
+                Grid.SetRow(assocGrid, 1);
+                main.Children.Add(assocGrid);
+                Grid.SetColumn(eventsGrid, 1);
+                Grid.SetRow(eventsGrid, 2);
+                main.Children.Add(eventsGrid);
+                scroll.Content = main;
+            }
+            resultatText.Text = "Résultat pour : " + searchBox.Text;
         }
 
         public Research()
@@ -321,6 +358,5 @@ namespace Caritathelp.All
             this.InitializeComponent();
             resultatText.Text = "";
         }
-
     }
 }
