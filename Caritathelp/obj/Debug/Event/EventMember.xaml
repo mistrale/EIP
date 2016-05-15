@@ -1,0 +1,33 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Caritathelp.Event"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Caritathelp="using:Caritathelp"
+    x:Class="Caritathelp.Event.EventMember"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="White">
+        <ScrollViewer HorizontalAlignment="Left" Height="510"
+			Margin="10,61,0,0" VerticalAlignment="Top"
+			Width="380" x:Name="scroll">
+            <Border BorderBrush="#FF4BAF50" BorderThickness="2.5" Height="509" Width="374"/>
+        </ScrollViewer>
+        <Grid HorizontalAlignment="Left" Height="56" VerticalAlignment="Top" Width="400" Background="#FF4BAF50"/>
+        <Button x:ConnectionId='1' x:Name="Back" Content="Previous"
+			HorizontalAlignment="Left" VerticalAlignment="Top"
+			Width="53" Margin="-10,0,0,0" BorderThickness="0" 
+			RenderTransformOrigin="0.557,1.219"
+			                   />
+        <TextBox x:Name="textBox" HorizontalAlignment="Left"
+			Margin="64,2,0,0" TextWrapping="Wrap"
+			Text="Liste des membres" VerticalAlignment="Top"
+			Background="{x:Null}" Width="293"
+			Foreground="White" Height="57" FontSize="24"
+			FontWeight="Bold" IsReadOnly="True" TextAlignment="Center" BorderBrush="{x:Null}"/>
+        <Caritathelp:Menu HorizontalAlignment="Left" Margin="0,592,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Page>
+

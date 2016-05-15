@@ -1,0 +1,25 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Caritathelp.Volunteer"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Caritathelp="using:Caritathelp"
+    x:Class="Caritathelp.Volunteer.VolunteerAssociation"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="White">
+
+        <Caritathelp:Menu HorizontalAlignment="Left" Margin="1,591,0,0" VerticalAlignment="Top"/>
+        <Grid HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" Width="400" Background="#FF4BAF50"/>
+        <Button x:Name="button" Content="Previous" 
+                HorizontalAlignment="Left" Margin="6,-1,0,0"
+                VerticalAlignment="Top" BorderBrush="{x:Null}"
+                Click="goBack"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="74,15,0,0" TextWrapping="Wrap" Text="Associations" VerticalAlignment="Top" Height="27" Width="275" FontSize="22" FontWeight="Bold" TextAlignment="Center"/>
+        <ScrollViewer Name="scroll" HorizontalAlignment="Left" Height="447" Margin="8,134,0,0" VerticalAlignment="Top" Width="384"/>
+        <Button Click="createAssociationClick" x:Name="button1" Content="Créer une assocation" HorizontalAlignment="Left" Margin="6,59,0,0" VerticalAlignment="Top" Background="#FFFAFAFA" BorderThickness="2.5" Height="80" Width="388" BorderBrush="#FF4BAF50" Foreground="#FF4BAF50"/>
+
+    </Grid>
+</Page>

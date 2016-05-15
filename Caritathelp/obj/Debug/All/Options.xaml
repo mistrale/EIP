@@ -1,0 +1,57 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Caritathelp.All"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Caritathelp="using:Caritathelp"
+    x:Class="Caritathelp.All.Options"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="White">
+        <Grid x:Name="Menu" HorizontalAlignment="Left" Height="51"
+			VerticalAlignment="Top" Width="400" 
+			Background="#FF4BAF50" Margin="1.167,0.167,-2.833,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.250*"/>
+            </Grid.RowDefinitions>
+
+            <Button x:ConnectionId='3' x:Name="searchButton" Content=""
+				HorizontalAlignment="Stretch"
+				VerticalAlignment="Stretch"
+				Margin="295,-1,-4,-6.167"
+				BorderThickness="0"
+				RenderTransformOrigin="0.622,0.467"
+				                    >
+                <Button.Background>
+                    <ImageBrush ImageSource="ms-appx:/Assets/magnify.png" Stretch="Uniform"/>
+                </Button.Background>
+            </Button>
+
+        </Grid>
+        <Button x:Name="alertButtonNotity" Content=""
+			HorizontalAlignment="Left" Margin="208,0,0,0"
+			VerticalAlignment="Top"
+			RenderTransformOrigin="0.38,0.334" BorderThickness="0" Visibility="Collapsed">
+            <Button.Background>
+                <ImageBrush Stretch="Uniform" ImageSource="Assets/AlertButtonNotified.png"/>
+            </Button.Background>
+        </Button>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="59,11,0,0" TextWrapping="Wrap" Text="Paramètres" VerticalAlignment="Top" Height="24" Width="254" FontSize="22" FontWeight="Bold" TextAlignment="Center"/>
+        <Grid HorizontalAlignment="Left" Height="161" Margin="-1,51,0,0" VerticalAlignment="Top" Width="400">
+            <Image x:Name="image" HorizontalAlignment="Left" Height="74" Margin="9,83,0,0" VerticalAlignment="Top" Width="74" Source="ms-appx:///Assets/logo.png"/>
+            <Image x:Name="image_Copy" HorizontalAlignment="Left" Height="74" Margin="9,4,0,0" VerticalAlignment="Top" Width="74" Source="ms-appx:///Assets/logo.png"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="79" Margin="0,52,0,0" VerticalAlignment="Top" Width="400"/>
+        <Grid HorizontalAlignment="Left" Height="79" Margin="2,129,-2,0" VerticalAlignment="Top" Width="400"/>
+        <Border BorderBrush="#FF4BAF50" BorderThickness="1" HorizontalAlignment="Left" Height="82" Margin="-2,50,-1,0" VerticalAlignment="Top" Width="403"/>
+        <Border BorderBrush="#FF4BAF50" BorderThickness="1,0,1,1" HorizontalAlignment="Left" Height="79" Margin="-2,130,-1,0" VerticalAlignment="Top" Width="403"/>
+        <Button x:ConnectionId='1'                           x:Name="button" Content="Profil" HorizontalAlignment="Left" Margin="97,63,0,0" VerticalAlignment="Top" Width="288" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FF4BAF50"/>
+        <Button x:ConnectionId='2'                               x:Name="button_Copy" Content="Déconnection" HorizontalAlignment="Left" Margin="97,144,0,0" VerticalAlignment="Top" Width="288" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FF4BAF50"/>
+
+        <Caritathelp:Menu HorizontalAlignment="Left" Margin="-2,590,-1,0" VerticalAlignment="Top" Width="403"/>
+
+    </Grid>
+</Page>
+

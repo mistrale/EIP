@@ -1,0 +1,43 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Caritathelp.Event"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Caritathelp="using:Caritathelp"
+    x:Class="Caritathelp.Event.EventManagerMember"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="White">
+        <ScrollViewer x:Name="scroll"
+			HorizontalAlignment="Left"
+			Height="424" Margin="10,147,0,0"
+			VerticalAlignment="Top" Width="380">
+            <Border BorderBrush="#FF4BAF50" BorderThickness="2.5" Height="422" Width="381"/>
+        </ScrollViewer>
+        <Button x:ConnectionId='1' x:Name="addMember"
+			                  
+			Content="Inviter" HorizontalAlignment="Left" Margin="273,52,0,0" VerticalAlignment="Top" BorderBrush="#FF4BAF50" Foreground="#FFFAFAFA" Width="117" Height="58" Background="#FF4BAF50"/>
+
+        <TextBox x:ConnectionId='2' x:Name="searchUser" Margin="10,62,132,541"
+			                                 
+			TextWrapping="Wrap" Text="Utilisateur..." VerticalAlignment="Stretch" Foreground="#FF4BAF50" FontStyle="Italic" BorderBrush="#FF4BAF50"/>
+        <TextBlock x:Name="warningTextBox" HorizontalAlignment="Left" Margin="10,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="37" Width="380" Foreground="#FF4BAF50" FontSize="20" TextAlignment="Center"/>
+        <Border BorderBrush="#FF4BAF50" BorderThickness="2" HorizontalAlignment="Left" Height="37" Margin="10,105,0,0" VerticalAlignment="Top" Width="380"/>
+        <Grid HorizontalAlignment="Left" Height="57" VerticalAlignment="Top" Width="400" Background="#FF4BAF50"/>
+        <Button x:ConnectionId='3' x:Name="Back" Content="Previous"
+			HorizontalAlignment="Left" VerticalAlignment="Top"
+			Width="53" Margin="-10,0,0,0" BorderThickness="0" 
+			RenderTransformOrigin="0.557,1.219"
+			                   />
+        <TextBox x:Name="textBox" HorizontalAlignment="Left"
+			Margin="102,8,0,0" TextWrapping="Wrap"
+			Text="Gestion des membres" VerticalAlignment="Top"
+			Background="{x:Null}" Width="266"
+			Foreground="White" Height="57" FontSize="24"
+			FontWeight="Bold" IsReadOnly="True" TextAlignment="Center" BorderBrush="{x:Null}"/>
+        <Caritathelp:Menu HorizontalAlignment="Left" Margin="0,592,0,0" VerticalAlignment="Top" Width="400"/>
+    </Grid>
+</Page>
+
