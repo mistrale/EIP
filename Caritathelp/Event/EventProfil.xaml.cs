@@ -35,7 +35,7 @@ namespace Caritathelp
         {
             public int status { get; set; }
             public string message { get; set; }
-            public GlobalNotification response { get; set; }
+            public IList<GlobalNotification> response { get; set; }
         }
 
         class PictureRequest
@@ -80,7 +80,7 @@ namespace Caritathelp
                         new KeyValuePair<string, string>("event_id", id)
 
                     };
-                string url = ("http://52.31.151.160:3000/guests/join");
+                string url = ("http://api.caritathelp.me/guests/join");
                 HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
@@ -126,7 +126,7 @@ namespace Caritathelp
                         new KeyValuePair<string, string>("notif_id", notif_id),
                         new KeyValuePair<string, string>("acceptance", "true")
                     };
-                string url = ("http://52.31.151.160:3000/guests/reply_invite");
+                string url = ("http://api.caritathelp.me/guests/reply_invite");
                 HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
@@ -166,7 +166,7 @@ namespace Caritathelp
                         new KeyValuePair<string, string>("notif_id", notif_id),
                         new KeyValuePair<string, string>("acceptance", "false")
                     };
-                string url = ("http://52.31.151.160:3000/guests/reply_invite");
+                string url = ("http://api.caritathelp.me/guests/reply_invite");
                 HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
@@ -207,7 +207,7 @@ namespace Caritathelp
 
         private async void leaveEvent()
         {
-            string url = "http://52.31.151.160:3000/guests/leave?token=" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"].ToString()
+            string url = "http://api.caritathelp.me/guests/leave?token=" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"].ToString()
                 + "&event_id=" + id;
             Debug.WriteLine(url);
             var httpClient = new HttpClient(new HttpClientHandler());
@@ -268,7 +268,7 @@ namespace Caritathelp
             try
             {
                 string myId = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
-                var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + myId + "/notifications" + "{?token}");
+                var template = new UriTemplate("http://api.caritathelp.me/volunteers/" + myId + "/notifications" + "{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
@@ -286,10 +286,11 @@ namespace Caritathelp
                 {
 
                     Debug.WriteLine(responseString);
-                    for (int x = 0; x < notifications.response.event_invite.Count; x++)
+                    for (int x = 0; x < notifications.response.Count; x++)
                     {
-                        if (id.Equals(notifications.response.event_invite[x].id.ToString(), StringComparison.Ordinal))
-                            notif_id = notifications.response.event_invite[x].notif_id.ToString();
+                        if (notifications.response[x].notif_type.Equals("InviteGuest", StringComparison.Ordinal)
+                             && id.Equals(notifications.response[x].event_id, StringComparison.Ordinal))
+                            notif_id = notifications.response[x].id;
                     }
                 }
             }
@@ -312,7 +313,7 @@ namespace Caritathelp
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://52.31.151.160:3000/events/" + id + "/main_picture{?token}");
+                var template = new UriTemplate("http://api.caritathelp.me/events/" + id + "/main_picture{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
@@ -357,7 +358,7 @@ namespace Caritathelp
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://52.31.151.160:3000/events/" + id + "{?token}");
+                var template = new UriTemplate("http://api.caritathelp.me/events/" + id + "{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);

@@ -53,7 +53,7 @@ namespace Caritathelp
 
         private async void connect()
         {
-            string url = "http://52.31.151.160:3000/login/";
+            string url = "http://api.caritathelp.me/login/";
             var values = new List<KeyValuePair<string, string>>
                     {
 

@@ -87,7 +87,7 @@ namespace Caritathelp.Event
                 Frame.Navigate(typeof(EventProfil), event_id);
                 return;
             }
-            string url = "http://52.31.151.160:3000/pictures/";
+            string url = "http://api.caritathelp.me/pictures/";
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("file", Base64String),
@@ -134,7 +134,7 @@ namespace Caritathelp.Event
             string date = data[2] + '-' + data[0] + '-' + data[1] + 'T' + timeBegin.Time.ToString() + 'Z';
             String[] data1 = endDate.Date.ToString().Split(' ')[0].Split('/');
             string date1 = data1[2] + '-' + data1[0] + '-' + data1[1] + 'T' + timeEnd.Time.ToString() + 'Z';
-            string url = "http://52.31.151.160:3000/events/" + id;
+            string url = "http://api.caritathelp.me/events/" + id;
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("title", eventTitleText.Text),
@@ -193,7 +193,7 @@ namespace Caritathelp.Event
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://52.31.151.160:3000/events/" + id + "{?token}");
+                var template = new UriTemplate("http://api.caritathelp.me/events/" + id + "{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
@@ -327,7 +327,7 @@ namespace Caritathelp.Event
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://52.31.151.160:3000/events/" + id + "/main_picture{?token}");
+                var template = new UriTemplate("http://api.caritathelp.me/events/" + id + "/main_picture{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);

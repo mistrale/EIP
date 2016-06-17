@@ -73,7 +73,7 @@ namespace Caritathelp.All
             try
             {
                 string search = searchBox.Text;
-                var template = new UriTemplate("http://52.31.151.160:3000/associations/search{?research,token}");
+                var template = new UriTemplate("http://api.caritathelp.me/associations/search{?research,token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 template.AddParameter("research", search);
                 var uri = template.Resolve();
@@ -90,6 +90,10 @@ namespace Caritathelp.All
                 }
                 else
                 {
+                    if (associationList != null)
+                        initResearchAssociation(associationList.response.Count);
+                    else
+                        initResearchAssociation(0);
                     resultatText.Text = "Résultat pour : ";
                 }
             }
@@ -108,10 +112,6 @@ namespace Caritathelp.All
                 Debug.WriteLine("Failed to read json");
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
-            if (associationList != null)
-                initResearchAssociation(associationList.response.Count);
-            else
-                initResearchAssociation(0);
         }
 
         private async Task searchEvent()
@@ -120,7 +120,7 @@ namespace Caritathelp.All
             try
             {
                 string search = searchBox.Text;
-                var template = new UriTemplate("http://52.31.151.160:3000/events/search{?research,token}");
+                var template = new UriTemplate("http://api.caritathelp.me/events/search{?research,token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 template.AddParameter("research", search);
                 var uri = template.Resolve();
@@ -137,6 +137,10 @@ namespace Caritathelp.All
                 }
                 else
                 {
+                    if (events != null)
+                        initResearchEvent(events.response.Count);
+                    else
+                        initResearchEvent(0);
                     resultatText.Text = "Résultat pour : ";
                 }
             }
@@ -155,10 +159,6 @@ namespace Caritathelp.All
                 Debug.WriteLine("Failed to read json");
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
-            if (events != null)
-                initResearchEvent(events.response.Count);
-            else
-                initResearchEvent(0);
         }
 
         private void initResearchEvent(int nbRows)
@@ -224,7 +224,7 @@ namespace Caritathelp.All
             try
             {
                 string search = searchBox.Text;
-                var template = new UriTemplate("http://52.31.151.160:3000/volunteers/search{?research,token}");
+                var template = new UriTemplate("http://api.caritathelp.me/volunteers/search{?research,token}");
                 template.AddParameter("research", search);
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
@@ -241,6 +241,10 @@ namespace Caritathelp.All
                 }
                 else
                 {
+                    if (userList != null)
+                        initResearchUser(userList.response.Count);
+                    else
+                        initResearchUser(0);
                 }
             }
             catch (HttpRequestException e)
@@ -258,10 +262,6 @@ namespace Caritathelp.All
                 Debug.WriteLine("Failed to read json");
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
-            if (userList != null)
-                initResearchUser(userList.response.Count);
-            else
-                initResearchUser(0);
         }
 
         private void UserButtonClick(object sender, RoutedEventArgs e)

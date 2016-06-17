@@ -112,7 +112,7 @@ namespace Caritathelp
                 return;
             }
             Debug.WriteLine("TATA" + Base64String);
-            string url = "http://52.31.151.160:3000/pictures/";
+            string url = "http://api.caritathelp.me/pictures/";
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("file", Base64String),
@@ -158,7 +158,7 @@ namespace Caritathelp
             string date = data[2] + '-' + data[0] + '-' + data[1] + 'T' + timeBegin.Time.ToString() + 'Z';
             String[] data1 = endDate.Date.ToString().Split(' ')[0].Split('/');
             string date1 = data1[2] + '-' + data1[0] + '-' + data1[1] + 'T' + timeEnd.Time.ToString() + 'Z';
-            string url = "http://52.31.151.160:3000/events/";
+            string url = "http://api.caritathelp.me/events/";
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("assoc_id", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["currentAssociation"]),

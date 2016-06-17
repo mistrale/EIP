@@ -71,7 +71,7 @@ namespace Caritathelp
                 Frame.Navigate(typeof(AssociationProfil), assoc_id);
                 return;
             }
-            string url = "http://52.31.151.160:3000/pictures/";
+            string url = "http://api.caritathelp.me/pictures/";
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("file", Base64String),
@@ -118,7 +118,7 @@ namespace Caritathelp
 
         private async void updateAssociation()
         {
-            string url = "http://52.31.151.160:3000/associations/" + id;
+            string url = "http://api.caritathelp.me/associations/" + id;
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("name", title.Text),
@@ -212,7 +212,7 @@ namespace Caritathelp
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://52.31.151.160:3000/associations/" + id + "/main_picture{?token}");
+                var template = new UriTemplate("http://api.caritathelp.me/associations/" + id + "/main_picture{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
@@ -257,7 +257,7 @@ namespace Caritathelp
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://52.31.151.160:3000/associations/" + id + "{?token}");
+                var template = new UriTemplate("http://api.caritathelp.me/associations/" + id + "{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);

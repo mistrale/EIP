@@ -128,7 +128,6 @@
     <Compile Include="Event\EventProfil.xaml.cs">
       <DependentUpon>EventProfil.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Event\NotifEvent.cs" />
     <Compile Include="All\FinalInscription.xaml.cs">
       <DependentUpon>FinalInscription.xaml</DependentUpon>
     </Compile>
@@ -149,7 +148,6 @@
     <Compile Include="AssociationPage\MemberAssociation.xaml.cs">
       <DependentUpon>MemberAssociation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AssociationPage\NoficiationAssoc.cs" />
     <Compile Include="Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>

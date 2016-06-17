@@ -33,7 +33,7 @@ namespace Caritathelp.All
         {
             public string status { get; set; }
             public string message { get; set; }
-            public GlobalNotification response { get; set; }
+            public IList<GlobalNotification> response { get; set; }
         }
 
         private string responseString;
@@ -46,49 +46,75 @@ namespace Caritathelp.All
             for (int i = 0; i < nbRows; ++i)
                 grid.RowDefinitions.Add(new RowDefinition());
             grid.ColumnDefinitions.Add(new ColumnDefinition());
-            for (int x = 0; x < notifications.response.add_friend.Count; ++x)
+            for (int x = 0; x < notifications.response.Count; x++)
             {
                 Button btn = new Button();
                 btn.Height = 100;
                 btn.Width = grid.Width;
-                btn.Content = new TextBlock
+                if (notifications.response[x].notif_type.Equals("JoinAssoc", StringComparison.Ordinal))
                 {
-                    Text = notifications.response.add_friend[x].firstname + " " + notifications.response.add_friend[x].lastname + " vous a envoyé une demande d'ajout.",
-                    TextWrapping = TextWrapping.Wrap
-                };
-                btn.Click += new RoutedEventHandler(UserButtonClick);
-                btn.Background = new SolidColorBrush(Color.FromArgb(0xFF, 75, 175, 80));
-                Grid.SetColumn(btn, 1);
-                Grid.SetRow(btn, x);
-                grid.Children.Add(btn);
-            }
-            for (int x = 0; x < notifications.response.assoc_invite.Count; ++x)
-            {
-                Button btn = new Button();
-                btn.Height = 100;
-                btn.Width = grid.Width;
-                btn.Content = new TextBlock
+                    btn.Content = new TextBlock
+                    {
+                        Text = "L'utilisateur " + notifications.response[x].sender_id + " a demandé a rejoindre l'association " + notifications.response[x].assoc_id,
+                        TextWrapping = TextWrapping.Wrap
+                    };
+                    btn.Click += new RoutedEventHandler(AssociationButtonClick);
+                }
+                if (notifications.response[x].notif_type.Equals("JoinEvent", StringComparison.Ordinal))
                 {
-                    Text = "L'association \"" + notifications.response.assoc_invite[x].name + "\" vous a envoyé une demande d'ajout.",
-                    TextWrapping = TextWrapping.Wrap
-                };
-                btn.Click += new RoutedEventHandler(AssociationButtonClick);
-                btn.Background = new SolidColorBrush(Color.FromArgb(0xFF, 75, 175, 80));
-                Grid.SetColumn(btn, 1);
-                Grid.SetRow(btn, x);
-                grid.Children.Add(btn);
-            }
-            for (int x = 0; x < notifications.response.event_invite.Count; ++x)
-            {
-                Button btn = new Button();
-                btn.Height = 100;
-                btn.Width = grid.Width;
-                btn.Content = new TextBlock
+                    btn.Content = new TextBlock
+                    {
+                        Text = "L'utilisateur " + notifications.response[x].sender_id + " a demandé a rejoindre l'évènement " + notifications.response[x].event_id,
+                        TextWrapping = TextWrapping.Wrap
+                    };
+                    btn.Click += new RoutedEventHandler(EventButtonClick);
+                }
+                if (notifications.response[x].notif_type.Equals("InviteMember", StringComparison.Ordinal))
                 {
-                    Text = "Vous avez été invité à participer à l'évènement \"" + notifications.response.event_invite[x].title + "\".",
-                    TextWrapping = TextWrapping.Wrap
-                };
-                btn.Click += new RoutedEventHandler(EventButtonClick);
+                    btn.Content = new TextBlock
+                    {
+                        Text = "Vous avez été invité à rejoindre " + notifications.response[x].assoc_id,
+                        TextWrapping = TextWrapping.Wrap
+                    };
+                    btn.Click += new RoutedEventHandler(AssociationButtonClick);
+                }
+                if (notifications.response[x].notif_type.Equals("InviteGuest", StringComparison.Ordinal))
+                {
+                    btn.Content = new TextBlock
+                    {
+                        Text = "Vous avez été invité à participer à l'évènement " + notifications.response[x].event_id,
+                        TextWrapping = TextWrapping.Wrap
+                    };
+                    btn.Click += new RoutedEventHandler(EventButtonClick);
+                }
+                if (notifications.response[x].notif_type.Equals("NewGuest", StringComparison.Ordinal))
+                {
+                    btn.Content = new TextBlock
+                    {
+                        Text = "L'utilisateur " + notifications.response[x].sender_id + " participe à l'évènement " + notifications.response[x].event_id,
+                        TextWrapping = TextWrapping.Wrap
+                    };
+                    btn.Click += new RoutedEventHandler(EventButtonClick);
+                }
+                if (notifications.response[x].notif_type.Equals("NewMember", StringComparison.Ordinal))
+                {
+                    btn.Content = new TextBlock
+                    {
+                        Text = "L'utilisateur " + notifications.response[x].sender_id + " a rejoint l'association " + notifications.response[x].assoc_id,
+                        TextWrapping = TextWrapping.Wrap
+                    };
+                    btn.Click += new RoutedEventHandler(AssociationButtonClick);
+                }
+                if (notifications.response[x].notif_type.Equals("AddFriend", StringComparison.Ordinal))
+                {
+                    btn.Content = new TextBlock
+                    {
+                        Text = "L'utilisateur " + notifications.response[x].sender_id + " vous a envoyé une demande d'ajout",
+                        TextWrapping = TextWrapping.Wrap
+                    };
+                    btn.Click += new RoutedEventHandler(UserButtonClick);
+                }
+
                 btn.Background = new SolidColorBrush(Color.FromArgb(0xFF, 75, 175, 80));
                 Grid.SetColumn(btn, 1);
                 Grid.SetRow(btn, x);
@@ -100,7 +126,7 @@ namespace Caritathelp.All
         {
             Button button = sender as Button;
             int x = Grid.GetRow(button);
-            string id = notifications.response.event_invite[x].id.ToString();
+            string id = notifications.response[x].event_id;
             Frame.Navigate(typeof(EventProfil), id);
             // identify which button was clicked and perform necessary actions
         }
@@ -109,7 +135,7 @@ namespace Caritathelp.All
         {
             Button button = sender as Button;
             int x = Grid.GetRow(button);
-            string id = notifications.response.add_friend[x].id.ToString();
+            string id = notifications.response[x].sender_id;
             Frame.Navigate(typeof(Volunteer.VolunteerProfil), id);
             // identify which button was clicked and perform necessary actions
         }
@@ -118,7 +144,7 @@ namespace Caritathelp.All
         {
             Button button = sender as Button;
             int x = Grid.GetRow(button);
-            string id = notifications.response.assoc_invite[x].id.ToString();
+            string id = notifications.response[x].assoc_id;
             Frame.Navigate(typeof(AssociationProfil), id);
             // identify which button was clicked and perform necessary actions
         }
@@ -130,7 +156,7 @@ namespace Caritathelp.All
             try
             {
                 string id = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
-                var template = new UriTemplate("http://52.31.151.160:3000/volunteers/" + id + "/notifications" + "{?token}");
+                var template = new UriTemplate("http://api.caritathelp.me/volunteers/" + id + "/notifications" + "{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
@@ -147,8 +173,7 @@ namespace Caritathelp.All
                 else
                 {
                     Debug.WriteLine(responseString);
-                    initNotifications(notifications.response.add_friend.Count + notifications.response.assoc_invite.Count
-                        + notifications.response.event_invite.Count);
+                    initNotifications(notifications.response.Count);
                 }
                 Debug.WriteLine(notifications);
             }

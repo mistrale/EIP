@@ -37,7 +37,7 @@ namespace Caritathelp.Event
         {
             public int status { get; set; }
             public string message { get; set; }
-            public NotificationEventRequest response { get; set; }
+            public IList<GlobalNotification> response { get; set; }
         }
 
         class SimpleRequest
@@ -51,7 +51,7 @@ namespace Caritathelp.Event
         {
             Button button = sender as Button;
             int x = Convert.ToInt32(button.Tag.ToString());
-            string id = eventNotif.response.guest_request[x].id.ToString();
+            string id = eventNotif.response[x].sender_id;
             Frame.Navigate(typeof(Volunteer.VolunteerProfil), id);
             // identify which button was clicked and perform necessary actions
         }
@@ -61,7 +61,7 @@ namespace Caritathelp.Event
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://52.31.151.160:3000/events/" + events.id.ToString() + "/notifications{?token}");
+                var template = new UriTemplate("http://api.caritathelp.me/volunteers/" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString() + "/notifications{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
@@ -78,75 +78,78 @@ namespace Caritathelp.Event
                     mainGrid = new Grid();
                     mainGrid.VerticalAlignment = VerticalAlignment.Top;
                     mainGrid.ColumnDefinitions.Add(new ColumnDefinition());
-                    for (int i = 0; i < eventNotif.response.guest_request.Count; i++)
+                    for (int i = 0; i < eventNotif.response.Count; i++)
                     {
-                        mainGrid.RowDefinitions.Add(new RowDefinition());
-                        Grid grid = new Grid();
-                        grid.Height = 130;
-                        grid.Background = new SolidColorBrush(Color.FromArgb(0xFF, 75, 175, 80));
-                        grid.Margin = new Thickness(0, 10, 0, 10);
+                        if (eventNotif.response[i].notif_type.Equals("JoinEvent", StringComparison.Ordinal))
+                        {
+                            mainGrid.RowDefinitions.Add(new RowDefinition());
+                            Grid grid = new Grid();
+                            grid.Height = 130;
+                            grid.Background = new SolidColorBrush(Color.FromArgb(0xFF, 75, 175, 80));
+                            grid.Margin = new Thickness(0, 10, 0, 10);
 
-                        // name
-                        var row = new RowDefinition();
-                        row.Height = new GridLength(60);
-                        grid.RowDefinitions.Add(row);
+                            // name
+                            var row = new RowDefinition();
+                            row.Height = new GridLength(60);
+                            grid.RowDefinitions.Add(row);
 
-                        // accept/refuse
-                        var row2 = new RowDefinition();
-                        row2.Height = new GridLength(60);
-                        grid.RowDefinitions.Add(row2);
+                            // accept/refuse
+                            var row2 = new RowDefinition();
+                            row2.Height = new GridLength(60);
+                            grid.RowDefinitions.Add(row2);
 
-                        // accept
-                        var colum = new ColumnDefinition();
-                        grid.ColumnDefinitions.Add(colum);
+                            // accept
+                            var colum = new ColumnDefinition();
+                            grid.ColumnDefinitions.Add(colum);
 
-                        // refuse
-                        var column2 = new ColumnDefinition();
-                        grid.ColumnDefinitions.Add(column2);
+                            // refuse
+                            var column2 = new ColumnDefinition();
+                            grid.ColumnDefinitions.Add(column2);
 
-                        Button title = new Button();
-                        title.Content = eventNotif.response.guest_request[i].firstname + " " + eventNotif.response.guest_request[i].lastname;
-                        title.HorizontalAlignment = HorizontalAlignment.Center;
-                        title.Click += new RoutedEventHandler(UserButtonClick);
-                        title.BorderThickness = new Thickness(2.5);
-                        title.Tag = i;
-                        title.Width = 350;
-                        title.Height = 60;
+                            Button title = new Button();
+                            title.Content = eventNotif.response[i].sender_id;
+                            title.HorizontalAlignment = HorizontalAlignment.Center;
+                            title.Click += new RoutedEventHandler(UserButtonClick);
+                            title.BorderThickness = new Thickness(2.5);
+                            title.Tag = i;
+                            title.Width = 350;
+                            title.Height = 60;
 
-                        Button btnYes = new Button();
-                        btnYes.Tag = i;
-                        btnYes.Click += new RoutedEventHandler(addUserToEvent);
-                        btnYes.Content = "Ajouter";
-                        btnYes.Width = 160;
-                        btnYes.HorizontalAlignment = HorizontalAlignment.Center;
-                        btnYes.Height = 50;
-                        btnYes.BorderThickness = new Thickness(2.5);
+                            Button btnYes = new Button();
+                            btnYes.Tag = i;
+                            btnYes.Click += new RoutedEventHandler(addUserToEvent);
+                            btnYes.Content = "Ajouter";
+                            btnYes.Width = 160;
+                            btnYes.HorizontalAlignment = HorizontalAlignment.Center;
+                            btnYes.Height = 50;
+                            btnYes.BorderThickness = new Thickness(2.5);
 
-                        Button btnNo = new Button();
-                        btnNo.Tag = i;
-                        btnNo.Click += new RoutedEventHandler(refuseUserToEvent);
-                        btnNo.Content = "Refuser";
-                        btnNo.Width = 160;
-                        btnNo.HorizontalAlignment = HorizontalAlignment.Center;
-                        btnNo.Height = 50;
-                        btnNo.BorderThickness = new Thickness(2.5);
+                            Button btnNo = new Button();
+                            btnNo.Tag = i;
+                            btnNo.Click += new RoutedEventHandler(refuseUserToEvent);
+                            btnNo.Content = "Refuser";
+                            btnNo.Width = 160;
+                            btnNo.HorizontalAlignment = HorizontalAlignment.Center;
+                            btnNo.Height = 50;
+                            btnNo.BorderThickness = new Thickness(2.5);
 
-                        Grid.SetColumn(title, 0);
-                        Grid.SetColumnSpan(title, 2);
-                        Grid.SetRow(title, 0);
-                        grid.Children.Add(title);
+                            Grid.SetColumn(title, 0);
+                            Grid.SetColumnSpan(title, 2);
+                            Grid.SetRow(title, 0);
+                            grid.Children.Add(title);
 
-                        Grid.SetColumn(btnYes, 0);
-                        Grid.SetRow(btnYes, 1);
-                        grid.Children.Add(btnYes);
+                            Grid.SetColumn(btnYes, 0);
+                            Grid.SetRow(btnYes, 1);
+                            grid.Children.Add(btnYes);
 
-                        Grid.SetColumn(btnNo, 1);
-                        Grid.SetRow(btnNo, 1);
-                        grid.Children.Add(btnNo);
+                            Grid.SetColumn(btnNo, 1);
+                            Grid.SetRow(btnNo, 1);
+                            grid.Children.Add(btnNo);
 
-                        mainGrid.Children.Add(grid);
-                        Grid.SetColumn(grid, 0);
-                        Grid.SetRow(grid, i);
+                            mainGrid.Children.Add(grid);
+                            Grid.SetColumn(grid, 0);
+                            Grid.SetRow(grid, i);
+                        }
                     }
                     scrollView.Content = mainGrid;
                 }
@@ -173,7 +176,7 @@ namespace Caritathelp.Event
 
             int i = Convert.ToInt32(button.Tag.ToString());
             Debug.WriteLine(i);
-            string id_notif = eventNotif.response.guest_request[i].notif_id.ToString();
+            string id_notif = eventNotif.response[i].id;
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
@@ -183,7 +186,7 @@ namespace Caritathelp.Event
                         new KeyValuePair<string, string>("notif_id", id_notif),
                         new KeyValuePair<string, string>("acceptance", "true")
                     };
-                string url = ("http://52.31.151.160:3000/guests/reply_guest");
+                string url = ("http://api.caritathelp.me/guests/reply_guest");
                 HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
@@ -220,7 +223,7 @@ namespace Caritathelp.Event
 
             int i = Convert.ToInt32(button.Tag.ToString());
             Debug.WriteLine(i);
-            string id_notif = eventNotif.response.guest_request[i].notif_id.ToString();
+            string id_notif = eventNotif.response[i].id;
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
@@ -230,7 +233,7 @@ namespace Caritathelp.Event
                         new KeyValuePair<string, string>("notif_id", id_notif),
                         new KeyValuePair<string, string>("acceptance", "false")
                     };
-                string url = ("http://52.31.151.160:3000/guests/reply_guest");
+                string url = ("http://api.caritathelp.me/guests/reply_guest");
                 HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
