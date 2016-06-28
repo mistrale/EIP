@@ -55,7 +55,7 @@ namespace Caritathelp.All
                 {
                     btn.Content = new TextBlock
                     {
-                        Text = "L'utilisateur " + notifications.response[x].sender_id + " a demandé a rejoindre l'association " + notifications.response[x].assoc_id,
+                        Text = "L'utilisateur " + notifications.response[x].sender_name + " a demandé a rejoindre l'association " + notifications.response[x].assoc_name,
                         TextWrapping = TextWrapping.Wrap
                     };
                     btn.Click += new RoutedEventHandler(AssociationButtonClick);
@@ -64,7 +64,7 @@ namespace Caritathelp.All
                 {
                     btn.Content = new TextBlock
                     {
-                        Text = "L'utilisateur " + notifications.response[x].sender_id + " a demandé a rejoindre l'évènement " + notifications.response[x].event_id,
+                        Text = "L'utilisateur " + notifications.response[x].sender_name + " a demandé a rejoindre l'évènement " + notifications.response[x].event_name,
                         TextWrapping = TextWrapping.Wrap
                     };
                     btn.Click += new RoutedEventHandler(EventButtonClick);
@@ -73,7 +73,7 @@ namespace Caritathelp.All
                 {
                     btn.Content = new TextBlock
                     {
-                        Text = "Vous avez été invité à rejoindre " + notifications.response[x].assoc_id,
+                        Text = "Vous avez été invité à rejoindre " + notifications.response[x].assoc_name,
                         TextWrapping = TextWrapping.Wrap
                     };
                     btn.Click += new RoutedEventHandler(AssociationButtonClick);
@@ -82,7 +82,7 @@ namespace Caritathelp.All
                 {
                     btn.Content = new TextBlock
                     {
-                        Text = "Vous avez été invité à participer à l'évènement " + notifications.response[x].event_id,
+                        Text = "Vous avez été invité à participer à l'évènement " + notifications.response[x].event_name,
                         TextWrapping = TextWrapping.Wrap
                     };
                     btn.Click += new RoutedEventHandler(EventButtonClick);
@@ -91,7 +91,7 @@ namespace Caritathelp.All
                 {
                     btn.Content = new TextBlock
                     {
-                        Text = "L'utilisateur " + notifications.response[x].sender_id + " participe à l'évènement " + notifications.response[x].event_id,
+                        Text = "L'utilisateur " + notifications.response[x].sender_name + " participe à l'évènement " + notifications.response[x].event_name,
                         TextWrapping = TextWrapping.Wrap
                     };
                     btn.Click += new RoutedEventHandler(EventButtonClick);
@@ -100,7 +100,7 @@ namespace Caritathelp.All
                 {
                     btn.Content = new TextBlock
                     {
-                        Text = "L'utilisateur " + notifications.response[x].sender_id + " a rejoint l'association " + notifications.response[x].assoc_id,
+                        Text = "L'utilisateur " + notifications.response[x].sender_name + " a rejoint l'association " + notifications.response[x].assoc_name,
                         TextWrapping = TextWrapping.Wrap
                     };
                     btn.Click += new RoutedEventHandler(AssociationButtonClick);
@@ -109,7 +109,7 @@ namespace Caritathelp.All
                 {
                     btn.Content = new TextBlock
                     {
-                        Text = "L'utilisateur " + notifications.response[x].sender_id + " vous a envoyé une demande d'ajout",
+                        Text = "L'utilisateur " + notifications.response[x].sender_name + " vous a envoyé une demande d'ajout",
                         TextWrapping = TextWrapping.Wrap
                     };
                     btn.Click += new RoutedEventHandler(UserButtonClick);

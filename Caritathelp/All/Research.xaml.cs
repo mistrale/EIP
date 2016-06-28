@@ -315,21 +315,27 @@ namespace Caritathelp.All
         {
             if (comboBox.SelectedIndex == 1)
             {
+                userGrid = new Grid();
                 await searchUser();
                 scroll.Content = userGrid;
             }
             else if (comboBox.SelectedIndex == 2)
             {
+                assocGrid = new Grid();
                 await searchAssociation();
                 scroll.Content = assocGrid;
             }
             else if (comboBox.SelectedIndex == 3)
             {
+                eventsGrid = new Grid();
                 await searchEvent();
                 scroll.Content = eventsGrid;
             }
             else
             {
+                userGrid = new Grid();
+                assocGrid = new Grid();
+                eventsGrid = new Grid();
                 await searchEvent();
                 await searchUser();
                 await searchAssociation();

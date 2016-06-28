@@ -118,7 +118,7 @@ namespace Caritathelp
                             grid.ColumnDefinitions.Add(column2);
 
                             Button title = new Button();
-                            title.Content = assocNotif.response[i].sender_id;
+                            title.Content = assocNotif.response[i].sender_name;
                             title.HorizontalAlignment = HorizontalAlignment.Center;
                             title.Click += new RoutedEventHandler(UserButtonClick);
                             title.BorderThickness = new Thickness(2.5);

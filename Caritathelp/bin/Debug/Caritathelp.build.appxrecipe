@@ -54,6 +54,9 @@
     <AppxPackagedFile Include="C:\Users\Aude\Documents\EIP\Caritathelp\Assets\alertAssociation.png">
       <PackagePath>Assets\alertAssociation.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Aude\Documents\EIP\Caritathelp\Assets\alertON.png">
+      <PackagePath>Assets\alertON.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Aude\Documents\EIP\Caritathelp\Assets\assoc.png">
       <PackagePath>Assets\assoc.png</PackagePath>
     </AppxPackagedFile>

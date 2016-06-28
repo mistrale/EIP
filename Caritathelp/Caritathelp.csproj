@@ -189,6 +189,7 @@
     <Content Include="Assets\addAssociation.png" />
     <Content Include="Assets\alert.png" />
     <Content Include="Assets\alertAssociation.png" />
+    <Content Include="Assets\alertON.png" />
     <Content Include="Assets\assoc.png" />
     <Content Include="Assets\avatar.png" />
     <Content Include="Assets\Background.png" />
