@@ -9,6 +9,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Tavis.UriTemplates;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -72,6 +73,7 @@ namespace Caritathelp.Volunteer
         private SimpleResponse simpleResponse;
         private NotificationResponse notifs;
         private string responseString;
+        Grid newsGrid;
 
         public VolunteerProfil()
         {
@@ -450,6 +452,102 @@ namespace Caritathelp.Volunteer
             }
         }
 
+        private void initNews()
+        {
+            newsGrid = new Grid();
+            newsGrid.VerticalAlignment = VerticalAlignment.Top;
+            newsGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            for (int i = 0; i < 10; i++)
+            {
+                newsGrid.RowDefinitions.Add(new RowDefinition());
+
+                // main new's grid
+                Grid grid = new Grid();
+                grid.Margin = new Thickness(0, 10, 0, 10);
+                grid.Background = new SolidColorBrush(Color.FromArgb(100, 75, 175, 80));
+
+                // grid new's info
+
+                // row username
+                var row = new RowDefinition();
+                row.Height = new GridLength(30);
+                grid.RowDefinitions.Add(row);
+
+                // row time published
+                var row2 = new RowDefinition();
+                row2.Height = new GridLength(30);
+                grid.RowDefinitions.Add(row2);
+
+                // row content
+                var rowContent = new RowDefinition();
+                grid.RowDefinitions.Add(rowContent);
+
+                // row share / comment
+                var row4 = new RowDefinition();
+                grid.RowDefinitions.Add(row4);
+
+                //column image user / share
+                var colum = new ColumnDefinition();
+                colum.Width = new GridLength(60);
+                grid.ColumnDefinitions.Add(colum);
+
+                //column comment
+                var colum2 = new ColumnDefinition();
+                grid.ColumnDefinitions.Add(colum2);
+
+                // image profil
+                Image btn = new Image();
+                btn.Source = new BitmapImage(new Uri("ms-appx:/Assets/avatar.png"));
+                Grid.SetColumn(btn, 0);
+                Grid.SetRow(btn, 0);
+                Grid.SetRowSpan(btn, 2);
+                grid.Children.Add(btn);
+
+                // username
+                // CHANGE BY HYPERLINK
+                TextBlock poster = new TextBlock();
+                poster.Text = "Aude Sikorav";
+                poster.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
+                poster.Margin = new Thickness(10, 5, 10, 5);
+                poster.FontSize = 14;
+                Grid.SetColumn(poster, 1);
+                Grid.SetRow(poster, 0);
+                grid.Children.Add(poster);
+
+                // time published
+                TextBlock date = new TextBlock();
+                date.Text = "7h25";
+                date.Margin = new Thickness(10, 0, 10, 0);
+                date.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
+                Grid.SetColumn(date, 1);
+                Grid.SetRow(date, 1);
+                grid.Children.Add(date);
+
+                // content
+                TextBlock content = new TextBlock();
+                content.Margin = new Thickness(10, 10, 10, 10);
+                content.FontSize = 12;
+                content.TextWrapping = TextWrapping.Wrap;
+                content.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
+                content.Text = "Bonjour a tous, voici une publication test pour voir combien en longeur elle va occupée et voir si Windows phone qui pue la merde gere tout seul la mise en place";
+                Grid.SetColumn(content, 0);
+                Grid.SetColumnSpan(content, 2);
+                Grid.SetRow(content, 2);
+                grid.Children.Add(content);
+
+                newsGrid.Children.Add(grid);
+                Grid.SetColumn(grid, 0);
+                Grid.SetRow(grid, i);
+            }
+            newsScroll.Content = newsGrid;
+        }
+
+        private async void getNews()
+        {
+            // request to getNews();
+            initNews();
+        }
+
         private async void getInformation()
         {
             var httpClient = new HttpClient(new HttpClientHandler());
@@ -502,6 +600,7 @@ namespace Caritathelp.Volunteer
             id = e.Parameter as string;
             getNotification();
             getInformation();
+            getNews();
         }
     }
 }

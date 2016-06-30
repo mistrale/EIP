@@ -82,7 +82,7 @@
             </Ellipse.Fill>
         </Ellipse>
         <TextBlock x:Name="nameTextBox" HorizontalAlignment="Left" Margin="2,254,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="45" Width="394" FontSize="24" FontWeight="Bold" TextAlignment="Center" Foreground="#FF4BAF50"/>
-        <ScrollViewer HorizontalAlignment="Left" Height="173" Margin="6,409,0,0" VerticalAlignment="Top" Width="387"/>
+        <ScrollViewer Name="newsScroll" HorizontalAlignment="Left" Height="173" Margin="6,409,0,0" VerticalAlignment="Top" Width="387"/>
         <Button x:ConnectionId='6' x:Name="addButton"
                 HorizontalAlignment="Left"
                 Margin="6,136,0,0" VerticalAlignment="Top"
