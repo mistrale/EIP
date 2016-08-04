@@ -72,7 +72,7 @@ namespace Caritathelp
             try
             {
                 string id = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
-                var template = new UriTemplate("http://api.caritathelp.me/volunteers/" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString() + "/notifications{?token}");
+                var template = new UriTemplate("http://api.caritathelp.me/notifications{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
@@ -90,6 +90,7 @@ namespace Caritathelp
                     mainGrid = new Grid();
                     mainGrid.VerticalAlignment = VerticalAlignment.Top;
                     mainGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                    int joinAssoc = 0;
                     for (int i = 0; i < assocNotif.response.Count; i++)
                     {
                         if (assocNotif.response[i].notif_type.Equals("JoinAssoc", StringComparison.Ordinal)) { 
@@ -160,7 +161,8 @@ namespace Caritathelp
 
                             mainGrid.Children.Add(grid);
                             Grid.SetColumn(grid, 0);
-                            Grid.SetRow(grid, i);
+                            Grid.SetRow(grid, joinAssoc);
+                            joinAssoc++;
                         }
                     }
                     scrollView.Content = mainGrid;

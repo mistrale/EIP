@@ -32,16 +32,8 @@
 			VerticalAlignment="Top" Width="366" 
 			BorderBrush="{x:Null}" 
 			Foreground="#FF4BAF50" Height="34" 
-			TextAlignment="Center" IsReadOnly="True" Background="{x:Null}" IsHitTestVisible="False"/>
-        <TextBox x:ConnectionId='2' x:Name="eventDescriptionText" HorizontalAlignment="Left"
-			Margin="11,254,0,0" TextWrapping="Wrap"
-			Text="Description"
-			                           
-			VerticalAlignment="Top" Width="380" 
-			BorderBrush="#FF4BAF50" 
-			Foreground="#FF4BAF50" Height="63" 
-			TextAlignment="Center" IsReadOnly="True"/>
-        <TextBox x:ConnectionId='3' x:Name="eventPlaceText" HorizontalAlignment="Left"
+			TextAlignment="Center" IsReadOnly="false" Background="{x:Null}"/>
+        <TextBox x:ConnectionId='2' x:Name="eventPlaceText" HorizontalAlignment="Left"
 			Margin="11,211,0,0" TextWrapping="Wrap"
 			Text="Lieu de l'évènement"
 			                           
@@ -73,7 +65,7 @@
 			Margin="11,354,0,0"
 			VerticalAlignment="Top"
 			Foreground="#FF4BAF50" Width="181" IsTapEnabled="False" IsRightTapEnabled="False" IsHoldingEnabled="False" IsDoubleTapEnabled="False"/>
-        <Button x:ConnectionId='4' x:Name="updateButton"
+        <Button x:ConnectionId='3' x:Name="updateButton"
 			Content="Modifier"
 			HorizontalAlignment="Left" Margin="12,494,0,0"
 			VerticalAlignment="Top" Background="#FF4BAF50"
@@ -83,10 +75,19 @@
         </TextBox>
         <TimePicker x:Name="timeBegin" HorizontalAlignment="Left" Margin="11,401,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF4BAF50"/>
         <TimePicker x:Name="timeEnd" HorizontalAlignment="Left" Margin="208,400,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF4BAF50"/>
-        <ScrollViewer HorizontalAlignment="Left" Height="61" Margin="11,256,0,0" VerticalAlignment="Top" Width="380" RenderTransformOrigin="0.367,0.753"/>
+        <ScrollViewer HorizontalAlignment="Left" Height="61" Margin="9,254,0,0" VerticalAlignment="Top" Width="380" RenderTransformOrigin="0.367,0.753">
+            <TextBox x:ConnectionId='6' x:Name="eventDescriptionText" HorizontalAlignment="Left"
+			TextWrapping="Wrap"
+			Text="Description"
+			                           
+			VerticalAlignment="Top" Width="380" 
+			BorderBrush="#FF4BAF50" 
+			Foreground="#FF4BAF50" Height="61" 
+			TextAlignment="Center" IsReadOnly="false"/>
+        </ScrollViewer>
         <Caritathelp:Menu HorizontalAlignment="Left" Margin="0,589,0,0" VerticalAlignment="Top" Width="400"/>
         <Grid HorizontalAlignment="Left" Height="52" Margin="2,0,0,0" VerticalAlignment="Top" Width="397" Background="#FF4BAF50"/>
-        <Button x:ConnectionId='5' x:Name="Back" Content="Previous"
+        <Button x:ConnectionId='4' x:Name="Back" Content="Previous"
 			HorizontalAlignment="Left" VerticalAlignment="Top"
 			Width="53" Margin="-3,0,0,0" BorderThickness="0" 
 			RenderTransformOrigin="0.557,1.219"
@@ -98,7 +99,7 @@
 			Foreground="White" Height="44" FontSize="24"
 			FontWeight="Bold" IsReadOnly="True" TextAlignment="Center" BorderBrush="{x:Null}" BorderThickness="0" IsHitTestVisible="False"/>
         <TextBox x:Name="logoText" HorizontalAlignment="Left" Margin="11,455,0,0" TextWrapping="Wrap" Text="Image" VerticalAlignment="Top" Width="180" Height="40" Foreground="#FF4BAF50" BorderBrush="#FF4BAF50"/>
-        <Button x:ConnectionId='6'                         x:Name="button" Content="Choisir image" HorizontalAlignment="Left" Margin="210,447,0,0" VerticalAlignment="Top" Background="#FF4BAF50" BorderBrush="{x:Null}" BorderThickness="0" Width="181"/>
+        <Button x:ConnectionId='5'                         x:Name="button" Content="Choisir image" HorizontalAlignment="Left" Margin="210,447,0,0" VerticalAlignment="Top" Background="#FF4BAF50" BorderBrush="{x:Null}" BorderThickness="0" Width="181"/>
     </Grid>
 </Page>
 

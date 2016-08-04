@@ -61,7 +61,7 @@ namespace Caritathelp.Event
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://api.caritathelp.me/volunteers/" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString() + "/notifications{?token}");
+                var template = new UriTemplate("http://api.caritathelp.me/notifications{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
@@ -78,6 +78,7 @@ namespace Caritathelp.Event
                     mainGrid = new Grid();
                     mainGrid.VerticalAlignment = VerticalAlignment.Top;
                     mainGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                    int nbJoinEvent = 0;
                     for (int i = 0; i < eventNotif.response.Count; i++)
                     {
                         if (eventNotif.response[i].notif_type.Equals("JoinEvent", StringComparison.Ordinal))
@@ -148,7 +149,8 @@ namespace Caritathelp.Event
 
                             mainGrid.Children.Add(grid);
                             Grid.SetColumn(grid, 0);
-                            Grid.SetRow(grid, i);
+                            Grid.SetRow(grid, nbJoinEvent);
+                            nbJoinEvent++;
                         }
                     }
                     scrollView.Content = mainGrid;
@@ -190,7 +192,6 @@ namespace Caritathelp.Event
                 HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
-
                 simpleResponse = JsonConvert.DeserializeObject<SimpleRequest>(responseString);
                 if (simpleResponse.status != 200)
                 {

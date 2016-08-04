@@ -35,196 +35,43 @@ namespace Caritathelp.All
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-
-        class UserListResponse
+        class ModelSearch
         {
-            public string status { get; set; }
-            public string message { get; set; }
-            public IList<User> response { get; set; }
+            public int id { get; set; }
+            public string thumb_path { get; set; }
+            public string name { get; set; }
+            public string rights { get; set; }
+            public string result_type { get; set; }
         }
 
-        class AssociationListResponse
-        {
-            public int status { get; set; }
-            public string message { get; set; }
-            public IList<Association> response { get; set; }
-        }
-
-        class EventListResponse
+        class ListResponse
         {
             public int status { get; set; }
             public string message { get; set; }
-            public IList<EventModel> response { get; set; }
+            public IList<ModelSearch> response { get; set; }
         }
 
-        private EventListResponse events;
-        private UserListResponse userList;
-        private AssociationListResponse associationList;
+        private ListResponse searchList;
         private string responseString;
 
-        private Grid eventsGrid;
-        private Grid assocGrid;
-        private Grid userGrid;
-        private Grid main;
-
-        private async Task searchAssociation()
-        {
-            var httpClient = new HttpClient(new HttpClientHandler());
-            try
-            {
-                string search = searchBox.Text;
-                var template = new UriTemplate("http://api.caritathelp.me/associations/search{?research,token}");
-                template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
-                template.AddParameter("research", search);
-                var uri = template.Resolve();
-                Debug.WriteLine(uri);
-
-                HttpResponseMessage response = await httpClient.GetAsync(uri);
-                response.EnsureSuccessStatusCode();
-                responseString = await response.Content.ReadAsStringAsync();
-                System.Diagnostics.Debug.WriteLine(responseString.ToString());
-                associationList = JsonConvert.DeserializeObject<AssociationListResponse>(responseString);
-                if (associationList.status != 200)
-                {
-                    warningTextBox.Text = associationList.message;
-                }
-                else
-                {
-                    if (associationList != null)
-                        initResearchAssociation(associationList.response.Count);
-                    else
-                        initResearchAssociation(0);
-                    resultatText.Text = "Résultat pour : ";
-                }
-            }
-            catch (HttpRequestException e)
-            {
-                warningTextBox.Text = e.Message;
-            }
-            catch (JsonReaderException e)
-            {
-                System.Diagnostics.Debug.WriteLine(responseString);
-                Debug.WriteLine("Failed to read json");
-            }
-            catch (JsonSerializationException e)
-            {
-                System.Diagnostics.Debug.WriteLine(responseString);
-                Debug.WriteLine("Failed to read json");
-                System.Diagnostics.Debug.WriteLine(e.Message);
-            }
-        }
-
-        private async Task searchEvent()
-        {
-            var httpClient = new HttpClient(new HttpClientHandler());
-            try
-            {
-                string search = searchBox.Text;
-                var template = new UriTemplate("http://api.caritathelp.me/events/search{?research,token}");
-                template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
-                template.AddParameter("research", search);
-                var uri = template.Resolve();
-                Debug.WriteLine(uri);
-
-                HttpResponseMessage response = await httpClient.GetAsync(uri);
-                response.EnsureSuccessStatusCode();
-                responseString = await response.Content.ReadAsStringAsync();
-                System.Diagnostics.Debug.WriteLine(responseString.ToString());
-                events = JsonConvert.DeserializeObject<EventListResponse>(responseString);
-                if (events.status != 200)
-                {
-                    warningTextBox.Text = events.message;
-                }
-                else
-                {
-                    if (events != null)
-                        initResearchEvent(events.response.Count);
-                    else
-                        initResearchEvent(0);
-                    resultatText.Text = "Résultat pour : ";
-                }
-            }
-            catch (HttpRequestException e)
-            {
-                warningTextBox.Text = e.Message;
-            }
-            catch (JsonReaderException e)
-            {
-                System.Diagnostics.Debug.WriteLine(responseString);
-                Debug.WriteLine("Failed to read json");
-            }
-            catch (JsonSerializationException e)
-            {
-                System.Diagnostics.Debug.WriteLine(responseString);
-                Debug.WriteLine("Failed to read json");
-                System.Diagnostics.Debug.WriteLine(e.Message);
-            }
-        }
-
-        private void initResearchEvent(int nbRows)
-        {
-            eventsGrid = new Grid();
-            eventsGrid.Height = nbRows * 100;
-            Debug.WriteLine(nbRows);
-            eventsGrid.Width = 375;
-            for (int i = 0; i < nbRows; ++i)
-                eventsGrid.RowDefinitions.Add(new RowDefinition());
-            eventsGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            for (int x = 0; x < events.response.Count; ++x)
-            {
-                Button btn = new Button();
-                btn.Height = 100;
-                btn.Width = eventsGrid.Width;
-                btn.HorizontalAlignment = HorizontalAlignment.Stretch;
-                btn.Click += new RoutedEventHandler(EventButtonClick);
-                btn.Content = events.response[x].title;
-                btn.Background = new SolidColorBrush(Color.FromArgb(0xFF, 75, 175, 80));
-                Grid.SetColumn(btn, 1);
-                Grid.SetRow(btn, x);
-                eventsGrid.Children.Add(btn);
-            }
-        }
-
-        private void initResearchAssociation(int nbRows)
-        {
-            assocGrid = new Grid();
-            assocGrid.Height = nbRows * 100;
-            Debug.WriteLine(nbRows);
-            assocGrid.Width = 375;
-            for (int i = 0; i < nbRows; ++i)
-                assocGrid.RowDefinitions.Add(new RowDefinition());
-            assocGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            for (int x = 0; x < associationList.response.Count; ++x)
-            {
-                Button btn = new Button();
-                btn.Height = 100;
-                btn.Width = assocGrid.Width;
-                btn.HorizontalAlignment = HorizontalAlignment.Stretch;
-                btn.Click += new RoutedEventHandler(AssociationButtonClick);
-                btn.Content = associationList.response[x].name;
-                btn.Background = new SolidColorBrush(Color.FromArgb(0xFF, 75, 175, 80));
-                Grid.SetColumn(btn, 1);
-                Grid.SetRow(btn, x);
-                assocGrid.Children.Add(btn);
-            }
-        }
+        private Grid searchGrid;
 
         private void EventButtonClick(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
             int x = Grid.GetRow(button);
-            string id = events.response[x].id.ToString();
+            string id = searchList.response[x].id.ToString();
             Frame.Navigate(typeof(EventProfil), id);
             // identify which button was clicked and perform necessary actions
         }
 
-        private async Task searchUser()
+        private async Task searchAll()
         {
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
                 string search = searchBox.Text;
-                var template = new UriTemplate("http://api.caritathelp.me/volunteers/search{?research,token}");
+                var template = new UriTemplate("http://api.caritathelp.me/search{?research,token}");
                 template.AddParameter("research", search);
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
@@ -234,15 +81,15 @@ namespace Caritathelp.All
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
                 System.Diagnostics.Debug.WriteLine(responseString.ToString());
-                userList = JsonConvert.DeserializeObject<UserListResponse>(responseString);
-                if (Int32.Parse(userList.status) != 200)
+                searchList = JsonConvert.DeserializeObject<ListResponse>(responseString);
+                if (searchList.status != 200)
                 {
-                    warningTextBox.Text = userList.message;
+                    warningTextBox.Text = searchList.message;
                 }
                 else
                 {
-                    if (userList != null)
-                        initResearchUser(userList.response.Count);
+                    if (searchList != null)
+                        initResearchUser(searchList.response.Count);
                     else
                         initResearchUser(0);
                 }
@@ -268,7 +115,7 @@ namespace Caritathelp.All
         {
             Button button = sender as Button;
             int x = Grid.GetRow(button);
-            string id = userList.response[x].id.ToString();
+            string id = searchList.response[x].id.ToString();
             Frame.Navigate(typeof(Volunteer.VolunteerProfil), id);
             // identify which button was clicked and perform necessary actions
         }
@@ -277,31 +124,36 @@ namespace Caritathelp.All
         {
             Button button = sender as Button;
             int x = Grid.GetRow(button);
-            string id = associationList.response[x].id.ToString();
+            string id = searchList.response[x].id.ToString();
             Frame.Navigate(typeof(AssociationProfil), id);
             // identify which button was clicked and perform necessary actions
         }
 
         private void initResearchUser(int nbRows)
         {
-            userGrid = new Grid();
-            userGrid.Height = nbRows * 100;
-            userGrid.Width = 375;
+            searchGrid = new Grid();
+            searchGrid.Height = nbRows * 100;
+            searchGrid.Width = 375;
             for (int i = 0; i < nbRows; ++i)
-                userGrid.RowDefinitions.Add(new RowDefinition());
-            userGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            for (int x = 0; x < userList.response.Count; ++x)
+                searchGrid.RowDefinitions.Add(new RowDefinition());
+            searchGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            for (int x = 0; x < searchList.response.Count; ++x)
             {
                 Button btn = new Button();
                 btn.Height = 100;
-                btn.Width = userGrid.Width;
+                btn.Width = searchGrid.Width;
                 btn.HorizontalAlignment = HorizontalAlignment.Stretch;
-                btn.Click += new RoutedEventHandler(UserButtonClick);
-                btn.Content = userList.response[x].firstname + " " + userList.response[x].lastname;
+                if (searchList.response[x].result_type.Equals("volunteer", StringComparison.Ordinal)) 
+                    btn.Click += new RoutedEventHandler(UserButtonClick);
+                else if (searchList.response[x].result_type.Equals("event", StringComparison.Ordinal))
+                    btn.Click += new RoutedEventHandler(EventButtonClick);
+                else if (searchList.response[x].result_type.Equals("assoc", StringComparison.Ordinal))
+                    btn.Click += new RoutedEventHandler(AssociationButtonClick);
+                btn.Content = searchList.response[x].name;
                 btn.Background = new SolidColorBrush(Color.FromArgb(0xFF, 75, 175, 80));
                 Grid.SetColumn(btn, 1);
                 Grid.SetRow(btn, x);
-                userGrid.Children.Add(btn);
+                searchGrid.Children.Add(btn);
             }
         }
 
@@ -313,49 +165,9 @@ namespace Caritathelp.All
 
         private async void search_Click(object sender, RoutedEventArgs e)
         {
-            if (comboBox.SelectedIndex == 1)
-            {
-                userGrid = new Grid();
-                await searchUser();
-                scroll.Content = userGrid;
-            }
-            else if (comboBox.SelectedIndex == 2)
-            {
-                assocGrid = new Grid();
-                await searchAssociation();
-                scroll.Content = assocGrid;
-            }
-            else if (comboBox.SelectedIndex == 3)
-            {
-                eventsGrid = new Grid();
-                await searchEvent();
-                scroll.Content = eventsGrid;
-            }
-            else
-            {
-                userGrid = new Grid();
-                assocGrid = new Grid();
-                eventsGrid = new Grid();
-                await searchEvent();
-                await searchUser();
-                await searchAssociation();
-                main = new Grid();
-                main.Width = 375;
-                main.RowDefinitions.Add(new RowDefinition());
-                main.RowDefinitions.Add(new RowDefinition());
-                main.RowDefinitions.Add(new RowDefinition());
-                main.ColumnDefinitions.Add(new ColumnDefinition());
-                Grid.SetColumn(userGrid, 1);
-                Grid.SetRow(userGrid, 0);
-                main.Children.Add(userGrid);
-                Grid.SetColumn(assocGrid, 1);
-                Grid.SetRow(assocGrid, 1);
-                main.Children.Add(assocGrid);
-                Grid.SetColumn(eventsGrid, 1);
-                Grid.SetRow(eventsGrid, 2);
-                main.Children.Add(eventsGrid);
-                scroll.Content = main;
-            }
+            searchGrid = new Grid();
+            await searchAll();
+            scroll.Content = searchGrid;
             resultatText.Text = "Résultat pour : " + searchBox.Text;
         }
 

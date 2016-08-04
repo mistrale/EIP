@@ -37,32 +37,26 @@
             </Button.Background>
         </Button>
         <ScrollViewer x:Name="scroll" HorizontalAlignment="Left"
-			Margin="10,240,0,0" 
+			Margin="10,182,0,0" 
 			VerticalScrollBarVisibility="Visible" 
 			VerticalScrollMode="Enabled" 
 			AllowDrop="False" 
 			VerticalAlignment="top"
 			BringIntoViewOnFocusChange="True"
 			HorizontalScrollMode="Disabled"
-			IsHoldingEnabled="True" Height="325" Width="380"/>
+			IsHoldingEnabled="True" Height="383" Width="380"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="3,13,0,0" TextWrapping="Wrap" Text="Recherche" VerticalAlignment="Top" Height="34" Width="395" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
         <TextBox x:ConnectionId='1' x:Name="searchBox"                                  
-			HorizontalAlignment="Left" Margin="6,100,0,0" TextWrapping="Wrap" Text="Rechercher..." VerticalAlignment="Top" Width="387" Foreground="#FF4BAF50" BorderBrush="#FF4BAF50" FontStyle="Italic"/>
-        <ComboBox x:Name="comboBox" Margin="8,140,183,0" VerticalAlignment="Top" Foreground="White" BorderBrush="#FF4BAF50" Background="#FF4BAF50" SelectedIndex="0">
-            <TextBlock Text="Tous"/>
-            <TextBlock Text="Volontaire"/>
-            <TextBlock Text="Association"/>
-            <TextBlock Text="Evènement"/>
-        </ComboBox>
+			HorizontalAlignment="Left" Margin="6,100,0,0" TextWrapping="Wrap" Text="Rechercher..." VerticalAlignment="Top" Width="271" Foreground="#FF4BAF50" BorderBrush="#FF4BAF50" FontStyle="Italic"/>
         <Button x:ConnectionId='2' x:Name="button" Content="Rechercher"
 			                    
 			HorizontalAlignment="Left" 
-			Margin="229,137,0,0" 
+			Margin="282,85,0,0" 
 			VerticalAlignment="Top" Foreground="White"
 			Background="#FF4BAF50" 
-			BorderBrush="{x:Null}" Width="165"
+			BorderBrush="{x:Null}" Width="116"
 			Height="63"/>
-        <TextBlock x:Name="resultatText" HorizontalAlignment="Left" Margin="13,198,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="33" Width="377" Foreground="#FF4BAF50" FontSize="20"/>
+        <TextBlock x:Name="resultatText" HorizontalAlignment="Left" Margin="13,144,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="33" Width="377" Foreground="#FF4BAF50" FontSize="20"/>
         <local1:Menu HorizontalAlignment="Left" Margin="0,589,-1,0" VerticalAlignment="Top" Width="401"/>
     </Grid>
 </Page>

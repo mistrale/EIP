@@ -73,7 +73,7 @@ namespace Caritathelp.Volunteer
                 {
                     if (pictures.response != null)
                     {
-                        btn.Source = new BitmapImage(new Uri("http://52.31.151.160:3000" + pictures.response.picture_path.thumb.url, UriKind.Absolute));
+                        btn.Source = new BitmapImage(new Uri("http://api.caritathelp.me" + pictures.response.picture_path.thumb.url, UriKind.Absolute));
                     }
                     else
                         btn.Source = new BitmapImage(new Uri("ms-appx:/Assets/avatar.png"));

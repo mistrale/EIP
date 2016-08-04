@@ -32,15 +32,7 @@
 			VerticalAlignment="Top" Width="366" 
 			BorderBrush="{x:Null}" 
 			Foreground="#FF4BAF50" Height="34" 
-			TextAlignment="Center" IsReadOnly="True" Background="{x:Null}" IsHitTestVisible="False"/>
-        <TextBox x:Name="eventDescriptionText" HorizontalAlignment="Left"
-			Margin="11,254,0,0" TextWrapping="Wrap"
-			Text="Description"
-			GotFocus="TextBox_GotFocus"
-			VerticalAlignment="Top" Width="380" 
-			BorderBrush="#FF4BAF50" 
-			Foreground="#FF4BAF50" Height="63" 
-			TextAlignment="Center" IsReadOnly="True"/>
+			TextAlignment="Center" IsReadOnly="false" Background="{x:Null}"/>
         <TextBox x:Name="eventPlaceText" HorizontalAlignment="Left"
 			Margin="11,211,0,0" TextWrapping="Wrap"
 			Text="Lieu de l'évènement"
@@ -83,7 +75,16 @@
         </TextBox>
         <TimePicker x:Name="timeBegin" HorizontalAlignment="Left" Margin="11,401,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF4BAF50"/>
         <TimePicker x:Name="timeEnd" HorizontalAlignment="Left" Margin="208,400,0,0" VerticalAlignment="Top" Width="182" Foreground="#FF4BAF50"/>
-        <ScrollViewer HorizontalAlignment="Left" Height="61" Margin="11,256,0,0" VerticalAlignment="Top" Width="380" RenderTransformOrigin="0.367,0.753"/>
+        <ScrollViewer HorizontalAlignment="Left" Height="61" Margin="9,254,0,0" VerticalAlignment="Top" Width="380" RenderTransformOrigin="0.367,0.753">
+            <TextBox x:Name="eventDescriptionText" HorizontalAlignment="Left"
+			TextWrapping="Wrap"
+			Text="Description"
+			GotFocus="TextBox_GotFocus"
+			VerticalAlignment="Top" Width="380" 
+			BorderBrush="#FF4BAF50" 
+			Foreground="#FF4BAF50" Height="61" 
+			TextAlignment="Center" IsReadOnly="false"/>
+        </ScrollViewer>
         <Caritathelp:Menu HorizontalAlignment="Left" Margin="0,589,0,0" VerticalAlignment="Top" Width="400"/>
         <Grid HorizontalAlignment="Left" Height="52" Margin="2,0,0,0" VerticalAlignment="Top" Width="397" Background="#FF4BAF50"/>
         <Button x:Name="Back" Content="Previous"

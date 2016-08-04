@@ -263,9 +263,14 @@ namespace Caritathelp.Event
                     else
                     {
                         eventTitleText.IsReadOnly = true;
+                        eventTitleText.IsHitTestVisible = false;
+                        eventDescriptionText.IsHitTestVisible = false;
+                        eventPlaceText.IsHitTestVisible = false;
                         eventDescriptionText.IsReadOnly = true;
                         eventPlaceText.IsReadOnly = true;
                         updateButton.Visibility = Visibility.Collapsed;
+                        logoText.Visibility = Visibility.Collapsed;
+                        button.Visibility = Visibility.Collapsed;
                     }
                 }
             }

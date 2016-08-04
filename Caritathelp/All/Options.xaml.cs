@@ -42,6 +42,11 @@ namespace Caritathelp.All
             this.Frame.Navigate(typeof(MainPage));
         }
 
+        public void friendsButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(FriendsPage));
+        }
+
         public void profilButtonClick(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Volunteer.VolunteerProfil), (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]);

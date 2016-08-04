@@ -30,27 +30,31 @@
             </Button>
 
         </Grid>
-        <Button x:Name="alertButtonNotity" Content=""
-			HorizontalAlignment="Left" Margin="208,0,0,0"
-			VerticalAlignment="Top"
-			RenderTransformOrigin="0.38,0.334" BorderThickness="0" Visibility="Collapsed">
-            <Button.Background>
-                <ImageBrush Stretch="Uniform" ImageSource="Assets/AlertButtonNotified.png"/>
-            </Button.Background>
-        </Button>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="59,11,0,0" TextWrapping="Wrap" Text="Paramètres" VerticalAlignment="Top" Height="24" Width="254" FontSize="22" FontWeight="Bold" TextAlignment="Center"/>
         <Grid HorizontalAlignment="Left" Height="161" Margin="-1,51,0,0" VerticalAlignment="Top" Width="400">
-            <Image x:Name="image" HorizontalAlignment="Left" Height="74" Margin="9,83,0,0" VerticalAlignment="Top" Width="74" Source="ms-appx:///Assets/logo.png"/>
+            <Image x:Name="image" HorizontalAlignment="Left" Height="74" Margin="10,245,0,-158" VerticalAlignment="Top" Width="74" Source="ms-appx:///Assets/logo.png"/>
             <Image x:Name="image_Copy" HorizontalAlignment="Left" Height="74" Margin="9,4,0,0" VerticalAlignment="Top" Width="74" Source="ms-appx:///Assets/logo.png"/>
+            <Image x:Name="image_Copy1" HorizontalAlignment="Left" Height="74" Margin="10,87,0,0" VerticalAlignment="Top" Width="74" Source="ms-appx:///Assets/logo.png"/>
+            <Image x:Name="image_Copy2" HorizontalAlignment="Left" Height="74" Margin="10,166,0,-79" VerticalAlignment="Top" Width="74" Source="ms-appx:///Assets/logo.png"/>
+            <Image x:Name="image_Copy4" HorizontalAlignment="Left" Height="74" Margin="10,459,0,-372" VerticalAlignment="Top" Width="74" Source="ms-appx:///Assets/logo.png"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="79" Margin="0,52,0,0" VerticalAlignment="Top" Width="400"/>
-        <Grid HorizontalAlignment="Left" Height="79" Margin="2,129,-2,0" VerticalAlignment="Top" Width="400"/>
+        <Grid HorizontalAlignment="Left" Height="79" Margin="-2,137,0,0" VerticalAlignment="Top" Width="400" RenderTransformOrigin="0.495,0.884"/>
         <Border BorderBrush="#FF4BAF50" BorderThickness="1" HorizontalAlignment="Left" Height="82" Margin="-2,50,-1,0" VerticalAlignment="Top" Width="403"/>
-        <Border BorderBrush="#FF4BAF50" BorderThickness="1,0,1,1" HorizontalAlignment="Left" Height="79" Margin="-2,130,-1,0" VerticalAlignment="Top" Width="403"/>
+        <Border BorderBrush="#FF4BAF50" BorderThickness="1,1,1,1" HorizontalAlignment="Left" Height="79" Margin="1,506,-4,0" VerticalAlignment="Top" Width="403"/>
         <Button Click="profilButtonClick" x:Name="button" Content="Profil" HorizontalAlignment="Left" Margin="97,63,0,0" VerticalAlignment="Top" Width="288" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FF4BAF50"/>
-        <Button Click="disconnectButtonClick" x:Name="button_Copy" Content="Déconnection" HorizontalAlignment="Left" Margin="97,144,0,0" VerticalAlignment="Top" Width="288" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FF4BAF50"/>
+        <Button Click="disconnectButtonClick" x:Name="button_Copy" Content="Déconnection" HorizontalAlignment="Left" Margin="97,520,0,0" VerticalAlignment="Top" Width="288" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FF4BAF50"/>
 
         <Caritathelp:Menu HorizontalAlignment="Left" Margin="-2,590,-1,0" VerticalAlignment="Top" Width="403"/>
+        <Grid HorizontalAlignment="Left" Height="79" Margin="0,506,0,0" VerticalAlignment="Top" Width="400">
+            <Image x:Name="image_Copy3" HorizontalAlignment="Left" Height="74" Margin="9,458,0,-453" VerticalAlignment="Top" Width="74" Source="ms-appx:///Assets/logo.png"/>
+        </Grid>
+        <Border BorderBrush="#FF4BAF50" BorderThickness="1,0,1,1" HorizontalAlignment="Left" Height="79" Margin="1,133,-4,0" VerticalAlignment="Top" Width="403"/>
+        <Button Click="friendsButtonClick" x:Name="FriendsButton" Content="Mes amis" HorizontalAlignment="Left" Margin="97,147,0,0" VerticalAlignment="Top" Width="288" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FF4BAF50"/>
+        <Border BorderBrush="#FF4BAF50" BorderThickness="1" HorizontalAlignment="Left" Height="82" Margin="-2,212,-1,0" VerticalAlignment="Top" Width="403"/>
+        <Button Click="friendsButtonClick" x:Name="FriendsButton_Copy" Content="Mes Associations" HorizontalAlignment="Stretch" Margin="97,229,15,0" VerticalAlignment="Top" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FF4BAF50"/>
+        <Border BorderBrush="#FF4BAF50" BorderThickness="1" HorizontalAlignment="Left" Height="82" Margin="-1,294,-2,0" VerticalAlignment="Top" Width="403"/>
+        <Button Click="friendsButtonClick" x:Name="FriendsButton_Copy1" Content="Mes évènements" HorizontalAlignment="Left" Margin="97,304,0,0" VerticalAlignment="Top" Width="288" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FF4BAF50"/>
 
     </Grid>
 </Page>

@@ -73,7 +73,7 @@ namespace Caritathelp.All
                 {
                     btn.Content = new TextBlock
                     {
-                        Text = "Vous avez été invité à rejoindre " + notifications.response[x].assoc_name,
+                        Text = "Vous avez été invité à rejoindre l'association " + notifications.response[x].assoc_name,
                         TextWrapping = TextWrapping.Wrap
                     };
                     btn.Click += new RoutedEventHandler(AssociationButtonClick);
@@ -156,7 +156,7 @@ namespace Caritathelp.All
             try
             {
                 string id = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
-                var template = new UriTemplate("http://api.caritathelp.me/volunteers/" + id + "/notifications" + "{?token}");
+                var template = new UriTemplate("http://api.caritathelp.me/notifications{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);

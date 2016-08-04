@@ -18,5 +18,15 @@ namespace Caritathelp
         public string mail { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
+        public string thumb_path { get; set; }
+    }
+
+    class FriendWaiting
+    {
+        public int id { get; set; }
+        public string firstname { get; set; }
+        public string lastname { get; set; }
+        public string thumb_path { get; set; }
+        public int notif_id { get; set; }
     }
 }

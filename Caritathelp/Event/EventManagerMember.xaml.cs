@@ -35,11 +35,20 @@ namespace Caritathelp.Event
             public string response { get; set; }
         }
 
-        class UserListResponse
+        class ModelSearch
         {
-            public string status { get; set; }
+            public int id { get; set; }
+            public string thumb_path { get; set; }
+            public string name { get; set; }
+            public string rights { get; set; }
+            public string result_type { get; set; }
+        }
+
+        class ListResponse
+        {
+            public int status { get; set; }
             public string message { get; set; }
-            public IList<User> response { get; set; }
+            public IList<ModelSearch> response { get; set; }
         }
 
         class Member
@@ -63,7 +72,7 @@ namespace Caritathelp.Event
         private Grid membersGrid;
         private MemberRequest members;
         private SimpleRequest simple;
-        private UserListResponse userList;
+        private ListResponse userList;
 
         private void UserButtonClick(object sender, RoutedEventArgs e)
         {
@@ -218,7 +227,7 @@ namespace Caritathelp.Event
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://api.caritathelp.me/volunteers/search{?research,token}");
+                var template = new UriTemplate("http://api.caritathelp.me/search{?research,token}");
                 template.AddParameter("research", searchUser.Text);
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
@@ -228,8 +237,8 @@ namespace Caritathelp.Event
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
                 System.Diagnostics.Debug.WriteLine(responseString.ToString());
-                userList = JsonConvert.DeserializeObject<UserListResponse>(responseString);
-                if (Int32.Parse(userList.status) != 200)
+                userList = JsonConvert.DeserializeObject<ListResponse>(responseString);
+                if (userList.status != 200)
                 {
                     warningTextBox.Text = userList.message;
                 }
@@ -238,7 +247,7 @@ namespace Caritathelp.Event
                     if (userList.response.Count == 0)
                         warningTextBox.Text = "Utilisateur non trouvé";
                     else
-                        inviteUserInEvent(userList.response[0].id);
+                        inviteUserInEvent(userList.response[0].id.ToString());
                 }
             }
             catch (HttpRequestException e)

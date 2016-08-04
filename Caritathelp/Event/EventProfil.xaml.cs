@@ -268,7 +268,7 @@ namespace Caritathelp
             try
             {
                 string myId = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
-                var template = new UriTemplate("http://api.caritathelp.me/volunteers/" + myId + "/notifications" + "{?token}");
+                var template = new UriTemplate("http://api.caritathelp.me/notifications{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
