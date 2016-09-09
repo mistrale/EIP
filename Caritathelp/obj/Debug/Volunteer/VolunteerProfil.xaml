@@ -36,9 +36,9 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Grid HorizontalAlignment="Left" Height="59" Margin="0,300,0,0" VerticalAlignment="Top" Width="400" Background="#FF4BAF50"/>
+        <Grid HorizontalAlignment="Left" Height="59" Margin="0,237,0,0" VerticalAlignment="Top" Width="400" Background="#FF4BAF50"/>
         <Button x:ConnectionId='2' x:Name="button1"
-                HorizontalAlignment="Left" Margin="288,303,-9,0"
+                HorizontalAlignment="Left" Margin="287,243,-8,0"
                 VerticalAlignment="Top" Height="54" Width="121"
                 BorderBrush="{x:Null}" Foreground="{x:Null}"
                                   >
@@ -48,7 +48,7 @@
         </Button>
         <Button x:ConnectionId='3' x:Name="friendsButton"
                                     
-        	HorizontalAlignment="Left" Margin="196,298,0,0"
+        	HorizontalAlignment="Left" Margin="192,237,0,0"
         	VerticalAlignment="Top" BorderBrush="{x:Null}"
         	Foreground="{x:Null}" BorderThickness="0,2.5" 
         	Width="120" Height="59" RenderTransformOrigin="0.839,0.534">
@@ -58,7 +58,7 @@
         </Button>
         <Button x:ConnectionId='4' x:Name="eventButton"
                                   
-        	HorizontalAlignment="Left" Margin="102,301,0,0"
+        	HorizontalAlignment="Left" Margin="108,238,0,0"
         	VerticalAlignment="Top" BorderBrush="{x:Null}"
         	Foreground="{x:Null}" BorderThickness="0,2.5" 
         	Width="100">
@@ -68,7 +68,7 @@
         </Button>
         <Button x:ConnectionId='5' x:Name="assocButton"
                                   
-        	HorizontalAlignment="Left" Margin="-10,300,0,0"
+        	HorizontalAlignment="Left" Margin="-8,238,0,0"
         	VerticalAlignment="Top" BorderBrush="{x:Null}"
         	Foreground="{x:Null}" BorderThickness="0,2.5"
         	Width="122">
@@ -76,13 +76,13 @@
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/assoc.png"/>
             </Button.Background>
         </Button>
-        <Ellipse Name="logo" HorizontalAlignment="Left" Height="143" Margin="122,88,0,0" VerticalAlignment="Top" Width="164">
+        <Ellipse Name="logo" HorizontalAlignment="Left" Height="109" Margin="145,82,0,0" VerticalAlignment="Top" Width="134">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
             </Ellipse.Fill>
         </Ellipse>
-        <TextBlock x:Name="nameTextBox" HorizontalAlignment="Left" Margin="2,254,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="45" Width="394" FontSize="24" FontWeight="Bold" TextAlignment="Center" Foreground="#FF4BAF50"/>
-        <ScrollViewer Name="newsScroll" HorizontalAlignment="Left" Height="127" Margin="6,455,0,0" VerticalAlignment="Top" Width="387"/>
+        <TextBlock x:Name="nameTextBox" HorizontalAlignment="Left" Margin="6,203,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="45" Width="394" FontSize="24" FontWeight="Bold" TextAlignment="Center" Foreground="#FF4BAF50"/>
+        <ScrollViewer Name="newsScroll" HorizontalAlignment="Left" Height="191" Margin="6,391,0,0" VerticalAlignment="Top" Width="387"/>
         <Button x:ConnectionId='6' x:Name="addButton"
                 HorizontalAlignment="Left"
                 Margin="6,136,0,0" VerticalAlignment="Top"
@@ -120,14 +120,14 @@
             </Button.Background>
         </Button>
         <TextBlock x:Name="informationBox" 
-                   HorizontalAlignment="Left" Margin="5,364,0,0"
+                   HorizontalAlignment="Left" Margin="5,301,0,0"
                    TextWrapping="Wrap" Text=""
                    VerticalAlignment="Top"
-                   Foreground="#FF4BAF50" Height="35"
+                   Foreground="#FF4BAF50" Height="29"
                    Width="388" FontSize="22"
                    TextAlignment="Center"/>
-        <TextBox x:ConnectionId='10' x:Name="news"                             HorizontalAlignment="Left" Margin="10,399,0,0" TextWrapping="Wrap" Text="Publier..." VerticalAlignment="Top" Height="51" Width="269" BorderBrush="#FF4BAF50"/>
-        <Button x:ConnectionId='11' x:Name="button2"                 Content="Publier" HorizontalAlignment="Left" Margin="284,389,0,0" VerticalAlignment="Top" Width="102" BorderBrush="#FF4BAF50" Background="#FF4BAF50" Height="70"/>
+        <TextBox x:ConnectionId='10' x:Name="news"                             HorizontalAlignment="Left" Margin="4,335,0,0" TextWrapping="Wrap" Text="Publier..." VerticalAlignment="Top" Height="51" Width="269" BorderBrush="#FF4BAF50"/>
+        <Button x:ConnectionId='11' x:Name="button2"                 Content="Publier" HorizontalAlignment="Left" Margin="281,326,0,0" VerticalAlignment="Top" Width="102" BorderBrush="#FF4BAF50" Background="#FF4BAF50" Height="70"/>
     </Grid>
 </Page>
 

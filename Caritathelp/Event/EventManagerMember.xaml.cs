@@ -103,7 +103,7 @@ namespace Caritathelp.Event
 
         private async void upgradeUser(string id_user, string rights)
         {
-            string url = "http://api.caritathelp.me/guests/upgrade";
+            string url = Global.API_IRL + "/guests/upgrade";
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("event_id", events.id.ToString()),
@@ -146,7 +146,7 @@ namespace Caritathelp.Event
         private async void kickUser(string id)
         {
 
-            string url = "http://api.caritathelp.me/guests/kick?token=" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"].ToString()
+            string url = Global.API_IRL + "/guests/kick?token=" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"].ToString()
                          + "&event_id=" + events.id.ToString() + "&volunteer_id=" + id;
             Debug.WriteLine(url);
             var httpClient = new HttpClient(new HttpClientHandler());
@@ -184,7 +184,7 @@ namespace Caritathelp.Event
 
         private async void inviteUserInEvent(String id)
         {
-            string url = "http://api.caritathelp.me/guests/invite";
+            string url = Global.API_IRL + "/guests/invite";
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("event_id", events.id.ToString()),
@@ -227,7 +227,7 @@ namespace Caritathelp.Event
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://api.caritathelp.me/search{?research,token}");
+                var template = new UriTemplate(Global.API_IRL + "/search{?research,token}");
                 template.AddParameter("research", searchUser.Text);
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
@@ -290,7 +290,7 @@ namespace Caritathelp.Event
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://api.caritathelp.me/events/" + events.id.ToString() + "/guests" + "{?token}");
+                var template = new UriTemplate(Global.API_IRL + "/events/" + events.id.ToString() + "/guests" + "{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);

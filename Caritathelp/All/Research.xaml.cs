@@ -71,7 +71,7 @@ namespace Caritathelp.All
             try
             {
                 string search = searchBox.Text;
-                var template = new UriTemplate("http://api.caritathelp.me/search{?research,token}");
+                var template = new UriTemplate(Global.API_IRL + "/search{?research,token}");
                 template.AddParameter("research", search);
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();

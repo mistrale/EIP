@@ -72,7 +72,7 @@ namespace Caritathelp
             try
             {
                 string id = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
-                var template = new UriTemplate("http://api.caritathelp.me/notifications{?token}");
+                var template = new UriTemplate(Global.API_IRL + "/notifications{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
@@ -201,7 +201,7 @@ namespace Caritathelp
                         new KeyValuePair<string, string>("notif_id", id_notif),
                         new KeyValuePair<string, string>("acceptance", "true")
                     };
-                string url = ("http://api.caritathelp.me/membership/reply_member");
+                string url = (Global.API_IRL + "/membership/reply_member");
                 HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
@@ -248,7 +248,7 @@ namespace Caritathelp
                         new KeyValuePair<string, string>("notif_id", id_notif),
                         new KeyValuePair<string, string>("acceptance", "false")
                     };
-                string url = ("http://api.caritathelp.me/membership/reply_member");
+                string url = (Global.API_IRL + "/membership/reply_member");
                 HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();

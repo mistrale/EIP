@@ -26,5 +26,8 @@ namespace Caritathelp
         public string longitude { get; set; }
         public bool allowgps { get; set; }
         public string allow_notifications { get; set; }
+        public string friendship { get; set; }
+        public string notif_id { get; set; }
+        public string thumb_path { get; set; }
     }
 }

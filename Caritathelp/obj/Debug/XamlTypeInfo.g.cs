@@ -148,7 +148,7 @@ namespace Caritathelp.Caritathelp_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[33];
+            _typeNameTable = new string[34];
             _typeNameTable[0] = "Caritathelp.Menu";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.UserControl";
             _typeNameTable[2] = "Caritathelp.All.Accueil";
@@ -177,13 +177,14 @@ namespace Caritathelp.Caritathelp_XamlTypeInfo
             _typeNameTable[25] = "Caritathelp.All.Notification";
             _typeNameTable[26] = "Caritathelp.NotificationAssociation";
             _typeNameTable[27] = "Caritathelp.All.Research";
-            _typeNameTable[28] = "Caritathelp.Volunteer.VolunteerAssociation";
-            _typeNameTable[29] = "Caritathelp.Volunteer.VolunteerEvenement";
-            _typeNameTable[30] = "Caritathelp.Volunteer.VolunteerFriends";
-            _typeNameTable[31] = "Caritathelp.Volunteer.VolunteerInformations";
-            _typeNameTable[32] = "Caritathelp.Volunteer.VolunteerProfil";
+            _typeNameTable[28] = "Caritathelp.Message";
+            _typeNameTable[29] = "Caritathelp.Volunteer.VolunteerAssociation";
+            _typeNameTable[30] = "Caritathelp.Volunteer.VolunteerEvenement";
+            _typeNameTable[31] = "Caritathelp.Volunteer.VolunteerFriends";
+            _typeNameTable[32] = "Caritathelp.Volunteer.VolunteerInformations";
+            _typeNameTable[33] = "Caritathelp.Volunteer.VolunteerProfil";
 
-            _typeTable = new global::System.Type[33];
+            _typeTable = new global::System.Type[34];
             _typeTable[0] = typeof(global::Caritathelp.Menu);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
             _typeTable[2] = typeof(global::Caritathelp.All.Accueil);
@@ -212,11 +213,12 @@ namespace Caritathelp.Caritathelp_XamlTypeInfo
             _typeTable[25] = typeof(global::Caritathelp.All.Notification);
             _typeTable[26] = typeof(global::Caritathelp.NotificationAssociation);
             _typeTable[27] = typeof(global::Caritathelp.All.Research);
-            _typeTable[28] = typeof(global::Caritathelp.Volunteer.VolunteerAssociation);
-            _typeTable[29] = typeof(global::Caritathelp.Volunteer.VolunteerEvenement);
-            _typeTable[30] = typeof(global::Caritathelp.Volunteer.VolunteerFriends);
-            _typeTable[31] = typeof(global::Caritathelp.Volunteer.VolunteerInformations);
-            _typeTable[32] = typeof(global::Caritathelp.Volunteer.VolunteerProfil);
+            _typeTable[28] = typeof(global::Caritathelp.Message);
+            _typeTable[29] = typeof(global::Caritathelp.Volunteer.VolunteerAssociation);
+            _typeTable[30] = typeof(global::Caritathelp.Volunteer.VolunteerEvenement);
+            _typeTable[31] = typeof(global::Caritathelp.Volunteer.VolunteerFriends);
+            _typeTable[32] = typeof(global::Caritathelp.Volunteer.VolunteerInformations);
+            _typeTable[33] = typeof(global::Caritathelp.Volunteer.VolunteerProfil);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -275,11 +277,12 @@ namespace Caritathelp.Caritathelp_XamlTypeInfo
         private object Activate_25_Notification() { return new global::Caritathelp.All.Notification(); }
         private object Activate_26_NotificationAssociation() { return new global::Caritathelp.NotificationAssociation(); }
         private object Activate_27_Research() { return new global::Caritathelp.All.Research(); }
-        private object Activate_28_VolunteerAssociation() { return new global::Caritathelp.Volunteer.VolunteerAssociation(); }
-        private object Activate_29_VolunteerEvenement() { return new global::Caritathelp.Volunteer.VolunteerEvenement(); }
-        private object Activate_30_VolunteerFriends() { return new global::Caritathelp.Volunteer.VolunteerFriends(); }
-        private object Activate_31_VolunteerInformations() { return new global::Caritathelp.Volunteer.VolunteerInformations(); }
-        private object Activate_32_VolunteerProfil() { return new global::Caritathelp.Volunteer.VolunteerProfil(); }
+        private object Activate_28_Message() { return new global::Caritathelp.Message(); }
+        private object Activate_29_VolunteerAssociation() { return new global::Caritathelp.Volunteer.VolunteerAssociation(); }
+        private object Activate_30_VolunteerEvenement() { return new global::Caritathelp.Volunteer.VolunteerEvenement(); }
+        private object Activate_31_VolunteerFriends() { return new global::Caritathelp.Volunteer.VolunteerFriends(); }
+        private object Activate_32_VolunteerInformations() { return new global::Caritathelp.Volunteer.VolunteerInformations(); }
+        private object Activate_33_VolunteerProfil() { return new global::Caritathelp.Volunteer.VolunteerProfil(); }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -477,37 +480,44 @@ namespace Caritathelp.Caritathelp_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 28:   //  Caritathelp.Volunteer.VolunteerAssociation
+            case 28:   //  Caritathelp.Message
                 userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_28_VolunteerAssociation;
+                userType.Activator = Activate_28_Message;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 29:   //  Caritathelp.Volunteer.VolunteerEvenement
+            case 29:   //  Caritathelp.Volunteer.VolunteerAssociation
                 userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_29_VolunteerEvenement;
+                userType.Activator = Activate_29_VolunteerAssociation;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 30:   //  Caritathelp.Volunteer.VolunteerFriends
+            case 30:   //  Caritathelp.Volunteer.VolunteerEvenement
                 userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_30_VolunteerFriends;
+                userType.Activator = Activate_30_VolunteerEvenement;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 31:   //  Caritathelp.Volunteer.VolunteerInformations
+            case 31:   //  Caritathelp.Volunteer.VolunteerFriends
                 userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_31_VolunteerInformations;
+                userType.Activator = Activate_31_VolunteerFriends;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 32:   //  Caritathelp.Volunteer.VolunteerProfil
+            case 32:   //  Caritathelp.Volunteer.VolunteerInformations
                 userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_32_VolunteerProfil;
+                userType.Activator = Activate_32_VolunteerInformations;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 33:   //  Caritathelp.Volunteer.VolunteerProfil
+                userType = new global::Caritathelp.Caritathelp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_33_VolunteerProfil;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;

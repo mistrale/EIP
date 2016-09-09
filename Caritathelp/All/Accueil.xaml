@@ -41,18 +41,21 @@
             </Button.Background>
         </Button>
         <Grid HorizontalAlignment="Left" Height="100" 
-			Margin="10,98,0,0" VerticalAlignment="Top" Width="380">
-            <TextBox x:Name="publication" HorizontalAlignment="Left"
-				Margin="77,10,-7,0" TextWrapping="Wrap"
-				Text="Publier ..." VerticalAlignment="Top"
-				Width="310" Height="80"/>
+			Margin="1,98,0,0" VerticalAlignment="Top" Width="398">
+            <TextBox GotFocus="TextBox_GotFocus" x:Name="publicationText" HorizontalAlignment="Left"
+				Margin="106,0,0,0" TextWrapping="Wrap"
+				Text="Nouvelle publication ..." VerticalAlignment="Top"
+				Width="282" Height="60" FontSize="16" BorderBrush="#FF4BAF50"/>
+            <Image x:Name="imageUser" HorizontalAlignment="Left" Height="90" VerticalAlignment="Top" Width="91" Margin="10,0,0,0" RenderTransformOrigin="0.503,0.66"/>
+            <Button Click="publish" x:Name="PublishButton" Content="Publier" HorizontalAlignment="Left" Margin="106,52,0,-9" VerticalAlignment="Top" Background="#FF4BAF50" BorderBrush="{x:Null}" Width="282"/>
         </Grid>
         <ScrollViewer HorizontalAlignment="Left" x:Name="scroll"
-			Height="362" Margin="10,203,0,0" 
+			Height="320" Margin="10,245,0,0" 
 			VerticalAlignment="Top" Width="380">
             <ContentPresenter />
         </ScrollViewer>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="78,13,0,0" TextWrapping="Wrap" Text="Accueil" VerticalAlignment="Top" Width="233" Height="29" FontSize="22" TextAlignment="Center" FontWeight="Bold"/>
         <local1:Menu HorizontalAlignment="Left" Margin="1,588,0,0" VerticalAlignment="Top" Width="398"/>
+        <TextBox x:Name="informationBox" HorizontalAlignment="Left" Margin="10,198,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="29" Width="380" IsReadOnly="True" TextAlignment="Center" FontSize="16" IsTapEnabled="False" IsDoubleTapEnabled="False"/>
     </Grid>
 </Page>

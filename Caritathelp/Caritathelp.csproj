@@ -134,6 +134,10 @@
     <Compile Include="All\FinalInscription.xaml.cs">
       <DependentUpon>FinalInscription.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Global.cs" />
+    <Compile Include="Message.xaml.cs">
+      <DependentUpon>Message.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Volunteer\Friend.cs" />
     <Compile Include="AssociationPage\GestionAssociation.xaml.cs">
       <DependentUpon>GestionAssociation.xaml</DependentUpon>
@@ -315,6 +319,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="All\Research.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Message.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

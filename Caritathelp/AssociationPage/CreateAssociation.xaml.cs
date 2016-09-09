@@ -87,7 +87,7 @@ namespace Caritathelp
                 Frame.Navigate(typeof(AssociationProfil), assoc_id);
                 return;
             }
-            string url = "http://api.caritathelp.me/pictures/";
+            string url = Global.API_IRL + "/pictures/";
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("file", Base64String),
@@ -137,7 +137,7 @@ namespace Caritathelp
             string year = DateTime.Today.Year.ToString();
 
             fullDate = month + "-" + date + "-" + year + "T00:00:00Z";
-            string url = "http://api.caritathelp.me/associations/";
+            string url = Global.API_IRL + "/associations/";
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("name", titleText.Text),

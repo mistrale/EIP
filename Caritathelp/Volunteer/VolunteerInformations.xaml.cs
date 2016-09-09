@@ -70,7 +70,7 @@ namespace Caritathelp.Volunteer
             {
                 return;
             }
-            string url = "http://api.caritathelp.me/pictures/";
+            string url = Global.API_IRL + "/pictures/";
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("file", Base64String),
@@ -171,7 +171,7 @@ namespace Caritathelp.Volunteer
             string genre = obj.Text.Equals("Femme", StringComparison.Ordinal) ? "f" : "m";
             String[] data = birthdayEdit.Date.ToString().Split(' ')[0].Split('/');
             string date = data[2] + '-' + data[0] + '-' + data[1] + "T00:00:00Z";
-            string url = "http://api.caritathelp.me/volunteers/";
+            string url = Global.API_IRL + "/volunteers/";
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("mail", emailEdit.Text),

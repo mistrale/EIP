@@ -94,7 +94,7 @@ namespace Caritathelp.All
         private async void createNewUser()
         {
             var settings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            string url = "http://api.caritathelp.me/volunteers/";
+            string url = Global.API_IRL + "/volunteers/";
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("lastname", (string)settings.Values["lastname"]),

@@ -27,19 +27,19 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Ellipse Name="logo" Margin="116,69,109,408.333" Grid.Row="1">
+        <Ellipse Name="logo" Margin="136,70,125,445">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
             </Ellipse.Fill>
         </Ellipse>
         <TextBox x:Name="titleText" HorizontalAlignment="Left"
-                 Margin="2,256,-2,0" TextWrapping="Wrap"
+                 Margin="1,219,-1,0" TextWrapping="Wrap"
                  Text="TextBox" VerticalAlignment="Top"
                  TextAlignment="Center"
                  Width="400" Height="47" Foreground="#FF4BAF50" Background="{x:Null}" BorderBrush="{x:Null}" IsReadOnly="True" FontWeight="Bold"/>
         <ScrollViewer HorizontalAlignment="Left"
-                      Name="scroll"
-                      Height="174" Margin="9,420,0,0"
+                      Name="newsScroll"
+                      Height="163" Margin="9,431,0,0"
                       VerticalAlignment="Top" Width="380"/>
         <Button x:ConnectionId='1' x:Name="OptionsButton"
                                          
@@ -96,11 +96,11 @@
                 <ImageBrush ImageSource="ms-appx:///Assets/checkKO.png" Stretch="None"/>
             </Button.Background>
         </Button>
-        <TextBlock x:Name="informationBox" HorizontalAlignment="Left" Margin="8,376,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="#FF4BAF50" Height="39" Width="379" TextAlignment="Center" FontSize="20"/>
-        <Grid HorizontalAlignment="Left" Height="57" Margin="0,302,0,0" VerticalAlignment="Top" Width="400" Background="#FF4BAF50"/>
+        <TextBlock x:Name="informationBox" HorizontalAlignment="Left" Margin="10,325,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="#FF4BAF50" Height="29" Width="379" TextAlignment="Center" FontSize="20"/>
+        <Grid HorizontalAlignment="Left" Height="57" Margin="0,263,0,0" VerticalAlignment="Top" Width="400" Background="#FF4BAF50"/>
         <Button x:ConnectionId='7' x:Name="infosButton" 
                                       
-                HorizontalAlignment="Left" Margin="191,298,0,0"
+                HorizontalAlignment="Left" Margin="197,254,0,0"
                 VerticalAlignment="Top" Foreground="{x:Null}"
                 BorderBrush="{x:Null}" 
                 RenderTransformOrigin="2.464,1.393" Width="203"
@@ -110,7 +110,7 @@
             </Button.Background>
         </Button>
         <Button x:ConnectionId='8' x:Name="memberButton" 
-                HorizontalAlignment="Left" Margin="5,300,0,0"
+                HorizontalAlignment="Left" Margin="10,259,0,0"
                 VerticalAlignment="Top" Foreground="{x:Null}"
                 BorderBrush="{x:Null}" Width="203" BorderThickness="0,2.5"
                 Height="64"                    >
@@ -118,6 +118,9 @@
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/member.png"/>
             </Button.Background>
         </Button>
+        <TextBox x:ConnectionId='9' x:Name="news"                             HorizontalAlignment="Left" Margin="6,359,0,0" TextWrapping="Wrap" Text="Publier..." VerticalAlignment="Top" Height="38" Width="269" BorderBrush="#FF4BAF50"/>
+        <Button x:ConnectionId='10' x:Name="button2"                     Content="Publier" HorizontalAlignment="Left" Margin="281,349,0,0" VerticalAlignment="Top" Width="102" BorderBrush="#FF4BAF50" Background="#FF4BAF50" Height="49"/>
+        <CheckBox x:Name="privateBox" Content="prive" HorizontalAlignment="Left" Margin="6,385,0,0" VerticalAlignment="Top" Foreground="#FF000B01" BorderBrush="#FF4BAF50" Height="57" FontSize="14" RenderTransformOrigin="0.475,0.655"/>
     </Grid>
 </Page>
 

@@ -52,7 +52,7 @@ namespace Caritathelp.Volunteer
         {
             public int status { get; set; }
             public string message { get; set; }
-            public IList<Publications> response { get; set; }
+            public IList<Publication> response { get; set; }
         }
 
         class PublishResponse
@@ -129,7 +129,7 @@ namespace Caritathelp.Volunteer
             try
             {
                 string id = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
-                var template = new UriTemplate("http://api.caritathelp.me/notifications{?token}");
+                var template = new UriTemplate(Global.API_IRL + "/notifications{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
@@ -171,7 +171,7 @@ namespace Caritathelp.Volunteer
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://api.caritathelp.me/volunteers/" + id + "/friends" + "{?token}");
+                var template = new UriTemplate(Global.API_IRL + "/volunteers/" + id + "/friends" + "{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 HttpResponseMessage response = await httpClient.GetAsync(uri);
@@ -183,28 +183,6 @@ namespace Caritathelp.Volunteer
                 if (friends.status != 200)
                 {
                     informationBox.Text = friends.message;
-                }
-                else
-                {
-                    var friend = friends.response.FirstOrDefault(c => c.id.ToString().Equals((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString(), StringComparison.Ordinal));
-                    if (friend != null)
-                    {
-                        removeButton.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        var notif = notifs.response.FirstOrDefault(c => c.sender_id.Equals(id, StringComparison.Ordinal) && c.notif_type.Equals("AddFriend", StringComparison.Ordinal));
-                        if (notif != null)
-                        {
-                            acceptUserButton.Visibility = Visibility.Visible;
-                            refuseUserButton.Visibility = Visibility.Visible;
-                        }
-                        else
-                        {
-                            if (!id.Equals((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString()))
-                                addButton.Visibility = Visibility.Visible;
-                        }
-                    }
                 }
             }
             catch (HttpRequestException e)
@@ -233,7 +211,8 @@ namespace Caritathelp.Volunteer
                         new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]),
                         new KeyValuePair<string, string>("volunteer_id", id)
                     };
-                    string url = ("http://api.caritathelp.me/friendship/add");
+                    string url = (Global.API_IRL + "/friendship/add");
+                    Debug.WriteLine("id : " + id);
                     HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
                     response.EnsureSuccessStatusCode();
                     responseString = await response.Content.ReadAsStringAsync();
@@ -277,7 +256,7 @@ namespace Caritathelp.Volunteer
                         new KeyValuePair<string, string>("notif_id", user.id),
                         new KeyValuePair<string, string>("acceptance", "false")
                     };
-                string url = ("http://api.caritathelp.me/friendship/reply");
+                string url = (Global.API_IRL + "/friendship/reply");
                 Debug.WriteLine(url);
                 HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
                 response.EnsureSuccessStatusCode();
@@ -323,7 +302,7 @@ namespace Caritathelp.Volunteer
                         new KeyValuePair<string, string>("notif_id", user.id),
                         new KeyValuePair<string, string>("acceptance", "true")
                     };
-                string url = ("http://api.caritathelp.me/friendship/reply");
+                string url = (Global.API_IRL + "/friendship/reply");
                 HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
@@ -359,7 +338,7 @@ namespace Caritathelp.Volunteer
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://api.caritathelp.me/friendship/remove" + "{?token,id}");
+                var template = new UriTemplate(Global.API_IRL + "/friendship/remove" + "{?token,id}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 template.AddParameter("id", id);
                 var uri = template.Resolve();
@@ -451,7 +430,7 @@ namespace Caritathelp.Volunteer
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://api.caritathelp.me/volunteers/" + id + "/main_picture{?token}");
+                var template = new UriTemplate(Global.API_IRL + "/volunteers/" + id + "/main_picture{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
@@ -471,7 +450,7 @@ namespace Caritathelp.Volunteer
                     if (picture.response != null)
                     {
                         myBrush.ImageSource =
-                            new BitmapImage(new Uri("http://api.caritathelp.me" + picture.response.picture_path.thumb.url, UriKind.Absolute));
+                            new BitmapImage(new Uri(Global.API_IRL + "" + picture.response.picture_path.thumb.url, UriKind.Absolute));
                     }
                     else
                         myBrush.ImageSource = new BitmapImage(new Uri("ms-appx:/Assets/avatar.png"));
@@ -521,7 +500,7 @@ namespace Caritathelp.Volunteer
                         new KeyValuePair<string, string>("friend_id", id),
                         new KeyValuePair<string, string>("content", news.Text)
                     };
-                string url = ("http://api.caritathelp.me/news/wall_message");
+                string url = (Global.API_IRL + "/news/wall_message");
                 HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
@@ -563,7 +542,7 @@ namespace Caritathelp.Volunteer
                         new KeyValuePair<string, string>("new_id", idNews.ToString()),
                         new KeyValuePair<string, string>("content", text)
                     };
-                string url = ("http://api.caritathelp.me/comments");
+                string url = (Global.API_IRL + "/comments");
                 HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
@@ -578,7 +557,7 @@ namespace Caritathelp.Volunteer
                     // image profil
                     Image profil = new Image();
                     profil.Margin = new Thickness(10, 10, 10, 10);
-                    profil.Source = new BitmapImage(new Uri("http://api.caritathelp.me" + commentResponse.response.thumb_path, UriKind.Absolute));
+                    profil.Source = new BitmapImage(new Uri(Global.API_IRL + "" + commentResponse.response.thumb_path, UriKind.Absolute));
                     Grid.SetColumn(profil, 0);
                     Grid.SetRow(profil, gridComment.RowDefinitions.Count + 1);
                     gridComment.Children.Add(profil);
@@ -597,8 +576,8 @@ namespace Caritathelp.Volunteer
                     Grid.SetColumn(contentComment, 1);
                     Grid.SetRow(contentComment, gridComment.RowDefinitions.Count + 1);
                     gridComment.Children.Add(contentComment);
-
-                    //Frame.Navigate(typeof(VolunteerProfil), id);
+                    gridComment.RowDefinitions.Add(new RowDefinition());
+                    gridComment.Visibility = Visibility.Visible;
                 }
                 Debug.WriteLine(message);
             }
@@ -629,7 +608,7 @@ namespace Caritathelp.Volunteer
             Grid gridComments = (Grid)(grid.Children.Cast<FrameworkElement>().FirstOrDefault(x => Grid.GetRow(x) == 4));
             TextBox text = (TextBox)(gridComment.Children.Cast<FrameworkElement>().FirstOrDefault(z => Grid.GetColumn(z) == 1));
             comments(text.Text, newsResponse.response[row].id, gridComments);
-            text.Text = "";
+            text.Text = "Votre commentaire ...";
         }
 
         private void initNews(int nbNews)
@@ -676,7 +655,7 @@ namespace Caritathelp.Volunteer
                 grid.ColumnDefinitions.Add(colum);
 
                 var colum1 = new ColumnDefinition();
-                colum1.Width = new GridLength(120);
+                colum1.Width = new GridLength(200);
                 grid.ColumnDefinitions.Add(colum1);
 
                 //column comment
@@ -689,7 +668,7 @@ namespace Caritathelp.Volunteer
                 // image profil
                 Image btn = new Image();
                 btn.Margin = new Thickness(10, 10, 10, 0);
-                btn.Source = new BitmapImage(new Uri("http://api.caritathelp.me" + newsResponse.response[i].thumb_path, UriKind.Absolute));
+                btn.Source = new BitmapImage(new Uri(Global.API_IRL + "" + newsResponse.response[i].groupe_thumb_path, UriKind.Absolute));
                 Grid.SetColumn(btn, 0);
                 Grid.SetRow(btn, 0);
                 Grid.SetRowSpan(btn, 2);
@@ -698,7 +677,13 @@ namespace Caritathelp.Volunteer
                 // username
                 // CHANGE BY HYPERLINK
                 TextBlock poster = new TextBlock();
-                poster.Text = newsResponse.response[i].firstname + " " + newsResponse.response[i].lastname;
+                if (newsResponse.response[i].news_type.Equals("New::Volunteer::FriendWallMessage", StringComparison.Ordinal))
+                {
+                    poster.Text = newsResponse.response[i].group_name + " a publie : ";
+                } else
+                {
+                    poster.Text = newsResponse.response[i].group_name;
+                }
                 poster.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
                 poster.Margin = new Thickness(10, 5, 10, 5);
                 poster.FontSize = 14;
@@ -708,7 +693,9 @@ namespace Caritathelp.Volunteer
 
                 // time published
                 TextBlock date = new TextBlock();
-                date.Text = newsResponse.response[i].created_at;
+                DateTime convertedDate;
+                convertedDate = Convert.ToDateTime(newsResponse.response[i].created_at);
+                date.Text = convertedDate.ToString();
                 date.Margin = new Thickness(10, 0, 10, 0);
                 date.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
                 Grid.SetColumn(date, 1);
@@ -811,7 +798,7 @@ namespace Caritathelp.Volunteer
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://api.caritathelp.me/news/"  + idNews + "/comments{?token}");
+                var template = new UriTemplate(Global.API_IRL + "/news/"  + idNews + "/comments{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
@@ -819,9 +806,7 @@ namespace Caritathelp.Volunteer
                 HttpResponseMessage response = await httpClient.GetAsync(uri);
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
-                System.Diagnostics.Debug.WriteLine(responseString.ToString());
                 commentsResponse = JsonConvert.DeserializeObject<CommentsResponse>(responseString);
-                Debug.WriteLine("COMMENTAIRE TROUVE : " + responseString);
                 if (commentsResponse.status != 200)
                 {
                     Debug.WriteLine("failed : " + commentsResponse.response);
@@ -836,7 +821,7 @@ namespace Caritathelp.Volunteer
                         // image profil
                         Image profil = new Image();
                         profil.Margin = new Thickness(10, 10, 10, 10);
-                        profil.Source = new BitmapImage(new Uri("http://api.caritathelp.me" + commentsResponse.response[x].thumb_path, UriKind.Absolute));
+                        profil.Source = new BitmapImage(new Uri(Global.API_IRL + "" + commentsResponse.response[x].thumb_path, UriKind.Absolute));
                         Grid.SetColumn(profil, 0);
                         Grid.SetRow(profil, x);
                         commentGrid.Children.Add(profil);
@@ -878,7 +863,7 @@ namespace Caritathelp.Volunteer
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://api.caritathelp.me/volunteers/" + id + "/news{?token}");
+                var template = new UriTemplate(Global.API_IRL + "/volunteers/" + id + "/news{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
@@ -886,7 +871,7 @@ namespace Caritathelp.Volunteer
                 HttpResponseMessage response = await httpClient.GetAsync(uri);
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync();
-                System.Diagnostics.Debug.WriteLine(responseString.ToString());
+                System.Diagnostics.Debug.WriteLine("NEWS : " + responseString.ToString());
                 newsResponse = JsonConvert.DeserializeObject<NewsResponse>(responseString);
                 if (newsResponse.status != 200)
                 {
@@ -920,7 +905,7 @@ namespace Caritathelp.Volunteer
             try
             {
 
-                var template = new UriTemplate("http://api.caritathelp.me/volunteers/" + id + "{?token}");
+                var template = new UriTemplate(Global.API_IRL + "/volunteers/" + id + "{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
@@ -937,6 +922,24 @@ namespace Caritathelp.Volunteer
                 else
                 {
                     nameTextBox.Text = user.response.firstname + " " + user.response.lastname;
+                    if (!id.Equals((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString()))
+                    {
+                        if (user.response.friendship == null)
+                        {
+                            addButton.Visibility = Visibility.Visible;
+                        } else if (user.response.friendship.Equals("friend", StringComparison.Ordinal))
+                        {
+                            removeButton.Visibility = Visibility.Visible;
+                        } else if (user.response.friendship.Equals("invitation sent", StringComparison.Ordinal))
+                        {
+                            informationBox.Text = "Invitation envoyee";
+                        } else if (user.response.friendship.Equals("invitation received", StringComparison.Ordinal))
+                        {
+                            acceptUserButton.Visibility = Visibility.Visible;
+                            refuseUserButton.Visibility = Visibility.Visible;
+                        }
+
+                    }
                     getFriends();
                     getPicture();
                 }

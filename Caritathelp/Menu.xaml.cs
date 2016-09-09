@@ -66,7 +66,7 @@ namespace Caritathelp
 
         public void messageButtonClick(object sender, RoutedEventArgs e)
         {
-
+            ((Frame)Window.Current.Content).Navigate(typeof(Message));
         }
 
         public void moreButtonClick(object sender, RoutedEventArgs e)
@@ -97,18 +97,21 @@ namespace Caritathelp
 
         private void MessageReceived(MessageWebSocket sender, MessageWebSocketMessageReceivedEventArgs args)
         {
+            Debug.WriteLine("test notif");
             try
             {
                 using (DataReader reader = args.GetDataReader())
                 {
                     reader.UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding.Utf8;
                     string read = reader.ReadString(reader.UnconsumedBufferLength);
+                    Debug.WriteLine("read : " + read);
                     notif = JsonConvert.DeserializeObject<Notification>(read);
-                    Debug.WriteLine(read);
+                    Debug.WriteLine("DATA : " + read);
                     if (notif.type.Equals("notification", StringComparison.Ordinal))
                     {
                         updateGUI();
                     }
+
                 }
             }
             catch (Exception ex) // For debugging

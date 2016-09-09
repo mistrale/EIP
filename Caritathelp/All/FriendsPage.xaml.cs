@@ -65,7 +65,7 @@ namespace Caritathelp.All
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://api.caritathelp.me/friend_requests" + "{?token,sent}");
+                var template = new UriTemplate(Global.API_IRL + "/friend_requests" + "{?token,sent}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 template.AddParameter("sent", "true");
                 var uri = template.Resolve();
@@ -134,7 +134,7 @@ namespace Caritathelp.All
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://api.caritathelp.me/friend_requests" + "{?token}");
+                var template = new UriTemplate(Global.API_IRL + "/friend_requests" + "{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 HttpResponseMessage response = await httpClient.GetAsync(uri);
@@ -203,7 +203,7 @@ namespace Caritathelp.All
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://api.caritathelp.me/volunteers/" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"] + "/friends" + "{?token}");
+                var template = new UriTemplate(Global.API_IRL + "/volunteers/" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"] + "/friends" + "{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 HttpResponseMessage response = await httpClient.GetAsync(uri);

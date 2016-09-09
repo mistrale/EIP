@@ -50,7 +50,7 @@ namespace Caritathelp.Event
 
         private async void deleteEvents()
         {
-            string url = "http://api.caritathelp.me/events/" + events.id.ToString() + "?token=" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"].ToString();
+            string url = Global.API_IRL + "/events/" + events.id.ToString() + "?token=" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"].ToString();
             Debug.WriteLine(url);
             var httpClient = new HttpClient(new HttpClientHandler());
             try

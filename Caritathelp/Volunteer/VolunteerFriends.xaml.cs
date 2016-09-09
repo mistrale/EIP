@@ -55,7 +55,7 @@ namespace Caritathelp.Volunteer
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate("http://api.caritathelp.me/volunteers/" + id + "/main_picture{?token}");
+                var template = new UriTemplate(Global.API_IRL + "/volunteers/" + id + "/main_picture{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
@@ -73,7 +73,7 @@ namespace Caritathelp.Volunteer
                 {
                     if (pictures.response != null)
                     {
-                        btn.Source = new BitmapImage(new Uri("http://api.caritathelp.me" + pictures.response.picture_path.thumb.url, UriKind.Absolute));
+                        btn.Source = new BitmapImage(new Uri(Global.API_IRL + "" + pictures.response.picture_path.thumb.url, UriKind.Absolute));
                     }
                     else
                         btn.Source = new BitmapImage(new Uri("ms-appx:/Assets/avatar.png"));

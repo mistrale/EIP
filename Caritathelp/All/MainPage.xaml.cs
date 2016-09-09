@@ -53,7 +53,7 @@ namespace Caritathelp
 
         private async void connect()
         {
-            string url = "http://api.caritathelp.me/login/";
+            string url = Global.API_IRL + "/login/";
             var values = new List<KeyValuePair<string, string>>
                     {
 
@@ -90,6 +90,7 @@ namespace Caritathelp
                         localSettings.Values["password"] = Password.Password;
                         localSettings.Values["id"] = message.response.id;
                         localSettings.Values["token"] = message.response.token;
+                        localSettings.Values["thumb_path"] = message.response.thumb_path;
                         //                      localSettings.Values["notifications"] = JsonConvert.SerializeObject(message.response.notifications);
                         this.Frame.Navigate(typeof(All.Accueil));
                     }
