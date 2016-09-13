@@ -62,10 +62,12 @@ namespace Caritathelp
             }
         }
 
-        public static ImageSourcePath test;
+        public static ImageSourcePath notifs;
+        public static ImageSourcePath msg;
 
         public void messageButtonClick(object sender, RoutedEventArgs e)
         {
+            msg.PathToImage = "ms-appx:/Assets/message.png";
             ((Frame)Window.Current.Content).Navigate(typeof(Message));
         }
 
@@ -81,17 +83,27 @@ namespace Caritathelp
 
         public void alertButtonClick(object sender, RoutedEventArgs e)
         {
-            test.PathToImage = "ms-appx:/Assets/alert.png";
+            notifs.PathToImage = "ms-appx:/Assets/alert.png";
             ((Frame)Window.Current.Content).Navigate(typeof(All.Notification));
         }
 
-        private async void updateGUI()
+        private async void updateNotificationGUI()
         {
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
             () =>
             {
                 BindingExpression expression = notifButton.GetBindingExpression(Button.DataContextProperty);
-                test.PathToImage = "ms-appx:/Assets/alertON.png";
+                notifs.PathToImage = "ms-appx:/Assets/alertON.png";
+            });
+        }
+
+        private async void updateMessageGUI()
+        {
+            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+            () =>
+            {
+                BindingExpression expression = notifButton.GetBindingExpression(Button.DataContextProperty);
+                msg.PathToImage = "ms-appx:/Assets/messageON.png";
             });
         }
 
@@ -109,7 +121,10 @@ namespace Caritathelp
                     Debug.WriteLine("DATA : " + read);
                     if (notif.type.Equals("notification", StringComparison.Ordinal))
                     {
-                        updateGUI();
+                        updateNotificationGUI();
+                    } else
+                    {
+                        updateMessageGUI();
                     }
 
                 }
@@ -147,7 +162,7 @@ namespace Caritathelp
                 // Have we connected yet?
                 if (webSocket == null)
                 {
-                    Uri server = new Uri("ws://api.caritathelp.me:8080");
+                    Uri server = new Uri(Global.WS_URL);
 
                     webSocket = new MessageWebSocket();
                     // MessageWebSocket supports both utf8 and binary messages.
@@ -181,12 +196,20 @@ namespace Caritathelp
         public Menu()
         {
             this.InitializeComponent();
-            if (test == null)
+            if (notifs == null)
             {
-                test = new ImageSourcePath();
-                test.PathToImage = "ms-appx:/Assets/alert.png";
+                notifs = new ImageSourcePath();
+                notifs.PathToImage = "ms-appx:/Assets/alert.png";
             }
-            notifButton.DataContext = test;
+            notifButton.DataContext = notifs;
+
+            if (msg == null)
+            {
+                msg = new ImageSourcePath();
+                msg.PathToImage = "ms-appx:/Assets/message.png";
+            }
+
+            messageButton.DataContext = msg;
             startListening();
         }
     }

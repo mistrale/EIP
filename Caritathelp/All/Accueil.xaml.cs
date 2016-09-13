@@ -62,6 +62,14 @@ namespace Caritathelp.All
             public Publication response { get; set; }
         }
 
+        class SimpleRequest
+        {
+            public int status { get; set; }
+            public string message { get; set; }
+            public string response { get; set; }
+        }
+
+        private SimpleRequest simple;
         Grid newsGrid;
         private PublishResponse publishreponse;
         private CommentsResponse commentsResponse;
@@ -69,158 +77,112 @@ namespace Caritathelp.All
         private string responseString;
         private NewsResponse newsResponse;
 
-        private void initAccueil()
-        {
-            //Publication test = new Publication();
-            //test.author = "Aude Sikorav";
-            //test.date = "17h25";
-            //test.content = "Bonjour a tous, voici une publication test pour voir combien en longeur elle va occupée et voir si Windows phone qui pue la merde gere tout seul la mise en place";
-            //test.title = "Welcome in Caritathelp";
-
-            //Comment comment = new Comment();
-            //comment.autor = "Robin Vassuer";
-            //comment.content = "Tg aude tu pues la merde";
-            //comment.date = "17h28";
-            //test.comments.Add(comment);
-            Grid mainGrid = new Grid();
-
-            mainGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            int i = 0;
-
-            while (i < 10)
-            {
-                mainGrid.RowDefinitions.Add(new RowDefinition());
-                Grid grid = new Grid();
-                // grid.Background = new SolidColorBrush(Color.FromArgb(250, 100, 100, 100));
-
-                // row
-                var row = new RowDefinition();
-                row.Height = new GridLength(30);
-                grid.RowDefinitions.Add(row);
-
-                var row2 = new RowDefinition();
-                row2.Height = new GridLength(30);
-                grid.RowDefinitions.Add(row2);
-
-                var row3 = new RowDefinition();
-                grid.RowDefinitions.Add(row3);
-
-                var row4 = new RowDefinition();
-                grid.RowDefinitions.Add(row4);
-
-                //column
-                var colum = new ColumnDefinition();
-                colum.Width = new GridLength(50);
-                grid.ColumnDefinitions.Add(colum);
-
-                var column2 = new ColumnDefinition();
-                grid.ColumnDefinitions.Add(column2);
-
-                var column3 = new ColumnDefinition();
-                column3.Width = new GridLength(60);
-                grid.ColumnDefinitions.Add(column3);
-
-                // title
-                TextBlock title = new TextBlock();
-                title.Text = "Aude Sikorav";
-                title.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
-                title.Margin = new Thickness(10, 5, 10, 5);
-                title.FontSize = 14;
-                Grid.SetColumn(title, 1);
-                Grid.SetColumnSpan(title, 2);
-                Grid.SetRow(title, 0);
-                grid.Children.Add(title);
-
-                // hour
-                TextBlock date = new TextBlock();
-                date.Text = "7h25";
-                date.Margin = new Thickness(10, 0, 10, 0);
-                date.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
-                Grid.SetColumn(date, 1);
-                Grid.SetColumnSpan(date, 2);
-                Grid.SetRow(date, 1);
-                grid.Children.Add(date);
-
-                // image
-                Button btn = new Button();
-                btn.Background = new SolidColorBrush(Color.FromArgb(250, 100, 100, 100));
-                btn.Margin = new Thickness(10, 10, 0, 10);
-                Grid.SetColumn(btn, 0);
-                Grid.SetRow(btn, 0);
-                Grid.SetRowSpan(btn, 2);
-                grid.Children.Add(btn);
-
-                // content
-                TextBlock content = new TextBlock();
-                content.Margin = new Thickness(10, 10, 10, 10);
-                content.FontSize = 12;
-                content.TextWrapping = TextWrapping.Wrap;
-                content.Width = 340;
-                content.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
-                content.Text = "Bonjour a tous, voici une publication test pour voir combien en longeur elle va occupée et voir si Windows phone qui pue la merde gere tout seul la mise en place";
-                Grid.SetColumn(content, 0);
-                Grid.SetColumnSpan(content, 3);
-                Grid.SetRow(content, 2);
-                grid.Children.Add(content);
-
-                // add comment
-                Button me = new Button();
-                me.Background = new SolidColorBrush(Colors.Blue);
-                me.Margin = new Thickness(10, 0, 10, 0);
-                Grid.SetColumn(me, 0);
-                Grid.SetRow(me, 3);
-                grid.Children.Add(me);
-
-                TextBox newComment = new TextBox();
-                newComment.BorderBrush = new SolidColorBrush(Colors.Black);
-               // newComment.BorderThickness = new Thickness(1, 1, 1, 1);
-                newComment.Text = "Votre commentaire ...";
-                newComment.Foreground = new SolidColorBrush(Colors.Black);
-                newComment.FontSize = 12;
-                newComment.Margin = new Thickness(0, 10, 0, 0);
-                Grid.SetColumn(newComment, 1);
-                Grid.SetColumnSpan(newComment, 1);
-                Grid.SetRow(newComment, 3);
-                grid.Children.Add(newComment);
-
-                Button ok = new Button();
-                ok.Content = "Ok";
-                ok.Foreground = new SolidColorBrush(Colors.Black);
-                ok.Background = new SolidColorBrush(Colors.Gray);
-                ok.Margin = new Thickness(10, 0, 10, 0);
-                Grid.SetColumn(ok, 2);
-                Grid.SetRow(ok, 3);
-
-                grid.Background = new SolidColorBrush(Color.FromArgb(255, 182, 215, 168));
-                grid.Children.Add(ok);
-
-
-                Border border = new Border();
-                border.BorderBrush = new SolidColorBrush(Color.FromArgb(250, 100, 100, 100));
-                border.BorderThickness = new Thickness(1, 1, 1, 1);
-                Grid.SetColumn(border, 0);
-                Grid.SetColumnSpan(border, 3);
-                Grid.SetRow(border, 0);
-                Grid.SetRowSpan(border, 4);
-                grid.Margin = new Thickness(10, 10, 10, 10);
-                grid.Children.Add(border);
-
-                mainGrid.Children.Add(grid);
-                Grid.SetColumn(grid, 0);
-                Grid.SetRow(grid, i);
-                i++;
-            }
-
-            scroll.Content = mainGrid;
-        }
-
         public void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox tb = (TextBox)sender;
             tb.Text = string.Empty;
         }
 
-        private async void getComments(int idNews, Grid commentGrid)
+        public void updateComment(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            commentInfos cmt = (commentInfos)button.Tag;
+            Grid grid = (Grid)(newsGrid.Children.Cast<FrameworkElement>().
+                         FirstOrDefault(y => Grid.GetRow(y) == cmt.row_news));
+
+            Grid gridComment = (Grid)grid.Children.Cast<FrameworkElement>().FirstOrDefault(x => Grid.GetRow(x) == 4);
+            Grid oneComment = (Grid)gridComment.Children.Cast<FrameworkElement>().FirstOrDefault(x => Grid.GetRow(x) == cmt.row_cmt);
+            string text = ((TextBox)(oneComment.Children.Cast<FrameworkElement>()
+                .FirstOrDefault(x => Grid.GetRow(x) == 0 && Grid.GetColumn(x) == 2))).Text;
+            Debug.WriteLine("on update avec :  " + text + " d id : " + cmt.id_comments );
+            //string text = (TextBox)
+            UpdateComment(cmt, text);
+        }
+
+        public void deleteComment(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            commentInfos cmt = (commentInfos)button.Tag;
+            DeleteComment(cmt);
+        }
+
+        private async void UpdateComment(commentInfos cmt, string content)
+        {
+            string url = Global.API_IRL + "/comments/" + cmt.id_comments;
+            var values = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("id", cmt.id_comments.ToString()),
+                        new KeyValuePair<string, string>("content", content),
+                        new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"])
+                    };
+            var httpClient = new HttpClient(new HttpClientHandler());
+            try
+            {
+                HttpResponseMessage response = await httpClient.PutAsync(url, new FormUrlEncodedContent(values));
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine(responseString);
+                commentResponse = JsonConvert.DeserializeObject<CommentResponse>(responseString);
+                if (commentResponse.status != 200)
+                {
+                    informationBox.Text = commentResponse.message;
+                }
+                else
+                {
+                    informationBox.Text = "Commentaire modifié !";
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                informationBox.Text = e.Message;
+            }
+            catch (JsonReaderException e)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+            }
+            catch (JsonSerializationException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+        }
+
+        private async void DeleteComment(commentInfos cmt)
+        {
+            string url = Global.API_IRL + "/comments/" + cmt.id_comments.ToString() + "?token=" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"].ToString();
+            Debug.WriteLine(url);
+            var httpClient = new HttpClient(new HttpClientHandler());
+            try
+            {
+                HttpResponseMessage response = await httpClient.DeleteAsync(url);
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine(responseString);
+                simple = JsonConvert.DeserializeObject<SimpleRequest>(responseString);
+                if (simple.status != 200)
+                {
+                    Debug.WriteLine(simple.message);
+                }
+                else
+                {
+                    Frame.Navigate(typeof(Accueil));
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Debug.WriteLine(responseString);
+                Debug.WriteLine(e.Message);
+            }
+            catch (JsonReaderException e)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+            }
+            catch (JsonSerializationException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+        }
+
+        private async void getComments(int idNews, Grid commentGrid, int row, string idVolunteer)
         {
             var httpClient = new HttpClient(new HttpClientHandler());
             try
@@ -245,28 +207,97 @@ namespace Caritathelp.All
                     {
                         commentGrid.RowDefinitions.Add(new RowDefinition());
 
+                        Grid oneComment = new Grid();
+                        oneComment.VerticalAlignment = VerticalAlignment.Top;
+                        var columnCommentImage = new ColumnDefinition();
+                        columnCommentImage.Width = new GridLength(60);
+                        oneComment.ColumnDefinitions.Add(columnCommentImage);
+
+                        var nameCol = new ColumnDefinition();
+                        nameCol.Width = new GridLength(100);
+                        oneComment.ColumnDefinitions.Add(nameCol);
+
+                        var column1 = new ColumnDefinition();
+                        column1.Width = new GridLength(50);
+                        oneComment.ColumnDefinitions.Add(column1);
+                        var column2 = new ColumnDefinition();
+                        oneComment.ColumnDefinitions.Add(column2);
+                        oneComment.RowDefinitions.Add(new RowDefinition());
+                        oneComment.RowDefinitions.Add(new RowDefinition());
+
                         // image profil
                         Image profil = new Image();
                         profil.Margin = new Thickness(10, 10, 10, 10);
                         profil.Source = new BitmapImage(new Uri(Global.API_IRL + commentsResponse.response[x].thumb_path, UriKind.Absolute));
                         Grid.SetColumn(profil, 0);
-                        Grid.SetRow(profil, x);
-                        commentGrid.Children.Add(profil);
+                        Grid.SetRow(profil, 0);
+                        oneComment.Children.Add(profil);
 
-                        TextBlock contentComment = new TextBlock();
-                        contentComment.Margin = new Thickness(10, 10, 10, 10);
-                        contentComment.FontSize = 12;
-                        contentComment.TextWrapping = TextWrapping.Wrap;
-                        contentComment.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
-                        Run test = new Run();
-                        test.FontWeight = FontWeights.Bold;
-                        test.Text = commentsResponse.response[x].firstname + " " + commentsResponse.response[x].lastname + " ";
-                        contentComment.Inlines.Add(test);
-                        contentComment.Inlines.Add(new Run { Text = commentsResponse.response[x].content });
+                        // name
+                        TextBlock name = new TextBlock();
+                        name.Margin = new Thickness(10, 10, 10, 10);
+                        name.FontSize = 12;
+                        name.TextWrapping = TextWrapping.Wrap;
+                        name.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
+                        name.Text = commentsResponse.response[x].firstname + " " + commentsResponse.response[x].lastname;
+                        name.FontWeight = FontWeights.Bold;
+                        name.VerticalAlignment = VerticalAlignment.Center;
+                        Grid.SetColumn(name, 1);
+                        Grid.SetRow(name, 0);
+                        oneComment.Children.Add(name);
 
-                        Grid.SetColumn(contentComment, 1);
-                        Grid.SetRow(contentComment, x);
-                        commentGrid.Children.Add(contentComment);
+                        // content
+                        TextBox content = new TextBox();
+                        content.Background = new SolidColorBrush(Color.FromArgb(0, 83, 166, 52));
+                        content.BorderBrush = new SolidColorBrush(Color.FromArgb(0, 83, 166, 52));
+                        content.Margin = new Thickness(10, 10, 10, 10);
+                        content.FontSize = 12;
+                        content.TextWrapping = TextWrapping.Wrap;
+                        content.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
+                        content.Text = commentsResponse.response[x].content;
+                        content.VerticalAlignment = VerticalAlignment.Center;
+                        Grid.SetColumn(content, 2);
+                        Grid.SetColumnSpan(content, 2);
+                        Grid.SetRow(content, 0);
+                        oneComment.Children.Add(content);
+
+                        // update /delete
+
+                        // update comment
+                        if (commentsResponse.response[x].volunteer_id != Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]))
+                        {
+                            commentInfos tmp = new commentInfos();
+                            tmp.id_news = idNews;
+                            tmp.id_comments = commentsResponse.response[x].id;
+                            tmp.row_news = row;
+                            tmp.row_cmt = x;
+
+                            Button updateNew = new Button();
+                            updateNew.Content = "Modifier";
+                            updateNew.Tag = tmp;
+                            updateNew.FontSize = 12;
+                            updateNew.Click += updateComment;
+
+                            Grid.SetColumn(updateNew, 1);
+                            Grid.SetRow(updateNew, 1);
+                            Grid.SetColumnSpan(updateNew, 2);
+                            oneComment.Children.Add(updateNew);
+
+                            // delete news
+                            Button deleteCmt = new Button();
+                            deleteCmt.Content = "Supprimer";
+                            deleteCmt.Tag = tmp;
+                            deleteCmt.Click += deleteComment;
+                            deleteCmt.FontSize = 12;
+                            deleteCmt.Margin = new Thickness(0, 0, 10, 0);
+
+                            Grid.SetColumn(deleteCmt, 3);
+                            Grid.SetRow(deleteCmt, 1);
+                            oneComment.Children.Add(deleteCmt);
+                        }
+                        Grid.SetColumn(oneComment, 0);
+                        Grid.SetRow(oneComment, x);
+                        commentGrid.Children.Add(oneComment);
                     }
                 }
             }
@@ -285,7 +316,7 @@ namespace Caritathelp.All
             }
         }
 
-        private async void comments(string text, int idNews, Grid gridComment)
+        private async void comments(string text, int idNews, Grid gridComment, int row_news)
         {
             var httpClient = new HttpClient(new HttpClientHandler());
             try
@@ -308,28 +339,98 @@ namespace Caritathelp.All
                 else
                 {
                     gridComment.RowDefinitions.Add(new RowDefinition());
+
+                    Grid oneComment = new Grid();
+                    oneComment.VerticalAlignment = VerticalAlignment.Top;
+                    var columnCommentImage = new ColumnDefinition();
+                    columnCommentImage.Width = new GridLength(60);
+                    oneComment.ColumnDefinitions.Add(columnCommentImage);
+
+                    var nameCol = new ColumnDefinition();
+                    nameCol.Width = new GridLength(100);
+                    oneComment.ColumnDefinitions.Add(nameCol);
+
+                    var column1 = new ColumnDefinition();
+                    column1.Width = new GridLength(50);
+                    oneComment.ColumnDefinitions.Add(column1);
+                    var column2 = new ColumnDefinition();
+                    oneComment.ColumnDefinitions.Add(column2);
+                    oneComment.RowDefinitions.Add(new RowDefinition());
+                    oneComment.RowDefinitions.Add(new RowDefinition());
+
                     // image profil
                     Image profil = new Image();
                     profil.Margin = new Thickness(10, 10, 10, 10);
                     profil.Source = new BitmapImage(new Uri(Global.API_IRL + commentResponse.response.thumb_path, UriKind.Absolute));
                     Grid.SetColumn(profil, 0);
-                    Grid.SetRow(profil, gridComment.RowDefinitions.Count + 1);
-                    gridComment.Children.Add(profil);
+                    Grid.SetRow(profil, 0);
+                    oneComment.Children.Add(profil);
 
-                    TextBlock contentComment = new TextBlock();
-                    contentComment.Margin = new Thickness(10, 10, 10, 10);
-                    contentComment.FontSize = 12;
-                    contentComment.TextWrapping = TextWrapping.Wrap;
-                    contentComment.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
-                    Run test = new Run();
-                    test.FontWeight = FontWeights.Bold;
-                    test.Text = commentResponse.response.firstname + " " + commentResponse.response.lastname + " ";
-                    contentComment.Inlines.Add(test);
-                    contentComment.Inlines.Add(new Run { Text = commentResponse.response.content });
+                    // name
+                    TextBlock name = new TextBlock();
+                    name.Margin = new Thickness(10, 10, 10, 10);
+                    name.FontSize = 12;
+                    name.TextWrapping = TextWrapping.Wrap;
+                    name.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
+                    name.Text = commentResponse.response.firstname + " " + commentResponse.response.lastname;
+                    name.FontWeight = FontWeights.Bold;
+                    name.VerticalAlignment = VerticalAlignment.Center;
+                    Grid.SetColumn(name, 1);
+                    Grid.SetRow(name, 0);
+                    oneComment.Children.Add(name);
 
-                    Grid.SetColumn(contentComment, 1);
-                    Grid.SetRow(contentComment, gridComment.RowDefinitions.Count + 1);
-                    gridComment.Children.Add(contentComment);
+                    // content
+                    TextBox content = new TextBox();
+                    content.Background = new SolidColorBrush(Color.FromArgb(0, 83, 166, 52));
+                    content.BorderBrush = new SolidColorBrush(Color.FromArgb(0, 83, 166, 52));
+                    content.Margin = new Thickness(10, 10, 10, 10);
+                    content.FontSize = 12;
+                    content.TextWrapping = TextWrapping.Wrap;
+                    content.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
+                    content.Text = commentResponse.response.content;
+                    content.VerticalAlignment = VerticalAlignment.Center;
+                    Grid.SetColumn(content, 2);
+                    Grid.SetColumnSpan(content, 2);
+                    Grid.SetRow(content, 0);
+                    oneComment.Children.Add(content);
+
+                    // update /delete
+
+                    // update comment
+                    commentInfos tmp = new commentInfos();
+                    tmp.id_news = idNews;
+                    tmp.id_comments = commentResponse.response.id;
+                    tmp.row_news = row_news;
+                    tmp.row_cmt = gridComment.RowDefinitions.Count + 1;
+
+                    Button updateNew = new Button();
+                    updateNew.Content = "Modifier";
+                    updateNew.Tag = tmp;
+                    updateNew.FontSize = 12;
+                    updateNew.Click += updateComment;
+
+                    Grid.SetColumn(updateNew, 1);
+                    Grid.SetRow(updateNew, 1);
+                    Grid.SetColumnSpan(updateNew, 2);
+                    oneComment.Children.Add(updateNew);
+
+                    // delete news
+                    Button deleteCmt = new Button();
+                    deleteCmt.Content = "Supprimer";
+                    deleteCmt.Tag = tmp;
+                    deleteCmt.Click += deleteComment;
+                    deleteCmt.FontSize = 12;
+                    deleteCmt.Margin = new Thickness(0, 0, 10, 0);
+
+                    Grid.SetColumn(deleteCmt, 3);
+                    Grid.SetRow(deleteCmt, 1);
+                    oneComment.Children.Add(deleteCmt);
+
+                    Grid.SetColumn(oneComment, 0);
+                    Grid.SetRow(oneComment, gridComment.RowDefinitions.Count + 1);
+                    gridComment.Children.Add(oneComment);
+
+                    /// pas la
                     gridComment.RowDefinitions.Add(new RowDefinition());
                     gridComment.Visibility = Visibility.Visible;
                 }
@@ -359,6 +460,101 @@ namespace Caritathelp.All
 
             var gridComment = grid.Children.Cast<FrameworkElement>().FirstOrDefault(x => Grid.GetRow(x) == 4);
             gridComment.Visibility = Visibility.Visible;
+        }
+
+        public void updateNews(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            NewsInfos row = (NewsInfos)(button.Tag);
+
+            Grid grid = (Grid)(newsGrid.Children.Cast<FrameworkElement>().
+                         FirstOrDefault(y => Grid.GetRow(y) == row.id_rows));
+            string text = ((TextBox)grid.Children.Cast<FrameworkElement>().FirstOrDefault(x => Grid.GetRow(x) == 2)).Text;
+            Debug.WriteLine("ON va modifier la news : " + row + " par : " + text);
+            UpdateNew(text, row.id_news);
+        }
+
+        public void deleteNew(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            NewsInfos cmt = (NewsInfos)button.Tag;
+            DeleteNew(cmt.id_news);
+        }
+
+        private async void DeleteNew(int idNews)
+        {
+            string url = Global.API_IRL + "/news/" + idNews.ToString() + "?token=" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"].ToString();
+            Debug.WriteLine(url);
+            var httpClient = new HttpClient(new HttpClientHandler());
+            try
+            {
+                HttpResponseMessage response = await httpClient.DeleteAsync(url);
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine(responseString);
+                simple = JsonConvert.DeserializeObject<SimpleRequest>(responseString);
+                if (simple.status != 200)
+                {
+                    Debug.WriteLine(simple.message);
+                }
+                else
+                {
+                    Frame.Navigate(typeof(Accueil));
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Debug.WriteLine(responseString);
+                Debug.WriteLine(e.Message);
+            }
+            catch (JsonReaderException e)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+            }
+            catch (JsonSerializationException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+        }
+
+        private async void UpdateNew(string text, int idNews)
+        {
+            string url = Global.API_IRL + "/news/" + idNews;
+            var values = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("id", idNews.ToString()),
+                        new KeyValuePair<string, string>("content", text),
+                        new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"])
+                    };
+            var httpClient = new HttpClient(new HttpClientHandler());
+            try
+            {
+                HttpResponseMessage response = await httpClient.PutAsync(url, new FormUrlEncodedContent(values));
+                response.EnsureSuccessStatusCode();
+                responseString = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine(responseString);
+                publishreponse = JsonConvert.DeserializeObject<PublishResponse>(responseString);
+                if (publishreponse.status != 200)
+                {
+                    informationBox.Text = publishreponse.message;
+                }
+                else
+                {
+                    informationBox.Text = "Publication modifié !";
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                informationBox.Text = e.Message;
+            }
+            catch (JsonReaderException e)
+            {
+                System.Diagnostics.Debug.WriteLine(responseString);
+            }
+            catch (JsonSerializationException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
         }
 
         public void publish(object sender, RoutedEventArgs e)
@@ -419,7 +615,7 @@ namespace Caritathelp.All
             Grid gridComment = (Grid)(grid.Children.Cast<FrameworkElement>().FirstOrDefault(x => Grid.GetRow(x) == 5));
             Grid gridComments = (Grid)(grid.Children.Cast<FrameworkElement>().FirstOrDefault(x => Grid.GetRow(x) == 4));
             TextBox text = (TextBox)(gridComment.Children.Cast<FrameworkElement>().FirstOrDefault(z => Grid.GetColumn(z) == 1));
-            comments(text.Text, newsResponse.response[row].id, gridComments);
+            comments(text.Text, newsResponse.response[row].id, gridComments, row);
             text.Text = "Votre commentaire ...";
         }
 
@@ -434,7 +630,6 @@ namespace Caritathelp.All
 
                 // main new's grid
                 Grid grid = new Grid();
-                grid.Margin = new Thickness(0, 10, 0, 10);
                 grid.Background = new SolidColorBrush(Color.FromArgb(100, 83, 166, 52));
 
                 // grid new's info
@@ -461,18 +656,21 @@ namespace Caritathelp.All
                 var row5 = new RowDefinition();
                 grid.RowDefinitions.Add(row5);
 
-                //column image user / share
+                // column image user / share
                 var colum = new ColumnDefinition();
                 colum.Width = new GridLength(60);
                 grid.ColumnDefinitions.Add(colum);
 
                 var colum1 = new ColumnDefinition();
-                colum1.Width = new GridLength(200);
+                colum1.Width = new GridLength(75);
                 grid.ColumnDefinitions.Add(colum1);
 
                 //column comment
                 var colum2 = new ColumnDefinition();
+              //  colum2.Width = new GridLength(80);
                 grid.ColumnDefinitions.Add(colum2);
+
+                grid.ColumnDefinitions.Add(new ColumnDefinition());
 
                 // add comment
                 grid.RowDefinitions.Add(new RowDefinition());
@@ -490,12 +688,19 @@ namespace Caritathelp.All
                 // username
                 // CHANGE BY HYPERLINK
                 TextBlock poster = new TextBlock();
-                poster.Text = newsResponse.response[i].group_name;
-
+                if (newsResponse.response[i].news_type.Equals("New::Volunteer::FriendWallMessage", StringComparison.Ordinal))
+                {
+                    poster.Text = newsResponse.response[i].group_name + " a publie : ";
+                }
+                else
+                {
+                    poster.Text = newsResponse.response[i].group_name;
+                }
                 poster.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
                 poster.Margin = new Thickness(10, 5, 10, 5);
                 poster.FontSize = 14;
                 Grid.SetColumn(poster, 1);
+                Grid.SetColumnSpan(poster, 3);
                 Grid.SetRow(poster, 0);
                 grid.Children.Add(poster);
 
@@ -511,23 +716,24 @@ namespace Caritathelp.All
                 grid.Children.Add(date);
 
                 // content
-                TextBlock content = new TextBlock();
+                TextBox content = new TextBox();
+                content.Background = new SolidColorBrush(Color.FromArgb(0, 83, 166, 52));
+                content.BorderBrush = new SolidColorBrush(Color.FromArgb(0, 83, 166, 52));
                 content.Margin = new Thickness(10, 10, 10, 10);
                 content.FontSize = 12;
                 content.TextWrapping = TextWrapping.Wrap;
                 content.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
                 content.Text = newsResponse.response[i].content;
                 Grid.SetColumn(content, 0);
-                Grid.SetColumnSpan(content, 3);
+                Grid.SetColumnSpan(content, 4);
                 Grid.SetRow(content, 2);
                 grid.Children.Add(content);
 
                 // see Comment
                 Button seeComment = new Button();
                 seeComment.Click += seeCommentEvent;
-                seeComment.Content = "Voir les commentaires";
+                seeComment.Content = newsResponse.response[i].number_comments.ToString() + " commentaires";
                 seeComment.Tag = i;
-                seeComment.Width = 150;
                 seeComment.FontSize = 12;
                 seeComment.Margin = new Thickness(10, 0, 10, 0);
 
@@ -536,17 +742,44 @@ namespace Caritathelp.All
                 Grid.SetColumnSpan(seeComment, 2);
                 grid.Children.Add(seeComment);
 
+                // update news
+                if (newsResponse.response[i].volunteer_id == (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"])
+                {
+                    NewsInfos tmp = new NewsInfos();
+
+                    tmp.id_news = newsResponse.response[i].id;
+                    tmp.id_rows = i;
+
+                    Button updateNew = new Button();
+                    updateNew.Content = "Modifier";
+                    updateNew.Tag = tmp;
+                    updateNew.FontSize = 12;
+                    updateNew.Click += updateNews;
+
+                    Grid.SetColumn(updateNew, 2);
+                    Grid.SetRow(updateNew, 3);
+                    grid.Children.Add(updateNew);
+
+                    // delete news
+                    Button deleteNews = new Button();
+                    deleteNews.Content = "Supprimer";
+                    deleteNews.Tag = tmp;
+                    deleteNews.Click += deleteNew;
+                    deleteNews.FontSize = 12;
+                    deleteNews.Margin = new Thickness(0, 0, 10, 0);
+
+                    Grid.SetColumn(deleteNews, 3);
+                    Grid.SetRow(deleteNews, 3);
+                    grid.Children.Add(deleteNews);
+                }
+
                 // grid comments 
 
                 Grid commentGrid = new Grid();
-                commentGrid.VerticalAlignment = VerticalAlignment.Top;
-                var columnCommentImage = new ColumnDefinition();
-                columnCommentImage.Width = new GridLength(60);
-                commentGrid.ColumnDefinitions.Add(columnCommentImage);
                 commentGrid.ColumnDefinitions.Add(new ColumnDefinition());
-                getComments(newsResponse.response[i].id, commentGrid);
+                getComments(newsResponse.response[i].id, commentGrid, i, newsResponse.response[i].volunteer_id);
                 Grid.SetColumn(commentGrid, 0);
-                Grid.SetColumnSpan(commentGrid, 3);
+                Grid.SetColumnSpan(commentGrid, 4);
                 Grid.SetRow(commentGrid, 4);
                 commentGrid.Visibility = Visibility.Collapsed;
                 grid.Children.Add(commentGrid);
@@ -587,12 +820,12 @@ namespace Caritathelp.All
                 Grid.SetRow(ok, 0);
                 addComment.Children.Add(ok);
                 Grid.SetColumn(addComment, 0);
-                Grid.SetColumnSpan(addComment, 3);
+                Grid.SetColumnSpan(addComment, 4);
                 Grid.SetRow(addComment, 5);
                 grid.Children.Add(addComment);
 
 
-                grid.Margin = new Thickness(10, 10, 10, 10);
+                grid.Margin = new Thickness(0, 0, 0, 10);
                 newsGrid.Children.Add(grid);
                 Grid.SetColumn(grid, 0);
                 Grid.SetRow(grid, i);

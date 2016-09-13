@@ -8,7 +8,8 @@ namespace Caritathelp
 {
     class Global
     {
-        public const string API_IRL = "http://api.caritathelp.me:3000";
+        public const string API_IRL = "http://staging.caritathelp.me";
+        public const string WS_URL = "ws://api.caritathelp.me:8081";
 
     }
 
@@ -44,4 +45,19 @@ namespace Caritathelp
         public string lastname { get; set; }
         public string thumb_path { get; set; }
     }
+
+    class commentInfos
+    {
+        public int id_news { get; set; }
+        public int id_comments { get; set; }
+        public int row_cmt { get; set; }
+        public int row_news { get; set; }
+    }
+
+    class NewsInfos
+    {
+        public int id_news { get; set; }
+        public int id_rows { get; set; }
+    }
+
 }

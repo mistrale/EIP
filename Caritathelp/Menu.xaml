@@ -16,7 +16,7 @@
         </Button>
         <Button x:Name="messageButton" Click="messageButtonClick" Content="" HorizontalAlignment="Left" Margin="200,-3,0,-3" VerticalAlignment="Top" Width="56" BorderThickness="0">
             <Button.Background>
-                <ImageBrush Stretch="Uniform" ImageSource="Assets/message.png"/>
+                <ImageBrush Stretch="Uniform" ImageSource="{Binding PathToImage, Mode=OneWay}"/>
             </Button.Background>
         </Button>
         <Button x:Name="notifButton" Content="" Foreground="White" Click="alertButtonClick"  HorizontalAlignment="Left" Margin="103,-4,0,-2" VerticalAlignment="Top" Width="56" BorderThickness="0">
