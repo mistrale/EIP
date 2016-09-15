@@ -36,12 +36,12 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Grid HorizontalAlignment="Left" Height="59" Margin="0,237,0,0" VerticalAlignment="Top" Width="400" Background="#FF4BAF50"/>
+        <Grid HorizontalAlignment="Left" Height="59" Margin="2,237,-2,0" VerticalAlignment="Top" Width="400" Background="#FF4BAF50"/>
         <Button x:ConnectionId='2' x:Name="button1"
-                HorizontalAlignment="Left" Margin="287,243,-8,0"
+                HorizontalAlignment="Left" Margin="278,237,0,0"
                 VerticalAlignment="Top" Height="54" Width="121"
                 BorderBrush="{x:Null}" Foreground="{x:Null}"
-                                  >
+                                   RenderTransformOrigin="0.795,-3.041">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/information.png"/>
             </Button.Background>
@@ -82,7 +82,10 @@
             </Ellipse.Fill>
         </Ellipse>
         <TextBlock x:Name="nameTextBox" HorizontalAlignment="Left" Margin="6,203,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="45" Width="394" FontSize="24" FontWeight="Bold" TextAlignment="Center" Foreground="#FF4BAF50"/>
-        <ScrollViewer Name="newsScroll" HorizontalAlignment="Left" Height="191" Margin="6,391,0,0" VerticalAlignment="Top" Width="387"/>
+        <ScrollViewer Name="newsScroll" 
+                      HorizontalAlignment="Left" 
+                      Height="186" Margin="6,391,0,0" 
+                      VerticalAlignment="Top" Width="387"/>
         <Button x:ConnectionId='6' x:Name="addButton"
                 HorizontalAlignment="Left"
                 Margin="6,136,0,0" VerticalAlignment="Top"

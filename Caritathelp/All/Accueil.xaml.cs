@@ -182,7 +182,7 @@ namespace Caritathelp.All
             }
         }
 
-        private async void getComments(int idNews, Grid commentGrid, int row, string idVolunteer)
+        private async void getComments(int idNews, Grid commentGrid, int row)
         {
             var httpClient = new HttpClient(new HttpClientHandler());
             try
@@ -264,7 +264,7 @@ namespace Caritathelp.All
                         // update /delete
 
                         // update comment
-                        if (commentsResponse.response[x].volunteer_id != Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]))
+                        if (commentsResponse.response[x].volunteer_id == Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]))
                         {
                             commentInfos tmp = new commentInfos();
                             tmp.id_news = idNews;
@@ -559,7 +559,12 @@ namespace Caritathelp.All
 
         public void publish(object sender, RoutedEventArgs e)
         {
-            publishNews();
+            Debug.WriteLine("text : " + publicationText.Text);
+            if (!publicationText.Text.Equals("Nouvelle publication ...", StringComparison.Ordinal)
+                && !publicationText.Text.Equals("", StringComparison.Ordinal))
+            {
+                publishNews();
+            }
         }
 
         private async void publishNews()
@@ -573,6 +578,7 @@ namespace Caritathelp.All
                         new KeyValuePair<string, string>("content", publicationText.Text),
                         new KeyValuePair<string, string>("group_id",  (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]),
                         new KeyValuePair<string, string>("news_type", "Status"),
+                        new KeyValuePair<string, string>("as_group", "false"),
                         new KeyValuePair<string, string>("group_type", "Volunteer"),
                 };
                 string url = (Global.API_IRL + "/news/wall_message");
@@ -615,9 +621,14 @@ namespace Caritathelp.All
             Grid gridComment = (Grid)(grid.Children.Cast<FrameworkElement>().FirstOrDefault(x => Grid.GetRow(x) == 5));
             Grid gridComments = (Grid)(grid.Children.Cast<FrameworkElement>().FirstOrDefault(x => Grid.GetRow(x) == 4));
             TextBox text = (TextBox)(gridComment.Children.Cast<FrameworkElement>().FirstOrDefault(z => Grid.GetColumn(z) == 1));
-            comments(text.Text, newsResponse.response[row].id, gridComments, row);
-            text.Text = "Votre commentaire ...";
+            if (!text.Text.Equals("Votre commentaire ...", StringComparison.Ordinal)
+                && !text.Text.Equals("", StringComparison.Ordinal))
+            {
+                comments(text.Text, newsResponse.response[row].id, gridComments, row);
+                text.Text = "Votre commentaire ...";
+            }
         }
+
 
         private void initNews(int nbNews)
         {
@@ -678,8 +689,7 @@ namespace Caritathelp.All
                 // image profil
                 Image btn = new Image();
                 btn.Margin = new Thickness(10, 10, 10, 0);
-                btn.Source = new BitmapImage(new Uri(Global.API_IRL + newsResponse.response[i].groupe_thumb_path, UriKind.Absolute));
-      
+                btn.Source = new BitmapImage(new Uri(Global.API_IRL + newsResponse.response[i].group_thumb_path, UriKind.Absolute));
                 Grid.SetColumn(btn, 0);
                 Grid.SetRow(btn, 0);
                 Grid.SetRowSpan(btn, 2);
@@ -688,9 +698,13 @@ namespace Caritathelp.All
                 // username
                 // CHANGE BY HYPERLINK
                 TextBlock poster = new TextBlock();
-                if (newsResponse.response[i].news_type.Equals("New::Volunteer::FriendWallMessage", StringComparison.Ordinal))
+                if (newsResponse.response[i].as_group == true)
                 {
-                    poster.Text = newsResponse.response[i].group_name + " a publie : ";
+                    poster.Text = newsResponse.response[i].group_name;
+                }
+                else if (newsResponse.response[i].volunteer_id != newsResponse.response[i].group_id)
+                {
+                    poster.Text = newsResponse.response[i].volunteer_name + " > " + newsResponse.response[i].group_name;
                 }
                 else
                 {
@@ -743,7 +757,7 @@ namespace Caritathelp.All
                 grid.Children.Add(seeComment);
 
                 // update news
-                if (newsResponse.response[i].volunteer_id == (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"])
+                if (newsResponse.response[i].volunteer_id == Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]))
                 {
                     NewsInfos tmp = new NewsInfos();
 
@@ -777,7 +791,7 @@ namespace Caritathelp.All
 
                 Grid commentGrid = new Grid();
                 commentGrid.ColumnDefinitions.Add(new ColumnDefinition());
-                getComments(newsResponse.response[i].id, commentGrid, i, newsResponse.response[i].volunteer_id);
+                getComments(newsResponse.response[i].id, commentGrid, i);
                 Grid.SetColumn(commentGrid, 0);
                 Grid.SetColumnSpan(commentGrid, 4);
                 Grid.SetRow(commentGrid, 4);

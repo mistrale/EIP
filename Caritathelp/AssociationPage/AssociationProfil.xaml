@@ -24,7 +24,7 @@
         </Button>
         <ScrollViewer HorizontalAlignment="Left"
                       Name="newsScroll"
-                      Height="181" Margin="10,398,0,0"
+                      Height="165" Margin="10,414,0,0"
                       VerticalAlignment="Top" Width="380" Grid.Row="1"/>
         <Rectangle HorizontalAlignment="Left" Height="247" Margin="0,53,0,0" VerticalAlignment="Top" Width="400" Grid.Row="1">
             <Rectangle.Fill>
@@ -43,7 +43,7 @@
                 Click="optionsAssociationClick"
                 HorizontalAlignment="Left"
                 Margin="290,126,0,0" VerticalAlignment="Top"
-                Width="109" BorderThickness="0" Height="60" RenderTransformOrigin="0.758,0.481" Grid.Row="1">
+                Width="109" BorderThickness="0" Height="60" RenderTransformOrigin="0.758,0.481" Grid.Row="1" Visibility="Collapsed">
             <Button.Background>
                 <ImageBrush ImageSource="ms-appx:///Assets/plusbutton.png" Stretch="None"/>
             </Button.Background>
@@ -157,8 +157,15 @@
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/information.png"/>
             </Button.Background>
         </Button>
-        <TextBox x:Name="news" GotFocus="TextBox_GotFocus" HorizontalAlignment="Left" Margin="10,325,0,0" TextWrapping="Wrap" Text="Publier..." VerticalAlignment="Top" Height="38" Width="269" BorderBrush="#FF4BAF50" Grid.RowSpan="2"/>
-        <Button x:Name="button2" Click="publishNews" Content="Publier" HorizontalAlignment="Left" Margin="284,315,0,0" VerticalAlignment="Top" Width="102" BorderBrush="#FF4BAF50" Background="#FF4BAF50" Height="49" Grid.RowSpan="2"/>
-        <CheckBox x:Name="privateBox" Content="prive" HorizontalAlignment="Left" Margin="10,352,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Foreground="#FF000B01" BorderBrush="#FF4BAF50" Height="57" FontSize="14"/>
+        <TextBox x:Name="news" GotFocus="TextBox_GotFocus" HorizontalAlignment="Left" Margin="10,325,0,0" TextWrapping="Wrap" Text="Publier..." VerticalAlignment="Top" Height="38" Width="377" BorderBrush="#FF4BAF50" Grid.RowSpan="2"/>
+        <Button x:Name="button2" Click="publishNews" Content="Publier" HorizontalAlignment="Left" Margin="278,361,0,0" VerticalAlignment="Top" Width="102" BorderBrush="#FF4BAF50" Background="#FF4BAF50" Height="49" Grid.RowSpan="2"/>
+        <ComboBox x:Name="asWhat" Margin="127,361,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Foreground="#FF4BAF50" BorderBrush="#FF4BAF50" HorizontalAlignment="Left" Width="146" SelectedIndex="0">
+            <x:String>Utilisateur</x:String>
+            <x:String>Association</x:String>
+        </ComboBox>
+        <ComboBox x:Name="isPrivate" Margin="10,361,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Foreground="#FF4BAF50" BorderBrush="#FF4BAF50" HorizontalAlignment="Left" Width="112" SelectedIndex="0">
+            <x:String>Public</x:String>
+            <x:String>Prive</x:String>
+        </ComboBox>
     </Grid>
 </Page>

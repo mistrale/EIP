@@ -322,7 +322,7 @@ namespace Caritathelp
                 // image profil
                 Image btn = new Image();
                 btn.Margin = new Thickness(10, 10, 10, 0);
-                btn.Source = new BitmapImage(new Uri(Global.API_IRL + "" + newsResponse.response[i].groupe_thumb_path, UriKind.Absolute));
+                btn.Source = new BitmapImage(new Uri(Global.API_IRL + "" + newsResponse.response[i].group_thumb_path, UriKind.Absolute));
                 Grid.SetColumn(btn, 0);
                 Grid.SetRow(btn, 0);
                 Grid.SetRowSpan(btn, 2);

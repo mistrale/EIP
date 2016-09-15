@@ -16,21 +16,24 @@ namespace Caritathelp
     class Publication
     {
         public int id { get; set; }
-        public string volunteer_id { get; set; }
+        public int volunteer_id { get; set; }
         public string news_type { get; set; }
 
 
         public string title { get; set; }
         public string content { get; set; }
-        public int groupe_id { get; set; }
-        public string groupe_type { get; set; }
+        public int group_id { get; set; }
+        public string group_type { get; set; }
         public string group_name { get; set; }
-        public string groupe_thumb_path { get; set; }
+        public string group_thumb_path { get; set; }
 
 
         public string created_at { get; set; }
         public string updated_at { get; set; }
         public int number_comments { get; set; }
+        public bool as_group { get; set; }
+        public string volunteer_name { get; set; }
+        public string volunteer_thumb_path { get; set; }
     }
 
     class Comments
