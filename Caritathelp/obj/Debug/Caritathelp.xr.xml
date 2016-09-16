@@ -111,6 +111,8 @@
       <RootProperty Name="IsHitTestVisible" />
       <RootProperty Name="FontStyle" />
       <RootProperty Name="RenderTransformOrigin" />
+      <RootProperty Name="UseLayoutRounding" />
+      <RootProperty Name="RenderTransform" />
       <RootEvent Name="GotFocus" />
       <RootEvent Name="TextChanged" />
     </RootType>
@@ -221,19 +223,8 @@
     <RootType FullName="Caritathelp.Event.EventManagerMember" />
     <RootType FullName="Caritathelp.Event.EventMember" />
     <RootType FullName="Caritathelp.Event.EventNotification" />
-    <RootType FullName="Windows.UI.Xaml.Controls.CheckBox">
-      <RootProperty Name="Content" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Foreground" />
-      <RootProperty Name="BorderBrush" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="FontSize" />
-      <RootProperty Name="RenderTransformOrigin" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="BorderThickness" />
+    <RootType FullName="Windows.UI.Xaml.Media.CompositeTransform">
+      <RootProperty Name="Rotation" />
     </RootType>
     <RootType FullName="Caritathelp.EventProfil" />
     <RootType FullName="Windows.UI.Xaml.Controls.PasswordBox">
@@ -248,6 +239,19 @@
       <RootProperty Name="Width" />
       <RootProperty Name="BorderBrush" />
       <RootEvent Name="GotFocus" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.CheckBox">
+      <RootProperty Name="Content" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="BorderBrush" />
     </RootType>
     <RootType FullName="Caritathelp.All.FinalInscription" />
     <RootType FullName="Caritathelp.GestionAssociation" />
