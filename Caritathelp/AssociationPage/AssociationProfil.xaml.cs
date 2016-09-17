@@ -430,6 +430,7 @@ namespace Caritathelp
                     if (picture.response != null)
                     {
                         ImageBrush myBrush = new ImageBrush();
+                        Debug.WriteLine("IMAGE :  " + Global.API_IRL + "" + picture.response.picture_path.thumb.url, UriKind.Absolute);
                         myBrush.ImageSource =
                             new BitmapImage(new Uri(Global.API_IRL + "" + picture.response.picture_path.thumb.url, UriKind.Absolute));
                         logo.Fill = myBrush;
@@ -494,7 +495,7 @@ namespace Caritathelp
                         || assoc.response.rights.Equals("admin", StringComparison.Ordinal)
                         || assoc.response.rights.Equals("member", StringComparison.Ordinal)))
                     {
-                        if (!assoc.response.rights.Equals("merber", StringComparison.Ordinal))
+                        if (!assoc.response.rights.Equals("member", StringComparison.Ordinal))
                         {
                             OptionsButton.Visibility = Visibility.Visible;
                         }

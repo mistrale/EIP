@@ -1227,26 +1227,41 @@ namespace Caritathelp
                 {
                     titleText.Text = events.response.title;
                     Windows.Storage.ApplicationData.Current.LocalSettings.Values["currentAssociation"] = id.ToString();
-                    if (events.response.rights.Equals("host", StringComparison.Ordinal)
-                        || events.response.rights.Equals("admin", StringComparison.Ordinal))
+                    if (events.response.rights == null || events.response.rights.Equals("none", StringComparison.Ordinal))
                     {
-                        OptionsButton.Visibility = Visibility.Visible;
-
-                    }
-                    else
-                        OptionsButton.Visibility = Visibility.Collapsed;
-                    if (events.response.rights.Equals("none", StringComparison.Ordinal))
                         joinEventButton.Visibility = Visibility.Visible;
-                    else if (events.response.rights.Equals("invited", StringComparison.Ordinal))
+                    }
+                    if (events.response.rights == null || events.response.rights.Equals("none", StringComparison.Ordinal) ||
+                        events.response.rights.Equals("invited", StringComparison.Ordinal) ||
+                        events.response.rights.Equals("waiting", StringComparison.Ordinal))
+                    {
+                        asWhat.Visibility = Visibility.Collapsed;
+                        isPrivate.Visibility = Visibility.Collapsed;
+                        button2.Visibility = Visibility.Collapsed;
+                        news.Visibility = Visibility.Collapsed;
+                        newsScroll.Margin = new Thickness(6, 335, 0, 0);
+                        newsScroll.Height = 252;
+                    }
+                    if (events.response.rights != null && (events.response.rights.Equals("host", StringComparison.Ordinal)
+                        || events.response.rights.Equals("admin", StringComparison.Ordinal)
+                        || events.response.rights.Equals("member", StringComparison.Ordinal)))
+                    {
+                        if (!events.response.rights.Equals("member", StringComparison.Ordinal))
+                        {
+                            OptionsButton.Visibility = Visibility.Visible;
+                        }
+
+                        leaveEventButton.Visibility = Visibility.Visible;
+                    }
+                    else if (events.response.rights != null && events.response.rights.Equals("invited", StringComparison.Ordinal))
                     {
                         accepteInvitation.Visibility = Visibility.Visible;
                         RefuseIntivation.Visibility = Visibility.Visible;
                         getNotification();
                     }
-                    else if (events.response.rights.Equals("waiting", StringComparison.Ordinal))
+                    else if (events.response.rights != null && events.response.rights.Equals("waiting", StringComparison.Ordinal))
                         informationBox.Text = "En attente de confirmation";
-                    else
-                        leaveEventButton.Visibility = Visibility.Visible;
+                    //
                     getPicture();
                 }
             }

@@ -68,7 +68,7 @@ namespace Caritathelp
         public void messageButtonClick(object sender, RoutedEventArgs e)
         {
             msg.PathToImage = "ms-appx:/Assets/message.png";
-            ((Frame)Window.Current.Content).Navigate(typeof(Message));
+            ((Frame)Window.Current.Content).Navigate(typeof(Message.Message));
         }
 
         public void moreButtonClick(object sender, RoutedEventArgs e)
@@ -99,6 +99,7 @@ namespace Caritathelp
 
         private async void updateMessageGUI()
         {
+            Debug.WriteLine("testasdasdasd");
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
             () =>
             {

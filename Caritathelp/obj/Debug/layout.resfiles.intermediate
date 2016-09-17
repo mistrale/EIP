@@ -18,6 +18,7 @@ Assets\logo.scale-100.png
 Assets\magnify.png
 Assets\member.png
 Assets\message.png
+Assets\messageON.png
 Assets\more.png
 Assets\plusbutton.png
 Assets\SmallLogo.scale-240.png
@@ -31,6 +32,7 @@ All\FinalInscription.xbf
 All\FriendsPage.xbf
 All\Inscription.xbf
 All\MainPage.xbf
+All\Models\GenericProfil.xbf
 All\Notification.xbf
 All\Options.xbf
 All\Research.xbf
@@ -52,7 +54,9 @@ Event\EventMember.xbf
 Event\EventNotification.xbf
 Event\EventProfil.xbf
 Menu.xbf
-Message.xbf
+Message\CreateMessage.xbf
+Message\Message.xbf
+Message\MessageProfil.xbf
 Volunteer\VolunteerAssociation.xbf
 Volunteer\VolunteerEvenement.xbf
 Volunteer\VolunteerFriends.xbf

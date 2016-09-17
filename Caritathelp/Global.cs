@@ -9,7 +9,7 @@ namespace Caritathelp
     class Global
     {
         public const string API_IRL = "http://staging.caritathelp.me";
-        public const string WS_URL = "ws://api.caritathelp.me:8081";
+        public const string WS_URL = "ws://ws.staging.caritathelp.me";
 
     }
 

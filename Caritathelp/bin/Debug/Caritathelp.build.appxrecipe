@@ -106,6 +106,9 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\message.png">
       <PackagePath>Assets\message.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\messageON.png">
+      <PackagePath>Assets\messageON.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\more.png">
       <PackagePath>Assets\more.png</PackagePath>
     </AppxPackagedFile>
@@ -147,6 +150,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\FriendsPage.xbf">
       <PackagePath>All\FriendsPage.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericProfil.xbf">
+      <PackagePath>All\Models\GenericProfil.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Options.xbf">
       <PackagePath>All\Options.xbf</PackagePath>
@@ -214,8 +220,14 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Research.xbf">
       <PackagePath>All\Research.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Message.xbf">
-      <PackagePath>Message.xbf</PackagePath>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Message\CreateMessage.xbf">
+      <PackagePath>Message\CreateMessage.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Message\Message.xbf">
+      <PackagePath>Message\Message.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Message\MessageProfil.xbf">
+      <PackagePath>Message\MessageProfil.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Volunteer\VolunteerAssociation.xbf">
       <PackagePath>Volunteer\VolunteerAssociation.xbf</PackagePath>

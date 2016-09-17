@@ -85,6 +85,10 @@
     <Compile Include="All\FriendsPage.xaml.cs">
       <DependentUpon>FriendsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="All\Models\GenericProfil.xaml.cs">
+      <DependentUpon>GenericProfil.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="All\Models\Models.cs" />
     <Compile Include="All\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
@@ -135,8 +139,15 @@
       <DependentUpon>FinalInscription.xaml</DependentUpon>
     </Compile>
     <Compile Include="Global.cs" />
-    <Compile Include="Message.xaml.cs">
+    <Compile Include="Message\CreateMessage.xaml.cs">
+      <DependentUpon>CreateMessage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Message\Message.cs" />
+    <Compile Include="Message\Message.xaml.cs">
       <DependentUpon>Message.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Message\MessageProfil.xaml.cs">
+      <DependentUpon>MessageProfil.xaml</DependentUpon>
     </Compile>
     <Compile Include="Volunteer\Friend.cs" />
     <Compile Include="AssociationPage\GestionAssociation.xaml.cs">
@@ -212,6 +223,7 @@
     <Content Include="Assets\magnify.png" />
     <Content Include="Assets\member.png" />
     <Content Include="Assets\message.png" />
+    <Content Include="Assets\messageON.png" />
     <Content Include="Assets\more.png" />
     <Content Include="Assets\plusbutton.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
@@ -231,6 +243,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="All\FriendsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="All\Models\GenericProfil.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -322,7 +338,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Message.xaml">
+    <Page Include="Message\CreateMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Message\Message.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Message\MessageProfil.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

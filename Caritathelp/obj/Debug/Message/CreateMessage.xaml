@@ -1,0 +1,47 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Caritathelp.Message"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Caritathelp="using:Caritathelp"
+    x:Class="Caritathelp.Message.CreateMessage"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="White">
+        <Grid HorizontalAlignment="Left" Height="68" Margin="0,0,-2,0" VerticalAlignment="Top" Width="402" Background="#FF4BAF50"/>
+        <Button x:ConnectionId='1' x:Name="button" Content=""
+                HorizontalAlignment="Left" Margin="293,0,-2,0"
+                VerticalAlignment="Top" BorderBrush="{x:Null}"
+                RenderTransformOrigin="1.759,0.719"
+                                     Width="68">
+            <Button.Background>
+                <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/magnify.png"/>
+            </Button.Background>
+        </Button>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="66" VerticalAlignment="Top" Width="398"/>
+        <TextBlock x:Name="nameBox" HorizontalAlignment="Left"
+                   Margin="51,10,0,0" TextWrapping="Wrap" 
+                   Text="Nouvelle conversation" VerticalAlignment="Top"
+                   Height="39" Width="253" FontSize="24" 
+                   TextAlignment="Center" FontWeight="Bold"/>
+        <Caritathelp:Menu HorizontalAlignment="Left" Margin="0,592,0,0" VerticalAlignment="Top"/>
+        <TextBox x:ConnectionId='2' x:Name="titleBox"                            
+                 HorizontalAlignment="Left" Margin="10,115,0,0" TextWrapping="Wrap" Text="Titre" VerticalAlignment="Top" BorderBrush="#FF4BAF50" Width="380" TextAlignment="Center"/>
+        <TextBox x:ConnectionId='3' x:Name="userBox"                            
+                 HorizontalAlignment="Left" Margin="10,159,0,0" TextWrapping="Wrap" Text="Ajouter un utilisateur ..." VerticalAlignment="Top" BorderBrush="#FF4BAF50" Width="261"/>
+        <Button x:ConnectionId='4' x:Name="addButton"                      Content="Ajouter" HorizontalAlignment="Left" Margin="281,150,0,0" VerticalAlignment="Top" Background="#FF4BAF50" BorderThickness="0"/>
+        <TextBlock x:Name="informationBox" 
+            HorizontalAlignment="Left" Margin="10,73,0,0"
+            TextWrapping="Wrap" Text=""
+            VerticalAlignment="Top"
+            Foreground="#FF4BAF50" Height="29"
+            Width="380" FontSize="22"
+            TextAlignment="Center"/>
+        <ScrollViewer Name="scroll" HorizontalAlignment="Left" Height="104" Margin="10,203,0,0" VerticalAlignment="Top" Width="380" BorderBrush="#FF4BAF50" BorderThickness="2.5" Content="Utilisateurs" Foreground="#FF040000" FontSize="20" FontStyle="Italic"/>
+        <Button x:ConnectionId='5' x:Name="button1"                        
+                Content="Creer une conversation" HorizontalAlignment="Left" Margin="10,302,0,0" VerticalAlignment="Top" Background="#FF4BAF50" BorderThickness="0" Width="380"/>
+    </Grid>
+</Page>
+

@@ -122,10 +122,13 @@ namespace Caritathelp.All
 
         private void AssociationButtonClick(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
+            All.Models.InfosModel infos = new Models.InfosModel();
+           Button button = sender as Button;
             int x = Grid.GetRow(button);
             string id = searchList.response[x].id.ToString();
-            Frame.Navigate(typeof(AssociationProfil), id);
+            infos.id = searchList.response[x].id;
+            infos.type = "Association";
+            Frame.Navigate(typeof(All.Models.GenericProfil), infos);
             // identify which button was clicked and perform necessary actions
         }
 
