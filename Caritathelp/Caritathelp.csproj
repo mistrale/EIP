@@ -82,13 +82,27 @@
     <Compile Include="All\Accueil.xaml.cs">
       <DependentUpon>Accueil.xaml</DependentUpon>
     </Compile>
+    <Compile Include="All\BasePage.xaml.cs">
+      <DependentUpon>BasePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="All\FriendsPage.xaml.cs">
       <DependentUpon>FriendsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="All\Models\Association.cs" />
+    <Compile Include="All\Models\Event.cs" />
+    <Compile Include="All\Models\GenericListModel.xaml.cs">
+      <DependentUpon>GenericListModel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="All\Models\GenericManagement.xaml.cs">
+      <DependentUpon>GenericManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="All\Models\GenericNotification.xaml.cs">
+      <DependentUpon>GenericNotification.xaml</DependentUpon>
     </Compile>
     <Compile Include="All\Models\GenericProfil.xaml.cs">
       <DependentUpon>GenericProfil.xaml</DependentUpon>
     </Compile>
-    <Compile Include="All\Models\Models.cs" />
+    <Compile Include="All\Models\Model.cs" />
     <Compile Include="All\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
@@ -210,6 +224,7 @@
     <Content Include="Assets\alertON.png" />
     <Content Include="Assets\assoc.png" />
     <Content Include="Assets\avatar.png" />
+    <Content Include="Assets\back.png" />
     <Content Include="Assets\Background.png" />
     <Content Include="Assets\checkKO.png" />
     <Content Include="Assets\checkOk.png" />
@@ -226,6 +241,8 @@
     <Content Include="Assets\messageON.png" />
     <Content Include="Assets\more.png" />
     <Content Include="Assets\plusbutton.png" />
+    <Content Include="Assets\search.png" />
+    <Content Include="Assets\send.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
     <Content Include="Assets\Square150x150Logo.scale-100.png" />
@@ -242,7 +259,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="All\BasePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="All\FriendsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="All\Models\GenericListModel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="All\Models\GenericManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="All\Models\GenericNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

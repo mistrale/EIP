@@ -41,7 +41,7 @@ namespace Caritathelp
         {
             public string status { get; set; }
             public string message { get; set; }
-            public Association response { get; set; }
+            public All.Models.Association response { get; set; }
         }
 
         class PictureRequest
@@ -160,7 +160,7 @@ namespace Caritathelp
                 }
                 else
                 {
-                    assoc_id = returned.response.id.ToString();
+                    //assoc_id = returned.response.id.ToString();
                     uploadLogo();
                 }
             }

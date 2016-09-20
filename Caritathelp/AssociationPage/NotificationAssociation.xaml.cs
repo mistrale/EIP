@@ -27,7 +27,7 @@ namespace Caritathelp
     /// </summary>
     public sealed partial class NotificationAssociation : Page
     {
-        private Association assoc;
+        private All.Models.Association assoc;
         private string responseString;
         private NotificationRequest assocNotif;
         private Grid mainGrid;
@@ -286,7 +286,7 @@ namespace Caritathelp
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            assoc = e.Parameter as Association;
+            assoc = e.Parameter as All.Models.Association;
             getNoficationMemberShip();
         }
     }

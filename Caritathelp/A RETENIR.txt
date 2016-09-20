@@ -1,0 +1,5 @@
+- create refactorisable (tester la scroll view avec page = grand format ou coder la gui a la main)
+- managementFriend == refactorisation pour event et assoc
+- information aussi du coup
+- gestion aussi (pair <string, routedClickHandler>, getNbButton() & getInfosButton(1)...)
+- pour notification => (Invitation : User : amis / assoc / event envoye; Join assoc => user; Join event => user ) ne pas afficher les autres onglets

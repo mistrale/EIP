@@ -67,7 +67,7 @@ namespace Caritathelp.AssociationPage
             public IList<Member> response { get; set; }
         }
 
-        private Association assoc;
+        private All.Models.Association assoc;
         private string responseString;
         private Grid membersGrid;
         private MemberRequest members;
@@ -107,7 +107,7 @@ namespace Caritathelp.AssociationPage
             string url = Global.API_IRL + "/membership/upgrade";
             var values = new List<KeyValuePair<string, string>>
                     {
-                        new KeyValuePair<string, string>("assoc_id", assoc.id.ToString()),
+                        new KeyValuePair<string, string>("assoc_id", "asa"),
                         new KeyValuePair<string, string>("rights", rights),
                         new KeyValuePair<string, string>("volunteer_id", id_user),
                         new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"])
@@ -148,7 +148,7 @@ namespace Caritathelp.AssociationPage
         {
 
             string url = Global.API_IRL + "/membership/kick?token=" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"].ToString()
-                         + "&assoc_id=" + assoc.id.ToString() + "&volunteer_id=" + id;
+                         + "&assoc_id="  + "&volunteer_id=" + id;
             Debug.WriteLine(url);
             var httpClient = new HttpClient(new HttpClientHandler());
             try
@@ -188,7 +188,7 @@ namespace Caritathelp.AssociationPage
             string url = Global.API_IRL + "/membership/invite";
             var values = new List<KeyValuePair<string, string>>
                     {
-                        new KeyValuePair<string, string>("assoc_id", assoc.id.ToString()),
+                       // new KeyValuePair<string, string>("assoc_id", assoc.id.ToString()),
                         new KeyValuePair<string, string>("volunteer_id", id),
                         new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"])
                     };
@@ -291,7 +291,7 @@ namespace Caritathelp.AssociationPage
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate(Global.API_IRL + "/associations/" + assoc.id.ToString() + "/members" + "{?token}");
+                var template = new UriTemplate(Global.API_IRL + "/associations/"+ "/members" + "{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 Debug.WriteLine(uri);
@@ -446,7 +446,7 @@ namespace Caritathelp.AssociationPage
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            assoc = e.Parameter as Association;
+            assoc = e.Parameter as All.Models.Association;
             warningTextBox.Text = "";
             getMember();
         }

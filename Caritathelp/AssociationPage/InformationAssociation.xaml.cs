@@ -36,7 +36,7 @@ namespace Caritathelp
         {
             public string status { get; set; }
             public string message { get; set; }
-            public Association response { get; set; }
+            public All.Models.Association response { get; set; }
         }
 
         class PictureRequest
@@ -140,7 +140,7 @@ namespace Caritathelp
                 else
                 {
                     warning.Text = "Association modifiée !";
-                    assoc_id = returned.response.id.ToString();
+                    //assoc_id = returned.response.id.ToString();
                     uploadLogo();
                 }
             }
@@ -273,32 +273,32 @@ namespace Caritathelp
                 }
                 else
                 {
-                    title.Text = assoc.response.name;
-                    description.Text = assoc.response.description;
-                   if (assoc.response.birthday != null)
-                    {
-                        string[] begin = assoc.response.birthday.Split('-');
-                        birthday.Date = (DateTime)Convert.ToDateTime(begin[1] + '/' + begin[2] + '/' + begin[0]);
-                    }
-                    //    birthday.Text = assoc.response.birthday.;
-                    Windows.Storage.ApplicationData.Current.LocalSettings.Values["currentAssociation"] = id.ToString();
-                    if (assoc.response.rights.Equals("owner", StringComparison.Ordinal)
-                        || assoc.response.rights.Equals("admin", StringComparison.Ordinal))
-                    {
-                        title.IsReadOnly = false;
-                        description.IsReadOnly = false;
-                        logoText.Visibility = Visibility.Visible;
-                        logoButton.Visibility = Visibility.Visible;
-                        updateButton.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        title.IsReadOnly = true;
-                        description.IsReadOnly = true;
-                        logoText.Visibility = Visibility.Collapsed;
-                        logoButton.Visibility = Visibility.Collapsed;
-                        updateButton.Visibility = Visibility.Collapsed;
-                    }
+                   // title.Text = assoc.response.name;
+                   // description.Text = assoc.response.description;
+                   //if (assoc.response.birthday != null)
+                   // {
+                   //     string[] begin = assoc.response.birthday.Split('-');
+                   //     birthday.Date = (DateTime)Convert.ToDateTime(begin[1] + '/' + begin[2] + '/' + begin[0]);
+                   // }
+                   // //    birthday.Text = assoc.response.birthday.;
+                   // Windows.Storage.ApplicationData.Current.LocalSettings.Values["currentAssociation"] = id.ToString();
+                   // if (assoc.response.rights.Equals("owner", StringComparison.Ordinal)
+                   //     || assoc.response.rights.Equals("admin", StringComparison.Ordinal))
+                   // {
+                   //     title.IsReadOnly = false;
+                   //     description.IsReadOnly = false;
+                   //     logoText.Visibility = Visibility.Visible;
+                   //     logoButton.Visibility = Visibility.Visible;
+                   //     updateButton.Visibility = Visibility.Visible;
+                   // }
+                   // else
+                   // {
+                   //     title.IsReadOnly = true;
+                   //     description.IsReadOnly = true;
+                   //     logoText.Visibility = Visibility.Collapsed;
+                   //     logoButton.Visibility = Visibility.Collapsed;
+                   //     updateButton.Visibility = Visibility.Collapsed;
+                   // }
                 }
             }
             catch (HttpRequestException e)

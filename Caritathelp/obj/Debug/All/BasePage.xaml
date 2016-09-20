@@ -1,0 +1,43 @@
+﻿<UserControl
+    x:Class="Caritathelp.All.BasePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Caritathelp.All"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="630"
+    d:DesignWidth="380">
+
+    <Grid Background="White">
+        <Rectangle Fill="#FF53A634" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="400"/>
+        <Button x:ConnectionId='1' x:Name="searchButton"                            Content="" HorizontalAlignment="Left" Margin="290,-2,-19,0" VerticalAlignment="Top" BorderBrush="{x:Null}">
+            <Button.Background>
+                <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/search.png"/>
+            </Button.Background>
+        </Button>
+        <Grid Background="#53A634" Margin="0,584,0,0" RenderTransformOrigin="0.496,0.494">
+            <Button x:ConnectionId='2' x:Name="moreButton"                         Content="" HorizontalAlignment="Left" Margin="289,-5,-18,-6" VerticalAlignment="Top" Width="56" BorderThickness="0">
+                <Button.Background>
+                    <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/more.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:ConnectionId='3' x:Name="messageButton"                            Content="" HorizontalAlignment="Left" Margin="198,-3,0,-8" VerticalAlignment="Top" Width="56" BorderThickness="0">
+                <Button.Background>
+                    <ImageBrush Stretch="Uniform" ImageSource="{Binding PathToImage, Mode=OneWay}"/>
+                </Button.Background>
+            </Button>
+            <Button x:ConnectionId='4' x:Name="notifButton" Content="" Foreground="White"                           HorizontalAlignment="Left" Margin="99,-4,0,-7" VerticalAlignment="Top" Width="56" BorderThickness="0">
+                <Button.Background>
+                    <ImageBrush Stretch="Uniform" ImageSource="{Binding PathToImage, Mode=OneWay}"/>
+                </Button.Background>
+            </Button>
+            <Button x:ConnectionId='5' x:Name="HomeButton"                         Content="" HorizontalAlignment="Left" Margin="-3,-5,0,-6" VerticalAlignment="Top" Width="56" BorderThickness="0">
+                <Button.Background>
+                    <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/home.png"/>
+                </Button.Background>
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>
+

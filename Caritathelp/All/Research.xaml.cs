@@ -56,15 +56,6 @@ namespace Caritathelp.All
 
         private Grid searchGrid;
 
-        private void EventButtonClick(object sender, RoutedEventArgs e)
-        {
-            Button button = sender as Button;
-            int x = Grid.GetRow(button);
-            string id = searchList.response[x].id.ToString();
-            Frame.Navigate(typeof(EventProfil), id);
-            // identify which button was clicked and perform necessary actions
-        }
-
         private async Task searchAll()
         {
             var httpClient = new HttpClient(new HttpClientHandler());
@@ -84,7 +75,7 @@ namespace Caritathelp.All
                 searchList = JsonConvert.DeserializeObject<ListResponse>(responseString);
                 if (searchList.status != 200)
                 {
-                    warningTextBox.Text = searchList.message;
+                    resultatText.Text = searchList.message;
                 }
                 else
                 {
@@ -96,7 +87,7 @@ namespace Caritathelp.All
             }
             catch (HttpRequestException e)
             {
-                warningTextBox.Text = e.Message;
+                resultatText.Text = e.Message;
             }
             catch (JsonReaderException e)
             {
@@ -111,23 +102,10 @@ namespace Caritathelp.All
             }
         }
 
-        private void UserButtonClick(object sender, RoutedEventArgs e)
+        private void ResearchButtonClick(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-            int x = Grid.GetRow(button);
-            string id = searchList.response[x].id.ToString();
-            Frame.Navigate(typeof(Volunteer.VolunteerProfil), id);
-            // identify which button was clicked and perform necessary actions
-        }
-
-        private void AssociationButtonClick(object sender, RoutedEventArgs e)
-        {
-            All.Models.InfosModel infos = new Models.InfosModel();
            Button button = sender as Button;
-            int x = Grid.GetRow(button);
-            string id = searchList.response[x].id.ToString();
-            infos.id = searchList.response[x].id;
-            infos.type = "Association";
+            All.Models.InfosModel infos = (All.Models.InfosModel)(button.Tag);
             Frame.Navigate(typeof(All.Models.GenericProfil), infos);
             // identify which button was clicked and perform necessary actions
         }
@@ -146,12 +124,12 @@ namespace Caritathelp.All
                 btn.Height = 100;
                 btn.Width = searchGrid.Width;
                 btn.HorizontalAlignment = HorizontalAlignment.Stretch;
-                if (searchList.response[x].result_type.Equals("volunteer", StringComparison.Ordinal)) 
-                    btn.Click += new RoutedEventHandler(UserButtonClick);
-                else if (searchList.response[x].result_type.Equals("event", StringComparison.Ordinal))
-                    btn.Click += new RoutedEventHandler(EventButtonClick);
-                else if (searchList.response[x].result_type.Equals("assoc", StringComparison.Ordinal))
-                    btn.Click += new RoutedEventHandler(AssociationButtonClick);
+                Models.InfosModel infos = new Models.InfosModel();
+                infos.type = searchList.response[x].result_type;
+                infos.id = searchList.response[x].id;
+                btn.Tag = infos;
+
+                btn.Click += new RoutedEventHandler(ResearchButtonClick);
                 btn.Content = searchList.response[x].name;
                 btn.Background = new SolidColorBrush(Color.FromArgb(0xFF, 75, 175, 80));
                 Grid.SetColumn(btn, 1);
@@ -164,6 +142,7 @@ namespace Caritathelp.All
         {
             TextBox tb = (TextBox)sender;
             tb.Text = string.Empty;
+            tb.Foreground = new SolidColorBrush(Color.FromArgb(100, 114, 136, 142));
         }
 
         private async void search_Click(object sender, RoutedEventArgs e)

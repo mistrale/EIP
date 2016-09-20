@@ -23,7 +23,7 @@ namespace Caritathelp
     /// </summary>
     public sealed partial class GestionAssociation : Page
     {
-        private Association assoc;
+        private All.Models.Association assoc;
 
         public void manageMemberClick(object sender, RoutedEventArgs e)
         {
@@ -57,11 +57,11 @@ namespace Caritathelp
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            assoc = e.Parameter as Association;
-            if (assoc.rights.Equals("owner", StringComparison.Ordinal))
-                deleteAssoc.Visibility = Visibility.Visible;
-            else
-                deleteAssoc.Visibility = Visibility.Collapsed;
+            //assoc = e.Parameter as All.Models.Association;
+            //if (assoc.rights.Equals("owner", StringComparison.Ordinal))
+            //    deleteAssoc.Visibility = Visibility.Visible;
+            //else
+            //    deleteAssoc.Visibility = Visibility.Collapsed;
         }
 
         public void TextBox_GotFocus(object sender, RoutedEventArgs e)

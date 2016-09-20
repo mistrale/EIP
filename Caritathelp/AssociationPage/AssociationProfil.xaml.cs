@@ -78,7 +78,7 @@ namespace Caritathelp
         {
             public string status { get; set; }
             public string message { get; set; }
-            public Association response { get; set; }
+            public All.Models.Association response { get; set; }
         }
 
         class NewsResponse
@@ -454,78 +454,78 @@ namespace Caritathelp
 
         private async void getInformation()
         {
-            var httpClient = new HttpClient(new HttpClientHandler());
-            try
-            {
-                var template = new UriTemplate(Global.API_IRL + "/associations/" + id + "{?token}");
-                template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
-                var uri = template.Resolve();
-                Debug.WriteLine(uri);
+            //var httpClient = new HttpClient(new HttpClientHandler());
+            //try
+            //{
+            //    var template = new UriTemplate(Global.API_IRL + "/associations/" + id + "{?token}");
+            //    template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
+            //    var uri = template.Resolve();
+            //    Debug.WriteLine(uri);
 
-                HttpResponseMessage response = await httpClient.GetAsync(uri);
-                response.EnsureSuccessStatusCode();
-                responseString = await response.Content.ReadAsStringAsync();
-                System.Diagnostics.Debug.WriteLine(responseString.ToString());
-                assoc = JsonConvert.DeserializeObject<AssociationRequest>(responseString);
-                if (Int32.Parse(assoc.status) != 200)
-                {
+            //    HttpResponseMessage response = await httpClient.GetAsync(uri);
+            //    response.EnsureSuccessStatusCode();
+            //    responseString = await response.Content.ReadAsStringAsync();
+            //    System.Diagnostics.Debug.WriteLine(responseString.ToString());
+            //    assoc = JsonConvert.DeserializeObject<AssociationRequest>(responseString);
+            //    if (Int32.Parse(assoc.status) != 200)
+            //    {
 
-                }
-                else
-                {
-                    titleText.Text = assoc.response.name;
+            //    }
+            //    else
+            //    {
+            //        titleText.Text = assoc.response.name;
                     
-                    Windows.Storage.ApplicationData.Current.LocalSettings.Values["currentAssociation"] = id.ToString();
-                    if (assoc.response.rights == null || assoc.response.rights.Equals("none", StringComparison.Ordinal))
-                    {
-                        joinAssociationButton.Visibility = Visibility.Visible;
-                    }
-                    if (assoc.response.rights == null || assoc.response.rights.Equals("none", StringComparison.Ordinal) ||
-                        assoc.response.rights.Equals("invited", StringComparison.Ordinal) ||
-                        assoc.response.rights.Equals("waiting", StringComparison.Ordinal))
-                    {
-                        asWhat.Visibility = Visibility.Collapsed;
-                        isPrivate.Visibility = Visibility.Collapsed;
-                        button2.Visibility = Visibility.Collapsed;
-                        news.Visibility = Visibility.Collapsed;
-                        newsScroll.Margin = new Thickness(6, 335, 0, 0);
-                        newsScroll.Height = 252;
-                    }
-                    if (assoc.response.rights != null && (assoc.response.rights.Equals("owner", StringComparison.Ordinal)
-                        || assoc.response.rights.Equals("admin", StringComparison.Ordinal)
-                        || assoc.response.rights.Equals("member", StringComparison.Ordinal)))
-                    {
-                        if (!assoc.response.rights.Equals("member", StringComparison.Ordinal))
-                        {
-                            OptionsButton.Visibility = Visibility.Visible;
-                        }
+            //        Windows.Storage.ApplicationData.Current.LocalSettings.Values["currentAssociation"] = id.ToString();
+            //        if (assoc.response.rights == null || assoc.response.rights.Equals("none", StringComparison.Ordinal))
+            //        {
+            //            joinAssociationButton.Visibility = Visibility.Visible;
+            //        }
+            //        if (assoc.response.rights == null || assoc.response.rights.Equals("none", StringComparison.Ordinal) ||
+            //            assoc.response.rights.Equals("invited", StringComparison.Ordinal) ||
+            //            assoc.response.rights.Equals("waiting", StringComparison.Ordinal))
+            //        {
+            //            asWhat.Visibility = Visibility.Collapsed;
+            //            isPrivate.Visibility = Visibility.Collapsed;
+            //            button2.Visibility = Visibility.Collapsed;
+            //            news.Visibility = Visibility.Collapsed;
+            //            newsScroll.Margin = new Thickness(6, 335, 0, 0);
+            //            newsScroll.Height = 252;
+            //        }
+            //        if (assoc.response.rights != null && (assoc.response.rights.Equals("owner", StringComparison.Ordinal)
+            //            || assoc.response.rights.Equals("admin", StringComparison.Ordinal)
+            //            || assoc.response.rights.Equals("member", StringComparison.Ordinal)))
+            //        {
+            //            if (!assoc.response.rights.Equals("member", StringComparison.Ordinal))
+            //            {
+            //                OptionsButton.Visibility = Visibility.Visible;
+            //            }
 
-                        leaveAssociationButton.Visibility = Visibility.Visible;
-                    }
-                    else if (assoc.response.rights != null && assoc.response.rights.Equals("invited", StringComparison.Ordinal))
-                    {
-                        accepteInvitation.Visibility = Visibility.Visible;
-                        RefuseIntivation.Visibility = Visibility.Visible;
-                        getNotification();
-                    }
-                    else if (assoc.response.rights != null && assoc.response.rights.Equals("waiting", StringComparison.Ordinal))
-                        informationBox.Text = "En attente de confirmation";
-                    getPicture();
-                }
-            }
-            catch (HttpRequestException e)
-            {
-            }
-            catch (JsonReaderException e)
-            {
-                System.Diagnostics.Debug.WriteLine(responseString);
-                Debug.WriteLine("Failed to read json");
-            }
-            catch (JsonSerializationException e)
-            {
-                Debug.WriteLine(responseString);
-                System.Diagnostics.Debug.WriteLine(e.Message);
-            }
+            //            leaveAssociationButton.Visibility = Visibility.Visible;
+            //        }
+            //        else if (assoc.response.rights != null && assoc.response.rights.Equals("invited", StringComparison.Ordinal))
+            //        {
+            //            accepteInvitation.Visibility = Visibility.Visible;
+            //            RefuseIntivation.Visibility = Visibility.Visible;
+            //            getNotification();
+            //        }
+            //        else if (assoc.response.rights != null && assoc.response.rights.Equals("waiting", StringComparison.Ordinal))
+            //            informationBox.Text = "En attente de confirmation";
+            //        getPicture();
+            //    }
+            //}
+            //catch (HttpRequestException e)
+            //{
+            //}
+            //catch (JsonReaderException e)
+            //{
+            //    System.Diagnostics.Debug.WriteLine(responseString);
+            //    Debug.WriteLine("Failed to read json");
+            //}
+            //catch (JsonSerializationException e)
+            //{
+            //    Debug.WriteLine(responseString);
+            //    System.Diagnostics.Debug.WriteLine(e.Message);
+            //}
         }
 
         public AssociationProfil()

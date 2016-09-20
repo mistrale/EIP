@@ -5,6 +5,7 @@ Assets\alertAssociation.png
 Assets\alertON.png
 Assets\assoc.png
 Assets\avatar.png
+Assets\back.png
 Assets\Background.png
 Assets\checkKO.png
 Assets\checkOk.png
@@ -21,6 +22,8 @@ Assets\message.png
 Assets\messageON.png
 Assets\more.png
 Assets\plusbutton.png
+Assets\search.png
+Assets\send.png
 Assets\SmallLogo.scale-240.png
 Assets\SplashScreen.scale-240.png
 Assets\Square150x150Logo.scale-100.png
@@ -28,10 +31,14 @@ Assets\Square71x71Logo.scale-240.png
 Assets\StoreLogo.scale-240.png
 Assets\WideLogo.scale-240.png
 All\Accueil.xbf
+All\BasePage.xbf
 All\FinalInscription.xbf
 All\FriendsPage.xbf
 All\Inscription.xbf
 All\MainPage.xbf
+All\Models\GenericListModel.xbf
+All\Models\GenericManagement.xbf
+All\Models\GenericNotification.xbf
 All\Models\GenericProfil.xbf
 All\Notification.xbf
 All\Options.xbf

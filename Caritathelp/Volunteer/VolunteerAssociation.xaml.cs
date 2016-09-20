@@ -34,7 +34,7 @@ namespace Caritathelp.Volunteer
         {
             public int status { get; set; }
             public string message { get; set; }
-            public IList<Association> response { get; set; }
+            public IList<All.Models.Association> response { get; set; }
         }
 
         class PictureRequest
@@ -49,7 +49,7 @@ namespace Caritathelp.Volunteer
         private AssociationRequest assoc;
         private string responseString;
 
-        private async void getPicture(int id, Image btn)
+        private async void getPicture(string id, Image btn)
         {
             var httpClient = new HttpClient(new HttpClientHandler());
             try
@@ -112,7 +112,7 @@ namespace Caritathelp.Volunteer
         {
             Button button = sender as Button;
             int x = Convert.ToInt32(button.Tag.ToString());
-            string id = assoc.response[x].id.ToString();
+            string id = "5";
             Frame.Navigate(typeof(AssociationProfil), id);
         }
 
@@ -172,7 +172,7 @@ namespace Caritathelp.Volunteer
 
                         // title
                         Button title = new Button();
-                        title.Content = assoc.response[x].name;
+                       // title.Content = assoc.response[x].name;
                         title.Foreground = new SolidColorBrush(Color.FromArgb(250, 250, 250, 250));
                         title.BorderThickness = new Thickness(0);
                         title.Tag = x;
@@ -184,7 +184,7 @@ namespace Caritathelp.Volunteer
 
                         // date
                         TextBlock rights = new TextBlock();
-                        rights.Text = assoc.response[x].rights;
+                        //rights.Text = assoc.response[x].rights;
                         rights.Foreground = new SolidColorBrush(Color.FromArgb(250, 250, 250, 250));
                         rights.FontSize = 14;
                         rights.Margin = new Thickness(10, 0, 0, 0);
@@ -194,7 +194,7 @@ namespace Caritathelp.Volunteer
 
                         // nb ami
                         TextBlock friends = new TextBlock();
-                        friends.Text = "Amis membres " + assoc.response[x].nb_friends_members.ToString();
+                       // friends.Text = "Amis membres " + assoc.response[x].nb_members.ToString();
                         friends.Foreground = new SolidColorBrush(Color.FromArgb(250, 250, 250, 250));
                         friends.FontSize = 14;
                         friends.Margin = new Thickness(10, 0, 0, 0);
@@ -204,7 +204,7 @@ namespace Caritathelp.Volunteer
 
                         // image
                         Image btn = new Image();
-                        getPicture(assoc.response[x].id, btn);
+                        //getPicture(assoc.response[x].id.ToString(), btn);
                         btn.Stretch = Stretch.Fill;
                         btn.Height = 100;
                         btn.Width = 100;
