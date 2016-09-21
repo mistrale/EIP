@@ -151,9 +151,6 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\FriendsPage.xbf">
       <PackagePath>All\FriendsPage.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericProfil.xbf">
-      <PackagePath>All\Models\GenericProfil.xbf</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Options.xbf">
       <PackagePath>All\Options.xbf</PackagePath>
     </AppxPackagedFile>

@@ -85,10 +85,6 @@
     <Compile Include="All\FriendsPage.xaml.cs">
       <DependentUpon>FriendsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="All\Models\GenericProfil.xaml.cs">
-      <DependentUpon>GenericProfil.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="All\Models\Models.cs" />
     <Compile Include="All\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
@@ -243,10 +239,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="All\FriendsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="All\Models\GenericProfil.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

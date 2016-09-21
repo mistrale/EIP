@@ -944,8 +944,3 @@ C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\Message\MessageProfil.g.i.cs
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\Message\MessageProfil.g.cs
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\Message\MessageProfil.xaml
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\Message\MessageProfil.xbf
-C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericProfil.xbf
-C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericProfil.g.i.cs
-C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericProfil.g.cs
-C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericProfil.xaml
-C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericProfil.xbf
