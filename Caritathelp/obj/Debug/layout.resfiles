@@ -9,6 +9,7 @@ Assets\back.png
 Assets\Background.png
 Assets\checkKO.png
 Assets\checkOk.png
+Assets\date.png
 Assets\event.png
 Assets\home.png
 Assets\information.png
@@ -36,6 +37,7 @@ All\FinalInscription.xbf
 All\FriendsPage.xbf
 All\Inscription.xbf
 All\MainPage.xbf
+All\Models\GenericCreationModel.xbf
 All\Models\GenericListModel.xbf
 All\Models\GenericManagement.xbf
 All\Models\GenericNotification.xbf

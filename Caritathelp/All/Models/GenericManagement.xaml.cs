@@ -35,7 +35,10 @@ namespace Caritathelp.All.Models
 
         public void createRessourceClick(object sender, RoutedEventArgs e)
         {
-
+            InfosListModel tmp = new InfosListModel();
+            tmp.typeModel = infos.type;
+            tmp.listTypeModel = "assoc";
+            Frame.Navigate(typeof(GenericCreationModel), tmp);
         }
 
         public void manageInvitationClick(object sender, RoutedEventArgs e)

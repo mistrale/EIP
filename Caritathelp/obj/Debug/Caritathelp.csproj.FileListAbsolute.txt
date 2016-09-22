@@ -969,3 +969,8 @@ C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericManagement.
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericManagement.g.cs
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericManagement.xaml
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericManagement.xbf
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericCreationModel.xbf
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericCreationModel.g.i.cs
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericCreationModel.g.cs
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericCreationModel.xaml
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericCreationModel.xbf

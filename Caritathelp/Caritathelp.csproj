@@ -90,6 +90,9 @@
     </Compile>
     <Compile Include="All\Models\Association.cs" />
     <Compile Include="All\Models\Event.cs" />
+    <Compile Include="All\Models\GenericCreationModel.xaml.cs">
+      <DependentUpon>GenericCreationModel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="All\Models\GenericListModel.xaml.cs">
       <DependentUpon>GenericListModel.xaml</DependentUpon>
     </Compile>
@@ -228,6 +231,7 @@
     <Content Include="Assets\Background.png" />
     <Content Include="Assets\checkKO.png" />
     <Content Include="Assets\checkOk.png" />
+    <Content Include="Assets\date.png" />
     <Content Include="Assets\event.png" />
     <Content Include="Assets\home.png" />
     <Content Include="Assets\information.png" />
@@ -264,6 +268,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="All\FriendsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="All\Models\GenericCreationModel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

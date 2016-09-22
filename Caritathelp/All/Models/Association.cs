@@ -19,6 +19,15 @@ namespace Caritathelp.All.Models
                 {"Gerer les membres", ButtonManagement.MANAGE_RELATION },
                 {"Gerer les demandes d'invitation", ButtonManagement.MANAGE_INVITATION }
             };
+
+            typeControls = new Dictionary<string, FormControlType>
+            {
+                { "Titre", FormControlType.FIELD },
+                { "Description", FormControlType.DESCRIPTION},
+                { "Ville", FormControlType.FIELD },
+                { "Date de creation", FormControlType.DATE},
+                { "Logo", FormControlType.FILE},
+            };
         }
 
          public override bool isInRelation(string rights)

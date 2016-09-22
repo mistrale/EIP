@@ -86,6 +86,7 @@
       <RootProperty Name="FontSize" />
       <RootProperty Name="TextAlignment" />
       <RootProperty Name="FontWeight" />
+      <RootProperty Name="LineHeight" />
       <RootProperty Name="RenderTransformOrigin" />
       <RootProperty Name="Foreground" />
     </RootType>
@@ -152,8 +153,8 @@
       <RootProperty Name="Height" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Width" />
-      <RootProperty Name="Margin" />
       <RootProperty Name="Stroke" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="StrokeThickness" />
       <RootProperty Name="Name" />
     </RootType>
@@ -168,6 +169,7 @@
       <RootProperty Name="Height" />
     </RootType>
     <RootType FullName="Caritathelp.All.FriendsPage" />
+    <RootType FullName="Caritathelp.All.Models.GenericCreationModel" />
     <RootType FullName="Caritathelp.All.Models.GenericListModel" />
     <RootType FullName="Caritathelp.All.Models.GenericManagement" />
     <RootType FullName="Caritathelp.All.Models.GenericNotification" />

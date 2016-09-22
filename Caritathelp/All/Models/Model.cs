@@ -8,6 +8,15 @@ using Windows.UI.Xaml;
 
 namespace Caritathelp.All.Models
 {
+    public enum FormControlType
+    {
+        FIELD,
+        DATE,
+        HOUR,
+        FILE,
+        DESCRIPTION
+    }
+
     public enum ButtonManagement
     {
         CREATE_RESOURCE = 1,
@@ -46,7 +55,14 @@ namespace Caritathelp.All.Models
                     { "AcceptURL", "/membership/reply_invite"},
                     { "NbRelationType", "nb_friends_members"},
                     { "ResourceURL", "/associations"},
-                    { "RightsType", "rights" }
+                    { "RightsType", "rights" },
+
+                    // creation / update assoc
+                    { "CreationType", "Creation d'association"},
+                    { "Titre", "name" },
+                    { "Description", "description" },
+                    { "Date de creation", "birthday" },
+                    { "Ville", "city" },
             }
             },
             { "event", new Dictionary<string, string>
@@ -58,6 +74,7 @@ namespace Caritathelp.All.Models
         }; 
 
         protected Dictionary<string, ButtonManagement> mngButton;
+        protected Dictionary<string, FormControlType> typeControls;
 
         public int id { get; set; }
 
@@ -68,6 +85,11 @@ namespace Caritathelp.All.Models
         public Model(int id)
         {
             this.id = id;
+        }
+
+        virtual public Dictionary<string, FormControlType> getFormControlType()
+        {
+            return typeControls;
         }
 
         virtual public Dictionary<string, ButtonManagement> getButtonsManagement()

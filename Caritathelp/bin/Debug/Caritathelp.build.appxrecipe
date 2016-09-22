@@ -79,6 +79,9 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\checkOk.png">
       <PackagePath>Assets\checkOk.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\date.png">
+      <PackagePath>Assets\date.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\event.png">
       <PackagePath>Assets\event.png</PackagePath>
     </AppxPackagedFile>
@@ -162,6 +165,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\FriendsPage.xbf">
       <PackagePath>All\FriendsPage.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericCreationModel.xbf">
+      <PackagePath>All\Models\GenericCreationModel.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericListModel.xbf">
       <PackagePath>All\Models\GenericListModel.xbf</PackagePath>
