@@ -98,11 +98,11 @@ namespace Caritathelp.Message
 
                 //if (notif.!= Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]))
                 //{
-                //    tmpGrid.Background = new SolidColorBrush(Color.FromArgb(100, 200, 211, 200));
+                //    tmpGrid.Background = new SolidColorBrush(Color.FromArgb(0xFF, 200, 211, 200));
                 //}
                 //else
                 //{
-                    tmpGrid.Background = new SolidColorBrush(Color.FromArgb(100, 157, 216, 160));
+                    tmpGrid.Background = new SolidColorBrush(Color.FromArgb(0xFF, 157, 216, 160));
                 //}
                 tmpGrid.VerticalAlignment = VerticalAlignment.Top;
                 tmpGrid.Width = 380;
@@ -248,11 +248,11 @@ namespace Caritathelp.Message
 
                 if (responseConv.response[x].volunteer_id != Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]))
                 {
-                    tmpGrid.Background = new SolidColorBrush(Color.FromArgb(100, 200, 211, 200));
+                    tmpGrid.Background = new SolidColorBrush(Color.FromArgb(0xFF, 200, 211, 200));
                 }
                 else
                 {
-                    tmpGrid.Background = new SolidColorBrush(Color.FromArgb(100, 157, 216, 160));
+                    tmpGrid.Background = new SolidColorBrush(Color.FromArgb(0xFF, 157, 216, 160));
                 }
                 tmpGrid.VerticalAlignment = VerticalAlignment.Top;
                 tmpGrid.Width = 380;

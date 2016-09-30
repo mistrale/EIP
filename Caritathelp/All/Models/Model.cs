@@ -14,7 +14,9 @@ namespace Caritathelp.All.Models
         DATE,
         HOUR,
         FILE,
-        DESCRIPTION
+        DESCRIPTION,
+        PASSWORD,
+        CHECKFIELD
     }
 
     public enum ButtonManagement
@@ -25,6 +27,15 @@ namespace Caritathelp.All.Models
         DELETE_RESOURCE = 4,
         MANAGE_RELATION = 5,
         GET_RESOURCES = 6
+    }
+
+    public class FormModel
+    {
+        public int id { get; set; }
+        public string modelType { get; set; }
+        public string createdModelType { get; set; }
+        public bool isCreation { get; set; }
+        public bool isAdmin { get; set; }
     }
 
     public class InfosListModel
@@ -46,6 +57,7 @@ namespace Caritathelp.All.Models
         {
             {"assoc", new Dictionary<string, string>
                 {
+                    { "Name", "Association"},
                     { "NameType", "name"},
                     { "URL", "/associations/"},
                     { "Model", "assoc"},
@@ -63,11 +75,24 @@ namespace Caritathelp.All.Models
                     { "Description", "description" },
                     { "Date de creation", "birthday" },
                     { "Ville", "city" },
+                    { "Logo", "thumb_path" }
             }
             },
             { "event", new Dictionary<string, string>
                 {
-                    { "", "" }
+                    { "Name", "Evenement"},
+                    { "NameType", "title"},
+                    { "URL", "/events/"},
+                    { "Model", "event"},
+                    { "TypeID", "event_id"},
+                    { "AddURL", "/guests/join"},
+                    { "RemoveURL", "/guests/leave"},
+                    { "AcceptURL", "/guests/reply_invite"},
+                    { "NbRelationType", "nb_friends_members"},
+                    { "ResourceURL", "/events"},
+                    { "RightsType", "rights" },
+
+
                 }
 
              }
@@ -135,6 +160,12 @@ namespace Caritathelp.All.Models
         virtual public string[] getNotificationType()
         {
             string[] array = {  };
+            return array;
+        }
+
+        virtual public string[] getPrivateField()
+        {
+            string[] array = { };
             return array;
         }
     }

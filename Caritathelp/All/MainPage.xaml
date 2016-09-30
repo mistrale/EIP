@@ -22,7 +22,7 @@
                  Foreground="#FF5C5555" TextChanged="Email_TextChanged" />
         <PasswordBox x:Name="Password" 
                  HorizontalAlignment="Left"
-                 Password="root"
+                 Password="root1234"
                  Margin="42,287,0,0"  
                  FontSize="29.333"
                  Background="White"

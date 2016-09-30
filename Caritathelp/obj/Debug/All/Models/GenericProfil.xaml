@@ -6,14 +6,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Caritathelp="using:Caritathelp"
     xmlns:All="using:Caritathelp.All"
+    xmlns:GUI="using:Caritathelp.All.GUI"
     x:Class="Caritathelp.All.Models.GenericProfil"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Rectangle HorizontalAlignment="Left" Height="64" Margin="11,307,0,0" Stroke="#FFBFCACC" VerticalAlignment="Top" Width="379"/>
         <All:BasePage HorizontalAlignment="Left" Margin="0,9,0,0" VerticalAlignment="Top"/>
-        <Rectangle HorizontalAlignment="Left" Height="206" Margin="0,49,0,0" VerticalAlignment="Top" Width="400" Stroke="#FF436435" StrokeThickness="0.5">
+        <Rectangle HorizontalAlignment="Left" Height="176" Margin="0,49,0,0" VerticalAlignment="Top" Width="400" Stroke="#FF436435" StrokeThickness="0.5">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFE4F7DD" Offset="1"/>
@@ -21,78 +21,79 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <Ellipse x:Name="logo" Margin="131,63,115,440" Stroke="#FF69B578">
+        <Ellipse x:Name="logo" Margin="123,63,146,464" Stroke="#FF69B578">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
             </Ellipse.Fill>
         </Ellipse>
-        <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="2,216,-2,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="400" TextAlignment="Center" FontWeight="Bold" Background="{x:Null}" Foreground="#FF53A634" BorderBrush="{x:Null}"/>
-        <Rectangle Fill="#FF53A634" HorizontalAlignment="Left" Height="43" Margin="0,253,0,0" VerticalAlignment="Top" Width="400"/>
-        <Button x:Name="infosButton" Content="" HorizontalAlignment="Left" Margin="307,247,-16,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10">
+        <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="-8,188,-1,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="409" TextAlignment="Center" FontWeight="Bold" Background="{x:Null}" Foreground="#FF53A634" BorderBrush="{x:Null}"/>
+        <Rectangle Fill="#FF53A634" HorizontalAlignment="Left" Height="43" Margin="1,225,-1,0" VerticalAlignment="Top" Width="400"/>
+        <Button x:ConnectionId='1' x:Name="infosButton"                    Content="" HorizontalAlignment="Left" Margin="307,218,-16,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/information.png"/>
             </Button.Background>
         </Button>
-        <Button x:ConnectionId='1' x:Name="relationButton"                      Content="" HorizontalAlignment="Left" Margin="-15,248,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10">
+        <Button x:ConnectionId='2' x:Name="relationButton"                      Content="" HorizontalAlignment="Left" Margin="-15,218,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/member.png"/>
             </Button.Background>
         </Button>
-        <Button x:ConnectionId='2' x:Name="eventButton"                    Content="" HorizontalAlignment="Left" Margin="55,247,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10">
+        <Button x:ConnectionId='3' x:Name="eventButton"                    Content="" HorizontalAlignment="Left" Margin="55,217,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/event.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="associationButton" Content="" HorizontalAlignment="Left" Margin="123,245,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="59">
+        <Button x:Name="associationButton" Content="" HorizontalAlignment="Left" Margin="123,218,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="59">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/assoc.png"/>
             </Button.Background>
         </Button>
-        <Button x:ConnectionId='3' x:Name="addButton"                  Content="" HorizontalAlignment="Left" Margin="-15,81,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10" Visibility="Collapsed">
+        <Button x:ConnectionId='4' x:Name="addButton"                  Content="" HorizontalAlignment="Left" Margin="-15,81,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10" Visibility="Collapsed">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/addAssociation.png"/>
             </Button.Background>
         </Button>
-        <Button x:ConnectionId='4' x:Name="acceptButton"                                Content="" HorizontalAlignment="Left" Margin="-15,128,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10" Visibility="Collapsed">
+        <Button x:ConnectionId='5' x:Name="acceptButton"                                Content="" HorizontalAlignment="Left" Margin="-15,128,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10" Visibility="Collapsed">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/checkOk.png"/>
             </Button.Background>
         </Button>
-        <Button x:ConnectionId='5' x:Name="removeButton" Content=""                     HorizontalAlignment="Left" Margin="22,81,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10" Visibility="Collapsed">
+        <Button x:ConnectionId='6' x:Name="removeButton" Content=""                     HorizontalAlignment="Left" Margin="22,81,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10" Visibility="Collapsed">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/leaveAssociation.png"/>
             </Button.Background>
         </Button>
-        <Button x:ConnectionId='6' x:Name="refuseButton"                               Content="" HorizontalAlignment="Left" Margin="22,128,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10" Visibility="Collapsed">
+        <Button x:ConnectionId='7' x:Name="refuseButton"                               Content="" HorizontalAlignment="Left" Margin="22,128,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10" Visibility="Collapsed">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/checkKO.png"/>
             </Button.Background>
         </Button>
-        <Button x:ConnectionId='7' x:Name="optionButton"                      Content="" HorizontalAlignment="Left" Margin="307,81,-16,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10" Visibility="Collapsed">
+        <Button x:ConnectionId='8' x:Name="optionButton"                      Content="" HorizontalAlignment="Left" Margin="307,81,-16,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10" Visibility="Collapsed">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/plusbutton.png"/>
             </Button.Background>
         </Button>
-        <TextBlock x:Name="informationBox"
-            HorizontalAlignment="Left"
-            Margin="0,566,0,0" 
-            TextWrapping="Wrap" 
-            Text="" VerticalAlignment="Top" 
-            RenderTransformOrigin="0.5,0.5" 
-            Width="400" Height="29" 
-            Foreground="#FF4BAF50" FontSize="22"
-            TextAlignment="Center"/>
-        <TextBox x:ConnectionId='8' x:Name="publishBox"                             HorizontalAlignment="Left" Margin="11,307,0,0" TextWrapping="Wrap" Text="Publier un message" VerticalAlignment="Top" Width="309" BorderBrush="#FFBFCACC" Foreground="#FFBFCACC" Height="42"/>
-        <Rectangle Name="backgroundSend" Fill="#FF53A634" HorizontalAlignment="Left" Height="42" Margin="320,307,0,0" VerticalAlignment="Top" Width="70"/>
-        <Button x:ConnectionId='9' x:Name="sendButton"                   Content="" HorizontalAlignment="Left" Margin="302,299,-11,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="47">
-            <Button.Background>
-                <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/send.png"/>
-            </Button.Background>
-        </Button>
-        <ScrollViewer Name="newsScroll" Background="#FFE4F7DD"  HorizontalAlignment="Left" Height="207" Margin="11,354,0,0" VerticalAlignment="Top" Width="379"/>
+        <ScrollViewer x:Name="scroll" Background="#FFE4F7DD"  HorizontalAlignment="Left" Height="202" Margin="12,389,0,0" VerticalAlignment="Top" Width="379"/>
         <TextBox x:Name="titleBox" HorizontalAlignment="Left" Margin="71,12,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="285" BorderBrush="{x:Null}" Foreground="White" Background="{x:Null}" TextAlignment="Center" FontWeight="Bold"/>
-        <CheckBox x:Name="privateBox" Content="prive" HorizontalAlignment="Left" Margin="11,340,0,0" VerticalAlignment="Top" Height="58" Background="#FF53A634" BorderBrush="#FF53A634" Foreground="#FF72888E" Visibility="Collapsed"/>
-        <CheckBox x:Name="adminBox" Content="en tant que goupe" HorizontalAlignment="Left" Margin="177,340,0,0" VerticalAlignment="Top" Height="58" Background="#FF53A634" BorderBrush="#FF53A634" Foreground="#FF72888E" Visibility="Collapsed"/>
+        <Border Name="publishGrid" CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" HorizontalAlignment="Left" Height="100" Margin="11,273,0,0" VerticalAlignment="Top" Width="380" Background="White">
+            <Grid>
+                <Border CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1" Margin="10,10,10,0" Height="40" VerticalAlignment="Top">
+                    <TextBox x:ConnectionId='10' x:Name="publishBox"                             HorizontalAlignment="Left" Margin="-0.833,-1.833,0,-0.833" TextWrapping="Wrap" Text="Publier un message" VerticalAlignment="Top" Width="284" BorderBrush="{x:Null}" Foreground="#FFBFCACC" Height="41" Background="{x:Null}"/>
+                </Border>
+                <Rectangle x:Name="backgroundSend" Fill="#FF53A634" HorizontalAlignment="Left" Height="40" Margin="297,10,0,0" VerticalAlignment="Top" Width="70" StrokeThickness="0"/>
+                <CheckBox x:Name="adminBox" Content="en tant que goupe" HorizontalAlignment="Left" Margin="184,44,0,-5" VerticalAlignment="Top" Height="58" Background="{x:Null}" BorderBrush="#FF53A634" Foreground="#FF72888E" BorderThickness="2.5" Visibility="Collapsed"/>
+                <Button x:ConnectionId='9' x:Name="sendButton"                   Content="" HorizontalAlignment="Left" Margin="278,2,-10,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="47">
+                    <Button.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/send.png"/>
+                    </Button.Background>
+                </Button>
+                <CheckBox x:Name="privateBox" Content="prive" HorizontalAlignment="Left" Margin="16,44,0,-5" VerticalAlignment="Top" Height="58" Background="{x:Null}" BorderBrush="#FF53A634" Foreground="#FF72888E"/>
+
+            </Grid>
+        </Border>
+        <GUI:PopField x:Name="optionsComment" HorizontalAlignment="Left" Margin="0,9,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
+        <GUI:ErrorControl x:Name="errControl" HorizontalAlignment="Left" Margin="1,10,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
+        <Image Name="waitingImage" HorizontalAlignment="Left" Height="42" Margin="22,115,0,0" VerticalAlignment="Top" Width="39" Source="ms-appx:///Assets/update.png" Visibility="Collapsed"/>
     </Grid>
 </Page>
 

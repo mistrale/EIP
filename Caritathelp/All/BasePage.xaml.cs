@@ -94,7 +94,9 @@ namespace Caritathelp.All
         public void alertButtonClick(object sender, RoutedEventArgs e)
         {
             notifs.PathToImage = "ms-appx:/Assets/alert.png";
-            ((Frame)Window.Current.Content).Navigate(typeof(All.Notification));
+            Models.InfosModel infos = new Models.InfosModel();
+            infos.type = "volunteer";
+            ((Frame)Window.Current.Content).Navigate(typeof(Models.GenericNotification), infos);
         }
 
         private async void updateNotificationGUI()

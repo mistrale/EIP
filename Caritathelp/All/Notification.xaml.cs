@@ -115,7 +115,7 @@ namespace Caritathelp.All
                     btn.Click += new RoutedEventHandler(UserButtonClick);
                 }
 
-                btn.Background = new SolidColorBrush(Color.FromArgb(0xFF, 75, 175, 80));
+                btn.Background = new SolidColorBrush(Color.FromArgb(100, 75, 175, 80));
                 Grid.SetColumn(btn, 1);
                 Grid.SetRow(btn, x);
                 grid.Children.Add(btn);

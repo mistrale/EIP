@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local1="using:Caritathelp"
+    xmlns:GUI="using:Caritathelp.All.GUI"
     x:Class="Caritathelp.All.Research"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -20,25 +21,26 @@
             </Button.Background>
         </Button>
         <ScrollViewer x:Name="scroll" Background="#FFE4F7DD" HorizontalAlignment="Left"
-			Margin="6,100,0,0" 
+			Margin="13,129,0,0" 
 			VerticalScrollBarVisibility="Visible" 
 			VerticalScrollMode="Enabled" 
 			AllowDrop="False" 
 			VerticalAlignment="top"
 			BringIntoViewOnFocusChange="True"
 			HorizontalScrollMode="Disabled"
-			IsHoldingEnabled="True" Height="440" Width="384"/>
+			IsHoldingEnabled="True" Height="448" Width="375"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="-5,7,0,0" TextWrapping="Wrap" Text="Recherche" VerticalAlignment="Top" Height="34" Width="395" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
-        <TextBox x:ConnectionId='1' x:Name="searchBox"                                  
-			HorizontalAlignment="Left" Margin="6,57,0,0" TextWrapping="Wrap" Text="Rechercher..." VerticalAlignment="Top" Width="330" Foreground="#FFBFCACC" BorderBrush="#FFBFCACC"/>
-        <TextBlock x:Name="resultatText" HorizontalAlignment="Left" Margin="6,544,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="33" Width="381" Foreground="#FFBFCACC" FontSize="20"/>
-        <Rectangle Fill="#FF53A634" HorizontalAlignment="Left" Height="39" Margin="336,57,0,0" VerticalAlignment="Top" Width="54"/>
-        <Button x:ConnectionId='2' x:Name="searchButton"                      Content="" HorizontalAlignment="Left" Margin="307,47,-16,0" VerticalAlignment="Top" BorderThickness="0">
+        <Border CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" HorizontalAlignment="Left" Height="67" Margin="10,57,0,0" VerticalAlignment="Top" Width="377" Background="#FFFFFBFB"/>
+        <Border CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" HorizontalAlignment="Left" Height="39" Margin="28,69,0,0" VerticalAlignment="Top" Width="340" Background="White"/>
+        <Rectangle Fill="#FF53A634" HorizontalAlignment="Left" Height="39" Margin="314,69,0,0" VerticalAlignment="Top" Width="54" StrokeThickness="0"/>
+        <Button x:ConnectionId='1' x:Name="searchButton"                      Content="" HorizontalAlignment="Left" Margin="288,60,0,0" VerticalAlignment="Top" BorderThickness="0">
             <Button.Background>
                 <ImageBrush ImageSource="ms-appx:/Assets/search.png" Stretch="Uniform"/>
             </Button.Background>
         </Button>
-        <Rectangle HorizontalAlignment="Left" Height="32" Margin="6,545,0,0" VerticalAlignment="Top" Width="384" Stroke="#FFBFCACC"/>
+        <TextBox x:ConnectionId='2' x:Name="searchBox"                                  
+			HorizontalAlignment="Left" Margin="33,71,0,0" TextWrapping="Wrap" Text="Rechercher..." VerticalAlignment="Top" Width="277" Foreground="#FFBFCACC" BorderBrush="{x:Null}" Background="{x:Null}"/>
+        <GUI:ErrorControl x:Name="errControl" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed"/>
     </Grid>
 </Page>
 

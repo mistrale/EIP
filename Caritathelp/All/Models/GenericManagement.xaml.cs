@@ -35,15 +35,18 @@ namespace Caritathelp.All.Models
 
         public void createRessourceClick(object sender, RoutedEventArgs e)
         {
-            InfosListModel tmp = new InfosListModel();
-            tmp.typeModel = infos.type;
-            tmp.listTypeModel = "assoc";
+            FormModel tmp = new FormModel();
+            tmp.modelType = infos.type;
+            tmp.createdModelType = "assoc";
+            tmp.id = infos.id;
+            tmp.isAdmin = true;
+            tmp.isCreation = true;
             Frame.Navigate(typeof(GenericCreationModel), tmp);
         }
 
         public void manageInvitationClick(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(GenericNotification), infos);
         }
 
         public void manageRelationClick(object sender, RoutedEventArgs e)
@@ -89,7 +92,7 @@ namespace Caritathelp.All.Models
                 button.Width = 280;
                 button.Content = entry.Key;
                 button.Background = new SolidColorBrush(Color.FromArgb(250, 255, 255, 255));
-                button.Foreground = new SolidColorBrush(Color.FromArgb(100, 114, 136, 142));
+                button.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 114, 136, 142));
                 ButtonManagement type = entry.Value;
                 switch (type)
                 {

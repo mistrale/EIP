@@ -53,68 +53,35 @@ namespace Caritathelp
 
         private async void connect()
         {
-            string url = Global.API_IRL + "/login/";
+            HttpHandler http = HttpHandler.getHttp();
+            string url = "/auth/sign_in/";
             var values = new List<KeyValuePair<string, string>>
                     {
-
-                        //new KeyValuePair<string, string>("mail", Email.Text),
-                        //new KeyValuePair<string, string>("password", Password.Password)
-                        new KeyValuePair<string, string>("mail", Email.Text),
+                        new KeyValuePair<string, string>("email", Email.Text),
                         new KeyValuePair<string, string>("password", Password.Password)
                     };
-            var httpClient = new HttpClient(new HttpClientHandler());
+
+            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(url, values, HttpHandler.TypeRequest.POST);
+            if (jObject == null)
+            {
+                Debug.WriteLine("failed to connect");
+                Loading.IsActive = false;
+                return;
+            }
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             try
             {
-                HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
+                localSettings.Values["password"] = (string)Password.Password;
+                localSettings.Values["id"] = jObject["id"].ToString();
+                localSettings.Values["thumb_path"] = (string)jObject["thumb_path"];
                 Loading.IsActive = false;
-                response.EnsureSuccessStatusCode();
-                responseString = await response.Content.ReadAsStringAsync();
-                Debug.WriteLine(responseString);
-                message = JsonConvert.DeserializeObject<RequestResponse>(responseString);
-                if (Int32.Parse(message.status) != 200)
-                {
-                    warningTextBox.Text = message.message;
-                }
-                else
-                {
-                    try
-                    {
-                        var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-                        localSettings.Values["mail"] = message.response.mail;
-                        localSettings.Values["firstname"] = message.response.firstname;
-                        localSettings.Values["lastname"] = message.response.lastname;
-                        localSettings.Values["city"] = message.response.city;
-                        localSettings.Values["birdthday"] = message.response.birthday;
-                        localSettings.Values["gender"] = message.response.gender;
-                        localSettings.Values["allowgps"] = message.response.allowgps;
-                        localSettings.Values["password"] = Password.Password;
-                        localSettings.Values["id"] = message.response.id;
-                        localSettings.Values["token"] = message.response.token;
-                        localSettings.Values["thumb_path"] = message.response.thumb_path;
-                        //                      localSettings.Values["notifications"] = JsonConvert.SerializeObject(message.response.notifications);
-                        this.Frame.Navigate(typeof(All.Accueil));
-                    }
-                    catch (System.Exception e)
-                    {
-                        System.Diagnostics.Debug.WriteLine(e.Message);
-                    }
-                    Email.Text = "Email";
-                    Password.Password = "password";
-                }
+                this.Frame.Navigate(typeof(All.Accueil));
             }
-            catch (HttpRequestException e)
+            catch (Exception e)
             {
-                warningTextBox.Text = e.Message;
+                Debug.WriteLine(e);
             }
-            catch (JsonReaderException e)
-            {
-                System.Diagnostics.Debug.WriteLine(responseString);
-            }
-            catch (JsonSerializationException e)
-            {
-                Loading.IsActive = false;
-                System.Diagnostics.Debug.WriteLine(e.Message);
-            }
+
         }
 
         public void Connexion_click(object sender, RoutedEventArgs e)

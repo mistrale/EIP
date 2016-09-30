@@ -575,7 +575,7 @@ namespace Caritathelp.Volunteer
 
                 // main new's grid
                 Grid grid = new Grid();
-                grid.Background = new SolidColorBrush(Color.FromArgb(100, 83, 166, 52));
+                grid.Background = new SolidColorBrush(Color.FromArgb(0xFF, 83, 166, 52));
 
                 // grid new's info
 

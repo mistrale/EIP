@@ -80,5 +80,11 @@ namespace Caritathelp.All.Models
             string[] array = { "JoinAssoc", "NewMember" };
             return array;
         }
+
+        public override string[] getPrivateField()
+        {
+            string[] array = { "Logo" };
+            return array;
+        }
     }
 }

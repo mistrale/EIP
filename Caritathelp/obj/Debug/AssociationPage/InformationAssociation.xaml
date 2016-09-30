@@ -18,7 +18,7 @@
         	                       
         	HorizontalAlignment="Left" Margin="202,401,0,0"
         	VerticalAlignment="Top" Foreground="White"
-        	Background="#FF4BAF50" BorderThickness="0"
+        	Background="#FFBFCACC" BorderThickness="0"
         	Height="63" Width="190" RenderTransformOrigin="0.494,0.19"/>
         <Button x:ConnectionId='2' x:Name="updateButton"
         	Content="Modifier"

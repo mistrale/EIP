@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:All="using:Caritathelp.All"
+    xmlns:GUI="using:Caritathelp.All.GUI"
     x:Class="Caritathelp.All.Models.GenericNotification"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -18,8 +19,8 @@
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/back.png"/>
             </Button.Background>
         </Button>
-        <ScrollViewer x:Name="scrollList" Background="#FFE4F7DD" HorizontalAlignment="Left" Height="514" Margin="10,70,0,0" VerticalAlignment="Top" Width="380"/>
-
+        <ScrollViewer x:Name="scroll" Background="{x:Null}" HorizontalAlignment="Left" Height="522" Margin="10,70,0,0" VerticalAlignment="Top" Width="380"/>
+        <GUI:ErrorControl x:Name="err"  HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
     </Grid>
 </Page>
 

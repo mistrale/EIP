@@ -1,0 +1,23 @@
+﻿<UserControl
+    x:Class="Caritathelp.All.GUI.SearchItem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Caritathelp.All.GUI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="115"
+    d:DesignWidth="375">
+
+    <Border Margin="0, 0, 0, 15" VerticalAlignment="Top" Height="100" Background="White" CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5">
+        <Grid>
+            <Ellipse x:Name="logo" Height="77" VerticalAlignment="Top" Margin="10,10,285,0" Stroke="#FF69B578">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Button x:Name="titleButton" Click="ResearchButtonClick" Content="Button" HorizontalAlignment="Left" Margin="108,7,0,0" VerticalAlignment="Top" Height="28" Width="253" Foreground="#FF72888E" BorderThickness="0" FontSize="16"/>
+            <TextBlock x:Name="typeText" HorizontalAlignment="Left" Margin="108,57,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="30" Width="254" Foreground="#FFBFCACC" FontSize="14" TextAlignment="Center"/>
+        </Grid>
+    </Border>
+</UserControl>
