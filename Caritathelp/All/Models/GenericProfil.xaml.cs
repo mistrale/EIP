@@ -91,8 +91,7 @@ namespace Caritathelp.All.Models
                     {
                         new KeyValuePair<string, string>("notif_id", notif_id),
                         new KeyValuePair<string, string>("acceptance", "false")
-                    }; Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[infos.type]["AcceptURL"]
-                + "&" + Model.Values[infos.type]["TypeID"] + "=" + infos.id, null, HttpHandler.TypeRequest.POST);
+                    }; Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[infos.type]["AcceptURL"], values, HttpHandler.TypeRequest.POST);
             if ((int)jObject["status"] == 200)
             {
                 Frame.Navigate(typeof(GenericProfil), infos);
@@ -109,8 +108,7 @@ namespace Caritathelp.All.Models
                     {
                         new KeyValuePair<string, string>("notif_id", notif_id),
                         new KeyValuePair<string, string>("acceptance", "true")
-                    }; Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[infos.type]["AcceptURL"]
-                + "&" + Model.Values[infos.type]["TypeID"] + "=" + infos.id, null, HttpHandler.TypeRequest.POST);
+                    }; Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[infos.type]["AcceptURL"], values, HttpHandler.TypeRequest.POST);
             if ((int)jObject["status"] == 200)
             {
                 Frame.Navigate(typeof(GenericProfil), infos);
@@ -124,27 +122,8 @@ namespace Caritathelp.All.Models
         public async void removeClick(object send, RoutedEventArgs e)
         {
             HttpHandler http = HttpHandler.getHttp();
-            var values = new List<KeyValuePair<string, string>>
-                    {
-                        new KeyValuePair<string, string>("notif_id", notif_id),
-                        new KeyValuePair<string, string>("acceptance", "false")
-                    }; Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[infos.type]["AcceptURL"]
-                + "&" + Model.Values[infos.type]["TypeID"] + "=" + infos.id, null, HttpHandler.TypeRequest.POST);
-            if ((int)jObject["status"] == 200)
-            {
-                Frame.Navigate(typeof(GenericProfil), infos);
-            }
-            else
-            {
-                errControl.printMessage((string)jObject["message"], GUI.ErrorControl.Code.FAILURE);
-            }
-        }
-
-        private async void removeModel()
-        {
-            HttpHandler http = HttpHandler.getHttp();
             Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[infos.type]["RemoveURL"]
-                + "&" + Model.Values[infos.type]["TypeID"] + "=" + infos.id, null, HttpHandler.TypeRequest.DELETE);
+                + "?" + Model.Values[infos.type]["TypeID"] + "=" + infos.id, null, HttpHandler.TypeRequest.DELETE);
             if ((int)jObject["status"] == 200)
             {
                 Frame.Navigate(typeof(GenericProfil), infos);
@@ -298,13 +277,13 @@ namespace Caritathelp.All.Models
                     }
                     removeButton.Visibility = Visibility.Visible;
                 }
-                else if (model.isInvited(rights))
+                if (model.isInvited(rights))
                 {
                     acceptButton.Visibility = Visibility;
                     refuseButton.Visibility = Visibility;
                     getNotification();
                 }
-                else if (model.isWaiting(rights))
+                if (model.isWaiting(rights))
                 {
                     waitingImage.Visibility = Visibility.Collapsed;
                 }

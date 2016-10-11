@@ -184,6 +184,9 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\ErrorControl.xbf">
       <PackagePath>All\GUI\ErrorControl.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\InvitationWaiting.xbf">
+      <PackagePath>All\GUI\InvitationWaiting.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\NewControle.xbf">
       <PackagePath>All\GUI\NewControle.xbf</PackagePath>
     </AppxPackagedFile>
@@ -193,14 +196,23 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\PopField.xbf">
       <PackagePath>All\GUI\PopField.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\ReceivedInviation.xbf">
+      <PackagePath>All\GUI\ReceivedInviation.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\SearchItem.xbf">
       <PackagePath>All\GUI\SearchItem.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericCreationModel.xbf">
       <PackagePath>All\Models\GenericCreationModel.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericInvitation.xbf">
+      <PackagePath>All\Models\GenericInvitation.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericListModel.xbf">
       <PackagePath>All\Models\GenericListModel.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericListModelManagement.xbf">
+      <PackagePath>All\Models\GenericListModelManagement.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericManagement.xbf">
       <PackagePath>All\Models\GenericManagement.xbf</PackagePath>

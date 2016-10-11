@@ -95,6 +95,9 @@
     <Compile Include="All\GUI\ErrorControl.xaml.cs">
       <DependentUpon>ErrorControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="All\GUI\InvitationWaiting.xaml.cs">
+      <DependentUpon>InvitationWaiting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="All\GUI\NewControle.xaml.cs">
       <DependentUpon>NewControle.xaml</DependentUpon>
     </Compile>
@@ -105,6 +108,9 @@
     <Compile Include="All\GUI\PopField.xaml.cs">
       <DependentUpon>PopField.xaml</DependentUpon>
     </Compile>
+    <Compile Include="All\GUI\ReceivedInviation.xaml.cs">
+      <DependentUpon>ReceivedInviation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="All\GUI\SearchItem.xaml.cs">
       <DependentUpon>SearchItem.xaml</DependentUpon>
     </Compile>
@@ -113,8 +119,14 @@
     <Compile Include="All\Models\GenericCreationModel.xaml.cs">
       <DependentUpon>GenericCreationModel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="All\Models\GenericInvitation.xaml.cs">
+      <DependentUpon>GenericInvitation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="All\Models\GenericListModel.xaml.cs">
       <DependentUpon>GenericListModel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="All\Models\GenericListModelManagement.xaml.cs">
+      <DependentUpon>GenericListModelManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="All\Models\GenericManagement.xaml.cs">
       <DependentUpon>GenericManagement.xaml</DependentUpon>
@@ -303,6 +315,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="All\GUI\InvitationWaiting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="All\GUI\NewControle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -315,6 +331,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="All\GUI\ReceivedInviation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="All\GUI\SearchItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -323,7 +343,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="All\Models\GenericInvitation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="All\Models\GenericListModel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="All\Models\GenericListModelManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

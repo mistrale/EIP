@@ -46,7 +46,7 @@ namespace Caritathelp.All.Models
 
         public void manageInvitationClick(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(GenericNotification), infos);
+            this.Frame.Navigate(typeof(GenericInvitation), infos);
         }
 
         public void manageRelationClick(object sender, RoutedEventArgs e)

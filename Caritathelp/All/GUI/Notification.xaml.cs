@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
@@ -22,6 +23,7 @@ namespace Caritathelp.All.GUI
     {
         private int idNotif;
         private string url;
+        private string content;
         Page currentPage;
         object parameter;
         System.Type type;
@@ -41,16 +43,52 @@ namespace Caritathelp.All.GUI
             return NotificationType.InformationNotification;
         }
 
-        Dictionary<string, string> d = new Dictionary<string, string>()
-             {
-                {"JoinAssoc",  "/membership/reply_member"},
-                {"InviteMember", "/membership/reply_invite"},
+        public Dictionary<string, Dictionary<string, string>> d = new Dictionary<string, Dictionary<string, string>>
+        {
+            {"JoinAssoc", new Dictionary<string, string>
+                {
+                    { "URL", "/membership/reply_member"},
+                    { "Content", "L'utilisateur a demande a rejoindre l'association"},
+                }
+            },
+            {"InviteMember", new Dictionary<string, string>
+                {
+                    { "URL", "/membership/reply_invite"},
+                    { "Content", "Vous avez ete invite a rejoindre l'association "},
+                }
+            },
+            {"JoinEvent", new Dictionary<string, string>
+                {
+                    { "URL", "/guests/reply_guest"},
+                    { "Content", "L'utilisateur a demande a rejoindre l'evemement"},
+                }
+            },
+            {"InviteGuest", new Dictionary<string, string>
+                {
+                    { "URL", "/guests/reply_invite"},
+                    { "Content", "Vous avez ete invite a rejoindre l'evenement "},
+                }
+            },
+            { "AddFriend", new Dictionary<string, string>
+                {
+                    {  "URL", "/friendship/reply"},
+                    {  "Content", "L'utilisateur vous a envoye une demande d'invitation"},
+                }
+             },
+             {"NewMember", new Dictionary<string, string>
+                {
+                    { "URL", ""},
+                    { "Content", "L'utilisateur a rejoint l'association"},
+                }
+            },
+            {"NewGuest", new Dictionary<string, string>
+                {
+                    { "URL", ""},
+                    { "Content", "L'utilisateur a rejoint l'evenement"},
+                }
+            },
 
-                {"JoinEvent",  "/guests/reply_guest"},
-                {"InviteGuest", "/guests/reply_invite"},
-
-                { "AddFriend", "/friendship/reply"}
-              };
+        };
 
         private void refuseNotification(object sender, RoutedEventArgs e)
         {
@@ -85,11 +123,17 @@ namespace Caritathelp.All.GUI
         {
             this.InitializeComponent();
             idNotif = (int)obj["id"];
-            url = d[(string)obj["notif_type"]];
+            Debug.WriteLine("asdsa sa" + (string)obj["notif_type"]);
+            url = (d[(string)obj["notif_type"]])["URL"];
+            content = (d[(string)obj["notif_type"]])["Content"];
             currentPage = page;
             this.parameter = parameter;
             this.type = type;
-            contentBox.Text = (string)obj["sender_name"];
+            contentBox.Text = (string)obj["sender_name"] + " : " + content;
+            ImageBrush myBrush = new ImageBrush();
+            myBrush.ImageSource =
+                new BitmapImage(new Uri(Global.API_IRL + "" + obj["sender_thumb_path"], UriKind.Absolute));
+            logo.Fill = myBrush;
             if (whatNotificationType((string)obj["notif_type"]) == NotificationType.InformationNotification) {
                 secondCol.Width = new GridLength(0);
                 contentBox.Width = 277;

@@ -21,7 +21,7 @@
             </Button.Background>
         </Button>
 
-        <GUI:ErrorControl x:Name="errControl" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top"/>
+        <GUI:ErrorControl x:Name="errControl" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
 
     </Grid>
 </Page>

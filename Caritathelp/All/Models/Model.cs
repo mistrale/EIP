@@ -62,12 +62,19 @@ namespace Caritathelp.All.Models
                     { "URL", "/associations/"},
                     { "Model", "assoc"},
                     { "TypeID", "assoc_id"},
+                    { "CancelTypeID", "volunteer_id"},
                     { "AddURL", "/membership/join"},
                     { "RemoveURL", "/membership/leave"},
                     { "AcceptURL", "/membership/reply_invite"},
+                    { "AcceptInvitation", "/membership/reply_member"},
+                    { "InviteURL", "/membership/invite"},
+                    { "CancelInviteURL", "/membership/uninvite" },
+
                     { "NbRelationType", "nb_friends_members"},
                     { "ResourceURL", "/associations"},
                     { "RightsType", "rights" },
+                    { "WaitingInvitation", "/membership/waiting" },
+                    { "SendInvitation", "/membership/invited" },
 
                     // creation / update assoc
                     { "CreationType", "Creation d'association"},

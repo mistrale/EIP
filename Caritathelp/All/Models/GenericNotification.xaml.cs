@@ -41,9 +41,9 @@ namespace Caritathelp.All.Models
 
         private Dictionary<string, string[] > allowed = new Dictionary<string, string[]>
         {
-            { "assoc", new string[] {"InviteMember", "NewMember"}},
-            { "event", new string[] {"InviteGuest", "NewGuest"}},
-            { "volunteer", new string[] {"JoinAssoc", "JoinEvent","InviteMember", "NewMember", "AddFriend"}},
+            { "assoc", new string[] { "JoinAssoc", "NewMember", }},
+            { "event", new string[] { "JoinEvent", "NewGuest"}},
+            { "volunteer", new string[] {"JoinAssoc", "JoinEvent", "InviteGuest", "InviteMember", "NewMember", "AddFriend"}},
         };
 
         public GenericNotification()
@@ -75,7 +75,7 @@ namespace Caritathelp.All.Models
                         continue;
 
                     newsGrid.RowDefinitions.Add(new RowDefinition());
-                    GUI.Notification btn = new GUI.Notification((Newtonsoft.Json.Linq.JObject)(newsResponse[i]), this, typeof(GenericNotification), null);
+                    GUI.Notification btn = new GUI.Notification((Newtonsoft.Json.Linq.JObject)(newsResponse[i]), this, infos, typeof(GenericNotification));
                     btn.Margin = new Thickness(0, 0, 0, 20);
                     Grid.SetColumn(btn, 0);
                     Grid.SetRow(btn, i);
