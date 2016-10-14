@@ -1,0 +1,50 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Caritathelp.All.Models"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:All="using:Caritathelp.All"
+    xmlns:GUI="using:Caritathelp.All.GUI"
+    x:Class="Caritathelp.All.Models.GenericInvitation"
+    mc:Ignorable="d">
+
+    <Grid>
+
+        <All:BasePage HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,9,0,0"/>
+        <RadioButton Checked="receivedClick" x:Name="receivedRB" Content="Recues" HorizontalAlignment="Left" Margin="35,69,0,0" VerticalAlignment="Top" Width="24" Foreground="#FF53A634" BorderBrush="#FF53A634" IsChecked="True" Background="#FF53A634"/>
+        <RadioButton Checked="sendClick"  x:Name="sendRB" Content="Envoyees" HorizontalAlignment="Left" Margin="222,67,0,0" VerticalAlignment="Top" Width="24" Foreground="#FF53A634" BorderBrush="#FF53A634" Background="#FF53A634" RenderTransformOrigin="0.5,0.5">
+            <RadioButton.RenderTransform>
+                <CompositeTransform SkewY="-0.825" TranslateY="1.21"/>
+            </RadioButton.RenderTransform>
+        </RadioButton>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="0,19,0,0" TextWrapping="Wrap" Text="Invitations" VerticalAlignment="Top" FontSize="24" Height="35" Width="400" FontWeight="Bold" TextAlignment="Center"/>
+        <ScrollViewer x:Name="scroll" HorizontalAlignment="Left" Height="456" Margin="10,137,0,0" VerticalAlignment="Top" Width="380">
+            <Grid Height="453" Width="372">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="46*"/>
+                    <RowDefinition Height="407*"/>
+                </Grid.RowDefinitions>
+                <Border CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="2" HorizontalAlignment="Left" Height="46" Grid.RowSpan="2" VerticalAlignment="Top" Width="372" Background="White">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="141*"/>
+                            <ColumnDefinition Width="43*"/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle RadiusX="5" RadiusY="5" Grid.Column="1" Fill="#FF53A634" HorizontalAlignment="Left" Height="42" Margin="0.333,0,-0.5,0" VerticalAlignment="Top" Width="86"/>
+                        <Button Click="inviteVolunteer"  x:Name="addButton" Content="Button" HorizontalAlignment="Left" Margin="269,-7,-0.5,-8" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Grid.ColumnSpan="2" Width="99">
+                            <Button.Background>
+                                <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/addAssociation.png"/>
+                            </Button.Background>
+                        </Button>
+                        <TextBox GotFocus="TextBox_GotFocus" x:Name="nameBox" HorizontalAlignment="Left" Margin="0,3,0,0" TextWrapping="Wrap" Text="Inviter ..." VerticalAlignment="Top" Grid.ColumnSpan="2" Width="282" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FFBFCACC"/>
+                    </Grid>
+                </Border>
+                <ScrollViewer Name="scrollInvit" HorizontalAlignment="Left" Height="402" Margin="0,5.167,0,0" Grid.Row="1" VerticalAlignment="Top" Width="372"/>
+            </Grid>
+        </ScrollViewer>
+
+        <GUI:ErrorControl x:Name="err" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
+
+    </Grid>
+</Page>

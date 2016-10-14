@@ -1,0 +1,22 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Caritathelp.All.Models"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:All="using:Caritathelp.All" xmlns:GUI="using:Caritathelp.All.GUI"
+    x:Class="Caritathelp.All.Models.GenericListModelManagement"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <All:BasePage HorizontalAlignment="Left" Margin="0,10,0,-1" VerticalAlignment="Top"/>
+
+
+        <GUI:ErrorControl x:Name="err" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
+        <TextBlock x:Name="title" HorizontalAlignment="Left" Margin="10,25,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="27" Width="371" FontSize="18" FontWeight="Bold" TextAlignment="Center"/>
+        <ScrollViewer Name="scroll" HorizontalAlignment="Left" Height="525" Margin="10,72,0,0" VerticalAlignment="Top" Width="380"/>
+
+
+    </Grid>
+</Page>

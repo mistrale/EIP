@@ -1,0 +1,27 @@
+﻿<UserControl
+    x:Class="Caritathelp.All.GUI.CreateGUI.FileControls"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Caritathelp.All.GUI.CreateGUI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignWidth="380" Height="96.291">
+
+    <Border CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" Background="White" Margin="0,0,0,0.167">
+        <Grid>
+            <Border CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" HorizontalAlignment="Left" Height="34" Margin="10,45,0,0" VerticalAlignment="Top" Width="243">
+                <Grid Margin="0.333,0.333,0,-1.833">
+                    <Rectangle RadiusX="5" RadiusY="5" Fill="#FF53A634" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="38" StrokeThickness="0"/>
+                    <Image x:Name="image" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="35" Source="ms-appx:///Assets/foler.png" Margin="3,0,0,0"/>
+                    <TextBlock x:Name="fileText" HorizontalAlignment="Left" Margin="43,7,0,0" TextWrapping="Wrap" Text="Logo" VerticalAlignment="Top" Foreground="#FF72888E" Height="22" Width="197" FontSize="14"/>
+                </Grid>
+            </Border>
+            <TextBlock x:Name="titleBloc" HorizontalAlignment="Left" Margin="15,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="#FF72888E" Width="243" Height="30" FontWeight="Bold" FontSize="16"/>
+            <Border CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" HorizontalAlignment="Left" Height="34" Margin="266,45,0,0" VerticalAlignment="Top" Width="101" Background="#FF53A634">
+                <Button x:ConnectionId='1'                         x:Name="button" Content="Choisir" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="-7.667,-13.667,-3.833,-13.5" BorderBrush="{x:Null}" BorderThickness="0" FontSize="16" Width="109"/>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>
+
