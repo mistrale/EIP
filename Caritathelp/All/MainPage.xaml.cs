@@ -74,6 +74,8 @@ namespace Caritathelp
                 localSettings.Values["password"] = (string)Password.Password;
                 localSettings.Values["id"] = jObject["id"].ToString();
                 localSettings.Values["thumb_path"] = (string)jObject["thumb_path"];
+                localSettings.Values["mail"] = Email.Text;
+
                 Loading.IsActive = false;
                 this.Frame.Navigate(typeof(All.Accueil));
             }

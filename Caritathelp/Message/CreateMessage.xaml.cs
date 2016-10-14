@@ -28,29 +28,6 @@ namespace Caritathelp.Message
     /// </summary>
     public sealed partial class CreateMessage : Page
     {
-        class MessageResponse
-        {
-            public int status { get; set; }
-            public string message { get; set; }
-            public MessageInfos response { get; set; }
-        }
-
-        class ModelSearch
-        {
-            public int id { get; set; }
-            public string thumb_path { get; set; }
-            public string name { get; set; }
-            public string rights { get; set; }
-            public string result_type { get; set; }
-        }
-
-        class ListResponse
-        {
-            public int status { get; set; }
-            public string message { get; set; }
-            public IList<ModelSearch> response { get; set; }
-        }
-
         public CreateMessage()
         {
             this.InitializeComponent();
@@ -63,76 +40,49 @@ namespace Caritathelp.Message
             idVolunter = new List<int>();
         }
 
-        private MessageResponse msgResponse;
         private List<int> idVolunter;
-        private string responseString;
-        private ListResponse userList;
         Grid volunteerGrid;
 
         private async void searchUsers()
         {
-            var httpClient = new HttpClient(new HttpClientHandler());
-            try
+            HttpHandler http = HttpHandler.getHttp();
+            var template = "/search?research=" + userBox.Text;
+            Newtonsoft.Json.Linq.JObject obj = await http.sendRequest(template, null, HttpHandler.TypeRequest.GET);
+            if ((int)obj["status"] != 200)
             {
-                var template = new UriTemplate(Global.API_IRL + "/search{?research,token}");
-                template.AddParameter("research", userBox.Text);
-                template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
-                var uri = template.Resolve();
-                Debug.WriteLine(uri);
+                informationBox.Text = (string)obj["message"];
+            }
+            else
+            {
+                Newtonsoft.Json.Linq.JArray list = (Newtonsoft.Json.Linq.JArray)obj["response"];
 
-                HttpResponseMessage response = await httpClient.GetAsync(uri);
-                response.EnsureSuccessStatusCode();
-                responseString = await response.Content.ReadAsStringAsync();
-                System.Diagnostics.Debug.WriteLine(responseString.ToString());
-                userList = JsonConvert.DeserializeObject<ListResponse>(responseString);
-                if (userList.status != 200)
+                if (list.Count == 0 ||
+                    !((string)(list[0]["result_type"])).Equals("volunteer", StringComparison.Ordinal))
+                    informationBox.Text = "Utilisateur non trouvé";
+                else if (idVolunter.Count != 0 && idVolunter.Contains((int)list[0]["id"]))
                 {
-                    informationBox.Text = userList.message;
+                    informationBox.Text = "Utilisateur deja ajoute";
                 }
                 else
                 {
-                    if (userList.response.Count == 0 ||
-                        !userList.response[0].result_type.Equals("volunteer", StringComparison.Ordinal))
-                        informationBox.Text = "Utilisateur non trouvé";
-                    else if (idVolunter.Count != 0 && idVolunter.Contains(userList.response[0].id)) {
-                        informationBox.Text = "Utilisateur deja ajoute";
-                    }
-                    else
-                    {
-                        volunteerGrid.RowDefinitions.Add(new RowDefinition());
+                    volunteerGrid.RowDefinitions.Add(new RowDefinition());
 
-                        TextBlock name = new TextBlock();
-                        name.Margin = new Thickness(10, 10, 10, 10);
-                        name.FontSize = 14;
-                        name.TextWrapping = TextWrapping.Wrap;
-                        name.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
-                        name.Text = userList.response[0].name;
-                        name.FontWeight = FontWeights.Bold;
-                        name.VerticalAlignment = VerticalAlignment.Center;
-                        name.HorizontalAlignment = HorizontalAlignment.Left;
-                        Grid.SetColumn(name, 1);
-                        Grid.SetRow(name, volunteerGrid.RowDefinitions.Count + 1);
-                        volunteerGrid.RowDefinitions.Add(new RowDefinition());
-                        volunteerGrid.Children.Add(name);
-                        idVolunter.Add(userList.response[0].id);
-                        userBox.Text = "Ajouter un utilisateur ...";
-                    }
+                    TextBlock name = new TextBlock();
+                    name.Margin = new Thickness(10, 10, 10, 10);
+                    name.FontSize = 14;
+                    name.TextWrapping = TextWrapping.Wrap;
+                    name.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
+                    name.Text = (string)list[0]["name"];
+                    name.FontWeight = FontWeights.Bold;
+                    name.VerticalAlignment = VerticalAlignment.Center;
+                    name.HorizontalAlignment = HorizontalAlignment.Left;
+                    Grid.SetColumn(name, 1);
+                    Grid.SetRow(name, volunteerGrid.RowDefinitions.Count + 1);
+                    volunteerGrid.RowDefinitions.Add(new RowDefinition());
+                    volunteerGrid.Children.Add(name);
+                    idVolunter.Add((int)list[0]["id"]);
+                    userBox.Text = "Ajouter un utilisateur ...";
                 }
-            }
-            catch (HttpRequestException e)
-            {
-                informationBox.Text = e.Message;
-            }
-            catch (JsonReaderException e)
-            {
-                System.Diagnostics.Debug.WriteLine(responseString);
-                Debug.WriteLine("Failed to read json");
-            }
-            catch (JsonSerializationException e)
-            {
-                System.Diagnostics.Debug.WriteLine(responseString);
-                Debug.WriteLine("Failed to read json");
-                System.Diagnostics.Debug.WriteLine(e.Message);
             }
         }
 
@@ -171,44 +121,20 @@ namespace Caritathelp.Message
                 }
             }
             volunteers += "]";
-
-            var httpClient = new HttpClient(new HttpClientHandler());
-            try
-            {
-                var values = new List<KeyValuePair<string, string>>
+            HttpHandler http = HttpHandler.getHttp();
+            var values = new List<KeyValuePair<string, string>>
                     {
-                        new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]),
                         new KeyValuePair<string, string>("name", title),
                         new KeyValuePair<string, string>("volunteers[]", volunteers)
                     };
-                string url = (Global.API_IRL + "/chatrooms");
-                Debug.WriteLine("volontaires : " + volunteers);
-                HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
-                response.EnsureSuccessStatusCode();
-                responseString = await response.Content.ReadAsStringAsync();
-                msgResponse = JsonConvert.DeserializeObject<MessageResponse>(responseString);
-                if (msgResponse.status != 200)
-                {
-                    informationBox.Text = msgResponse.message;
-                }
-                else
-                {
-                    ((Frame)Window.Current.Content).Navigate(typeof(Message));
-                }
-            }
-            catch (HttpRequestException e)
+            Newtonsoft.Json.Linq.JObject obj = await http.sendRequest("/chatrooms", values, HttpHandler.TypeRequest.POST);
+            if ((int)obj["status"] != 200)
             {
-                Debug.WriteLine(e.Message);
+                informationBox.Text = (string)obj["message"];
+
             }
-            catch (JsonReaderException e)
-            {
-                System.Diagnostics.Debug.WriteLine(responseString);
-                Debug.WriteLine("Failed to read json");
-            }
-            catch (JsonSerializationException e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.Message);
-                Debug.WriteLine("Fail in publish news friends");
+            else {
+                ((Frame)Window.Current.Content).Navigate(typeof(Message));
             }
         }
 

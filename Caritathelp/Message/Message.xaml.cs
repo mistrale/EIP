@@ -43,11 +43,10 @@ namespace Caritathelp.Message
             public IList<MessageInfos> response { get; set; }
         }
 
+        List<MessageInfos> listMsg;
         static private MessageWebSocket messageWebSocket;
         static private DataWriter messageWriter;
         private Notification notif;
-        public string responseString;
-        private MessageResponse msgResponse;
         Grid msgGrid;
 
         public void newMessage_Click(object sender, RoutedEventArgs e)
@@ -64,38 +63,42 @@ namespace Caritathelp.Message
         {
             Button button = sender as Button;
             int i = Convert.ToInt32(button.Tag.ToString());
-            MessageInfos infos = msgResponse.response[i];
+            MessageInfos infos = listMsg[i];
             Frame.Navigate(typeof(MessageProfil), infos);
         }
 
-        void initMessage(int nbMessages)
+        void initMessage(Newtonsoft.Json.Linq.JArray list)
         {
             msgGrid = new Grid();
             msgGrid.ColumnDefinitions.Add(new ColumnDefinition());
             msgGrid.VerticalAlignment = VerticalAlignment.Top;
-            msgGrid.Height = msgResponse.response.Count * 100;
+            msgGrid.Height = list.Count * 100;
             msgGrid.Width = 380;
-            for (int x = 0; x < nbMessages; x++)
+            listMsg = new List<MessageInfos>();
+            for (int x = 0; x < list.Count; x++)
             {
                 msgGrid.RowDefinitions.Add(new RowDefinition());
-
+                MessageInfos msgInfos = new MessageInfos();
+                msgInfos.id = (int)list[x]["id"];
                 Button title = new Button();
                 title.Height = 100;
-                if (msgResponse.response[x].name == null)
+                msgInfos.name = (string)list[x]["name"];
+                if (msgInfos.name == null)
                 {
-                    for (int nbUser = 0; nbUser < msgResponse.response[x].volunteers.Count; nbUser++)
+                    Newtonsoft.Json.Linq.JArray listVlt = (Newtonsoft.Json.Linq.JArray)list[x]["volunteers"];
+                    for (int nbUser = 0; nbUser < listVlt.Count; nbUser++)
                     {
                         string fullname = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["firstname"]
                             + " " + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["lastname"];
-                        if (!fullname.Equals(msgResponse.response[x].volunteers[nbUser], StringComparison.Ordinal))
+                        if (!fullname.Equals((string)listVlt[nbUser], StringComparison.Ordinal))
                         {
-                            if (nbUser + 1 == msgResponse.response[x].volunteers.Count)
-                            {
-                                msgResponse.response[x].name += msgResponse.response[x].volunteers[nbUser];
+                            if (nbUser + 1 == listVlt.Count)
+                            {  
+                                msgInfos.name += (string)listVlt[nbUser];
                             }
                             else
                             {
-                                msgResponse.response[x].name += msgResponse.response[x].volunteers[nbUser] + " - ";
+                                msgInfos.name += (string)listVlt[nbUser] + " - ";
                             }
                         }
                     }
@@ -104,19 +107,19 @@ namespace Caritathelp.Message
                 {
 
                 }
-                if (msgResponse.response[x].name.Length >= 17)
+                if (msgInfos.name.Length >= 17)
                 {
-                    msgResponse.response[x].name = msgResponse.response[x].name.Substring(0, 17);
-                    msgResponse.response[x].name += " ...";
+                    msgInfos.name = msgInfos.name.Substring(0, 17);
+                    msgInfos.name += " ...";
                 }
-                title.Content = msgResponse.response[x].name + " ( " + msgResponse.response[x].number_volunteers + " participants )";
+                title.Content = msgInfos.name + " ( " + (int)list[x]["number_volunteers"] + " participants )";
                 title.Background = new SolidColorBrush(Color.FromArgb(250, 75, 175, 80));
                 title.HorizontalContentAlignment = HorizontalAlignment.Left;
                 title.Width = 380;
                 title.Margin = new Thickness(0, 0, 0, 10);
                 title.Tag = x;
                 title.Click += new RoutedEventHandler(GoToMessageClick);
-
+                listMsg.Add(msgInfos);
                 Grid.SetColumn(title, 0);
                 Grid.SetRow(title, x);
                 msgGrid.Children.Add(title);
@@ -126,39 +129,15 @@ namespace Caritathelp.Message
 
         private async void getMessage()
         {
-            var httpClient = new HttpClient(new HttpClientHandler());
-            try
+            HttpHandler http = HttpHandler.getHttp();
+            Newtonsoft.Json.Linq.JObject obj = await http.sendRequest("/chatrooms", null, HttpHandler.TypeRequest.GET);
+            if ((int)obj["status"] != 200)
             {
-                var template = new UriTemplate(Global.API_IRL + "/chatrooms{?token}");
-                template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
-                var uri = template.Resolve();
-                Debug.WriteLine(uri);
-
-                HttpResponseMessage response = await httpClient.GetAsync(uri);
-                response.EnsureSuccessStatusCode();
-                responseString = await response.Content.ReadAsStringAsync();
-                msgResponse = JsonConvert.DeserializeObject<MessageResponse>(responseString);
-                if (msgResponse.status != 200)
-                {
-                    Debug.WriteLine("failed : " + msgResponse.message);
-                }
-                else
-                {
-                    initMessage(msgResponse.response.Count);
-                }
+                Debug.WriteLine((string)obj["message"]);
             }
-            catch (HttpRequestException e)
+            else
             {
-            }
-            catch (JsonReaderException e)
-            {
-                System.Diagnostics.Debug.WriteLine(responseString);
-                Debug.WriteLine("Failed to read json");
-            }
-            catch (JsonSerializationException e)
-            {
-                Debug.WriteLine(responseString);
-                System.Diagnostics.Debug.WriteLine(e.Message);
+                initMessage((Newtonsoft.Json.Linq.JArray)obj["response"]);
             }
         }
 
@@ -226,7 +205,7 @@ namespace Caritathelp.Message
                     messageWebSocket = webSocket; // Only store it after successfully connecting.
                     messageWriter = new DataWriter(webSocket.OutputStream);
                     // Buffer any data we want to send.*
-                    string message = "{ \"token\" : \"token\", \"token_user\" : \"" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"] + "\"}";
+                    string message = "{ \"token\" : \"token\", \"user_uid\" : \"" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["mail"] + "\"}";
                     messageWriter.WriteString(message);
 
                     // Send the data as one complete message.

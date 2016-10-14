@@ -17,16 +17,4 @@ namespace Caritathelp.Message
         public bool is_private { get; set; }
         public IList<string> volunteers { get; set; }
     }
-
-    public class MessageConversation
-    {
-        public int id { get; set; }
-        public int chatroom_id { get; set; }
-        public int volunteer_id { get; set; }
-        public string content { get; set; }
-        public string created_at { get; set; }
-        public string updated_at { get; set; }
-        public string fullname { get; set; }
-        public string thumb_path { get; set; }
-    }
 }

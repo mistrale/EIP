@@ -34,20 +34,6 @@ namespace Caritathelp.Message
     /// </summary>
     public sealed partial class MessageProfil : Page
     {
-        class ConversationResponse
-        {
-            public int status { get; set; }
-            public string message { get; set; }
-            public IList<MessageConversation> response { get; set; }
-        }
-
-        class NewMessageResponse
-        {
-            public int status { get; set; }
-            public string message { get; set; }
-            public MessageConversation response { get; set; }
-        }
-
         class Notification
         {
             public string type { get; set; }
@@ -55,16 +41,17 @@ namespace Caritathelp.Message
             public string sender_firstname { get; set; }
             public string sender_lastname { get; set; }
             public string content { get; set; }
+            public string sender_thumb_path { get; set; }
+            public string create_at { get; set; }
+            public int sender_id { get; set; }
 
         }
 
         private Notification notif;
         static private MessageWebSocket messageWebSocket;
         static private DataWriter messageWriter;
-        private NewMessageResponse newMessageResponse;
         private MessageInfos infos;
         private string responseString;
-        private ConversationResponse responseConv;
         Grid msgGrid;
 
         public MessageProfil()
@@ -96,14 +83,14 @@ namespace Caritathelp.Message
                 Grid tmpGrid = new Grid();
                 tmpGrid.Margin = new Thickness(0, 0, 0, 20);
 
-                //if (notif.!= Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]))
-                //{
-                //    tmpGrid.Background = new SolidColorBrush(Color.FromArgb(0xFF, 200, 211, 200));
-                //}
-                //else
-                //{
+                if (notif.sender_id != Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]))
+                {
+                    tmpGrid.Background = new SolidColorBrush(Color.FromArgb(0xFF, 200, 211, 200));
+                }
+                else
+                {
                     tmpGrid.Background = new SolidColorBrush(Color.FromArgb(0xFF, 157, 216, 160));
-                //}
+                }
                 tmpGrid.VerticalAlignment = VerticalAlignment.Top;
                 tmpGrid.Width = 380;
 
@@ -127,7 +114,7 @@ namespace Caritathelp.Message
                 // image profil
                 Image profil = new Image();
                 profil.Margin = new Thickness(10, 10, 10, 10);
-                //profil.Source = new BitmapImage(new Uri(Global.API_IRL + , UriKind.Absolute));
+                profil.Source = new BitmapImage(new Uri(Global.API_IRL + notif.sender_thumb_path , UriKind.Absolute));
                 Grid.SetColumn(profil, 0);
                 Grid.SetRow(profil, 0);
                 tmpGrid.Children.Add(profil);
@@ -150,8 +137,8 @@ namespace Caritathelp.Message
                 TextBlock date = new TextBlock();
                 DateTime convertedDate;
                 date.Margin = new Thickness(10, 10, 0, 10);
-                //convertedDate = Convert.ToDateTime(responseConv.response[x].created_at);
-                //date.Text = convertedDate.ToString();
+                convertedDate = Convert.ToDateTime(notif.create_at);
+                date.Text = convertedDate.ToString();
                 date.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
                 date.TextWrapping = TextWrapping.Wrap;
                 Grid.SetColumn(date, 0);
@@ -188,41 +175,22 @@ namespace Caritathelp.Message
 
         private async void sendMessage()
         {
-            string url = Global.API_IRL + "/chatrooms/" + infos.id + "/new_message";
+            string url =  "/chatrooms/" + infos.id + "/new_message";
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("id", infos.id.ToString()),
                         new KeyValuePair<string, string>("content", msgBox.Text),
                         new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"])
                     };
-            var httpClient = new HttpClient(new HttpClientHandler());
-            try
+            HttpHandler http = HttpHandler.getHttp();
+            Newtonsoft.Json.Linq.JObject obj = await http.sendRequest(url, values, HttpHandler.TypeRequest.PUT);
+            if ((int)obj["status"] != 200)
             {
-                HttpResponseMessage response = await httpClient.PutAsync(url, new FormUrlEncodedContent(values));
-                response.EnsureSuccessStatusCode();
-                responseString = await response.Content.ReadAsStringAsync();
-                Debug.WriteLine(responseString);
-                newMessageResponse = JsonConvert.DeserializeObject<NewMessageResponse>(responseString);
-                if (newMessageResponse.status != 200)
-                {
-                    Debug.WriteLine(newMessageResponse.message);
-                }
-                else
-                {
-                    updateMessageGUI();
-                    msgBox.Text = "Votres message ...";
-                }
+                Debug.WriteLine((string)obj["message"]);
             }
-            catch (HttpRequestException e)
+            else
             {
-            }
-            catch (JsonReaderException e)
-            {
-                System.Diagnostics.Debug.WriteLine(responseString);
-            }
-            catch (JsonSerializationException e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.Message);
+                msgBox.Text = "Votre message ...";
             }
         }
 
@@ -232,21 +200,21 @@ namespace Caritathelp.Message
             ((Frame)Window.Current.Content).Navigate(typeof(All.Research));
         }
 
-        private void initMessage(int nbMessage)
+        private void initMessage(Newtonsoft.Json.Linq.JArray list)
         {
             msgGrid = new Grid();
             msgGrid.ColumnDefinitions.Add(new ColumnDefinition());
             msgGrid.VerticalAlignment = VerticalAlignment.Top;
             //msgGrid.Height = responseConv.response.Count * 400;
             msgGrid.Width = 380;
-            for (int x = 0; x < nbMessage; x++)
+            for (int x = 0; x < list.Count; x++)
             {
                 msgGrid.RowDefinitions.Add(new RowDefinition());
 
                 Grid tmpGrid = new Grid();
                 tmpGrid.Margin = new Thickness(0, 0, 0, 20);
 
-                if (responseConv.response[x].volunteer_id != Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]))
+                if ((int)list[x]["volunteer_id"] != Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]))
                 {
                     tmpGrid.Background = new SolidColorBrush(Color.FromArgb(0xFF, 200, 211, 200));
                 }
@@ -277,7 +245,7 @@ namespace Caritathelp.Message
                 // image profil
                 Image profil = new Image();
                 profil.Margin = new Thickness(10, 10, 10, 10);
-                profil.Source = new BitmapImage(new Uri(Global.API_IRL + responseConv.response[x].thumb_path, UriKind.Absolute));
+                profil.Source = new BitmapImage(new Uri(Global.API_IRL + (string)list[x]["thumb_path"], UriKind.Absolute));
                 Grid.SetColumn(profil, 0);
                 Grid.SetRow(profil, 0);
                 tmpGrid.Children.Add(profil);
@@ -288,7 +256,7 @@ namespace Caritathelp.Message
                 name.FontSize = 14;
                 name.TextWrapping = TextWrapping.Wrap;
                 name.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
-                name.Text = responseConv.response[x].fullname;
+                name.Text = (string)list[x]["fullname"];
                 name.FontWeight = FontWeights.Bold;
                 name.VerticalAlignment = VerticalAlignment.Center;
                 name.HorizontalAlignment = HorizontalAlignment.Left;
@@ -300,7 +268,7 @@ namespace Caritathelp.Message
                 TextBlock date = new TextBlock();
                 DateTime convertedDate;
                 date.Margin = new Thickness(10, 10, 0, 10);
-                convertedDate = Convert.ToDateTime(responseConv.response[x].created_at);
+                convertedDate = Convert.ToDateTime((string)list[x]["created_at"]);
                 date.Text = convertedDate.ToString();
                 date.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
                 date.TextWrapping = TextWrapping.Wrap;
@@ -311,7 +279,7 @@ namespace Caritathelp.Message
                 // content
                 TextBlock msg = new TextBlock();
                 msg.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
-                msg.Text = responseConv.response[x].content;
+                msg.Text = (string)list[x]["content"];
                 msg.FontSize = 14;
                 msg.VerticalAlignment = VerticalAlignment.Top;
                 msg.Margin = new Thickness(10, 10, 0, 10);
@@ -336,40 +304,15 @@ namespace Caritathelp.Message
 
         private async void getMessage(MessageInfos id)
         {
-            var httpClient = new HttpClient(new HttpClientHandler());
-            try
+            HttpHandler http = HttpHandler.getHttp();
+            Newtonsoft.Json.Linq.JObject obj = await http.sendRequest("/chatrooms/" + infos.id, null, HttpHandler.TypeRequest.GET);
+            if ((int)obj["status"] != 200)
             {
-                var template = new UriTemplate(Global.API_IRL + "/chatrooms/" + infos.id + "{?token}");
-                template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
-                var uri = template.Resolve();
-                Debug.WriteLine(uri);
-
-                HttpResponseMessage response = await httpClient.GetAsync(uri);
-                response.EnsureSuccessStatusCode();
-                responseString = await response.Content.ReadAsStringAsync();
-                responseConv = JsonConvert.DeserializeObject<ConversationResponse>(responseString);
-                if (responseConv.status != 200)
-                {
-                    Debug.WriteLine("failed : " + responseConv.message);
-                }
-                else
-                {
-                    nameBox.Text = infos.name;
-                    initMessage(responseConv.response.Count);
-                }
+                Debug.WriteLine((string)obj["message"]);
             }
-            catch (HttpRequestException e)
+            else
             {
-            }
-            catch (JsonReaderException e)
-            {
-                System.Diagnostics.Debug.WriteLine(responseString);
-                Debug.WriteLine("Failed to read json");
-            }
-            catch (JsonSerializationException e)
-            {
-                Debug.WriteLine(responseString);
-                System.Diagnostics.Debug.WriteLine(e.Message);
+                initMessage((Newtonsoft.Json.Linq.JArray)obj["response"]);
             }
         }
 
@@ -386,6 +329,7 @@ namespace Caritathelp.Message
                     if (notif.type.Equals("message", StringComparison.Ordinal)
                         && notif.chatroom_id == infos.id)
                     {
+                        
                         updateMessageGUI();
                     }
 
@@ -438,7 +382,7 @@ namespace Caritathelp.Message
                     messageWebSocket = webSocket; // Only store it after successfully connecting.
                     messageWriter = new DataWriter(webSocket.OutputStream);
                     // Buffer any data we want to send.*
-                    string message = "{ \"token\" : \"token\", \"token_user\" : \"" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"] + "\"}";
+                    string message = "{ \"token\" : \"token\", \"user_uid\" : \"" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["mail"] + "\"}";
                     messageWriter.WriteString(message);
 
                     // Send the data as one complete message.

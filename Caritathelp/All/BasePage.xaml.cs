@@ -187,7 +187,7 @@ namespace Caritathelp.All
                     messageWebSocket = webSocket; // Only store it after successfully connecting.
                     messageWriter = new DataWriter(webSocket.OutputStream);
                     // Buffer any data we want to send.*
-                    string message = "{ \"token\" : \"token\", \"uid\" : \"" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["mail"] + "\"}";
+                    string message = "{ \"token\" : \"token\", \"user_uid\" : \"" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["mail"] + "\"}";
                     messageWriter.WriteString(message);
 
                     // Send the data as one complete message.
