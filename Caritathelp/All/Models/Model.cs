@@ -26,7 +26,8 @@ namespace Caritathelp.All.Models
         MANAGE_INVITATION = 3,
         DELETE_RESOURCE = 4,
         MANAGE_RELATION = 5,
-        GET_RESOURCES = 6
+        GET_RESOURCES = 6,
+        GET_NOTIFICATION = 7,
     }
 
     public class FormModel

@@ -49,6 +49,9 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\2017_logo_caritathelp.png">
       <PackagePath>Assets\2017_logo_caritathelp.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\account.png">
+      <PackagePath>Assets\account.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\addAssociation.png">
       <PackagePath>Assets\addAssociation.png</PackagePath>
     </AppxPackagedFile>
@@ -90,6 +93,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\event.png">
       <PackagePath>Assets\event.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\foler.png">
+      <PackagePath>Assets\foler.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\home.png">
       <PackagePath>Assets\home.png</PackagePath>
@@ -180,6 +186,18 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\CommentContro.xbf">
       <PackagePath>All\GUI\CommentContro.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\CreateGUI\DateControls.xbf">
+      <PackagePath>All\GUI\CreateGUI\DateControls.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\CreateGUI\DescriptionControls.xbf">
+      <PackagePath>All\GUI\CreateGUI\DescriptionControls.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\CreateGUI\FileControls.xbf">
+      <PackagePath>All\GUI\CreateGUI\FileControls.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\CreateGUI\TitleContro.xbf">
+      <PackagePath>All\GUI\CreateGUI\TitleContro.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\ErrorControl.xbf">
       <PackagePath>All\GUI\ErrorControl.xbf</PackagePath>

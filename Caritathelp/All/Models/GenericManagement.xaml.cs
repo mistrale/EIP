@@ -49,6 +49,11 @@ namespace Caritathelp.All.Models
             this.Frame.Navigate(typeof(GenericInvitation), infos);
         }
 
+        public void getNotification(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(GenericNotification), infos);
+        }
+
         public void manageRelationClick(object sender, RoutedEventArgs e)
         {
 
@@ -107,6 +112,9 @@ namespace Caritathelp.All.Models
                         break;
                     case ButtonManagement.MANAGE_RELATION:
                         button.Click += manageRelationClick;
+                        break;
+                    case ButtonManagement.GET_NOTIFICATION:
+                        button.Click += getNotification;
                         break;
                 }
                 Grid.SetColumn(button, 1);

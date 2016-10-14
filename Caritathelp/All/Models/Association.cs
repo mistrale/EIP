@@ -17,7 +17,8 @@ namespace Caritathelp.All.Models
                 {"Creer un evenement", ButtonManagement.CREATE_RESOURCE },
                 {"Supprimer l'association", ButtonManagement.DELETE_RESOURCE },
                 {"Gerer les membres", ButtonManagement.MANAGE_RELATION },
-                {"Gerer les demandes d'invitation", ButtonManagement.MANAGE_INVITATION }
+                {"Gerer les invitations", ButtonManagement.MANAGE_INVITATION },
+                {"Notifications", ButtonManagement.GET_NOTIFICATION }
             };
 
             typeControls = new Dictionary<string, FormControlType>

@@ -12,28 +12,15 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="304"/>
-                <ColumnDefinition  Width="73*" x:Name="secondCol" />
+                <ColumnDefinition  Width="19*" x:Name="secondCol" />
             </Grid.ColumnDefinitions>
-            <Ellipse x:Name="logo" Height="73" VerticalAlignment="Top" Margin="10,19,220.333,0" Stroke="#FF69B578">
+            <Ellipse x:Name="logo" Height="73" VerticalAlignment="Top" Margin="10,19,220,0" Stroke="#FF69B578">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <Border CornerRadius="5" BorderThickness="1" HorizontalAlignment="Left" Height="46" Margin="11.667,58,0,0" VerticalAlignment="Top" Width="52" Background="#FFFF6E6E" Grid.Column="1">
-                <Button Click="refuseNotification" x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="-28.833,-7.833,-30.167,-8.5" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="58" Width="109">
-                    <Button.Background>
-                        <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/checkKO.png"/>
-                    </Button.Background>
-                </Button>
-            </Border>
-            <Border CornerRadius="5" BorderThickness="1" HorizontalAlignment="Left" Height="46" Margin="11.667,7,0,0" VerticalAlignment="Top" Width="52" Background="#FF53A634" Grid.Column="1">
-                <Button Click="acceptNotification" x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="-28.833,-7.833,-30.167,-8.5" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="58" Width="109">
-                    <Button.Background>
-                        <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/checkOk.png"/>
-                    </Button.Background>
-                </Button>
-            </Border>
-            <TextBlock Grid.Column="0" x:Name="contentBox" HorizontalAlignment="Left" Margin="99,19,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="81" Width="195" Foreground="#FF72888E" FontSize="16" TextAlignment="Justify"/>
+            <TextBlock Grid.Column="0" x:Name="contentBox" HorizontalAlignment="Left" Margin="99,40,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="70" Width="268" Foreground="#FF72888E" FontSize="16" TextAlignment="Justify" Grid.ColumnSpan="2"/>
+            <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="99,-5,0,0" VerticalAlignment="Top" Foreground="#FF281313" BorderThickness="0" Grid.ColumnSpan="2" Width="268"/>
         </Grid>
     </Border>
 </UserControl>

@@ -146,7 +146,13 @@ namespace Caritathelp.All.GUI
             logo.Fill = image;
 
             date.Text = Convert.ToDateTime((string)obj["created_at"]).ToString();
-            content.Text = (string)obj["content"];
+            try
+            {
+                content.Text = (string)obj["content"];
+            } catch (Exception excp)
+            {
+                content.Text = "";
+            }
 
             if ((int)obj["volunteer_id"] != Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]))
             {

@@ -51,13 +51,6 @@ namespace Caritathelp.All.Models
             this.InitializeComponent();
         }
 
-        private void ModelButtonClick(object sender, RoutedEventArgs e)
-        {
-            Button button = sender as Button;
-            InfosModel tmp = (InfosModel)button.Tag;
-            Frame.Navigate(typeof(GenericProfil), tmp);
-        }
-
         public async void getNotifications()
         {
             var http = HttpHandler.getHttp();
@@ -73,9 +66,55 @@ namespace Caritathelp.All.Models
                 {
                     if (!allowed[infos.type].Contains((string)newsResponse[i]["notif_type"]))
                         continue;
+                    string notiftype = (string)newsResponse[i]["notif_type"];
+                    InfosModel tmp = new InfosModel();
+
+                    string sender_name = "";
+                    switch (notiftype)
+                    {
+                        case "AddFriend":
+                            tmp.type = "user";
+                            tmp.id = infos.id;
+                            sender_name = "L'utilisateur " + (string)newsResponse[i]["sender_name"] + " vous a envoye une demande d'ajout.";
+                            break;
+                        case "JoinAssoc":
+                            tmp.type = "assoc";
+                            tmp.id = (int)newsResponse[i]["assoc_id"];
+                            sender_name = "L'utilisateur " + (string)newsResponse[i]["sender_name"] + " a demande a rejoindre " 
+                                + (string)newsResponse[i]["assoc_name"];
+                            break;
+                        case "JoinEvent":
+                            tmp.type = "event";
+                            tmp.id = infos.id;
+                            sender_name = "L'utilisateur " + (string)newsResponse[i]["sender_name"] + " a demande a participer a "
+                                + (string)newsResponse[i]["event_name"];
+                            break;
+                        case "InviteMember":
+                            tmp.type = "user";
+                            tmp.id = infos.id;
+                            sender_name = "Vous avez ete invite a rejoindre l'association " + (string)newsResponse[i]["assoc_name"];
+                            break;
+                        case "InviteGuest":
+                            tmp.type = "user";
+                            tmp.id = infos.id;
+                            sender_name = "Vous avez ete invite a participer a l'evenement " + (string)newsResponse[i]["event_name"];
+                            break;
+                        case "NewMember":
+                            tmp.type = "user";
+                            tmp.id = (int)newsResponse[i]["sender_id"];
+                            sender_name = "L'utilisateur " + (string)newsResponse[i]["sender_name"] + " a rejoint l'association "
+                                + (string)newsResponse[i]["assoc_name"];                     
+                            break;
+                        case "NewGuest":
+                            tmp.type = "user";
+                            tmp.id = (int)newsResponse[i]["sender_id"];
+                            sender_name = "L'utilisateur " + (string)newsResponse[i]["sender_name"] + " participe a  'evenement "
+                                + (string)newsResponse[i]["event_name"];
+                            break;
+                    }
 
                     newsGrid.RowDefinitions.Add(new RowDefinition());
-                    GUI.Notification btn = new GUI.Notification((Newtonsoft.Json.Linq.JObject)(newsResponse[i]), this, infos, typeof(GenericNotification));
+                    GUI.Notification btn = new GUI.Notification((Newtonsoft.Json.Linq.JObject)(newsResponse[i]), tmp, sender_name, this);
                     btn.Margin = new Thickness(0, 0, 0, 20);
                     Grid.SetColumn(btn, 0);
                     Grid.SetRow(btn, i);

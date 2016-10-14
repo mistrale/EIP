@@ -36,40 +36,16 @@ namespace Caritathelp.All.Models
     /// </summary>
     public sealed partial class GenericCreationModel : Page
     {
-        public class ImageSourcePath : INotifyPropertyChanged
-        {
-            private string _path;
 
-            public event PropertyChangedEventHandler PropertyChanged;
 
-            public String PathToImage
-            {
-                get { return _path; }
-                set
-                {
-                    _path = value;
-                    NotifyPropertyChanged("PathToImage");
-                }
-            }
-
-            public void NotifyPropertyChanged(string propertyName)
-            {
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this,
-                        new PropertyChangedEventArgs(propertyName));
-                }
-            }
-        }
-
-        public static ImageSourcePath filePath;
-        Image file;
         Dictionary<string, FormControlType> forms;
+        List<UserControl> elements;
         private Model model;
         private Model typeSearch;
         private FormModel infos;
         private string responseString;
         private Grid formsGrid;
+        string Base64String;
 
         public GenericCreationModel()
         {
@@ -83,120 +59,36 @@ namespace Caritathelp.All.Models
             tb.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 114, 136, 142));
         }
 
-        CoreApplicationView view;
-        StorageFile storageFileWP;
-        Binding myBinding;
 
-        public void chooseFileClick(object sender, RoutedEventArgs e)
-        {
-            view = CoreApplication.GetCurrentView();
 
-            string ImagePath = string.Empty;
-            FileOpenPicker filePicker = new FileOpenPicker();
-            filePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            filePicker.ViewMode = PickerViewMode.Thumbnail;
 
-            // Filter to include a sample subset of file types
-            filePicker.FileTypeFilter.Clear();
-            filePicker.FileTypeFilter.Add(".pdf");
-            filePicker.FileTypeFilter.Add(".png");
-            filePicker.FileTypeFilter.Add(".jpeg");
-            filePicker.FileTypeFilter.Add(".jpg");
-            filePicker.FileTypeFilter.Add(".gif");
-            filePicker.PickSingleFileAndContinue();
-            view.Activated += viewActivated;
 
-        }
-
-        private async void viewActivated(CoreApplicationView sender, IActivatedEventArgs args1)
-        {
-            FileOpenPickerContinuationEventArgs args = args1 as FileOpenPickerContinuationEventArgs;
-
-            if (args != null)
-            {
-                if (args.Files.Count == 0) return;
-
-                view.Activated -= viewActivated;
-                storageFileWP = args.Files[0];
-
-            }
-            Debug.WriteLine("testasdasdasd");
-            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-            () =>
-            {
-                filePath.PathToImage = storageFileWP.Name.ToString();
-            });
-        }
 
 
         private async void uploadLogo(InfosModel tmp)
         {
             string Base64String = "";
 
-            if (storageFileWP != null)
-            {
-                IRandomAccessStream fileStream = await storageFileWP.OpenAsync(FileAccessMode.Read);
-                var reader = new DataReader(fileStream.GetInputStreamAt(0));
-                await reader.LoadAsync((uint)fileStream.Size);
-                byte[] byteArray = new byte[fileStream.Size];
-                reader.ReadBytes(byteArray);
-                Base64String = Convert.ToBase64String(byteArray);
-            }
-            else
-            {
-                infosBox.Text = "Fichier invalide.";
-                Frame.Navigate(typeof(GenericProfil), tmp);
-
-                return;
-            }
+            HttpHandler http = HttpHandler.getHttp();
             string url = Global.API_IRL + "/pictures/";
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("file", Base64String),
-                        new KeyValuePair<string, string>("filename", storageFileWP.Name.ToString()),
+                        new KeyValuePair<string, string>("filename", ""),
                         new KeyValuePair<string, string>(Model.Values[infos.createdModelType]["TypeID"], tmp.id.ToString()),
                         new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"])
                     };
-            var httpClient = new HttpClient(new HttpClientHandler());
-            try
+            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest("/pictures/", values, HttpHandler.TypeRequest.POST);
+            if ((int)jObject["status"] != 200)
             {
-                HttpResponseMessage response = await httpClient.PostAsync(url, new FormUrlEncodedContent(values));
-                response.EnsureSuccessStatusCode();
-                responseString = await response.Content.ReadAsStringAsync();
-                Debug.WriteLine(responseString);
-
-                Newtonsoft.Json.Linq.JObject jObject = Newtonsoft.Json.Linq.JObject.Parse(responseString);
-                if ((int)jObject["status"] != 200)
-                {
-                    infosBox.Text = (string)jObject["message"];
-                }
-                else
-                {
-                    Frame.Navigate(typeof(GenericProfil), tmp);
-                }
+                err.printMessage((string)jObject["message"], GUI.ErrorControl.Code.FAILURE);
             }
-            catch (HttpRequestException e)
+            else
             {
-                infosBox.Text = e.Message;
-                Debug.WriteLine(e.Message);
+                Frame.Navigate(typeof(GenericProfil), tmp);
             }
         }
 
-        private bool checkFile(int row, string type, out string field)
-        {
-            Grid grid = (Grid)((Border)(formsGrid.Children.Cast<FrameworkElement>().
-                         FirstOrDefault(y => Grid.GetRow(y) == row))).Child;
-            string text = ((TextBox)(grid.Children.Cast<FrameworkElement>()
-                .FirstOrDefault(x => Grid.GetRow(x) == 1 && Grid.GetColumn(x) == 1))).Text;
-            if (text.Equals(type, StringComparison.Ordinal)
-                || text.Equals("", StringComparison.Ordinal))
-            {
-                field = "";
-                return true;
-            }
-            field = text;
-            return true;
-        }
 
         private bool checkPassword(int row, string type, out string field)
         {
@@ -211,17 +103,6 @@ namespace Caritathelp.All.Models
             return true;
         }
 
-        private bool checkDate(int row, string type, out string field)
-        {
-            Grid grid = (Grid)((Border)(formsGrid.Children.Cast<FrameworkElement>().
-                         FirstOrDefault(y => Grid.GetRow(y) == row))).Child;
-            DatePicker beginDate = ((DatePicker)(grid.Children.Cast<FrameworkElement>()
-                .FirstOrDefault(x => Grid.GetRow(x) == 1 && Grid.GetColumn(x) == 1)));
-            String[] data = beginDate.Date.ToString().Split(' ')[0].Split('/');
-            string date = data[2] + '-' + data[0] + '-' + data[1] + 'T';
-            field = date;
-            return true;
-        }
 
         private bool checkCheckField(int row, string type, out string field)
         {
@@ -230,41 +111,7 @@ namespace Caritathelp.All.Models
             return true;
         }
 
-        private bool checkTextField(int row, string type, out string field)
-        {
-            Grid grid = (Grid)((Border)(formsGrid.Children.Cast<FrameworkElement>().
-                         FirstOrDefault(y => Grid.GetRow(y) == row))).Child;
-            string text = ((TextBox)(grid.Children.Cast<FrameworkElement>()
-                .FirstOrDefault(x => Grid.GetRow(x) == 1 && Grid.GetColumn(x) == 1))).Text;
-            if (text.Equals(type, StringComparison.Ordinal)
-                || text.Equals("", StringComparison.Ordinal))
-            {
-                field = "";
 
-                infosBox.Text = "Champs '" + type + "' vide.";
-                return false;
-            }
-            field = text;
-            return true;
-        }
-
-        private bool checkDescription(int row, string type, out string field)
-        {
-            Grid grid = (Grid)((Border)(formsGrid.Children.Cast<FrameworkElement>().
-                         FirstOrDefault(y => Grid.GetRow(y) == row))).Child;
-            string text = ((TextBox)(grid.Children.Cast<FrameworkElement>()
-                .FirstOrDefault(x => Grid.GetRow(x) == 1))).Text;
-            if (text.Equals(type, StringComparison.Ordinal)
-                || text.Equals("", StringComparison.Ordinal))
-            {
-                field = "";
-
-                infosBox.Text = "Champs '" + type + "' vide.";
-                return false;
-            }
-            field = text;
-            return true;
-        }
 
         private bool checkField(List<KeyValuePair<string, string>> values)
         {
@@ -275,32 +122,23 @@ namespace Caritathelp.All.Models
                 switch (entry.Value)
                 {
                     case FormControlType.DESCRIPTION:
-                        if (!checkDescription(i, entry.Key, out field))
+                        if (!((GUI.CreateGUI.DescriptionControls)(elements[i])).checkField(entry.Key, out field))
                             return false;
                         break;
                     case FormControlType.FIELD:
-                        if (!checkTextField(i, entry.Key, out field))
-                            return false;
-                        break;
-                    case FormControlType.PASSWORD:
-                        if (!checkPassword(i, entry.Key, out field))
-                            return false;
-                        break;
-                    case FormControlType.CHECKFIELD:
-                        if (!checkCheckField(i, entry.Key, out field))
+                        if (!((GUI.CreateGUI.TitleContro)(elements[i])).checkField(entry.Key, out field))
                             return false;
                         break;
                     case FormControlType.DATE:
-                        if (!checkDate(i, entry.Key, out field))
-                            return false;
-                        break;
-                    case FormControlType.HOUR:
-                        if (!checkHour(i, entry.Key, out field))
+                        if (!((GUI.CreateGUI.DateControls)(elements[i])).checkField(entry.Key, out field))
                             return false;
                         break;
                     case FormControlType.FILE:
-                        if (!checkFile(i, entry.Key, out field))
-                            return false;
+                        //if (!((GUI.CreateGUI.FileControls)(elements[i])).checkField(entry.Key, out field))
+                        //{
+                        //    Base64String = field;
+                        //    return false;
+                        //}
                         break;
 
                 }
@@ -318,53 +156,29 @@ namespace Caritathelp.All.Models
             var values = new List<KeyValuePair<string, string>>();
             if (!checkField(values))
             {
+                Debug.WriteLine("test ca marche pas");
                 return;
             }
-
-            string token = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"];
-            if (token != null) 
-                values.Add(new KeyValuePair<string, string>("token", token));
-            
-                Debug.WriteLine("token : " + token);
-            Debug.WriteLine("url : " + (string)Model.Values[infos.createdModelType]["URL"]);
             foreach(KeyValuePair<string, string> na in values)
             {
                 Debug.WriteLine("Key : " + na.Key + " value : " + na.Value);
             }
-
-            var httpClient = new HttpClient(new HttpClientHandler());
-            try
+            HttpHandler http = HttpHandler.getHttp();
+            Newtonsoft.Json.Linq.JObject jObject = null;
+            if (infos.isCreation)
+                jObject = await http.sendRequest((string)Model.Values[infos.createdModelType]["URL"], values, HttpHandler.TypeRequest.POST);
+            else
+                jObject = await http.sendRequest((string)Model.Values[infos.createdModelType]["URL"] + infos.id.ToString(), values, HttpHandler.TypeRequest.PUT);
+            if ((int)jObject["status"] != 200)
             {
-                HttpResponseMessage response;
-                if (infos.isCreation)
-                    response = await httpClient.PostAsync(Global.API_IRL + (string)Model.Values[infos.createdModelType]["URL"], new FormUrlEncodedContent(values));
-                else
-                    response = await httpClient.PutAsync(Global.API_IRL + (string)Model.Values[infos.createdModelType]["URL"] + infos.id.ToString(), new FormUrlEncodedContent(values));
-                response.EnsureSuccessStatusCode();
-                responseString = await response.Content.ReadAsStringAsync();
-                Debug.WriteLine(responseString);
-                Newtonsoft.Json.Linq.JObject jObject = Newtonsoft.Json.Linq.JObject.Parse(responseString);
-
-                //returned = JsonConvert.DeserializeObject<AssociationRequest>(responseString);
-                if ((int)jObject["status"] != 200)
-                {
-                    infosBox.Text = (string)jObject["message"];
-                }
-                else
-                {
-                    InfosModel tmp = new InfosModel();
-                    tmp.id = (int)jObject["response"]["id"];
-                    tmp.type = infos.createdModelType;
-                    uploadLogo(tmp);
-                }
+                err.printMessage((string)jObject["message"], GUI.ErrorControl.Code.FAILURE);
             }
-            catch (HttpRequestException err)
+            else
             {
-                infosBox.Text = err.Message;
-            }
-            catch (System.InvalidOperationException err)
-            {
-                Debug.WriteLine("wtf :  " + err.Message);
+                InfosModel tmp = new InfosModel();
+                tmp.id = (int)jObject["response"]["id"];
+                tmp.type = infos.createdModelType;
+                //uploadLogo(tmp);
             }
         }
 
@@ -389,158 +203,6 @@ namespace Caritathelp.All.Models
             return tmp;
         }
 
-        public Grid addFileType(string type, Grid tmp)
-        {
-            var row2 = new RowDefinition();
-            row2.Height = new GridLength(60);
-
-            var row3 = new ColumnDefinition();
-            row3.Width = new GridLength(110);
-
-            tmp.RowDefinitions.Add(row2);
-            tmp.ColumnDefinitions.Add(row3);
-            tmp.ColumnDefinitions.Add(new ColumnDefinition());
-
-            // a voir a remplace par un bouton
-            Button btn = new Button();
-            btn.BorderThickness = new Thickness(10, 0, 0, 0);
-            btn.Content = "Choisir";
-            btn.Background = new SolidColorBrush(Color.FromArgb(0xFF, 83, 166, 52));
-            btn.Click += chooseFileClick;
-            btn.Width = 100;
-            Grid.SetColumn(btn, 0);
-            Grid.SetRow(btn, 1);
-            tmp.Children.Add(btn);
-
-            TextBox image = new TextBox();
-            image.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 191, 202, 204));
-            image.BorderBrush = new SolidColorBrush(Color.FromArgb(0xFF, 114, 136, 142));
-            image.Margin = new Thickness(10, 10, 10, 10);
-            image.TextWrapping = TextWrapping.Wrap;
-            filePath.PathToImage = type;
-            image.Text = filePath.PathToImage;
-            image.GotFocus += searchTextBox_GotFocus;
-            
-
-            Binding myBinding = new Binding();
-            myBinding.Source = filePath;
-            myBinding.Path = new PropertyPath("PathToImage");
-            myBinding.Mode = BindingMode.TwoWay;
-            myBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-            BindingOperations.SetBinding(image, TextBox.TextProperty, myBinding);
-
-            Grid.SetColumn(image, 1);
-            Grid.SetRow(image, 1);
-            tmp.Children.Add(image);
-
-            return tmp;
-
-        }
-
-        public Grid addDateType(string date, Grid tmp)
-        {
-            var row2 = new RowDefinition();
-            row2.Height = new GridLength(60);
-            tmp.RowDefinitions.Add(row2);
-
-            var col1 = new ColumnDefinition();
-            col1.Width = new GridLength(60);
-            tmp.ColumnDefinitions.Add(col1);
-            tmp.ColumnDefinitions.Add(new ColumnDefinition());
-
-            // a voir a remplace par un bouton
-            Image btn = new Image();
-            btn.Source = new BitmapImage(new Uri("ms-appx:/Assets/date.png"));
-            btn.Margin = new Thickness(10, 0, 0, 0);
-
-            Grid.SetColumn(btn, 0);
-            Grid.SetRow(btn, 1);
-            tmp.Children.Add(btn);
-
-            DatePicker field = new DatePicker();
-            field.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 114, 136, 142));
-            field.BorderBrush = new SolidColorBrush(Color.FromArgb(0xFF, 114, 136, 142));
-            field.Margin = new Thickness(10, 0, 10, 0);
-
-            try
-            {
-                string[] begin = date.Split('-');
-                field.Date = (DateTime)Convert.ToDateTime(begin[1] + '/' + begin[2] + '/' + begin[0]);
-            }
-            catch (System.IndexOutOfRangeException e)
-            {
-
-            }
-
-            Grid.SetColumn(field, 1);
-            Grid.SetRow(field, 1);
-            tmp.Children.Add(field);
-
-            return tmp;
-        }
-
-        public Grid addDescribeType(string description, Grid tmp)
-        {
-            var row2 = new RowDefinition();
-            row2.Height = new GridLength(220);
-            tmp.RowDefinitions.Add(row2);
-
-            var col1 = new ColumnDefinition();
-            tmp.ColumnDefinitions.Add(col1);
-
-            TextBox field = new TextBox();
-            field.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 191, 202, 204));
-            field.BorderBrush = new SolidColorBrush(Color.FromArgb(0xFF, 114, 136, 142));
-            field.Margin = new Thickness(10, 10, 10, 10);
-            //field.BorderThickness = new Thickness(0, 0, 0, 0);
-            field.Text = description;
-            field.Height = 200;
-            field.TextWrapping = TextWrapping.Wrap;
-            field.GotFocus += searchTextBox_GotFocus;
-
-            Grid.SetColumn(field, 0);
-            Grid.SetRow(field, 1);
-            tmp.Children.Add(field);
-            return tmp;
-
-        }
-
-        public Grid addFieldType(string title, Grid tmp)
-        {
-            var row2 = new RowDefinition();
-            row2.Height = new GridLength(60);
-            tmp.RowDefinitions.Add(row2);
-
-            var col1 = new ColumnDefinition();
-            col1.Width = new GridLength(60);
-            tmp.ColumnDefinitions.Add(col1);
-            tmp.ColumnDefinitions.Add(new ColumnDefinition());
-
-            // a voir a remplace par un bouton
-            Image btn = new Image();
-            btn.Source = new BitmapImage(new Uri("ms-appx:/Assets/avatar.png"));
-            btn.Margin = new Thickness(10, 0, 0, 0);
-
-
-            Grid.SetColumn(btn, 0);
-            Grid.SetRow(btn, 1);
-            tmp.Children.Add(btn);
-
-            TextBox field = new TextBox();
-            field.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 191, 202, 204));
-            field.BorderBrush = new SolidColorBrush(Color.FromArgb(0xFF, 114, 136, 142));
-            field.Margin = new Thickness(10, 10, 10, 10);
-            field.TextWrapping = TextWrapping.Wrap;
-            field.Text = title;
-            field.GotFocus += searchTextBox_GotFocus;
-
-
-            Grid.SetColumn(field, 1);
-            Grid.SetRow(field, 1);
-            tmp.Children.Add(field);
-
-            return tmp;
-        }
 
         public void createButtonType(Grid tmp, int i)
         {
@@ -583,7 +245,7 @@ namespace Caritathelp.All.Models
                 Newtonsoft.Json.Linq.JObject jObject = Newtonsoft.Json.Linq.JObject.Parse(responseString);
                 if ((int)jObject["status"] != 200)
                 {
-                    infosBox.Text = (string)jObject["message"];
+                    err.printMessage((string)jObject["message"], GUI.ErrorControl.Code.FAILURE);
                 }
                 else
                 {
@@ -605,6 +267,7 @@ namespace Caritathelp.All.Models
 
         public async void initFormulaire()
         {
+            elements = new List<UserControl>();
             forms = typeSearch.getFormControlType();
             int i = 0;
             formsGrid = new Grid();
@@ -615,33 +278,8 @@ namespace Caritathelp.All.Models
             {
                 if (!infos.isAdmin && typeSearch.getPrivateField().Contains(entry.Key))
                     continue;
-                formsGrid.RowDefinitions.Add(new RowDefinition());
-                Border border = new Border();
-                border.Margin = new Thickness(10, 10, 10, 10);
-                border.BorderBrush = new SolidColorBrush(Color.FromArgb(0xFF, 191, 202, 204));
-                border.BorderThickness = new Thickness(1.5, 1.5, 1.5, 1.5);
-                border.CornerRadius = new CornerRadius(5);
-                Grid tmp = new Grid();
-                border.Child = tmp;
-                tmp.Background = new SolidColorBrush(Color.FromArgb(0xFF, 255, 255, 255));
-               // tmp.Margin = new Thickness(10, 10, 10, 10);
-
-
-                var row = new RowDefinition();
-                row.Height = new GridLength(60);
-                tmp.RowDefinitions.Add(row);
-
-                TextBox type = new TextBox();
-                type.Text = entry.Key;
-                type.FontWeight = FontWeights.Bold;
-                type.HorizontalAlignment = HorizontalAlignment.Left;
-                type.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 114, 136, 142));
-
-                Grid.SetColumn(type, 0);
-                Grid.SetColumnSpan(type, 2);
-                Grid.SetRow(type, 0);
-                tmp.Children.Add(type);
                 string resources = entry.Key;
+                UserControl ctls = null;
                 if (values != null)
                 {
                     //resources = values[(string)(Model.Values[infos.createdModelType][entry.Key]).ToSt];
@@ -650,37 +288,31 @@ namespace Caritathelp.All.Models
                 switch (entry.Value)
                 {
                     case FormControlType.FIELD:
-                        tmp = addFieldType(resources, tmp);
+                        ctls = new GUI.CreateGUI.TitleContro(resources, entry.Key, err);
                         break;
                     case FormControlType.DESCRIPTION:
-                        tmp = addDescribeType(resources, tmp);
+                        ctls = new GUI.CreateGUI.DescriptionControls(resources, entry.Key, err);
                         break;
                     case FormControlType.DATE:
-                        tmp = addDateType(resources, tmp);
+                        ctls = new GUI.CreateGUI.DateControls(resources, entry.Key, err);
                         break;
                     case FormControlType.FILE:
-                        tmp = addFileType(resources, tmp);
-                        break;
-                    case FormControlType.HOUR:
-                        tmp = addHourType(resources, tmp);
-                        break;
-                    case FormControlType.PASSWORD:
-                        tmp = addPasswordType(resources, tmp);
-                        break;
-                    case FormControlType.CHECKFIELD:
-                        tmp = addCheckField(resources, tmp);
+                        ctls = new GUI.CreateGUI.FileControls(resources, entry.Key, err);
                         break;
                 }
-                Grid.SetColumn(border, 0);
-                Grid.SetRow(border, i);
 
-                formsGrid.Children.Add(border);
+                formsGrid.RowDefinitions.Add(new RowDefinition());
+                elements.Add(ctls);
+                ctls.Margin = new Thickness(0, 0, 0, 20);
+                Grid.SetColumn(ctls, 0);
+                Grid.SetRow(ctls, i);
+                formsGrid.Children.Add(ctls);
 
                 i++;
             }
             if (infos.isAdmin)
                 createButtonType(formsGrid, i);
-            scrollButton.Content = formsGrid;
+            scroll.Content = formsGrid;
         }
 
         /// <summary>
@@ -692,8 +324,6 @@ namespace Caritathelp.All.Models
         {
             infos = e.Parameter as FormModel;
 
-            filePath = new ImageSourcePath();
-            filePath.PathToImage = "Logo";
             if (infos.createdModelType.Equals("assoc", StringComparison.Ordinal))
             {
                 typeSearch = new Association(infos.id);
@@ -712,13 +342,11 @@ namespace Caritathelp.All.Models
             }
             if (infos.isCreation)
             {
-                title.Text = Model.Values[infos.createdModelType]["CreationType"];
+                typeBox.Text = Model.Values[infos.createdModelType]["CreationType"];
             }
-
             else
             {
-                title.Text = "Informations";
-                infosBox.Text = Model.Values[infos.createdModelType]["Name"];
+                typeBox.Text = "Informations";
             }
             initFormulaire();
         }

@@ -51,8 +51,8 @@
       <RootProperty Name="Foreground" />
       <RootProperty Name="Width" />
       <RootProperty Name="Height" />
-      <RootProperty Name="FontWeight" />
       <RootProperty Name="FontSize" />
+      <RootProperty Name="FontWeight" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
@@ -117,10 +117,10 @@
       <RootProperty Name="Margin" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Width" />
-      <RootProperty Name="Stroke" />
       <RootProperty Name="RadiusX" />
       <RootProperty Name="RadiusY" />
       <RootProperty Name="StrokeThickness" />
+      <RootProperty Name="Stroke" />
     </RootType>
     <RootType FullName="Caritathelp.All.GUI.PopField">
       <RootProperty Name="HorizontalAlignment" />
@@ -153,13 +153,8 @@
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Width" />
       <RootProperty Name="BorderThickness" />
-      <RootProperty Name="IsDoubleTapEnabled" />
-      <RootProperty Name="IsHoldingEnabled" />
-      <RootProperty Name="IsRightTapEnabled" />
-      <RootProperty Name="IsTapEnabled" />
-      <RootProperty Name="PreventKeyboardDisplayOnProgrammaticFocus" />
-      <RootProperty Name="IsReadOnly" />
       <RootProperty Name="FontWeight" />
+      <RootProperty Name="IsReadOnly" />
       <RootProperty Name="IsHitTestVisible" />
       <RootProperty Name="FontStyle" />
       <RootProperty Name="RenderTransformOrigin" />
@@ -199,24 +194,43 @@
       <RootProperty Name="Width" />
     </RootType>
     <RootType FullName="Caritathelp.All.GUI.CommentContro" />
+    <RootType FullName="Windows.UI.Xaml.Controls.DatePicker">
+      <RootProperty Name="Name" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="DayFormat" />
+      <RootProperty Name="IsDoubleTapEnabled" />
+      <RootProperty Name="IsHoldingEnabled" />
+      <RootProperty Name="IsRightTapEnabled" />
+      <RootProperty Name="IsTapEnabled" />
+      <RootProperty Name="Height" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Image">
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Source" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="RenderTransformOrigin" />
+      <RootProperty Name="Name" />
+      <RootProperty Name="Visibility" />
+      <RootProperty Name="Stretch" />
+    </RootType>
+    <RootType FullName="Caritathelp.All.GUI.CreateGUI.DateControls" />
+    <RootType FullName="Caritathelp.All.GUI.CreateGUI.DescriptionControls" />
+    <RootType FullName="Caritathelp.All.GUI.CreateGUI.FileControls" />
+    <RootType FullName="Caritathelp.All.GUI.CreateGUI.TitleContro" />
     <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
       <RootProperty Name="Width" />
     </RootType>
     <RootType FullName="Caritathelp.All.GUI.InvitationWaiting" />
     <RootType FullName="Caritathelp.All.GUI.NewControle" />
     <RootType FullName="Caritathelp.All.GUI.Notification" />
-    <RootType FullName="Windows.UI.Xaml.Controls.Image">
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="Source" />
-      <RootProperty Name="RenderTransformOrigin" />
-      <RootProperty Name="Name" />
-      <RootProperty Name="Visibility" />
-      <RootProperty Name="Stretch" />
-    </RootType>
     <RootType FullName="Caritathelp.All.GUI.ReceivedInviation" />
     <RootType FullName="Caritathelp.All.GUI.SearchItem" />
     <RootType FullName="Caritathelp.All.Models.GenericCreationModel" />
@@ -296,21 +310,6 @@
     <RootType FullName="Caritathelp.CreateAssociation" />
     <RootType FullName="Caritathelp.EventAssociation" />
     <RootType FullName="Caritathelp.AssociationPage.ManageMembersAssoc" />
-    <RootType FullName="Windows.UI.Xaml.Controls.DatePicker">
-      <RootProperty Name="Name" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="Foreground" />
-      <RootProperty Name="DayFormat" />
-      <RootProperty Name="IsDoubleTapEnabled" />
-      <RootProperty Name="IsHoldingEnabled" />
-      <RootProperty Name="IsRightTapEnabled" />
-      <RootProperty Name="IsTapEnabled" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="Background" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TimePicker">
       <RootProperty Name="Name" />
       <RootProperty Name="HorizontalAlignment" />

@@ -265,6 +265,7 @@ namespace Caritathelp.All.Models
                 }
                 else if (model.isInRelation(rights))
                 {
+                    
                     if (model.isAdmin(rights))
                     {
                         isAdmin = true;
@@ -285,7 +286,7 @@ namespace Caritathelp.All.Models
                 }
                 if (model.isWaiting(rights))
                 {
-                    waitingImage.Visibility = Visibility.Collapsed;
+                    waitingImage.Visibility = Visibility.Visible;
                 }
             }
         }

@@ -1,4 +1,5 @@
 Assets\2017_logo_caritathelp.png
+Assets\account.png
 Assets\addAssociation.png
 Assets\alert.png
 Assets\alertAssociation.png
@@ -13,6 +14,7 @@ Assets\checkOk.png
 Assets\date.png
 Assets\delete.png
 Assets\event.png
+Assets\foler.png
 Assets\home.png
 Assets\information.png
 Assets\Inscription.png
@@ -40,6 +42,10 @@ All\BasePage.xbf
 All\FinalInscription.xbf
 All\FriendsPage.xbf
 All\GUI\CommentContro.xbf
+All\GUI\CreateGUI\DateControls.xbf
+All\GUI\CreateGUI\DescriptionControls.xbf
+All\GUI\CreateGUI\FileControls.xbf
+All\GUI\CreateGUI\TitleContro.xbf
 All\GUI\ErrorControl.xbf
 All\GUI\InvitationWaiting.xbf
 All\GUI\NewControle.xbf

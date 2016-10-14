@@ -92,6 +92,18 @@
       <DependentUpon>CommentContro.xaml</DependentUpon>
     </Compile>
     <Compile Include="All\GUI\ControlsGenerator.cs" />
+    <Compile Include="All\GUI\CreateGUI\DateControls.xaml.cs">
+      <DependentUpon>DateControls.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="All\GUI\CreateGUI\DescriptionControls.xaml.cs">
+      <DependentUpon>DescriptionControls.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="All\GUI\CreateGUI\FileControls.xaml.cs">
+      <DependentUpon>FileControls.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="All\GUI\CreateGUI\TitleContro.xaml.cs">
+      <DependentUpon>TitleContro.xaml</DependentUpon>
+    </Compile>
     <Compile Include="All\GUI\ErrorControl.xaml.cs">
       <DependentUpon>ErrorControl.xaml</DependentUpon>
     </Compile>
@@ -253,6 +265,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\2017_logo_caritathelp.png" />
+    <Content Include="Assets\account.png" />
     <Content Include="Assets\addAssociation.png" />
     <Content Include="Assets\alert.png" />
     <Content Include="Assets\alertAssociation.png" />
@@ -267,6 +280,7 @@
     <Content Include="Assets\date.png" />
     <Content Include="Assets\delete.png" />
     <Content Include="Assets\event.png" />
+    <Content Include="Assets\foler.png" />
     <Content Include="Assets\home.png" />
     <Content Include="Assets\information.png" />
     <Content Include="Assets\Inscription.png" />
@@ -308,6 +322,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="All\GUI\CommentContro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="All\GUI\CreateGUI\DateControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="All\GUI\CreateGUI\DescriptionControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="All\GUI\CreateGUI\FileControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="All\GUI\CreateGUI\TitleContro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
