@@ -75,7 +75,8 @@ namespace Caritathelp
                 localSettings.Values["id"] = jObject["id"].ToString();
                 localSettings.Values["thumb_path"] = (string)jObject["thumb_path"];
                 localSettings.Values["mail"] = Email.Text;
-
+                localSettings.Values["allowgps"] = (bool)jObject["allowgps"];
+                //SocketHandler.getWS();
                 Loading.IsActive = false;
                 this.Frame.Navigate(typeof(All.Accueil));
             }

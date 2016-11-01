@@ -21,7 +21,7 @@ namespace Caritathelp.All.GUI
 {
     public sealed partial class InvitationWaiting : UserControl
     {
-        Models.InfosModel infos;
+        Models.Model infos;
         private int idNotif;
         private int idUser;
 
@@ -36,8 +36,8 @@ namespace Caritathelp.All.GUI
         private async void cancelRequest(object sender, RoutedEventArgs e)
         {
             HttpHandler http = HttpHandler.getHttp();
-            var url = Models.Model.Values[infos.type]["CancelInviteURL"] + "?" + Models.Model.Values[infos.type]["CancelTypeID"]
-                + "=" + idNotif.ToString() + "&" + Models.Model.Values[infos.type]["TypeID"] + "=" + infos.id.ToString();
+            var url = Models.Model.Values[infos.getType()]["CancelInviteURL"] + "?" + Models.Model.Values[infos.getType()]["CancelTypeID"]
+                + "=" + idNotif.ToString() + "&" + Models.Model.Values[infos.getType()]["TypeID"] + "=" + infos.id.ToString();
             Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(url, null, HttpHandler.TypeRequest.DELETE);
             if ((int)jObject["status"] != 200)
             {
@@ -49,7 +49,7 @@ namespace Caritathelp.All.GUI
             }
         }
 
-        public InvitationWaiting(Models.InfosModel tmp, Newtonsoft.Json.Linq.JObject obj)
+        public InvitationWaiting(Models.Model tmp, Newtonsoft.Json.Linq.JObject obj)
         {
             this.InitializeComponent();
             if (obj["notif_id"] != null)

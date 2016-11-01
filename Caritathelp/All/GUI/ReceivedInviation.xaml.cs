@@ -21,7 +21,7 @@ namespace Caritathelp.All.GUI
 {
     public sealed partial class ReceivedInviation : UserControl
     {
-        Models.InfosModel infos;
+        Models.Model infos;
         private int idNotif;
         private int idUser;
 
@@ -52,7 +52,7 @@ namespace Caritathelp.All.GUI
                             new KeyValuePair<string, string>("acceptance", isTrue.ToString().ToLower())
                         };
             HttpHandler http = HttpHandler.getHttp();
-            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Models.Model.Values[infos.type]["AcceptInvitation"], values, HttpHandler.TypeRequest.POST);
+            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Models.Model.Values[infos.getType()]["AcceptInvitation"], values, HttpHandler.TypeRequest.POST);
             if ((int)jObject["status"] != 200)
             {
                 Debug.WriteLine(jObject["message"]);
@@ -63,7 +63,7 @@ namespace Caritathelp.All.GUI
             }
         }
 
-        public ReceivedInviation(Models.InfosModel tmp, Newtonsoft.Json.Linq.JObject obj)
+        public ReceivedInviation(Models.Model tmp, Newtonsoft.Json.Linq.JObject obj)
         {
             this.InitializeComponent();
             idNotif = (int)obj["notif_id"];

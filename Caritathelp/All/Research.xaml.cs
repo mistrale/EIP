@@ -94,5 +94,10 @@ namespace Caritathelp.All
         {
             this.InitializeComponent();
         }
+
+        private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Debug.WriteLine("tests + " + ((TextBox)sender).Text);
+        }
     }
 }

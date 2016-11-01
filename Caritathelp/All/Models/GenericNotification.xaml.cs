@@ -33,7 +33,6 @@ namespace Caritathelp.All.Models
             public string typeNotif { get; set; }
         }
 
-        private InfosModel infos { get; set; }
         private Model model { get; set; }
         private string responseString { get; set; }
         private Grid notifGrid { get; set; }
@@ -64,7 +63,7 @@ namespace Caritathelp.All.Models
                 newsGrid.VerticalAlignment = VerticalAlignment.Top;
                 for (int i = 0; i < newsResponse.Count; i++)
                 {
-                    if (!allowed[infos.type].Contains((string)newsResponse[i]["notif_type"]))
+                    if (!allowed[model.getType()].Contains((string)newsResponse[i]["notif_type"]))
                         continue;
                     string notiftype = (string)newsResponse[i]["notif_type"];
                     InfosModel tmp = new InfosModel();
@@ -74,7 +73,7 @@ namespace Caritathelp.All.Models
                     {
                         case "AddFriend":
                             tmp.type = "user";
-                            tmp.id = infos.id;
+                            tmp.id = model.getID();
                             sender_name = "L'utilisateur " + (string)newsResponse[i]["sender_name"] + " vous a envoye une demande d'ajout.";
                             break;
                         case "JoinAssoc":
@@ -85,18 +84,18 @@ namespace Caritathelp.All.Models
                             break;
                         case "JoinEvent":
                             tmp.type = "event";
-                            tmp.id = infos.id;
+                            tmp.id = model.getID();
                             sender_name = "L'utilisateur " + (string)newsResponse[i]["sender_name"] + " a demande a participer a "
                                 + (string)newsResponse[i]["event_name"];
                             break;
                         case "InviteMember":
                             tmp.type = "user";
-                            tmp.id = infos.id;
+                            tmp.id = model.getID();
                             sender_name = "Vous avez ete invite a rejoindre l'association " + (string)newsResponse[i]["assoc_name"];
                             break;
                         case "InviteGuest":
                             tmp.type = "user";
-                            tmp.id = infos.id;
+                            tmp.id = model.getID();
                             sender_name = "Vous avez ete invite a participer a l'evenement " + (string)newsResponse[i]["event_name"];
                             break;
                         case "NewMember":
@@ -130,16 +129,7 @@ namespace Caritathelp.All.Models
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            infos = e.Parameter as InfosModel;
-
-            if (infos.type.Equals("assoc", StringComparison.Ordinal))
-            {
-                model = new Association(infos.id);
-            }
-            else if (infos.type.Equals("event", StringComparison.Ordinal))
-            {
-                model = new Event(infos.id);
-            }
+            model = e.Parameter as Model;
             getNotifications();
 
         }

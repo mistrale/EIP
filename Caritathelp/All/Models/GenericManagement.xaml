@@ -11,6 +11,7 @@
 
     <Grid>
         <All:BasePage HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top"/>
-        <ScrollViewer Name="scrollButton" Background="#FFE4F7DD" HorizontalAlignment="Left" Height="536" Margin="0,60,0,0" VerticalAlignment="Top" Width="400"/>
+        <ScrollViewer Name="scrollButton" Background="#FFE4F7DD" HorizontalAlignment="Left" Height="526" Margin="10,70,0,0" VerticalAlignment="Top" Width="380"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="95,15,0,0" TextWrapping="Wrap" Text="Options" VerticalAlignment="Top" Height="39" Width="218" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
     </Grid>
 </Page>

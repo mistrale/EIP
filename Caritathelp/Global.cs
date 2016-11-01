@@ -5,8 +5,12 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Tavis.UriTemplates;
+using Windows.Networking.Sockets;
+using Windows.Storage.Streams;
+using Windows.Web;
 
 namespace Caritathelp
 {

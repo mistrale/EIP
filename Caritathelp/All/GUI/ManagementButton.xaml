@@ -1,0 +1,21 @@
+﻿<UserControl
+    x:Class="Caritathelp.All.GUI.ManagementButton"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Caritathelp.All.GUI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignWidth="380" Height="70.414">
+
+    <Border CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" Background="White">
+        <Grid>
+            <Ellipse x:Name="logo" Height="46" VerticalAlignment="Top" Margin="10,10,312,0" Stroke="#FF69B578" RenderTransformOrigin="0.491,0.48">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="80,0,0,0" VerticalAlignment="Top" Height="65" Width="274" BorderBrush="{x:Null}" Foreground="#FF72888E" BorderThickness="0"/>
+        </Grid>
+    </Border>
+</UserControl>

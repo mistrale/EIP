@@ -64,6 +64,9 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\alertON.png">
       <PackagePath>Assets\alertON.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\announce.png">
+      <PackagePath>Assets\announce.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\assoc.png">
       <PackagePath>Assets\assoc.png</PackagePath>
     </AppxPackagedFile>
@@ -165,6 +168,9 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\update.png">
       <PackagePath>Assets\update.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\white_settings.png">
+      <PackagePath>Assets\white_settings.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\WideLogo.scale-240.png">
       <PackagePath>Assets\WideLogo.scale-240.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
@@ -187,6 +193,9 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\CommentContro.xbf">
       <PackagePath>All\GUI\CommentContro.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\ConfirmControl.xbf">
+      <PackagePath>All\GUI\ConfirmControl.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\CreateGUI\DateControls.xbf">
       <PackagePath>All\GUI\CreateGUI\DateControls.xbf</PackagePath>
     </AppxPackagedFile>
@@ -202,8 +211,23 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\ErrorControl.xbf">
       <PackagePath>All\GUI\ErrorControl.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\InputBox.xbf">
+      <PackagePath>All\GUI\InputBox.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\InvitationWaiting.xbf">
       <PackagePath>All\GUI\InvitationWaiting.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\ListManagement.xbf">
+      <PackagePath>All\GUI\ListManagement.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\ManagementButton.xbf">
+      <PackagePath>All\GUI\ManagementButton.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\Message\ListMessageControl.xbf">
+      <PackagePath>All\GUI\Message\ListMessageControl.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\Message\MessageControl.xbf">
+      <PackagePath>All\GUI\Message\MessageControl.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\NewControle.xbf">
       <PackagePath>All\GUI\NewControle.xbf</PackagePath>
@@ -315,6 +339,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Message\MessageProfil.xbf">
       <PackagePath>Message\MessageProfil.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Message\UpdageMessage.xbf">
+      <PackagePath>Message\UpdageMessage.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Volunteer\VolunteerAssociation.xbf">
       <PackagePath>Volunteer\VolunteerAssociation.xbf</PackagePath>

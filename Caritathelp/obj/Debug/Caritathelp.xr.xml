@@ -51,8 +51,8 @@
       <RootProperty Name="Foreground" />
       <RootProperty Name="Width" />
       <RootProperty Name="Height" />
-      <RootProperty Name="FontSize" />
       <RootProperty Name="FontWeight" />
+      <RootProperty Name="FontSize" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
@@ -109,6 +109,7 @@
       <RootProperty Name="Background" />
       <RootProperty Name="Child" />
       <RootProperty Name="Name" />
+      <RootProperty Name="RenderTransformOrigin" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Shapes.Rectangle">
       <RootProperty Name="Fill" />
@@ -153,10 +154,10 @@
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Width" />
       <RootProperty Name="BorderThickness" />
+      <RootProperty Name="FontStyle" />
       <RootProperty Name="FontWeight" />
       <RootProperty Name="IsReadOnly" />
       <RootProperty Name="IsHitTestVisible" />
-      <RootProperty Name="FontStyle" />
       <RootProperty Name="RenderTransformOrigin" />
       <RootProperty Name="UseLayoutRounding" />
       <RootProperty Name="RenderTransform" />
@@ -167,6 +168,7 @@
     <RootType FullName="Windows.UI.Xaml.Controls.UserControl">
       <RootProperty Name="Content" />
       <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
       <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
@@ -189,11 +191,13 @@
       <RootProperty Name="Stroke" />
       <RootProperty Name="Height" />
       <RootProperty Name="Fill" />
+      <RootProperty Name="RenderTransformOrigin" />
       <RootProperty Name="Name" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Width" />
     </RootType>
     <RootType FullName="Caritathelp.All.GUI.CommentContro" />
+    <RootType FullName="Caritathelp.All.GUI.ConfirmControl" />
     <RootType FullName="Windows.UI.Xaml.Controls.DatePicker">
       <RootProperty Name="Name" />
       <RootProperty Name="HorizontalAlignment" />
@@ -225,10 +229,56 @@
     <RootType FullName="Caritathelp.All.GUI.CreateGUI.DescriptionControls" />
     <RootType FullName="Caritathelp.All.GUI.CreateGUI.FileControls" />
     <RootType FullName="Caritathelp.All.GUI.CreateGUI.TitleContro" />
+    <RootType FullName="Caritathelp.All.GUI.InputBox">
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Visibility" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
       <RootProperty Name="Width" />
     </RootType>
     <RootType FullName="Caritathelp.All.GUI.InvitationWaiting" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="BorderBrush" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="SelectedIndex" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="IsSynchronizedWithCurrentItem" />
+      <RootProperty Name="Items" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="BorderThickness" />
+      <RootEvent Name="DropDownOpened" />
+      <RootEvent Name="DropDownClosed" />
+    </RootType>
+    <RootType FullName="System.String" />
+    <RootType FullName="Caritathelp.All.GUI.ListManagement" />
+    <RootType FullName="Caritathelp.All.GUI.ManagementButton" />
+    <RootType FullName="Caritathelp.All.GUI.Message.ListMessageControl" />
+    <RootType FullName="Windows.UI.Xaml.Media.SolidColorBrush">
+      <RootProperty Name="Color" />
+      <RootProperty Name="Opacity" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.HyperlinkButton">
+      <RootProperty Name="Name" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="FontWeight" />
+      <RootProperty Name="Content" />
+      <RootProperty Name="FontStyle" />
+      <RootEvent Name="Click" />
+    </RootType>
+    <RootType FullName="Caritathelp.All.GUI.Message.MessageControl" />
     <RootType FullName="Caritathelp.All.GUI.NewControle" />
     <RootType FullName="Caritathelp.All.GUI.Notification" />
     <RootType FullName="Caritathelp.All.GUI.ReceivedInviation" />
@@ -283,20 +333,6 @@
     </RootType>
     <RootType FullName="Caritathelp.All.Models.GenericProfil" />
     <RootType FullName="Caritathelp.All.Options" />
-    <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
-      <RootProperty Name="Margin" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Foreground" />
-      <RootProperty Name="BorderBrush" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="SelectedIndex" />
-      <RootProperty Name="Items" />
-      <RootProperty Name="Height" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="BorderThickness" />
-    </RootType>
-    <RootType FullName="System.String" />
     <RootType FullName="Caritathelp.AssociationProfil" />
     <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
       <RootProperty Name="Name" />
@@ -343,14 +379,6 @@
     <RootType FullName="Caritathelp.GestionAssociation" />
     <RootType FullName="Caritathelp.InformationAssociation" />
     <RootType FullName="Caritathelp.All.Inscription" />
-    <RootType FullName="Windows.UI.Xaml.Controls.HyperlinkButton">
-      <RootProperty Name="Margin" />
-      <RootProperty Name="Width" />
-      <RootProperty Name="FontSize" />
-      <RootProperty Name="FontStyle" />
-      <RootProperty Name="Content" />
-      <RootEvent Name="Click" />
-    </RootType>
     <RootType FullName="Caritathelp.MainPage" />
     <RootType FullName="Caritathelp.MemberAssociation" />
     <RootType FullName="Caritathelp.All.Notification" />
@@ -359,6 +387,7 @@
     <RootType FullName="Caritathelp.Message.CreateMessage" />
     <RootType FullName="Caritathelp.Message.Message" />
     <RootType FullName="Caritathelp.Message.MessageProfil" />
+    <RootType FullName="Caritathelp.Message.UpdageMessage" />
     <RootType FullName="Caritathelp.Volunteer.VolunteerAssociation" />
     <RootType FullName="Caritathelp.Volunteer.VolunteerEvenement" />
     <RootType FullName="Caritathelp.Volunteer.VolunteerFriends" />

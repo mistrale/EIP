@@ -58,7 +58,7 @@ namespace Caritathelp.All.Models
 
         public void optionsClick(object send, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(GenericManagement), infos);
+            Frame.Navigate(typeof(GenericManagement), model);
         }
 
         public void eventClick(object send, RoutedEventArgs e)
@@ -77,6 +77,12 @@ namespace Caritathelp.All.Models
             tmp.typeModel = infos.type;
             tmp.listTypeModel = "user";
             Frame.Navigate(typeof(GenericListModel), tmp);
+        }
+
+        public void sendUrgence(object send, RoutedEventArgs e)
+        {
+            inputBox.setIdEvent(infos.id, errControl);
+            inputBox.Visibility = Visibility.Visible;
         }
 
         public void acceptInvitationClick(object send, RoutedEventArgs e)
@@ -275,6 +281,9 @@ namespace Caritathelp.All.Models
                         {
                             adminBox.Visibility = Visibility.Visible;
                         }
+                        if (Model.Values[infos.type]["Model"].Equals("event", StringComparison.Ordinal)) {
+                            announceButton.Visibility = Visibility.Visible;
+                        }
                     }
                     removeButton.Visibility = Visibility.Visible;
                 }
@@ -316,6 +325,12 @@ namespace Caritathelp.All.Models
             else if (infos.type.Equals("event", StringComparison.Ordinal))
             {
                 model = new Event(infos.id);
+                associationButton.Visibility = Visibility.Collapsed;
+                eventButton.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                model = new Volunteer(infos.id);
             }
             initProfilPage();
             optionsComment.setCurrentPage(this, typeof(GenericProfil), infos, errControl);

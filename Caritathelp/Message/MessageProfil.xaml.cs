@@ -42,16 +42,15 @@ namespace Caritathelp.Message
             public string sender_lastname { get; set; }
             public string content { get; set; }
             public string sender_thumb_path { get; set; }
-            public string create_at { get; set; }
+            public string created_at { get; set; }
             public int sender_id { get; set; }
 
         }
 
         private Notification notif;
-        static private MessageWebSocket messageWebSocket;
-        static private DataWriter messageWriter;
-        private MessageInfos infos;
-        private string responseString;
+        private MessageWebSocket messageWebSocket;
+        private DataWriter messageWriter;
+        private MessageInfos infos { get; set; }
         Grid msgGrid;
 
         public MessageProfil()
@@ -63,13 +62,17 @@ namespace Caritathelp.Message
         {
             TextBox tb = (TextBox)sender;
             tb.Text = string.Empty;
+            tb.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 114, 146, 142));
         }
 
         public void sendMessageClick(object sender, RoutedEventArgs e)
         {
             if (!msgBox.Text.Equals("", StringComparison.Ordinal)
                 && !msgBox.Text.Equals("Votre message ...", StringComparison.Ordinal))
-            sendMessage();
+            {
+                sendMessage();
+                msgBox.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 191, 202, 204));
+            }
         }
 
         private async void updateMessageGUI()
@@ -78,95 +81,21 @@ namespace Caritathelp.Message
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
             () =>
             {
+                Newtonsoft.Json.Linq.JObject tmp = new Newtonsoft.Json.Linq.JObject();
+                tmp["id"] = notif.chatroom_id;
+                tmp["volunteer_id"] = notif.sender_id;
+                tmp["thumb_path"] = notif.sender_thumb_path;
+                tmp["fullname"] = notif.sender_firstname + " " + notif.sender_lastname;
+                tmp["created_at"] = notif.created_at;
+                tmp["content"] = notif.content;
                 msgGrid.RowDefinitions.Add(new RowDefinition());
 
-                Grid tmpGrid = new Grid();
-                tmpGrid.Margin = new Thickness(0, 0, 0, 20);
+                All.GUI.Message.MessageControl ctls = new All.GUI.Message.MessageControl((Newtonsoft.Json.Linq.JObject)tmp, this);
+                ctls.Margin = new Thickness(0, 0, 0, 10);
 
-                if (notif.sender_id != Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]))
-                {
-                    tmpGrid.Background = new SolidColorBrush(Color.FromArgb(0xFF, 200, 211, 200));
-                }
-                else
-                {
-                    tmpGrid.Background = new SolidColorBrush(Color.FromArgb(0xFF, 157, 216, 160));
-                }
-                tmpGrid.VerticalAlignment = VerticalAlignment.Top;
-                tmpGrid.Width = 380;
-
-                // col
-                var columImg = new ColumnDefinition();
-                columImg.Width = new GridLength(70);
-                tmpGrid.ColumnDefinitions.Add(columImg);
-
-                var colName = new ColumnDefinition();
-                tmpGrid.ColumnDefinitions.Add(colName);
-
-                // rows
-                var rowInfos = new RowDefinition();
-                rowInfos.Height = new GridLength(70);
-                tmpGrid.RowDefinitions.Add(rowInfos);
-
-                var rowContent = new RowDefinition();
-                //rowContent.Height = new GridLength(200);
-                tmpGrid.RowDefinitions.Add(rowContent);
-
-                // image profil
-                Image profil = new Image();
-                profil.Margin = new Thickness(10, 10, 10, 10);
-                profil.Source = new BitmapImage(new Uri(Global.API_IRL + notif.sender_thumb_path , UriKind.Absolute));
-                Grid.SetColumn(profil, 0);
-                Grid.SetRow(profil, 0);
-                tmpGrid.Children.Add(profil);
-
-                // name
-                TextBlock name = new TextBlock();
-                name.Margin = new Thickness(10, 10, 10, 10);
-                name.FontSize = 14;
-                name.TextWrapping = TextWrapping.Wrap;
-                name.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
-                name.Text = notif.sender_firstname + " " + notif.sender_lastname;
-                name.FontWeight = FontWeights.Bold;
-                name.VerticalAlignment = VerticalAlignment.Center;
-                name.HorizontalAlignment = HorizontalAlignment.Left;
-                Grid.SetColumn(name, 1);
-                Grid.SetRow(name, 0);
-                tmpGrid.Children.Add(name);
-
-                // time published
-                TextBlock date = new TextBlock();
-                DateTime convertedDate;
-                date.Margin = new Thickness(10, 10, 0, 10);
-                convertedDate = Convert.ToDateTime(notif.create_at);
-                date.Text = convertedDate.ToString();
-                date.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
-                date.TextWrapping = TextWrapping.Wrap;
-                Grid.SetColumn(date, 0);
-                Grid.SetRow(date, 1);
-                tmpGrid.Children.Add(date);
-
-                // content
-                TextBlock msg = new TextBlock();
-                msg.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
-                msg.Text = notif.content;
-                msg.FontSize = 14;
-                msg.VerticalAlignment = VerticalAlignment.Top;
-                msg.Margin = new Thickness(10, 10, 0, 10);
-                msg.TextWrapping = TextWrapping.Wrap;
-
-                Grid.SetColumn(msg, 1);
-                Grid.SetRow(msg, 1);
-                tmpGrid.Children.Add(msg);
-
-
-                // add to general grid
-                Grid.SetColumn(tmpGrid, 0);
-                Grid.SetRow(tmpGrid, msgGrid.RowDefinitions.Count + 1);
-                msgGrid.RowDefinitions.Add(new RowDefinition());
-
-
-
-                msgGrid.Children.Add(tmpGrid);
+                Grid.SetColumn(ctls, 0);
+                Grid.SetRow(ctls, msgGrid.RowDefinitions.Count - 1);
+                msgGrid.Children.Add(ctls);
 
                 scroll.UpdateLayout();
                 scroll.ScrollToVerticalOffset(scroll.ScrollableHeight);
@@ -205,96 +134,16 @@ namespace Caritathelp.Message
             msgGrid = new Grid();
             msgGrid.ColumnDefinitions.Add(new ColumnDefinition());
             msgGrid.VerticalAlignment = VerticalAlignment.Top;
-            //msgGrid.Height = responseConv.response.Count * 400;
-            msgGrid.Width = 380;
             for (int x = 0; x < list.Count; x++)
             {
                 msgGrid.RowDefinitions.Add(new RowDefinition());
 
-                Grid tmpGrid = new Grid();
-                tmpGrid.Margin = new Thickness(0, 0, 0, 20);
+                All.GUI.Message.MessageControl ctls = new All.GUI.Message.MessageControl((Newtonsoft.Json.Linq.JObject)list[x], this);
+                ctls.Margin = new Thickness(0, 0, 0, 10);
 
-                if ((int)list[x]["volunteer_id"] != Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]))
-                {
-                    tmpGrid.Background = new SolidColorBrush(Color.FromArgb(0xFF, 200, 211, 200));
-                }
-                else
-                {
-                    tmpGrid.Background = new SolidColorBrush(Color.FromArgb(0xFF, 157, 216, 160));
-                }
-                tmpGrid.VerticalAlignment = VerticalAlignment.Top;
-                tmpGrid.Width = 380;
-
-                // col
-                var columImg = new ColumnDefinition();
-                columImg.Width = new GridLength(70);
-                tmpGrid.ColumnDefinitions.Add(columImg);
-
-                var colName = new ColumnDefinition();
-                tmpGrid.ColumnDefinitions.Add(colName);
-
-                // rows
-                var rowInfos = new RowDefinition();
-                rowInfos.Height = new GridLength(70);
-                tmpGrid.RowDefinitions.Add(rowInfos);
-
-                var rowContent = new RowDefinition();
-                //rowContent.Height = new GridLength(200);
-                tmpGrid.RowDefinitions.Add(rowContent);
-
-                // image profil
-                Image profil = new Image();
-                profil.Margin = new Thickness(10, 10, 10, 10);
-                profil.Source = new BitmapImage(new Uri(Global.API_IRL + (string)list[x]["thumb_path"], UriKind.Absolute));
-                Grid.SetColumn(profil, 0);
-                Grid.SetRow(profil, 0);
-                tmpGrid.Children.Add(profil);
-
-                // name
-                TextBlock name = new TextBlock();
-                name.Margin = new Thickness(10, 10, 10, 10);
-                name.FontSize = 14;
-                name.TextWrapping = TextWrapping.Wrap;
-                name.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
-                name.Text = (string)list[x]["fullname"];
-                name.FontWeight = FontWeights.Bold;
-                name.VerticalAlignment = VerticalAlignment.Center;
-                name.HorizontalAlignment = HorizontalAlignment.Left;
-                Grid.SetColumn(name, 1);
-                Grid.SetRow(name, 0);
-                tmpGrid.Children.Add(name);
-
-                // time published
-                TextBlock date = new TextBlock();
-                DateTime convertedDate;
-                date.Margin = new Thickness(10, 10, 0, 10);
-                convertedDate = Convert.ToDateTime((string)list[x]["created_at"]);
-                date.Text = convertedDate.ToString();
-                date.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
-                date.TextWrapping = TextWrapping.Wrap;
-                Grid.SetColumn(date, 0);
-                Grid.SetRow(date, 1);
-                tmpGrid.Children.Add(date);
-
-                // content
-                TextBlock msg = new TextBlock();
-                msg.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
-                msg.Text = (string)list[x]["content"];
-                msg.FontSize = 14;
-                msg.VerticalAlignment = VerticalAlignment.Top;
-                msg.Margin = new Thickness(10, 10, 0, 10);
-                msg.TextWrapping = TextWrapping.Wrap;
-
-                Grid.SetColumn(msg, 1);
-                Grid.SetRow(msg, 1);
-                tmpGrid.Children.Add(msg);
-
-
-                // add to general grid
-                Grid.SetColumn(tmpGrid, 0);
-                Grid.SetRow(tmpGrid, x);
-
-                msgGrid.Children.Add(tmpGrid);
+                Grid.SetColumn(ctls, 0);
+                Grid.SetRow(ctls, x);
+                msgGrid.Children.Add(ctls);
 
             }
             scroll.Content = msgGrid;
@@ -325,7 +174,10 @@ namespace Caritathelp.Message
                     reader.UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding.Utf8;
                     string read = reader.ReadString(reader.UnconsumedBufferLength);
                     notif = JsonConvert.DeserializeObject<Notification>(read);
+                    Debug.WriteLine("UPDATE GUI Name : " + infos.name + " id : " + infos.id);
+
                     Debug.WriteLine("DATA MESSQGE IN MESSAGE : " + read);
+                    Debug.WriteLine("chat id : " + infos.id + " chat id notif : " + notif.chatroom_id);
                     if (notif.type.Equals("message", StringComparison.Ordinal)
                         && notif.chatroom_id == infos.id)
                     {
@@ -407,7 +259,9 @@ namespace Caritathelp.Message
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             infos = e.Parameter as MessageInfos;
+            Debug.WriteLine("Name : " + infos.name + " id : " + infos.id);
             getMessage(infos);
+            nameBox.Text = infos.name;
             startListening();
         }
     }

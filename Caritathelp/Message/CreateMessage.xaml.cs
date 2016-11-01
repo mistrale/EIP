@@ -31,7 +31,6 @@ namespace Caritathelp.Message
         public CreateMessage()
         {
             this.InitializeComponent();
-            informationBox.Text = "";
             volunteerGrid = new Grid();
             volunteerGrid.VerticalAlignment = VerticalAlignment.Top;
             volunteerGrid.ColumnDefinitions.Add(new ColumnDefinition());
@@ -50,7 +49,7 @@ namespace Caritathelp.Message
             Newtonsoft.Json.Linq.JObject obj = await http.sendRequest(template, null, HttpHandler.TypeRequest.GET);
             if ((int)obj["status"] != 200)
             {
-                informationBox.Text = (string)obj["message"];
+                err.printMessage((string)obj["message"], All.GUI.ErrorControl.Code.FAILURE);
             }
             else
             {
@@ -58,37 +57,45 @@ namespace Caritathelp.Message
 
                 if (list.Count == 0 ||
                     !((string)(list[0]["result_type"])).Equals("volunteer", StringComparison.Ordinal))
-                    informationBox.Text = "Utilisateur non trouvé";
+                    err.printMessage("Utilisateur non trouvé", All.GUI.ErrorControl.Code.FAILURE);
                 else if (idVolunter.Count != 0 && idVolunter.Contains((int)list[0]["id"]))
                 {
-                    informationBox.Text = "Utilisateur deja ajoute";
+                    err.printMessage("Utilisateur deja ajoute", All.GUI.ErrorControl.Code.FAILURE);
                 }
                 else
                 {
                     volunteerGrid.RowDefinitions.Add(new RowDefinition());
-
-                    TextBlock name = new TextBlock();
-                    name.Margin = new Thickness(10, 10, 10, 10);
-                    name.FontSize = 14;
-                    name.TextWrapping = TextWrapping.Wrap;
-                    name.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
-                    name.Text = (string)list[0]["name"];
-                    name.FontWeight = FontWeights.Bold;
-                    name.VerticalAlignment = VerticalAlignment.Center;
-                    name.HorizontalAlignment = HorizontalAlignment.Left;
-                    Grid.SetColumn(name, 1);
-                    Grid.SetRow(name, volunteerGrid.RowDefinitions.Count + 1);
+                    Button btn = new Button();
+                    btn.FontSize = 14;
+                    btn.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
+                    btn.Content = (string)list[0]["name"];
+                    btn.FontWeight = FontWeights.Bold;
+                    btn.VerticalAlignment = VerticalAlignment.Center;
+                    btn.HorizontalAlignment = HorizontalAlignment.Left;
+                    btn.Click += RemoveAddedUser;
+                    btn.Tag = (int)list[0]["id"];
+                    Grid.SetColumn(btn, 1);
+                    Grid.SetRow(btn, volunteerGrid.RowDefinitions.Count - 1);
                     volunteerGrid.RowDefinitions.Add(new RowDefinition());
-                    volunteerGrid.Children.Add(name);
+                    volunteerGrid.Children.Add(btn);
                     idVolunter.Add((int)list[0]["id"]);
-                    userBox.Text = "Ajouter un utilisateur ...";
+                    userBox.Text = "Ajouter...";
                 }
             }
         }
 
+        public void RemoveAddedUser(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            int i = (int)btn.Tag;
+            Debug.WriteLine("i = " + i);
+            idVolunter.Remove(i);
+            volunteerGrid.Children.Remove(btn);
+        }
+
         public void addUserClick(object sender, RoutedEventArgs e)
         {
-            if (!userBox.Text.Equals("Ajouter un utilisateur ...", StringComparison.Ordinal)
+            if (!userBox.Text.Equals("Ajouter...", StringComparison.Ordinal)
                 && !userBox.Text.Equals("", StringComparison.Ordinal))
                 searchUsers();
         }
@@ -103,8 +110,10 @@ namespace Caritathelp.Message
         {
             string title = titleBox.Text;
             if (title == null || title.Equals("", StringComparison.Ordinal)
-                || title.Equals("Title", StringComparison.Ordinal))
+                || title.Equals("Titre", StringComparison.Ordinal))
+            {
                 title = null;
+            }
             if (!idVolunter.Contains(Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"])))
             {
                 idVolunter.Add(Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]));
@@ -130,18 +139,12 @@ namespace Caritathelp.Message
             Newtonsoft.Json.Linq.JObject obj = await http.sendRequest("/chatrooms", values, HttpHandler.TypeRequest.POST);
             if ((int)obj["status"] != 200)
             {
-                informationBox.Text = (string)obj["message"];
+                err.printMessage((string)obj["message"], All.GUI.ErrorControl.Code.FAILURE);
 
             }
             else {
                 ((Frame)Window.Current.Content).Navigate(typeof(Message));
             }
-        }
-
-
-        public void search_Click(object sender, RoutedEventArgs e)
-        {
-            ((Frame)Window.Current.Content).Navigate(typeof(All.Research));
         }
 
         public void TextBox_GotFocus(object sender, RoutedEventArgs e)

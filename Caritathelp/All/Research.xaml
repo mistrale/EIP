@@ -38,7 +38,7 @@
                 <ImageBrush ImageSource="ms-appx:/Assets/search.png" Stretch="Uniform"/>
             </Button.Background>
         </Button>
-        <TextBox x:Name="searchBox" GotFocus="searchTextBox_GotFocus"
+        <TextBox TextChanged="searchBox_TextChanged" x:Name="searchBox" GotFocus="searchTextBox_GotFocus"
 			HorizontalAlignment="Left" Margin="33,71,0,0" TextWrapping="Wrap" Text="Rechercher..." VerticalAlignment="Top" Width="277" Foreground="#FFBFCACC" BorderBrush="{x:Null}" Background="{x:Null}"/>
         <GUI:ErrorControl x:Name="errControl" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed"/>
     </Grid>

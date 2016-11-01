@@ -5,34 +5,23 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Caritathelp="using:Caritathelp"
+    xmlns:All="using:Caritathelp.All"
+    xmlns:GUI="using:Caritathelp.All.GUI"
     x:Class="Caritathelp.Message.Message"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="White">
-        <Grid HorizontalAlignment="Left" Height="68" Margin="0,0,-2,0" VerticalAlignment="Top" Width="402" Background="#FF4BAF50"/>
-        <Button x:ConnectionId='1' x:Name="button" Content=""
-                HorizontalAlignment="Left" Margin="281,3,0,0"
-                VerticalAlignment="Top" BorderBrush="{x:Null}"
-                RenderTransformOrigin="1.759,0.719"
-                                     Width="68">
-            <Button.Background>
-                <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/magnify.png"/>
-            </Button.Background>
-        </Button>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="66" VerticalAlignment="Top" Width="400" Margin="0,2,0,0"/>
-        <TextBlock x:Name="nameBox" HorizontalAlignment="Left"
-                   Margin="73,13,0,0" TextWrapping="Wrap" 
-                   Text="Messages" VerticalAlignment="Top"
-                   Height="39" Width="253" FontSize="24" 
-                   TextAlignment="Center" FontWeight="Bold"/>
-        <ScrollViewer Name="scroll"
-                      HorizontalAlignment="Left"
-                      Height="430" Margin="10,140,0,0" 
-                      VerticalAlignment="Top" Width="380"/>
-        <Caritathelp:Menu HorizontalAlignment="Left" Margin="0,592,-2,0" VerticalAlignment="Top" Width="402"/>
-        <Button x:ConnectionId='2' x:Name="newMessage"                         
-                Content="Creer une conversation" HorizontalAlignment="Left" Margin="10,63,0,0" VerticalAlignment="Top" Background="#FF4BAF50" BorderBrush="{x:Null}" Height="70" Width="380"/>
+    <Grid>
+
+        <All:BasePage HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="62,18,0,0" TextWrapping="Wrap" Text="Messages" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" RenderTransformOrigin="0.481,0.405" Height="38" Width="277" TextAlignment="Center"/>
+        <Border BorderBrush="#FFBFCACC"  CornerRadius="5"  BorderThickness="1.5" HorizontalAlignment="Left" Height="52" Margin="10,69,0,0" VerticalAlignment="Top" Width="380" Background="#FF53A634">
+            <Button x:ConnectionId='1'                          x:Name="button" Content="Nouvelle conversation" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="{x:Null}" BorderThickness="0" Margin="-1.667,-4.667,1.333,-5"/>
+        </Border>
+        <ScrollViewer x:Name="scroll" HorizontalAlignment="Left" Height="462" Margin="10,132,0,0" VerticalAlignment="Top" Width="380"/>
+
+        <GUI:ErrorControl x:Name="err" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0" Visibility="Collapsed"/>
+
     </Grid>
 </Page>
 

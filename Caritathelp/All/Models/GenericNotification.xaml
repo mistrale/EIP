@@ -13,7 +13,7 @@
     <Grid>
 
         <All:BasePage HorizontalAlignment="Left" Margin="0,9,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="titleBox" HorizontalAlignment="Left" Margin="52,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="285" BorderBrush="{x:Null}" Foreground="White" Background="{x:Null}" TextAlignment="Center" FontWeight="Bold"/>
+        <TextBox x:Name="titleBox" HorizontalAlignment="Left" Margin="85,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="236" BorderBrush="{x:Null}" Foreground="White" Background="{x:Null}" TextAlignment="Center" FontWeight="Bold"/>
         <Button x:Name="previousButton" Content="" HorizontalAlignment="Left" Margin="0,8,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Width="54">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/back.png"/>

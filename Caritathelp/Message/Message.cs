@@ -15,6 +15,6 @@ namespace Caritathelp.Message
         public int number_volunteers { get; set; }
         public int number_messages { get; set; }
         public bool is_private { get; set; }
-        public IList<string> volunteers { get; set; }
+        public Newtonsoft.Json.Linq.JArray volunteers { get; set; }
     }
 }

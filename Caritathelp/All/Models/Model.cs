@@ -64,12 +64,16 @@ namespace Caritathelp.All.Models
                     { "Model", "assoc"},
                     { "TypeID", "assoc_id"},
                     { "CancelTypeID", "volunteer_id"},
+                    { "ResourceManagement", "members"},
+
                     { "AddURL", "/membership/join"},
                     { "RemoveURL", "/membership/leave"},
                     { "AcceptURL", "/membership/reply_invite"},
                     { "AcceptInvitation", "/membership/reply_member"},
                     { "InviteURL", "/membership/invite"},
                     { "CancelInviteURL", "/membership/uninvite" },
+                    { "UpgradeURL", "/membership/upgrade" },
+                    { "KickURL", "/membership/kick" },
 
                     { "NbRelationType", "nb_friends_members"},
                     { "ResourceURL", "/associations"},
@@ -85,7 +89,41 @@ namespace Caritathelp.All.Models
                     { "Ville", "city" },
                     { "Logo", "thumb_path" }
             }
-            },
+         },
+         {"volunteer", new Dictionary<string, string>
+                {
+                    { "Name", "Volontaire"},
+                    { "NameType", "fullname"},
+                    { "URL", "/volunteers/"},
+                    { "Model", "volunteer"},
+                    { "TypeID", "volunteer_id"},
+                    { "CancelTypeID", "volunteer_id"},
+                    { "ResourceManagement", "friendship"},
+
+                    { "AddURL", "/friendship/add"},
+                    { "RemoveURL", "/friendship/remove"},
+                    { "AcceptURL", "/friendship/reply"},
+                    { "AcceptInvitation", "/friendship/reply"},
+                    { "InviteURL", "/friendship/add"},
+                    { "CancelInviteURL", "/friendship/cancel" },
+                    { "UpgradeURL", "" },
+                    { "KickURL", "/friendship/remove" },
+
+                    { "NbRelationType", "nb_friends"},
+                    { "ResourceURL", "/friends"},
+                    { "RightsType", "friendship" },
+                    { "WaitingInvitation", "/friendship/received_invitations" },
+                    { "SendInvitation", "/friend_requests/" },
+
+                    // creation / update assoc
+                    { "CreationType", "Creation d'association"},
+                    { "Titre", "name" },
+                    { "Description", "description" },
+                    { "Date de creation", "birthday" },
+                    { "Ville", "city" },
+                    { "Logo", "thumb_path" }
+            }
+         },
             { "event", new Dictionary<string, string>
                 {
                     { "Name", "Evenement"},
@@ -118,6 +156,11 @@ namespace Caritathelp.All.Models
         public Model(int id)
         {
             this.id = id;
+        }
+
+        virtual public string getType()
+        {
+            return "";
         }
 
         virtual public Dictionary<string, FormControlType> getFormControlType()

@@ -24,7 +24,6 @@ namespace Caritathelp.All.Models
     /// </summary>
     public sealed partial class GenericManagement : Page
     {
-        private InfosModel infos;
         private Model model;
         private Grid buttonGrid = new Grid();
 
@@ -36,9 +35,9 @@ namespace Caritathelp.All.Models
         public void createRessourceClick(object sender, RoutedEventArgs e)
         {
             FormModel tmp = new FormModel();
-            tmp.modelType = infos.type;
+            tmp.modelType = model.getType();
             tmp.createdModelType = "assoc";
-            tmp.id = infos.id;
+            tmp.id = model.getID();
             tmp.isAdmin = true;
             tmp.isCreation = true;
             Frame.Navigate(typeof(GenericCreationModel), tmp);
@@ -46,17 +45,17 @@ namespace Caritathelp.All.Models
 
         public void manageInvitationClick(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(GenericInvitation), infos);
+            this.Frame.Navigate(typeof(GenericInvitation), model);
         }
 
         public void getNotification(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(GenericNotification), infos);
+            this.Frame.Navigate(typeof(GenericNotification), model);
         }
 
         public void manageRelationClick(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(GenericListModelManagement), model);
         }
 
         public void deleteRessourceClick(object sender, RoutedEventArgs e)
@@ -68,58 +67,36 @@ namespace Caritathelp.All.Models
         {
             buttonGrid = new Grid();
             buttonGrid.VerticalAlignment = VerticalAlignment.Top;
-            buttonGrid.Margin = new Thickness(10, 10, 10, 10);
-            var columnImage = new ColumnDefinition();
-            columnImage.Width = new GridLength(100);
-            buttonGrid.ColumnDefinitions.Add(columnImage);
-
-            var otherColumn = new ColumnDefinition();
-            otherColumn.Width = new GridLength(270);
-            buttonGrid.ColumnDefinitions.Add(otherColumn);
+            buttonGrid.ColumnDefinitions.Add(new ColumnDefinition());
             Dictionary<string, Models.ButtonManagement> buttonsList = model.getButtonsManagement();
             int i = 0;
             foreach (KeyValuePair<string, ButtonManagement> entry in buttonsList)
             {
                 buttonGrid.RowDefinitions.Add(new RowDefinition());
-
-                Image image = new Image();
-                image.Height = 100;
-                image.Source = new BitmapImage(new Uri("ms-appx:/Assets/logo.png"));
-                // do something with entry.Value or entry.Key
-
-                Grid.SetColumn(image, 0);
-                Grid.SetRow(image, i);
-                buttonGrid.Children.Add(image);
-
-                Button button = new Button();
-                button.Margin = new Thickness(0, 0, 0, 0);
-                button.Height = 115;
-                button.Width = 280;
-                button.Content = entry.Key;
-                button.Background = new SolidColorBrush(Color.FromArgb(250, 255, 255, 255));
-                button.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 114, 136, 142));
+                GUI.ManagementButton btn = new GUI.ManagementButton();
+                btn.Margin = new Thickness(0, 0, 0, 15);
                 ButtonManagement type = entry.Value;
                 switch (type)
                 {
                     case ButtonManagement.CREATE_RESOURCE:
-                        button.Click += createRessourceClick;
+                        btn.setControls(entry.Key, createRessourceClick);
                         break;
                     case ButtonManagement.DELETE_RESOURCE:
-                        button.Click += deleteRessourceClick;
+                        btn.setControls(entry.Key, deleteRessourceClick);
                         break;
                     case ButtonManagement.MANAGE_INVITATION:
-                        button.Click += manageInvitationClick;
+                        btn.setControls(entry.Key, manageInvitationClick);
                         break;
                     case ButtonManagement.MANAGE_RELATION:
-                        button.Click += manageRelationClick;
+                        btn.setControls(entry.Key, manageRelationClick);
                         break;
                     case ButtonManagement.GET_NOTIFICATION:
-                        button.Click += getNotification;
+                        btn.setControls(entry.Key, getNotification);
                         break;
                 }
-                Grid.SetColumn(button, 1);
-                Grid.SetRow(button, i);
-                buttonGrid.Children.Add(button);
+                Grid.SetColumn(btn, 1);
+                Grid.SetRow(btn, i);
+                buttonGrid.Children.Add(btn);
                 i++;
             }
             scrollButton.Content = buttonGrid;
@@ -132,17 +109,8 @@ namespace Caritathelp.All.Models
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            infos = e.Parameter as InfosModel;
-            if (infos.type.Equals("assoc", StringComparison.Ordinal))
-            {
-                model = new Association(infos.id);
-                initButtonsManagement();
-            }
-            else if (infos.type.Equals("event", StringComparison.Ordinal))
-            {
-                model = new Event(infos.id);
-                initButtonsManagement();
-            }
+            model = e.Parameter as Model;
+            initButtonsManagement();
         }
     }
 }

@@ -36,7 +36,6 @@ namespace Caritathelp.All.Models
         }
 
         private int idSearch { get; set; }
-        private InfosModel infos { get; set; }
         private Model model { get; set; }
         private string responseString { get; set; }
 
@@ -111,14 +110,14 @@ namespace Caritathelp.All.Models
             HttpHandler http = HttpHandler.getHttp();
             var values = new List<KeyValuePair<string, string>>
                     {
-                        new KeyValuePair<string, string>(Model.Values[infos.type]["TypeID"], infos.id.ToString()),
+                        new KeyValuePair<string, string>(Model.Values[model.getType()]["TypeID"], model.getID().ToString()),
                         new KeyValuePair<string, string>("volunteer_id", idSearch.ToString()),
                         new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"])
                     };
-            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[infos.type]["InviteURL"], values, HttpHandler.TypeRequest.POST);
+            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[model.getType()]["InviteURL"], values, HttpHandler.TypeRequest.POST);
             if ((int)jObject["status"] == 200)
             {
-                this.Frame.Navigate(typeof(GenericInvitation), infos);
+                this.Frame.Navigate(typeof(GenericInvitation), model);
             }
             else
             {
@@ -131,9 +130,9 @@ namespace Caritathelp.All.Models
             var http = HttpHandler.getHttp();
             var values = new List<KeyValuePair<string, string>>
                     {
-                        new KeyValuePair<string, string>("TypeID", infos.id.ToString()),
+                        new KeyValuePair<string, string>("TypeID", model.getID().ToString()),
                     };
-            string url = Model.Values[infos.type]["WaitingInvitation"] + "?" + Model.Values[infos.type]["TypeID"] + "=" + infos.id.ToString();
+            string url = Model.Values[model.getType()]["WaitingInvitation"] + "?" + Model.Values[model.getType()]["TypeID"] + "=" + model.getID().ToString();
             Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(url, null, HttpHandler.TypeRequest.GET);
             if ((int)jObject["status"] == 200)
             {
@@ -146,7 +145,7 @@ namespace Caritathelp.All.Models
                 {
                     Debug.WriteLine("2");
                     receivedGrid.RowDefinitions.Add(new RowDefinition());
-                    GUI.ReceivedInviation btn = new GUI.ReceivedInviation(infos, (Newtonsoft.Json.Linq.JObject)(newsResponse[i]));
+                    GUI.ReceivedInviation btn = new GUI.ReceivedInviation(model, (Newtonsoft.Json.Linq.JObject)(newsResponse[i]));
                     btn.Margin = new Thickness(0, 0, 0, 20);
                     Grid.SetColumn(btn, 0);
                     Grid.SetRow(btn, i);
@@ -165,9 +164,9 @@ namespace Caritathelp.All.Models
             var http = HttpHandler.getHttp();
             var values = new List<KeyValuePair<string, string>>
                     {
-                        new KeyValuePair<string, string>("TypeID", infos.id.ToString()),
+                        new KeyValuePair<string, string>("TypeID", model.getID().ToString()),
                     };
-            string url = Model.Values[infos.type]["SendInvitation"] + "?" + Model.Values[infos.type]["TypeID"] + "=" + infos.id.ToString();
+            string url = Model.Values[model.getType()]["SendInvitation"] + "?" + Model.Values[model.getType()]["TypeID"] + "=" + model.getID().ToString();
             Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(url, null, HttpHandler.TypeRequest.GET);
             if ((int)jObject["status"] == 200)
             {
@@ -179,7 +178,7 @@ namespace Caritathelp.All.Models
                 for (int i = 0; i < newsResponse.Count; i++)
                 {
                     sendGrid.RowDefinitions.Add(new RowDefinition());
-                    GUI.InvitationWaiting btn = new GUI.InvitationWaiting(infos, (Newtonsoft.Json.Linq.JObject)(newsResponse[i]));
+                    GUI.InvitationWaiting btn = new GUI.InvitationWaiting(model, (Newtonsoft.Json.Linq.JObject)(newsResponse[i]));
                     btn.Margin = new Thickness(0, 0, 0, 20);
                     Grid.SetColumn(btn, 0);
                     Grid.SetRow(btn, i);
@@ -202,16 +201,7 @@ namespace Caritathelp.All.Models
         {
             this.InitializeComponent();
 
-            infos = e.Parameter as InfosModel;
-
-            if (infos.type.Equals("assoc", StringComparison.Ordinal))
-            {
-                model = new Association(infos.id);
-            }
-            else if (infos.type.Equals("event", StringComparison.Ordinal))
-            {
-                model = new Event(infos.id);
-            }
+            model = e.Parameter as Model;
             tmp = receivedRB;
             getSendInvitation();
             getReceivedInvitation();

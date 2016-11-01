@@ -7,6 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
+using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Networking.Sockets;
@@ -32,8 +34,8 @@ namespace Caritathelp.All
             public string type { get; set; }
         }
 
-        static private MessageWebSocket messageWebSocket;
-        static private DataWriter messageWriter;
+        private MessageWebSocket messageWebSocket;
+        private DataWriter messageWriter;
         private Notification notif;
         public class ImageSourcePath : INotifyPropertyChanged
         {
@@ -142,7 +144,7 @@ namespace Caritathelp.All
             }
             catch (Exception ex) // For debugging
             {
-                Debug.WriteLine(ex.Message);
+                Debug.WriteLine("BIG ERROR " + ex.Message);
                 WebErrorStatus status = WebSocketError.GetStatus(ex.GetBaseException().HResult);
                 // Add your specific error-handling code here.
             }
@@ -197,11 +199,57 @@ namespace Caritathelp.All
             }
             catch (Exception ex) // For debugging
             {
-                Debug.WriteLine(ex.Message);
+                Debug.WriteLine("HUGHE ERROR " + ex.Message);
                 WebErrorStatus status = WebSocketError.GetStatus(ex.GetBaseException().HResult);
                 Debug.WriteLine(status);
                 // Add your specific error-handling code here.
             }
+        }
+
+
+        private async void GetPOSITION()
+        {
+            if ((bool)Windows.Storage.ApplicationData.Current.LocalSettings.Values["allowgps"] != true)
+            {
+                return;
+            }
+            while (true)
+            {
+                Geolocator geolocator = new Geolocator();
+                geolocator.DesiredAccuracyInMeters = 50;
+
+                try
+                {
+                    HttpHandler http = HttpHandler.getHttp();
+
+                    Geoposition geoposition = await geolocator.GetGeopositionAsync(
+                         maximumAge: TimeSpan.FromMinutes(5),
+                         timeout: TimeSpan.FromSeconds(10)
+                        );
+                    string url = "/auth/";
+                    var values = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("latitude", geoposition.Coordinate.Latitude.ToString("0.00")),
+                        new KeyValuePair<string, string>("longitude",  geoposition.Coordinate.Longitude.ToString("0.00"))
+                    };
+
+                    Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(url, values, HttpHandler.TypeRequest.PUT);
+                    if (jObject == null)
+                    {
+                        Debug.WriteLine("failed to connect");
+                    }
+                    Debug.WriteLine("x : " + geoposition.Coordinate.Latitude.ToString("0.00") + " et y : " + geoposition.Coordinate.Longitude.ToString("0.00"));
+                    //With this 2 lines of code, the app is able to write on a Text Label the Latitude and the Longitude, given by {{Icode|geoposition}}
+                }
+                //If an error is catch 2 are the main causes: the first is that you forgot to include ID_CAP_LOCATION in your app manifest. 
+                //The second is that the user doesn't turned on the Location Services
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Failed getting position : " + ex.Message);
+                }
+                await Task.Delay(30000);
+            }
+
         }
 
         public BasePage()
@@ -219,9 +267,10 @@ namespace Caritathelp.All
                 msg = new ImageSourcePath();
                 msg.PathToImage = "ms-appx:/Assets/message.png";
             }
-
+            GetPOSITION();
             messageButton.DataContext = msg;
-            startListening();
+           startListening();
+
         }
     }
 }

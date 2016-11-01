@@ -31,7 +31,12 @@ namespace Caritathelp.All.Models
             };
         }
 
-         public override bool isInRelation(string rights)
+        public override string getType()
+        {
+            return "assoc";
+        }
+
+        public override bool isInRelation(string rights)
         {
             if (rights != null && (rights.Equals("admin") || rights.Equals("owner")
                 || rights.Equals("member")))
