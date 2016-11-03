@@ -42,7 +42,7 @@ namespace Caritathelp.All.Models
         {
             { "assoc", new string[] { "JoinAssoc", "NewMember", }},
             { "event", new string[] { "JoinEvent", "NewGuest"}},
-            { "volunteer", new string[] {"JoinAssoc", "JoinEvent", "InviteGuest", "InviteMember", "NewMember", "AddFriend"}},
+            { "volunteer", new string[] {"JoinAssoc", "JoinEvent", "InviteGuest", "InviteMember", "NewMember", "AddFriend", "Emergency"}},
         };
 
         public GenericNotification()
@@ -63,6 +63,9 @@ namespace Caritathelp.All.Models
                 newsGrid.VerticalAlignment = VerticalAlignment.Top;
                 for (int i = 0; i < newsResponse.Count; i++)
                 {
+                    Debug.WriteLine("type model : " + model.getType());
+                    Debug.WriteLine("notif type : " + (string)newsResponse[i]["notif_type"]);
+
                     if (!allowed[model.getType()].Contains((string)newsResponse[i]["notif_type"]))
                         continue;
                     string notiftype = (string)newsResponse[i]["notif_type"];
@@ -108,6 +111,12 @@ namespace Caritathelp.All.Models
                             tmp.type = "user";
                             tmp.id = (int)newsResponse[i]["sender_id"];
                             sender_name = "L'utilisateur " + (string)newsResponse[i]["sender_name"] + " participe a  'evenement "
+                                + (string)newsResponse[i]["event_name"];
+                            break;
+                        case "Emergency":
+                            tmp.type = "event";
+                            tmp.id = (int)newsResponse[i]["event_id"];
+                            sender_name = "L'utilisateur " + (string)newsResponse[i]["sender_name"] + " vous a envoye une demande d'urgence pour "
                                 + (string)newsResponse[i]["event_name"];
                             break;
                     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,16 +23,26 @@ namespace Caritathelp.All.GUI
         int id;
         ErrorControl err;
 
-        public async void cancel(object send, RoutedEventArgs e)
+        public void cancel(object send, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Collapsed;
         }
 
+        public void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.Foreground = GUI.PolicyGenerator.getBrush(GUI.PolicyGenerator.ColorType.DEFAULT_TEXT);
+        }
+
         public async void confirmeSender(object send, RoutedEventArgs e)
         {
+            Regex regex = new Regex("[^0-9.-]+"); //regex that matches disallowed text
             if (textBox.Text.Equals("") || textBox.Text.Equals("Nombre de volontaires a inviter")
-                || textBox2.Text.Equals("") || textBox2.Text.Equals("Distance maximum(km2)"))
+                || textBox2.Text.Equals("") || textBox2.Text.Equals("Distance maximum(km2)")
+                )
             {
+
                 return;
             }
 
@@ -44,10 +55,12 @@ namespace Caritathelp.All.GUI
                     }; Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(url, values, HttpHandler.TypeRequest.POST);
             if ((int)jObject["status"] == 200)
             {
-                err.printMessage("Demandes envoyees a " + (Newtonsoft.Json.Linq.JArray)jObject["response"] + " volontaires", GUI.ErrorControl.Code.SUCCESS);
+                this.Visibility = Visibility.Collapsed;
+                err.printMessage("Demandes envoyees a " + ((Newtonsoft.Json.Linq.JArray)jObject["response"]).Count + " volontaires", GUI.ErrorControl.Code.SUCCESS);
             }
             else
             {
+                this.Visibility = Visibility.Collapsed;
                 err.printMessage((string)jObject["message"], GUI.ErrorControl.Code.FAILURE);
             }
         }

@@ -67,7 +67,7 @@ namespace Caritathelp.All
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("content", publicationText.Text),
-                        new KeyValuePair<string, string>("group_id",  (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]),
+                        new KeyValuePair<string, string>("group_id",  ((int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]).ToString()),
                         new KeyValuePair<string, string>("news_type", "Status"),
                         new KeyValuePair<string, string>("as_group", "false"),
                         new KeyValuePair<string, string>("group_type", "Volunteer"),

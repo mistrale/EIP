@@ -72,7 +72,7 @@ namespace Caritathelp
             try
             {
                 localSettings.Values["password"] = (string)Password.Password;
-                localSettings.Values["id"] = jObject["id"].ToString();
+                localSettings.Values["id"] = (int)jObject["id"];
                 localSettings.Values["thumb_path"] = (string)jObject["thumb_path"];
                 localSettings.Values["mail"] = Email.Text;
                 localSettings.Values["allowgps"] = (bool)jObject["allowgps"];

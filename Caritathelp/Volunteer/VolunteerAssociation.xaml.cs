@@ -244,10 +244,7 @@ namespace Caritathelp.Volunteer
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            id = e.Parameter as string;
-            if (!id.Equals((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"], StringComparison.Ordinal))
-                button1.Visibility = Visibility.Collapsed;
-            getAssociation();
+
         }
     }
 }

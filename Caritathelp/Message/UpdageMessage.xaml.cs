@@ -33,8 +33,6 @@ namespace Caritathelp.Message
         }
 
         private List<int> idVolunter;
-        private List<int> addVolunteer;
-        private List<int> removeVolunteer;
 
         Grid volunteerGrid;
 
@@ -60,12 +58,24 @@ namespace Caritathelp.Message
                 }
                 else
                 {
+
+                    var values = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("volunteers[]", "[" + (string)list[0]["id"] + "]")
+                    };
+
+                    obj = await http.sendRequest("/chatrooms/" + infos.id, values, HttpHandler.TypeRequest.PUT);
+                    if ((int)obj["status"] != 200)
+                    {
+                        err.printMessage((string)obj["message"], All.GUI.ErrorControl.Code.FAILURE);
+                        return;
+                    }
+
                     volunteerGrid.RowDefinitions.Add(new RowDefinition());
                     Button btn = new Button();
                     btn.FontSize = 14;
                     btn.Foreground = new SolidColorBrush(Color.FromArgb(250, 0, 0, 0));
                     btn.Content = (string)list[0]["name"];
-                        addVolunteer.Add((int)list[0]["id"]);
                     btn.FontWeight = FontWeights.Bold;
                     btn.VerticalAlignment = VerticalAlignment.Center;
                     btn.HorizontalAlignment = HorizontalAlignment.Left;
@@ -78,18 +88,30 @@ namespace Caritathelp.Message
                     volunteerGrid.RowDefinitions.Add(new RowDefinition());
                     volunteerGrid.Children.Add(btn);
                     userBox.Text = "Ajouter...";
+
                 }
             }
         }
 
-        public void RemoveAddedUser(object sender, RoutedEventArgs e)
+
+        public async void RemoveAddedUser(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
             int i = (int)btn.Tag;
-            removeVolunteer.Add(i);
+            //removeVolunteer.Add(i);
             Debug.WriteLine("i = " + i + " contetnt = " + btn.Content );
             idVolunter.Remove(i);
             volunteerGrid.Children.Remove(btn);
+            HttpHandler http = HttpHandler.getHttp();
+            Newtonsoft.Json.Linq.JObject obj = await http.sendRequest("/chatrooms/" + infos.id + "/kick?volunteer_id=" + i, null, HttpHandler.TypeRequest.DELETE);
+            if ((int)obj["status"] != 200)
+            {
+                err.printMessage((string)obj["message"], All.GUI.ErrorControl.Code.FAILURE);
+            }
+            if (i == (int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"])
+            {
+                ((Frame)Window.Current.Content).Navigate(typeof(Message));
+            }
         }
 
         public void addUserClick(object sender, RoutedEventArgs e)
@@ -99,57 +121,23 @@ namespace Caritathelp.Message
                 searchUsers();
         }
 
-        public void createRoomClick(object sender, RoutedEventArgs e)
+        public async void setNameClick(object sender, RoutedEventArgs e)
         {
-            if (idVolunter.Count != 0)
-                createRoom();
-        }
-
-        private async void createRoom()
-        {
-            bool success = true;
-
-            Newtonsoft.Json.Linq.JObject obj;
             HttpHandler http = HttpHandler.getHttp();
-            for (int i = 0; i < removeVolunteer.Count; i++)
-            {
-                Debug.WriteLine("VOLUNTEER TO REMOVE : " + removeVolunteer[i]);
 
-                obj = await http.sendRequest("/chatrooms/" + infos.id + "/kick?volunteer_id=" + removeVolunteer[i], null, HttpHandler.TypeRequest.DELETE);
-                if ((int)obj["status"] != 200)
-                {
-                    err.printMessage((string)obj["message"], All.GUI.ErrorControl.Code.FAILURE);
-                    success = false;
-                }
-            }
-            //obj = await http.sendRequest("/chatrooms/" + infos.id + "/set_name")
-            string volunteers = "[";
-            for (int i = 0; i < addVolunteer.Count; i++)
-            {
-                Debug.WriteLine("VOLUNTEER TO AD : " + addVolunteer[i]);
-                if (i + 1 == addVolunteer.Count)
-                {
-                    volunteers += addVolunteer[i];
-                }
-                else
-                {
-                    volunteers += addVolunteer[i] + ",";
-                }
-            }
-            volunteers += "]";
             var values = new List<KeyValuePair<string, string>>
                     {
-                        new KeyValuePair<string, string>("volunteers[]", volunteers)
+                        new KeyValuePair<string, string>("name", titleBox.Text)
                     };
-            obj = await http.sendRequest("/chatrooms/" + infos.id + "/add_volunteers", values, HttpHandler.TypeRequest.PUT);
+            Newtonsoft.Json.Linq.JObject obj = await http.sendRequest("/chatrooms/" + infos.id, values, HttpHandler.TypeRequest.PUT);
             if ((int)obj["status"] != 200)
             {
                 err.printMessage((string)obj["message"], All.GUI.ErrorControl.Code.FAILURE);
-                success = false;
             }
-
-            if (success)
+            else
+            {
                 err.printMessage("Modification enregistree !", All.GUI.ErrorControl.Code.SUCCESS);
+            }
 
         }
 
@@ -210,10 +198,7 @@ namespace Caritathelp.Message
             volunteerGrid.Width = 380;
             scroll.Content = volunteerGrid;
             idVolunter = new List<int>();
-            addVolunteer = new List<int>();
-            removeVolunteer = new List<int>();
             initUpdateMessage();
-
         }
     }
 }

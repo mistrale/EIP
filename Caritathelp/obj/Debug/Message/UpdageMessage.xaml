@@ -19,7 +19,7 @@
                     <Grid>
                         <Rectangle Fill="#FF53A634" HorizontalAlignment="Left" Height="52" VerticalAlignment="Top" Width="74" RadiusX="5" RadiusY="5" StrokeThickness="0"/>
                         <Image x:Name="image" HorizontalAlignment="Left" Height="40" Margin="14,6,0,0" VerticalAlignment="Top" Width="47" Source="ms-appx:///Assets/account.png"/>
-                        <TextBox x:ConnectionId='4'                             x:Name="titleBox" HorizontalAlignment="Left" Margin="79,10,0,0" TextWrapping="Wrap" Text="Titre" VerticalAlignment="Top" Width="266" Foreground="#FF72888E"/>
+                        <TextBox x:ConnectionId='5'                             x:Name="titleBox" HorizontalAlignment="Left" Margin="79,10,0,0" TextWrapping="Wrap" Text="Titre" VerticalAlignment="Top" Width="266" Foreground="#FF72888E"/>
                     </Grid>
                 </Border>
             </Grid>
@@ -31,26 +31,32 @@
                         <Rectangle Fill="#FF53A634" HorizontalAlignment="Left" Height="52" VerticalAlignment="Top" Width="74" RadiusX="5" RadiusY="5" StrokeThickness="0"/>
                         <Rectangle Fill="#FF53A634" HorizontalAlignment="Left" Height="52" VerticalAlignment="Top" Width="74" RadiusX="5" RadiusY="5" StrokeThickness="0" Margin="281,0,0,0"/>
                         <Image x:Name="image1" HorizontalAlignment="Left" Height="40" Margin="14,6,0,0" VerticalAlignment="Top" Width="47" Source="ms-appx:///Assets/account.png"/>
-                        <Button x:ConnectionId='2'                      x:Name="button2" Content="Button" HorizontalAlignment="Left" Margin="265,-4,-19,-1" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" BorderThickness="0">
+                        <Button x:ConnectionId='1'                      x:Name="button2" Content="Button" HorizontalAlignment="Left" Margin="265,-4,-19,-1" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" BorderThickness="0">
                             <Button.Background>
                                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/plusbutton.png"/>
                             </Button.Background>
                         </Button>
-                        <TextBox x:ConnectionId='3'                             x:Name="userBox" HorizontalAlignment="Left" Margin="70,0,0,0" TextWrapping="Wrap" Text="Ajouter..." VerticalAlignment="Top" Width="224" Foreground="#FF72888E" Height="52" BorderBrush="{x:Null}" Background="{x:Null}"/>
+                        <TextBox x:ConnectionId='2'                             x:Name="userBox" HorizontalAlignment="Left" Margin="70,0,0,0" TextWrapping="Wrap" Text="Ajouter..." VerticalAlignment="Top" Width="224" Foreground="#FF72888E" Height="52" BorderBrush="{x:Null}" Background="{x:Null}"/>
+                        <Button x:ConnectionId='3'                      x:Name="button2_Copy1" Content="Button" HorizontalAlignment="Left" Margin="265,-4,-19,-1" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" BorderThickness="0">
+                            <Button.Background>
+                                <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/plusbutton.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Rectangle Fill="#FF53A634" HorizontalAlignment="Left" Height="52" VerticalAlignment="Top" Width="74" RadiusX="5" RadiusY="5" StrokeThickness="0" Margin="281,-82,0,0"/>
+                        <Button x:ConnectionId='4'                      x:Name="button2_Copy" Content="Button" HorizontalAlignment="Left" Margin="265,-84,-19,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" BorderThickness="0">
+                            <Button.Background>
+                                <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/update.png"/>
+                            </Button.Background>
+                        </Button>
                     </Grid>
                 </Border>
             </Grid>
         </Border>
-        <Border  CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" HorizontalAlignment="Left" Height="56" Margin="10,520,0,0" VerticalAlignment="Top" Width="380" Background="#FF53A634">
-            <Button x:ConnectionId='1' x:Name="button1"                        
-                Content="Modifier la conversation" HorizontalAlignment="Left" Margin="7.333,-0.667,-10.667,-3.833" VerticalAlignment="Top" Background="{x:Null}" BorderThickness="0" Width="380"/>
-
-        </Border>
-        <Border  CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" HorizontalAlignment="Left" Height="289" Margin="10,226,0,0" VerticalAlignment="Top" Width="380" Background="White">
+        <Border  CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" HorizontalAlignment="Left" Height="345" Margin="10,226,0,0" VerticalAlignment="Top" Width="380" Background="White">
             <Grid>
-                <Border CornerRadius="5" BorderBrush="#FFBFCACC" HorizontalAlignment="Left" Height="266" Margin="10,10,0,0" VerticalAlignment="Top" Width="357" BorderThickness="1">
+                <Border CornerRadius="5" BorderBrush="#FFBFCACC" HorizontalAlignment="Left" Height="322" Margin="10,10,0,0" VerticalAlignment="Top" Width="357" BorderThickness="1">
                     <Grid>
-                        <ScrollViewer x:Name="scroll" HorizontalAlignment="Left" Height="264" VerticalAlignment="Top" Width="355" BorderBrush="{x:Null}" BorderThickness="2.5" Content="Utilisateurs" Foreground="#FF72888E" FontSize="20" FontStyle="Italic"/>
+                        <ScrollViewer x:Name="scroll" HorizontalAlignment="Left" Height="322" VerticalAlignment="Top" Width="355" BorderBrush="{x:Null}" BorderThickness="2.5" Content="Utilisateurs" Foreground="#FF72888E" FontSize="20" FontStyle="Italic" Margin="0,0,0,-2"/>
                     </Grid>
                 </Border>
             </Grid>

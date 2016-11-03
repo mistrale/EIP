@@ -75,7 +75,7 @@ namespace Caritathelp.All.Models
             InfosListModel tmp = new InfosListModel();
             tmp.id = infos.id;
             tmp.typeModel = infos.type;
-            tmp.listTypeModel = "user";
+            tmp.listTypeModel = "volunteer";
             Frame.Navigate(typeof(GenericListModel), tmp);
         }
 

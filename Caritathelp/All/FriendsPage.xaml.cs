@@ -203,7 +203,7 @@ namespace Caritathelp.All
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                var template = new UriTemplate(Global.API_IRL + "/volunteers/" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"] + "/friends" + "{?token}");
+                var template = new UriTemplate(Global.API_IRL + "/volunteers/" + (int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"] + "/friends" + "{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
                 HttpResponseMessage response = await httpClient.GetAsync(uri);

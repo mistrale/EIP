@@ -45,7 +45,7 @@ namespace Caritathelp.All.GUI
             image2.ImageSource = new BitmapImage(new Uri("http://staging.caritathelp.me" + (string)obj["thumb_path"], UriKind.Absolute));
             myLogo.Fill = image2;
             idComment = (int)obj["id"];
-            if ((int)obj["volunteer_id"] != Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]))
+            if ((int)obj["volunteer_id"] != (int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"])
             {
                 optionsButton.Visibility = Visibility.Collapsed;
             }

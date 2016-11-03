@@ -367,7 +367,7 @@ namespace Caritathelp
             var httpClient = new HttpClient(new HttpClientHandler());
             try
             {
-                string myId = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"].ToString();
+                string myId = ((int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]).ToString();
                 var template = new UriTemplate(Global.API_IRL + "/notifications{?token}");
                 template.AddParameter("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"]);
                 var uri = template.Resolve();
@@ -879,7 +879,7 @@ namespace Caritathelp
 
                         // update comment
                         
-                        if (commentsResponse.response[x].volunteer_id == Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]))
+                        if (commentsResponse.response[x].volunteer_id == Convert.ToInt32((int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]))
                         {
                             commentInfos tmp = new commentInfos();
                             tmp.id_news = idNews;

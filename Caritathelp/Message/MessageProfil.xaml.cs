@@ -38,12 +38,11 @@ namespace Caritathelp.Message
         {
             public string type { get; set; }
             public int chatroom_id { get; set; }
-            public string sender_firstname { get; set; }
-            public string sender_lastname { get; set; }
+            public string fullname { get; set; }
             public string content { get; set; }
-            public string sender_thumb_path { get; set; }
+            public string thumb_path { get; set; }
             public string created_at { get; set; }
-            public int sender_id { get; set; }
+            public int volunteer_id { get; set; }
 
         }
 
@@ -83,9 +82,9 @@ namespace Caritathelp.Message
             {
                 Newtonsoft.Json.Linq.JObject tmp = new Newtonsoft.Json.Linq.JObject();
                 tmp["id"] = notif.chatroom_id;
-                tmp["volunteer_id"] = notif.sender_id;
-                tmp["thumb_path"] = notif.sender_thumb_path;
-                tmp["fullname"] = notif.sender_firstname + " " + notif.sender_lastname;
+                tmp["volunteer_id"] = notif.volunteer_id;
+                tmp["thumb_path"] = notif.thumb_path;
+                tmp["fullname"] = notif.fullname;
                 tmp["created_at"] = notif.created_at;
                 tmp["content"] = notif.content;
                 msgGrid.RowDefinitions.Add(new RowDefinition());

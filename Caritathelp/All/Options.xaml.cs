@@ -49,7 +49,7 @@ namespace Caritathelp.All
 
         public void profilButtonClick(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Volunteer.VolunteerProfil), (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]);
+            this.Frame.Navigate(typeof(Volunteer.VolunteerProfil), (int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]);
         }
 
         /// <summary>

@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignWidth="380" Height="112.956">
+    d:DesignWidth="380" Height="130.426">
 
     <Border CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" Background="White">
         <Grid>
@@ -14,12 +14,12 @@
                 <ColumnDefinition Width="304"/>
                 <ColumnDefinition  Width="19*" x:Name="secondCol" />
             </Grid.ColumnDefinitions>
-            <Ellipse x:Name="logo" Height="73" VerticalAlignment="Top" Margin="10,19,220,0" Stroke="#FF69B578">
+            <Ellipse x:Name="logo" Height="91" VerticalAlignment="Top" Margin="10,19,205,0" Stroke="#FF69B578">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <TextBlock Grid.Column="0" x:Name="contentBox" HorizontalAlignment="Left" Margin="99,40,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="70" Width="268" Foreground="#FF72888E" FontSize="16" TextAlignment="Justify" Grid.ColumnSpan="2"/>
+            <TextBlock Grid.Column="0" x:Name="contentBox" HorizontalAlignment="Left" Margin="109,40,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="77" Width="258" Foreground="#FF72888E" FontSize="16" TextAlignment="Justify" Grid.ColumnSpan="2"/>
             <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="99,-5,0,0" VerticalAlignment="Top" Foreground="#FF281313" BorderThickness="0" Grid.ColumnSpan="2" Width="268"/>
         </Grid>
     </Border>

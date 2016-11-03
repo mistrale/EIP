@@ -154,7 +154,7 @@ namespace Caritathelp.All.GUI
                 content.Text = "";
             }
 
-            if ((int)obj["volunteer_id"] != Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]))
+            if ((int)obj["volunteer_id"] != (int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"])
             {
                 optionButton.Visibility = Visibility.Collapsed;
             }

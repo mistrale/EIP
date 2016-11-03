@@ -114,9 +114,9 @@ namespace Caritathelp.Message
             {
                 title = null;
             }
-            if (!idVolunter.Contains(Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"])))
+            if (!idVolunter.Contains((int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]))
             {
-                idVolunter.Add(Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]));
+                idVolunter.Add((int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]);
             }
             string volunteers = "[";
             for (int i = 0; i < idVolunter.Count; i++)

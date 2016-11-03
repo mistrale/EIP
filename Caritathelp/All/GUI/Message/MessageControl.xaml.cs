@@ -30,7 +30,7 @@ namespace Caritathelp.All.GUI.Message
             this.obj = obj;
             this.page = page;
 
-            if ((int)obj["volunteer_id"] != Convert.ToInt32((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]))
+            if ((int)obj["volunteer_id"] != (int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"])
             {
                 container.Background = new SolidColorBrush(Color.FromArgb(0xFF, 255, 255, 255));
                 container.Opacity = 1;

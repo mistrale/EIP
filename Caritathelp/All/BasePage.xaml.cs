@@ -96,9 +96,8 @@ namespace Caritathelp.All
         public void alertButtonClick(object sender, RoutedEventArgs e)
         {
             notifs.PathToImage = "ms-appx:/Assets/alert.png";
-            Models.InfosModel infos = new Models.InfosModel();
-            infos.type = "volunteer";
-            ((Frame)Window.Current.Content).Navigate(typeof(Models.GenericNotification), infos);
+            Models.Model vlt = new Models.Volunteer((int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]);
+            ((Frame)Window.Current.Content).Navigate(typeof(Models.GenericNotification), vlt);
         }
 
         private async void updateNotificationGUI()
@@ -247,7 +246,7 @@ namespace Caritathelp.All
                 {
                     Debug.WriteLine("Failed getting position : " + ex.Message);
                 }
-                await Task.Delay(30000);
+                await Task.Delay(300000);
             }
 
         }
