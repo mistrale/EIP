@@ -33,7 +33,7 @@ namespace Caritathelp.All.GUI
         {
             TextBox tb = (TextBox)sender;
             tb.Text = string.Empty;
-            tb.Foreground = GUI.PolicyGenerator.getBrush(GUI.PolicyGenerator.ColorType.DEFAULT_TEXT);
+            tb.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 114, 136, 142));
         }
 
         public async void sendCommentClick(object sender, RoutedEventArgs e)

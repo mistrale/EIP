@@ -1,6 +1,6 @@
 <XamlCompilerSaveState>
   <ReferenceAssemblyList>
-    <LocalAssembly PathName="c:\users\sikorav\desktop\eip\caritathelp\obj\debug\intermediatexaml\caritathelp.exe" HashGuid="83f5318e-9210-c07b-4ba0-553839a40053" />
+    <LocalAssembly PathName="c:\users\sikorav\desktop\eip\caritathelp\obj\debug\intermediatexaml\caritathelp.exe" HashGuid="7a19c72b-13c0-e3f6-5a50-a1a0c26373ac" />
     <ReferenceAssembly PathName="c:\program files (x86)\microsoft sdks\windowsphoneapp\v8.1\extensionsdks\behaviorsxamlsdkmanaged\12.0\references\commonconfiguration\neutral\microsoft.xaml.interactions.dll" HashGuid="95a94f94-3917-d473-4f7c-18c4bd437046" />
     <ReferenceAssembly PathName="c:\program files (x86)\microsoft sdks\windowsphoneapp\v8.1\extensionsdks\behaviorsxamlsdkmanaged\12.0\references\commonconfiguration\neutral\microsoft.xaml.interactivity.dll" HashGuid="d25f59e6-dd81-900a-0dfc-55b39f6898ef" />
     <ReferenceAssembly PathName="c:\users\sikorav\desktop\eip\packages\caliburn.micro.core.2.0.2\lib\portable-net45+win8+wp8+wpa81\caliburn.micro.dll" HashGuid="a9e7d59c-fb07-2261-8294-220427d27b96" />

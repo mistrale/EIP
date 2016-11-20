@@ -277,9 +277,6 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\VolunteerPart\PasswordChange.xbf">
       <PackagePath>All\Models\VolunteerPart\PasswordChange.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Options.xbf">
-      <PackagePath>All\Options.xbf</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\FinalInscription.xbf">
       <PackagePath>All\FinalInscription.xbf</PackagePath>
     </AppxPackagedFile>

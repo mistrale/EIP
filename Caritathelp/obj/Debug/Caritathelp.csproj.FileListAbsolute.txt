@@ -766,7 +766,6 @@ C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericListModelMa
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericManagement.xbf
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericNotification.xbf
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericProfil.xbf
-C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Options.xbf
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\FinalInscription.xbf
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Inscription.xbf
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\MainPage.xbf
@@ -846,8 +845,6 @@ C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericNotificatio
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericNotification.g.cs
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericProfil.g.i.cs
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericProfil.g.cs
-C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Options.g.i.cs
-C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Options.g.cs
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\FinalInscription.g.i.cs
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\FinalInscription.g.cs
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Inscription.g.i.cs
@@ -890,7 +887,6 @@ C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericListModel.x
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericListModelManagement.xaml
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericManagement.xaml
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericNotification.xaml
-C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Options.xaml
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\FinalInscription.xaml
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Inscription.xaml
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\MainPage.xaml
@@ -924,7 +920,6 @@ C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericListModel.x
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericListModelManagement.xbf
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericManagement.xbf
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericNotification.xbf
-C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Options.xbf
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\FinalInscription.xbf
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Inscription.xbf
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\MainPage.xbf

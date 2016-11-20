@@ -57,12 +57,7 @@ namespace Caritathelp.All.Models
 
         public void optionsClick(object send, RoutedEventArgs e)
         {
-            if (model.getType().Equals("volunteer", StringComparison.Ordinal))
-                Frame.Navigate(typeof(All.Options), model);
-            else
-            {
-                Frame.Navigate(typeof(GenericManagement), model);
-            }
+            Frame.Navigate(typeof(GenericManagement), model);
         }
 
         public void eventClick(object send, RoutedEventArgs e)

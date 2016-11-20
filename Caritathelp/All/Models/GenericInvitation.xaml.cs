@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Tavis.UriTemplates;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -48,7 +49,7 @@ namespace Caritathelp.All.Models
         {
             TextBox tb = (TextBox)sender;
             tb.Text = string.Empty;
-            tb.Foreground = GUI.PolicyGenerator.getBrush(GUI.PolicyGenerator.ColorType.DEFAULT_TEXT);
+            tb.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 114, 136, 142));
         }
 
         private void receivedClick(object sender, RoutedEventArgs e)
