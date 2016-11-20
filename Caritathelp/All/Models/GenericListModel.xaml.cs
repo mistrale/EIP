@@ -28,8 +28,8 @@ namespace Caritathelp.All.Models
     public sealed partial class GenericListModel : Page
     {
         private InfosListModel infos;
-        private Model model;
-        private Model typeSearch;
+        //private Model model;
+        //private Model typeSearch;
 
         private Newtonsoft.Json.Linq.JArray searchList;
         private Grid searchGrid;
@@ -37,7 +37,8 @@ namespace Caritathelp.All.Models
         private void EventButtonClick(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            InfosModel tmp = (InfosModel)button.Tag;
+
+            Models.Model tmp = (Models.Model)button.Tag;
             Frame.Navigate(typeof(GenericProfil), tmp);
         }
 
@@ -62,11 +63,9 @@ namespace Caritathelp.All.Models
                     searchGrid.RowDefinitions.Add(new RowDefinition());
                     GUI.SearchItem controls = new GUI.SearchItem();
 
-                    InfosModel tmp = new InfosModel();
-                    tmp.id = (int)searchList[x]["id"];
-                    tmp.type = Model.Values[infos.listTypeModel]["Model"];
+                    Models.Model tmp = Model.createModel(Model.Values[infos.listTypeModel]["Model"], (int)searchList[x]["id"]);
                     controls.setItem((string)searchList[x]["thumb_path"], (string)searchList[x][Model.Values[infos.listTypeModel]["NameType"]],
-                        "Amis en commun " + (string)searchList[x][Model.Values[infos.listTypeModel]["NbRelationType"]], this, tmp);
+                         (string)searchList[x][Model.Values[infos.listTypeModel]["NbRelationType"]] + " amis en commun ", this, tmp);
 
                     Grid.SetColumn(controls, 0);
                     Grid.SetRow(controls, x);
@@ -93,22 +92,15 @@ namespace Caritathelp.All.Models
             Debug.WriteLine("type : " + infos.listTypeModel);
             if (infos.listTypeModel.Equals("assoc", StringComparison.Ordinal))
             {
-                typeSearch = new Association(infos.id);
                 titleBox.Text = "Associations";
 
             }
             else if (infos.listTypeModel.Equals("event", StringComparison.Ordinal))
             {
-                typeSearch = new Event(infos.id);
                 titleBox.Text = "Evenements";
-            }
-            if (infos.typeModel.Equals("assoc", StringComparison.Ordinal))
+            } else
             {
-                model = new Association(infos.id);
-            }
-            else if (infos.typeModel.Equals("event", StringComparison.Ordinal))
-            {
-                model = new Event(infos.id);
+                titleBox.Text = "Volontaires";
             }
             initListModel();
         }

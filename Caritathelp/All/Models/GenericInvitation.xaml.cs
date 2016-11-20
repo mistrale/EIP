@@ -58,7 +58,7 @@ namespace Caritathelp.All.Models
                 tmp.IsChecked = false;
                 receivedRB.IsChecked = true;
                 tmp = receivedRB;
-                getReceivedInvitation();
+                getReceivedInvitation(true);
             }
         }
 
@@ -69,7 +69,7 @@ namespace Caritathelp.All.Models
                 tmp.IsChecked = false;
                 sendRB.IsChecked = true;
                 tmp = sendRB;
-                getSendInvitation();
+                getSendInvitation(true);
             }
         }
 
@@ -112,7 +112,6 @@ namespace Caritathelp.All.Models
                     {
                         new KeyValuePair<string, string>(Model.Values[model.getType()]["TypeID"], model.getID().ToString()),
                         new KeyValuePair<string, string>("volunteer_id", idSearch.ToString()),
-                        new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"])
                     };
             Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[model.getType()]["InviteURL"], values, HttpHandler.TypeRequest.POST);
             if ((int)jObject["status"] == 200)
@@ -125,13 +124,9 @@ namespace Caritathelp.All.Models
             }
         }
 
-        private async void getReceivedInvitation()
+        private async void getReceivedInvitation(bool print)
         {
             var http = HttpHandler.getHttp();
-            var values = new List<KeyValuePair<string, string>>
-                    {
-                        new KeyValuePair<string, string>("TypeID", model.getID().ToString()),
-                    };
             string url = Model.Values[model.getType()]["WaitingInvitation"] + "?" + Model.Values[model.getType()]["TypeID"] + "=" + model.getID().ToString();
             Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(url, null, HttpHandler.TypeRequest.GET);
             if ((int)jObject["status"] == 200)
@@ -151,7 +146,8 @@ namespace Caritathelp.All.Models
                     Grid.SetRow(btn, i);
                     receivedGrid.Children.Add(btn);
                 }
-                scrollInvit.Content = receivedGrid;
+                if (print)
+                    scrollInvit.Content = receivedGrid;
             }
             else
             {
@@ -159,14 +155,11 @@ namespace Caritathelp.All.Models
             }
         }
 
-        private async void getSendInvitation()
+        private async void getSendInvitation(bool print)
         {
             var http = HttpHandler.getHttp();
-            var values = new List<KeyValuePair<string, string>>
-                    {
-                        new KeyValuePair<string, string>("TypeID", model.getID().ToString()),
-                    };
-            string url = Model.Values[model.getType()]["SendInvitation"] + "?" + Model.Values[model.getType()]["TypeID"] + "=" + model.getID().ToString();
+
+            string url = Model.Values[model.getType()]["SendInvitation"] + "?" + Model.Values[model.getType()]["TypeID"] + "=" + model.getID().ToString() + "&sent=true";
             Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(url, null, HttpHandler.TypeRequest.GET);
             if ((int)jObject["status"] == 200)
             {
@@ -184,7 +177,8 @@ namespace Caritathelp.All.Models
                     Grid.SetRow(btn, i);
                     sendGrid.Children.Add(btn);
                 }
-                scrollInvit.Content = sendGrid;
+                if (print)
+                    scrollInvit.Content = sendGrid;
             }
             else
             {
@@ -203,9 +197,8 @@ namespace Caritathelp.All.Models
 
             model = e.Parameter as Model;
             tmp = receivedRB;
-            getSendInvitation();
-            getReceivedInvitation();
-            scrollInvit.Content = receivedGrid;
+            getSendInvitation(false);
+            getReceivedInvitation(true);
         }
     }
 }

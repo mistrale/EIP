@@ -22,9 +22,10 @@ namespace Caritathelp.All.Models
     /// </summary>
     public sealed partial class GenericListModelManagement : Page
     {
-        private Model model;
-
+       // private Model model;
+        private InfosListModel infos;
         private Newtonsoft.Json.Linq.JArray searchList;
+
         private Grid gridUser;
 
         public GenericListModelManagement()
@@ -35,8 +36,30 @@ namespace Caritathelp.All.Models
 
         private async void initListModel()
         {
-            var url = Model.Values[model.getType()]["URL"]
-                    + model.getID() + "/" + Model.Values[model.getType()]["ResourceManagement"];
+           var routes = new   Dictionary<string, Dictionary<string, string>>
+            {
+                {"assoc", new Dictionary<string, string>
+                    {
+                        { "volunteer", "/members"},
+                        { "shelter", "/shelters"},
+                    }
+                },
+                {"volunteer", new Dictionary<string, string>
+                    {
+                        { "volunteer", "/friends"},
+                        { "assoc", "/associations"},
+                        { "event", "/events"},
+                    }
+                },
+                {"event", new Dictionary<string, string>
+                    {
+                        { "volunteer", "/guests"},
+                    }
+                }
+           };
+
+            var url = Model.Values[infos.typeModel]["URL"]
+                    + infos.id + routes[infos.typeModel][infos.listTypeModel];
             HttpHandler http = HttpHandler.getHttp();
             Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(url, null, HttpHandler.TypeRequest.GET);
             if ((int)jObject["status"] != 200)
@@ -52,8 +75,8 @@ namespace Caritathelp.All.Models
                 for (int x = 0; x < searchList.Count; ++x)
                 {
                     gridUser.RowDefinitions.Add(new RowDefinition());
-                    GUI.ListManagement controls = new GUI.ListManagement(model, (Newtonsoft.Json.Linq.JObject)searchList[x], err,
-                        this, !model.getType().Equals("volunteer", StringComparison.Ordinal));
+                    GUI.ListManagement controls = new GUI.ListManagement(infos, (Newtonsoft.Json.Linq.JObject)searchList[x], err,
+                        this, infos.listTypeModel.Equals("volunteer") && !infos.typeModel.Equals("volunteer"));
                     controls.Margin = new Thickness(0, 0, 0, 15);
                     Grid.SetColumn(controls, 0);
                     Grid.SetRow(controls, x);
@@ -70,8 +93,8 @@ namespace Caritathelp.All.Models
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            model = e.Parameter as Model;
-            title.Text = Models.Model.Values[model.getType()]["ResourceManagement"];
+            infos = e.Parameter as InfosListModel;
+            title.Text = infos.listTypeModel;
             initListModel();
         }
     }

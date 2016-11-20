@@ -22,7 +22,7 @@ namespace Caritathelp.All.GUI
     {
         Page page;
         private GUI.ErrorControl err;
-        private Models.Model model;
+        private Models.InfosListModel infos;
         private int idUser;
 
 
@@ -34,14 +34,45 @@ namespace Caritathelp.All.GUI
         private void UserButtonClick(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            Models.InfosModel tmp = (Models.InfosModel)button.Tag;
+            Models.Model tmp = (Models.Model)button.Tag;
             page.Frame.Navigate(typeof(Models.GenericProfil), tmp);
         }
 
         private async void KickButtonClick(object sender, RoutedEventArgs e)
         {
-            string url = Models.Model.Values[model.getType()]["KickURL"] + "?" + Models.Model.Values[model.getType()]["TypeID"]
-                + "=" + model.getID() + "&volunteer_id=" + idUser;
+            var routes = new Dictionary<string, Dictionary<string, string>>
+            {
+                {"assoc", new Dictionary<string, string>
+                    {
+                        { "volunteer", "/membership/kick"},
+                        { "shelter", "/shelters"},
+                    }
+                },
+                {"volunteer", new Dictionary<string, string>
+                    {
+                        { "volunteer", "/friendship/remove"},
+                        { "assoc", "/membership/leave"},
+                        { "event", "/guests/leave"},
+                    }
+                },
+                {"event", new Dictionary<string, string>
+                    {
+                        { "volunteer", "/guests/kick"},
+                    }
+                }
+           };
+
+            string url = "";
+            if (!infos.typeModel.Equals("volunteer", StringComparison.Ordinal))
+            {
+                 url = routes[infos.typeModel][infos.listTypeModel] + "?" + Models.Model.Values[infos.typeModel]["TypeID"]
+                    + "=" + infos.id + "&volunteer_id=" + idUser;
+            } else
+            {
+                url = routes[infos.typeModel][infos.listTypeModel] + "?" + Models.Model.Values[infos.listTypeModel]["TypeID"]
+                   + "=" + idUser;
+            }
+
             HttpHandler http = HttpHandler.getHttp();
             Newtonsoft.Json.Linq.JObject obj = await http.sendRequest(url, null, HttpHandler.TypeRequest.DELETE);
             if ((int)obj["status"] != 200)
@@ -50,7 +81,7 @@ namespace Caritathelp.All.GUI
             }
             else
             {
-                page.Frame.Navigate(typeof(Models.GenericListModelManagement), model);
+                page.Frame.Navigate(typeof(Models.GenericListModelManagement), infos);
             }
         }
 
@@ -58,10 +89,10 @@ namespace Caritathelp.All.GUI
         {
             ComboBox comboBox = (ComboBox)sender;
             string selected = (string)comboBox.SelectedItem;
-            string url = Models.Model.Values[model.getType()]["UpgradeURL"];
+            string url = Models.Model.Values[infos.typeModel]["UpgradeURL"];
             var values = new List<KeyValuePair<string, string>>
                     {
-                        new KeyValuePair<string, string>(Models.Model.Values[model.getType()]["TypeID"], model.getID().ToString()),
+                        new KeyValuePair<string, string>(Models.Model.Values[infos.typeModel]["TypeID"], infos.id.ToString()),
                         new KeyValuePair<string, string>("rights", selected.ToLower()),
                         new KeyValuePair<string, string>("volunteer_id", idUser.ToString()),
                     };
@@ -76,22 +107,21 @@ namespace Caritathelp.All.GUI
             }
         }
 
-        public ListManagement(Models.Model tmp, Newtonsoft.Json.Linq.JObject obj, GUI.ErrorControl err, Page page, bool canUpgrade)
+        public ListManagement(Models.InfosListModel tmp, Newtonsoft.Json.Linq.JObject obj, GUI.ErrorControl err, Page page, bool canUpgrade)
         {
             this.InitializeComponent();
             this.err = err;
-            model = tmp;
+            infos = tmp;
             this.page = page;
 
-            userName.Content = (string)obj["firstname"] + " " + (string)obj["lastname"];
+            userName.Content = (string)obj[Models.Model.Values[tmp.listTypeModel]["NameType"]];
             idUser = (int)obj["id"];
-            Models.InfosModel tag = new Models.InfosModel();
-            tag.id = idUser;
-            tag.type = "volunteer";
+            Models.Model tag = Models.Model.createModel(tmp.listTypeModel, idUser);
             userName.Tag = tag;
             if (!canUpgrade)
             {
                 comboBox.Visibility = Visibility.Collapsed;
+                userName.Width = 240;
             } else
             {
                 if (((string)obj["rights"]).Equals("member", StringComparison.Ordinal))

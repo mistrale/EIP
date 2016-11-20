@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -29,18 +30,21 @@ namespace Caritathelp.All.GUI.CreateGUI
             return true;
         }
 
-        public DateControls(string date, string type, GUI.ErrorControl err)
+        public DateControls(string type, string date, GUI.ErrorControl err)
         {
             this.InitializeComponent();
             typeDateBox.Text = type;
-            try
+            if (date !=  null)
             {
-                string[] begin = date.Split('-');
-                dateDate.Date = (DateTime)Convert.ToDateTime(begin[1] + '/' + begin[2] + '/' + begin[0]);
-            }
-            catch (System.IndexOutOfRangeException e)
-            {
-
+                try
+                {
+                    string[] begin = date.Split('-');
+                    dateDate.Date = (DateTime)Convert.ToDateTime(begin[1] + '/' + begin[2] + '/' + begin[0]);
+                }
+                catch (System.IndexOutOfRangeException e)
+                {
+                    Debug.WriteLine("Fail dans DateControl mais pas important : " + e.Message);
+                }
             }
             this.err = err;
         }

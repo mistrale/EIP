@@ -19,10 +19,11 @@ namespace Caritathelp.All.GUI
 {
     public sealed partial class ManagementButton : UserControl
     {
-        public void setControls(string name, RoutedEventHandler e)
+        public void setControls(string name, RoutedEventHandler e, string tag)
         {
             button.Click += e;
             button.Content = name;
+            button.Tag = tag;
         }
 
         public ManagementButton()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -35,8 +36,9 @@ namespace Caritathelp.All.Models
         public void createRessourceClick(object sender, RoutedEventArgs e)
         {
             FormModel tmp = new FormModel();
-            tmp.modelType = model.getType();
-            tmp.createdModelType = "assoc";
+            Button btn = (Button)sender;
+            tmp.modelType = model;
+            tmp.createdModelType = Model.createModel((string)btn.Tag, 0);
             tmp.id = model.getID();
             tmp.isAdmin = true;
             tmp.isCreation = true;
@@ -55,12 +57,50 @@ namespace Caritathelp.All.Models
 
         public void manageRelationClick(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(GenericListModelManagement), model);
+            InfosListModel tmp = new InfosListModel();
+            Button btn = (Button)sender;
+            tmp.id = model.getID();
+            tmp.typeModel = model.getType();
+            tmp.listTypeModel = (string)btn.Tag;
+            this.Frame.Navigate(typeof(GenericListModelManagement), tmp);
         }
 
-        public void deleteRessourceClick(object sender, RoutedEventArgs e)
+        public async void deleteRessourceClick(object sender, RoutedEventArgs e)
         {
+            HttpHandler http = HttpHandler.getHttp();
+            Newtonsoft.Json.Linq.JObject jObject;
+            if (model.getType().Equals("volunteer", StringComparison.Ordinal))
+            {
+                jObject = await http.sendRequest(Model.Values[model.getType()]["DeleteURL"]
+                + "?" + Model.Values[model.getType()]["TypeID"] + "=" + model.getID(), null, HttpHandler.TypeRequest.DELETE);
+            }
 
+            else
+            {
+                jObject = await http.sendRequest(Model.Values[model.getType()]["DeleteURL"] + "/" + model.getID()
++ "?" + Model.Values[model.getType()]["TypeID"] + "=" + model.getID(), null, HttpHandler.TypeRequest.DELETE);
+            }
+
+            if ((int)jObject["status"] == 200)
+            {
+                if (model.getType().Equals("volunteer", StringComparison.Ordinal))
+                {
+                    Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("password");
+                    Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("id");
+                    Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("thumb_path");
+                    Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("mail");
+                    Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("allowgps");
+                    HttpHandler.resetHttp();
+                    this.Frame.Navigate(typeof(MainPage));
+                } else
+                {
+                    Frame.Navigate(typeof(Accueil), model);
+                }
+            }
+            else
+            {
+                err.printMessage((string)jObject["message"], GUI.ErrorControl.Code.FAILURE);
+            }
         }
 
         public void initButtonsManagement()
@@ -68,30 +108,30 @@ namespace Caritathelp.All.Models
             buttonGrid = new Grid();
             buttonGrid.VerticalAlignment = VerticalAlignment.Top;
             buttonGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            Dictionary<string, Models.ButtonManagement> buttonsList = model.getButtonsManagement();
+            Dictionary<string, Dictionary<string, ButtonManagement>> buttonsList = model.getButtonsManagement();
             int i = 0;
-            foreach (KeyValuePair<string, ButtonManagement> entry in buttonsList)
+            foreach (KeyValuePair<string, Dictionary<string, ButtonManagement>> entry in buttonsList)
             {
                 buttonGrid.RowDefinitions.Add(new RowDefinition());
                 GUI.ManagementButton btn = new GUI.ManagementButton();
                 btn.Margin = new Thickness(0, 0, 0, 15);
-                ButtonManagement type = entry.Value;
+                ButtonManagement type = entry.Value.First().Value;               
                 switch (type)
                 {
                     case ButtonManagement.CREATE_RESOURCE:
-                        btn.setControls(entry.Key, createRessourceClick);
+                        btn.setControls(entry.Key, createRessourceClick, entry.Value.First().Key);
                         break;
                     case ButtonManagement.DELETE_RESOURCE:
-                        btn.setControls(entry.Key, deleteRessourceClick);
+                        btn.setControls(entry.Key, deleteRessourceClick, entry.Value.First().Key);
                         break;
                     case ButtonManagement.MANAGE_INVITATION:
-                        btn.setControls(entry.Key, manageInvitationClick);
+                        btn.setControls(entry.Key, manageInvitationClick, entry.Value.First().Key);
                         break;
                     case ButtonManagement.MANAGE_RELATION:
-                        btn.setControls(entry.Key, manageRelationClick);
+                        btn.setControls(entry.Key, manageRelationClick, entry.Value.First().Key);
                         break;
                     case ButtonManagement.GET_NOTIFICATION:
-                        btn.setControls(entry.Key, getNotification);
+                        btn.setControls(entry.Key, getNotification, entry.Value.First().Key);
                         break;
                 }
                 Grid.SetColumn(btn, 1);

@@ -37,9 +37,7 @@ namespace Caritathelp.All.GUI
 
         private void viewProfil(object sender, RoutedEventArgs e)
         {
-            Models.InfosModel tmp = new Models.InfosModel();
-            tmp.id = idUser;
-            tmp.type = "volunteer";
+            Models.Model tmp = new Models.Volunteer(idUser);
             ((Frame)Window.Current.Content).Navigate(typeof(Models.GenericProfil), tmp);
         }
 

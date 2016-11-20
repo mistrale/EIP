@@ -31,7 +31,7 @@ namespace Caritathelp.All
 
             public string status { get; set; }
             public string message { get; set; }
-            public User response { get; set; }
+            public Newtonsoft.Json.Linq.JObject response { get; set; }
         }
 
         private RequeteResponse message;

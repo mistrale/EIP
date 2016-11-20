@@ -85,9 +85,6 @@
     <Compile Include="All\BasePage.xaml.cs">
       <DependentUpon>BasePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="All\FriendsPage.xaml.cs">
-      <DependentUpon>FriendsPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="All\GUI\CommentContro.xaml.cs">
       <DependentUpon>CommentContro.xaml</DependentUpon>
     </Compile>
@@ -95,14 +92,20 @@
       <DependentUpon>ConfirmControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="All\GUI\ControlsGenerator.cs" />
+    <Compile Include="All\GUI\CreateGUI\CheckField.xaml.cs">
+      <DependentUpon>CheckField.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="All\GUI\CreateGUI\ComboBoxControl.xaml.cs">
+      <DependentUpon>ComboBoxControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="All\GUI\CreateGUI\DateControls.xaml.cs">
       <DependentUpon>DateControls.xaml</DependentUpon>
     </Compile>
     <Compile Include="All\GUI\CreateGUI\DescriptionControls.xaml.cs">
       <DependentUpon>DescriptionControls.xaml</DependentUpon>
     </Compile>
-    <Compile Include="All\GUI\CreateGUI\FileControls.xaml.cs">
-      <DependentUpon>FileControls.xaml</DependentUpon>
+    <Compile Include="All\GUI\CreateGUI\HourControl.xaml.cs">
+      <DependentUpon>HourControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="All\GUI\CreateGUI\TitleContro.xaml.cs">
       <DependentUpon>TitleContro.xaml</DependentUpon>
@@ -169,6 +172,9 @@
     </Compile>
     <Compile Include="All\Models\Model.cs" />
     <Compile Include="All\Models\Volunteer.cs" />
+    <Compile Include="All\Models\VolunteerPart\PasswordChange.xaml.cs">
+      <DependentUpon>PasswordChange.xaml</DependentUpon>
+    </Compile>
     <Compile Include="All\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
@@ -176,45 +182,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AssociationPage\Association.cs" />
-    <Compile Include="AssociationPage\AssociationProfil.xaml.cs">
-      <DependentUpon>AssociationProfil.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AssociationPage\ManageMembersAssoc.xaml.cs">
-      <DependentUpon>ManageMembersAssoc.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
-    <Compile Include="AssociationPage\CreateAssociation.xaml.cs">
-      <DependentUpon>CreateAssociation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Event\Event.cs" />
-    <Compile Include="AssociationPage\EventAssociation.xaml.cs">
-      <DependentUpon>EventAssociation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Event\EventCreation.xaml.cs">
-      <DependentUpon>EventCreation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Event\EventGestion.xaml.cs">
-      <DependentUpon>EventGestion.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Event\EventInformation.xaml.cs">
-      <DependentUpon>EventInformation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Event\EventManagerMember.xaml.cs">
-      <DependentUpon>EventManagerMember.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Event\EventMember.xaml.cs">
-      <DependentUpon>EventMember.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Event\EventNotification.xaml.cs">
-      <DependentUpon>EventNotification.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Event\EventProfil.xaml.cs">
-      <DependentUpon>EventProfil.xaml</DependentUpon>
-    </Compile>
     <Compile Include="All\FinalInscription.xaml.cs">
       <DependentUpon>FinalInscription.xaml</DependentUpon>
     </Compile>
@@ -232,52 +203,16 @@
     <Compile Include="Message\UpdageMessage.xaml.cs">
       <DependentUpon>UpdageMessage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Volunteer\Friend.cs" />
-    <Compile Include="AssociationPage\GestionAssociation.xaml.cs">
-      <DependentUpon>GestionAssociation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Volunteer\GlobalNotification.cs" />
-    <Compile Include="AssociationPage\InformationAssociation.xaml.cs">
-      <DependentUpon>InformationAssociation.xaml</DependentUpon>
-    </Compile>
     <Compile Include="All\Inscription.xaml.cs">
       <DependentUpon>Inscription.xaml</DependentUpon>
     </Compile>
     <Compile Include="All\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AssociationPage\MemberAssociation.xaml.cs">
-      <DependentUpon>MemberAssociation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Menu.xaml.cs">
-      <DependentUpon>Menu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="All\Notification.xaml.cs">
-      <DependentUpon>Notification.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AssociationPage\NotificationAssociation.xaml.cs">
-      <DependentUpon>NotificationAssociation.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="All\Publication.cs" />
     <Compile Include="All\Research.xaml.cs">
       <DependentUpon>Research.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Volunteer\User.cs" />
-    <Compile Include="Volunteer\VolunteerAssociation.xaml.cs">
-      <DependentUpon>VolunteerAssociation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Volunteer\VolunteerEvenement.xaml.cs">
-      <DependentUpon>VolunteerEvenement.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Volunteer\VolunteerFriends.xaml.cs">
-      <DependentUpon>VolunteerFriends.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Volunteer\VolunteerInformations.xaml.cs">
-      <DependentUpon>VolunteerInformations.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Volunteer\VolunteerProfil.xaml.cs">
-      <DependentUpon>VolunteerProfil.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -308,6 +243,7 @@
     <Content Include="Assets\information.png" />
     <Content Include="Assets\Inscription.png" />
     <Content Include="Assets\leaveAssociation.png" />
+    <Content Include="Assets\lock.png" />
     <Content Include="Assets\logo.png" />
     <Content Include="Assets\logo.scale-100.png" />
     <Content Include="Assets\magnify.png" />
@@ -319,6 +255,7 @@
     <Content Include="Assets\search.png" />
     <Content Include="Assets\send.png" />
     <Content Include="Assets\settings.png" />
+    <Content Include="Assets\sexe.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
     <Content Include="Assets\Square150x150Logo.scale-100.png" />
@@ -341,15 +278,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="All\FriendsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="All\GUI\CommentContro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="All\GUI\ConfirmControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="All\GUI\CreateGUI\CheckField.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="All\GUI\CreateGUI\ComboBoxControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -361,7 +302,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="All\GUI\CreateGUI\FileControls.xaml">
+    <Page Include="All\GUI\CreateGUI\HourControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -445,63 +386,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="All\Models\VolunteerPart\PasswordChange.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="All\Options.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AssociationPage\AssociationProfil.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AssociationPage\CreateAssociation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AssociationPage\EventAssociation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AssociationPage\ManageMembersAssoc.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Event\EventCreation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Event\EventGestion.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Event\EventInformation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Event\EventManagerMember.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Event\EventMember.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Event\EventNotification.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Event\EventProfil.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="All\FinalInscription.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AssociationPage\GestionAssociation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AssociationPage\InformationAssociation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -512,22 +405,6 @@
     <Page Include="All\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="AssociationPage\MemberAssociation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Menu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="All\Notification.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AssociationPage\NotificationAssociation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="All\Research.xaml">
       <SubType>Designer</SubType>
@@ -546,26 +423,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Message\UpdageMessage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Volunteer\VolunteerAssociation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Volunteer\VolunteerEvenement.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Volunteer\VolunteerFriends.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Volunteer\VolunteerInformations.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Volunteer\VolunteerProfil.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

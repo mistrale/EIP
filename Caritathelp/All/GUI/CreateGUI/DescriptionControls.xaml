@@ -10,10 +10,10 @@
 
     <Border CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" Background="White" Margin="0,0,0,0.167">
         <Grid>
-            <TextBlock x:Name="titleBloc" HorizontalAlignment="Left" Margin="15,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="#FF72888E" Width="243" Height="30" FontWeight="Bold" FontSize="16"/>
+            <TextBlock  x:Name="titleBloc" HorizontalAlignment="Left" Margin="15,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="#FF72888E" Width="243" Height="30" FontWeight="Bold" FontSize="16"/>
             <Border CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" HorizontalAlignment="Left" Height="111" Margin="15,40,0,0" VerticalAlignment="Top" Width="352">
                 <Grid Margin="0.333,0.333,0,-1.833">
-                    <TextBox x:Name="Content" HorizontalAlignment="Left" Margin="1,-1,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="345" Height="110" Foreground="#FFBFCACC" FontSize="14" BorderBrush="{x:Null}" BorderThickness="0" Background="{x:Null}"/>
+                    <TextBox GotFocus="searchTextBox_GotFocus" x:Name="Content" HorizontalAlignment="Left" Margin="1,-1,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="345" Height="110" Foreground="#FF424849" FontSize="14" BorderBrush="{x:Null}" BorderThickness="0" Background="{x:Null}"/>
                 </Grid>
             </Border>
         </Grid>

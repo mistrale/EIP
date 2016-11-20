@@ -15,7 +15,7 @@
                 <Grid Margin="0.333,0.333,0,-1.833">
                     <Rectangle RadiusX="5" RadiusY="5" Fill="#FF53A634" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="38" StrokeThickness="0"/>
                     <Image x:Name="image" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="35" Source="ms-appx:///Assets/account.png" Margin="3,0,0,0"/>
-                    <TextBox x:Name="Content" HorizontalAlignment="Left" Margin="44,3,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="304" Height="19" Foreground="#FFBFCACC" FontSize="14" BorderBrush="{x:Null}" BorderThickness="0" Background="{x:Null}"/>
+                    <TextBox  GotFocus="searchTextBox_GotFocus" x:Name="Content" HorizontalAlignment="Left" Margin="39,-1,0,-1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="304" Height="19" Foreground="#FF424849" FontSize="14" BorderBrush="{x:Null}" BorderThickness="0" Background="{x:Null}"/>
                 </Grid>
             </Border>
         </Grid>

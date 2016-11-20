@@ -22,7 +22,9 @@
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/settings.png"/>
             </Button.Background>
         </Button>
-        <TextBlock x:Name="userTitle" HorizontalAlignment="Left" Margin="72,3,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="254" Height="22" FontSize="14" Foreground="#FF3F5461" FontWeight="Bold"/>
+        <Button x:ConnectionId='2'                       x:Name="button" HorizontalAlignment="Left" Margin="66,-16,0,0" VerticalAlignment="Top" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}">
+            <TextBlock x:Name="userTitle" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="254" Height="22" FontSize="14" Foreground="#FF3F5461" FontWeight="Bold"/>
+        </Button>
     </Grid>
 </UserControl>
 

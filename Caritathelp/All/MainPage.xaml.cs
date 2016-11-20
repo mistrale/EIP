@@ -29,17 +29,8 @@ namespace Caritathelp
         {
             public string token { get; set; }
         }
-        class RequestResponse
-        {
-            public string status { get; set; } 
-            public string message { get; set; }
-            public User response { get; set; }
-        }
 
-        private RequestResponse message;
         private string responseString;
-
-
 
         public void HyperlinkButton_forgettenPassword(object sender, RoutedEventArgs e)
         {
@@ -66,6 +57,13 @@ namespace Caritathelp
             {
                 Debug.WriteLine("failed to connect");
                 Loading.IsActive = false;
+                return;
+            }
+            if (jObject == null && (int)jObject["status"] != 200)
+            {
+                Debug.WriteLine("failed to connect");
+                Loading.IsActive = false;
+                warningTextBox.Text = (string)jObject["message"];
                 return;
             }
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;

@@ -40,8 +40,8 @@ namespace Caritathelp.All.Models
 
         private Dictionary<string, string[] > allowed = new Dictionary<string, string[]>
         {
-            { "assoc", new string[] { "JoinAssoc", "NewMember", }},
-            { "event", new string[] { "JoinEvent", "NewGuest"}},
+            { "assoc", new string[] { "JoinAssoc", "NewMember", "Emergency"}},
+            { "event", new string[] { "JoinEvent", "NewGuest",  "Emergency"}},
             { "volunteer", new string[] {"JoinAssoc", "JoinEvent", "InviteGuest", "InviteMember", "NewMember", "AddFriend", "Emergency"}},
         };
 
@@ -63,60 +63,50 @@ namespace Caritathelp.All.Models
                 newsGrid.VerticalAlignment = VerticalAlignment.Top;
                 for (int i = 0; i < newsResponse.Count; i++)
                 {
-                    Debug.WriteLine("type model : " + model.getType());
-                    Debug.WriteLine("notif type : " + (string)newsResponse[i]["notif_type"]);
-
                     if (!allowed[model.getType()].Contains((string)newsResponse[i]["notif_type"]))
                         continue;
                     string notiftype = (string)newsResponse[i]["notif_type"];
-                    InfosModel tmp = new InfosModel();
+                    //InfosModel tmp = new InfosModel();
+                    Model tmp = null;
 
                     string sender_name = "";
                     switch (notiftype)
                     {
                         case "AddFriend":
-                            tmp.type = "user";
-                            tmp.id = model.getID();
+                            tmp = new Volunteer(model.getID());
                             sender_name = "L'utilisateur " + (string)newsResponse[i]["sender_name"] + " vous a envoye une demande d'ajout.";
                             break;
                         case "JoinAssoc":
-                            tmp.type = "assoc";
-                            tmp.id = (int)newsResponse[i]["assoc_id"];
+                            tmp = new Association((int)newsResponse[i]["assoc_id"]);
                             sender_name = "L'utilisateur " + (string)newsResponse[i]["sender_name"] + " a demande a rejoindre " 
                                 + (string)newsResponse[i]["assoc_name"];
                             break;
                         case "JoinEvent":
-                            tmp.type = "event";
-                            tmp.id = model.getID();
+                            tmp = new Event((int)newsResponse[i]["event_id"]);
                             sender_name = "L'utilisateur " + (string)newsResponse[i]["sender_name"] + " a demande a participer a "
                                 + (string)newsResponse[i]["event_name"];
                             break;
                         case "InviteMember":
-                            tmp.type = "user";
-                            tmp.id = model.getID();
+                            tmp = new Volunteer(model.getID());
                             sender_name = "Vous avez ete invite a rejoindre l'association " + (string)newsResponse[i]["assoc_name"];
                             break;
                         case "InviteGuest":
-                            tmp.type = "user";
-                            tmp.id = model.getID();
+                            tmp = new Association(model.getID());
                             sender_name = "Vous avez ete invite a participer a l'evenement " + (string)newsResponse[i]["event_name"];
                             break;
                         case "NewMember":
-                            tmp.type = "user";
-                            tmp.id = (int)newsResponse[i]["sender_id"];
+                            tmp = new Volunteer((int)newsResponse[i]["sender_id"]);
                             sender_name = "L'utilisateur " + (string)newsResponse[i]["sender_name"] + " a rejoint l'association "
                                 + (string)newsResponse[i]["assoc_name"];                     
                             break;
                         case "NewGuest":
-                            tmp.type = "user";
-                            tmp.id = (int)newsResponse[i]["sender_id"];
+                            tmp = new Volunteer((int)newsResponse[i]["sender_id"]);
                             sender_name = "L'utilisateur " + (string)newsResponse[i]["sender_name"] + " participe a  'evenement "
                                 + (string)newsResponse[i]["event_name"];
                             break;
                         case "Emergency":
-                            tmp.type = "event";
-                            tmp.id = (int)newsResponse[i]["event_id"];
-                            sender_name = "L'utilisateur " + (string)newsResponse[i]["sender_name"] + " vous a envoye une demande d'urgence pour "
+                            tmp = new Event((int)newsResponse[i]["event_id"]);
+                            sender_name = "L'utilisateur " + (string)newsResponse[i]["sender_name"] + " a envoye une demande d'urgence pour "
                                 + (string)newsResponse[i]["event_name"];
                             break;
                     }

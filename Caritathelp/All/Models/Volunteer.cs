@@ -10,22 +10,37 @@ namespace Caritathelp.All.Models
     {
         public Volunteer(int id) : base(id)
         {
-            mngButton = new Dictionary<string, ButtonManagement>
+            mngButton = new Dictionary<string, Dictionary<string, ButtonManagement>>
             {
-                {"Creer un evenement", ButtonManagement.CREATE_RESOURCE },
-                {"Supprimer l'association", ButtonManagement.DELETE_RESOURCE },
-                {"Gerer les membres", ButtonManagement.MANAGE_RELATION },
-                {"Gerer les invitations", ButtonManagement.MANAGE_INVITATION },
-                {"Notifications", ButtonManagement.GET_NOTIFICATION }
+                { "Créer une association", new Dictionary<string, ButtonManagement> { { "assoc", ButtonManagement.CREATE_RESOURCE } } },
+
+                { "Mes associations", new Dictionary<string, ButtonManagement> { { "assoc", ButtonManagement.MANAGE_RELATION } } },
+                { "Mes évènements", new Dictionary<string, ButtonManagement> { { "event", ButtonManagement.MANAGE_RELATION } } },
+                { "Mes amis", new Dictionary<string, ButtonManagement> { { "volunteer", ButtonManagement.MANAGE_RELATION } } },
+
+  //              { "Invitations associations", new Dictionary<string, ButtonManagement> { { "assoc", ButtonManagement.MANAGE_INVITATION } } },
+//                { "Invitations évènement", new Dictionary<string, ButtonManagement> { { "event", ButtonManagement.MANAGE_INVITATION } } },
+                { "Demandes de contact", new Dictionary<string, ButtonManagement> { { "volunteer", ButtonManagement.MANAGE_INVITATION } } },
+
+
+         //       { "Modifier mon mot de passe", new Dictionary<string, ButtonManagement> { { "", ButtonManagement.DELETE_RESOURCE } } },
+                { "Notification", new Dictionary<string, ButtonManagement> { { "", ButtonManagement.GET_NOTIFICATION } } },
+                { "Se déconnecter", new Dictionary<string, ButtonManagement> { { "", ButtonManagement.DELETE_RESOURCE } } }
             };
 
             typeControls = new Dictionary<string, FormControlType>
             {
-                { "Titre", FormControlType.FIELD },
-                { "Description", FormControlType.DESCRIPTION},
+                { "Prénom", FormControlType.FIELD },
+                { "Nom", FormControlType.FIELD },
                 { "Ville", FormControlType.FIELD },
-                { "Date de creation", FormControlType.DATE},
-                { "Logo", FormControlType.FILE},
+
+                { "Sexe", FormControlType.COMBOX },
+                { "Date de naissance", FormControlType.DATE },
+
+                { "Email", FormControlType.FIELD },
+
+                { "Recevoir les notifications", FormControlType.CHECKFIELD },
+                { "Activer la géolocalisation", FormControlType.CHECKFIELD },
             };
         }
 
@@ -50,7 +65,7 @@ namespace Caritathelp.All.Models
 
         public override bool isWaiting(string rights)
         {
-            if (rights != null && rights.Equals("waiting"))
+            if (rights != null && rights.Equals("invitation sent"))
                 return true;
             return false;
         }
@@ -58,7 +73,7 @@ namespace Caritathelp.All.Models
         public override bool hasNotif(string rights)
         {
 
-            if (rights != null && rights.Equals("invited"))
+            if (rights != null && rights.Equals("invitation received"))
                 return true;
             return false;
         }
@@ -73,7 +88,7 @@ namespace Caritathelp.All.Models
 
         public override bool isInvited(string rights)
         {
-            if (rights != null && rights.Equals("invited"))
+            if (rights != null && rights.Equals("invitation received"))
                 return true;
             return false;
         }

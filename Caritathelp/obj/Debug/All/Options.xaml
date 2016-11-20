@@ -10,51 +10,69 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Background="White">
-        <Grid x:Name="Menu" HorizontalAlignment="Left" Height="51"
-			VerticalAlignment="Top" Width="400" 
-			Background="#FF4BAF50" Margin="1.167,0.167,-2.833,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.250*"/>
-            </Grid.RowDefinitions>
+        <local:BasePage HorizontalAlignment="Left" Margin="-1,0,0,0" VerticalAlignment="Top" Height="640"/>
 
-            <Button x:ConnectionId='6' x:Name="searchButton" Content=""
-				HorizontalAlignment="Stretch"
-				VerticalAlignment="Stretch"
-				Margin="295,-1,-4,-6.167"
-				BorderThickness="0"
-				RenderTransformOrigin="0.622,0.467"
-				                    >
-                <Button.Background>
-                    <ImageBrush ImageSource="ms-appx:/Assets/magnify.png" Stretch="Uniform"/>
-                </Button.Background>
-            </Button>
-
-        </Grid>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="59,11,0,0" TextWrapping="Wrap" Text="Paramètres" VerticalAlignment="Top" Height="24" Width="254" FontSize="22" FontWeight="Bold" TextAlignment="Center"/>
-        <Grid HorizontalAlignment="Left" Height="161" Margin="-1,51,0,0" VerticalAlignment="Top" Width="400">
-            <Image x:Name="image" HorizontalAlignment="Left" Height="74" Margin="10,245,0,-158" VerticalAlignment="Top" Width="74" Source="ms-appx:///Assets/logo.png"/>
-            <Image x:Name="image_Copy" HorizontalAlignment="Left" Height="74" Margin="9,4,0,0" VerticalAlignment="Top" Width="74" Source="ms-appx:///Assets/logo.png"/>
-            <Image x:Name="image_Copy1" HorizontalAlignment="Left" Height="74" Margin="10,87,0,0" VerticalAlignment="Top" Width="74" Source="ms-appx:///Assets/logo.png"/>
-            <Image x:Name="image_Copy2" HorizontalAlignment="Left" Height="74" Margin="10,166,0,-79" VerticalAlignment="Top" Width="74" Source="ms-appx:///Assets/logo.png"/>
-            <Image x:Name="image_Copy4" HorizontalAlignment="Left" Height="74" Margin="10,459,0,-372" VerticalAlignment="Top" Width="74" Source="ms-appx:///Assets/logo.png"/>
-        </Grid>
-        <Grid HorizontalAlignment="Left" Height="79" Margin="0,52,0,0" VerticalAlignment="Top" Width="400"/>
-        <Grid HorizontalAlignment="Left" Height="79" Margin="-2,137,0,0" VerticalAlignment="Top" Width="400" RenderTransformOrigin="0.495,0.884"/>
-        <Border BorderBrush="#FF4BAF50" BorderThickness="1" HorizontalAlignment="Left" Height="82" Margin="-2,50,-1,0" VerticalAlignment="Top" Width="403"/>
-        <Border BorderBrush="#FF4BAF50" BorderThickness="1,1,1,1" HorizontalAlignment="Left" Height="79" Margin="1,506,-4,0" VerticalAlignment="Top" Width="403"/>
-        <Button x:ConnectionId='1'                           x:Name="button" Content="Profil" HorizontalAlignment="Left" Margin="97,63,0,0" VerticalAlignment="Top" Width="288" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FF4BAF50"/>
-        <Button x:ConnectionId='2'                               x:Name="button_Copy" Content="Déconnection" HorizontalAlignment="Left" Margin="97,520,0,0" VerticalAlignment="Top" Width="288" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FF4BAF50"/>
-
-        <Caritathelp:Menu HorizontalAlignment="Left" Margin="-2,590,-1,0" VerticalAlignment="Top" Width="403"/>
-        <Grid HorizontalAlignment="Left" Height="79" Margin="0,506,0,0" VerticalAlignment="Top" Width="400">
-            <Image x:Name="image_Copy3" HorizontalAlignment="Left" Height="74" Margin="9,458,0,-453" VerticalAlignment="Top" Width="74" Source="ms-appx:///Assets/logo.png"/>
-        </Grid>
-        <Border BorderBrush="#FF4BAF50" BorderThickness="1,0,1,1" HorizontalAlignment="Left" Height="79" Margin="1,133,-4,0" VerticalAlignment="Top" Width="403"/>
-        <Button x:ConnectionId='3'                            x:Name="FriendsButton" Content="Mes amis" HorizontalAlignment="Left" Margin="97,147,0,0" VerticalAlignment="Top" Width="288" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FF4BAF50"/>
-        <Border BorderBrush="#FF4BAF50" BorderThickness="1" HorizontalAlignment="Left" Height="82" Margin="-2,212,-1,0" VerticalAlignment="Top" Width="403"/>
-        <Button x:ConnectionId='4'                            x:Name="FriendsButton_Copy" Content="Mes Associations" HorizontalAlignment="Stretch" Margin="97,229,15,0" VerticalAlignment="Top" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FF4BAF50"/>
-        <Border BorderBrush="#FF4BAF50" BorderThickness="1" HorizontalAlignment="Left" Height="82" Margin="-1,294,-2,0" VerticalAlignment="Top" Width="403"/>
-        <Button x:ConnectionId='5'                            x:Name="FriendsButton_Copy1" Content="Mes évènements" HorizontalAlignment="Left" Margin="97,304,0,0" VerticalAlignment="Top" Width="288" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FF4BAF50"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="118,11,0,0" TextWrapping="Wrap" Text="Paramètres" VerticalAlignment="Top" Height="24" Width="172" FontSize="22" FontWeight="Bold" TextAlignment="Center"/>
+        <Border CornerRadius="5" BorderBrush="#FFC0CCBF" BorderThickness="1" HorizontalAlignment="Left" Height="75" Margin="10,58,0,0" VerticalAlignment="Top" Width="380" Background="White">
+            <Grid>
+                <Ellipse x:Name="logo" Height="53" VerticalAlignment="Top" Margin="10,10,308,0" Stroke="#FF69B578">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Button x:ConnectionId='6'                      x:Name="profil" Content="Profil" HorizontalAlignment="Left" Margin="83,0,0,0" VerticalAlignment="Top" Height="70" Width="285" Foreground="#FF3F5461" FontSize="20" FontWeight="Bold"/>
+            </Grid>
+        </Border>
+        <Border CornerRadius="5" BorderBrush="#FFC0CCBF" BorderThickness="1" HorizontalAlignment="Left" Height="75" Margin="10,138,0,0" VerticalAlignment="Top" Width="380" Background="White">
+            <Grid>
+                <Ellipse x:Name="logo1" Height="53" VerticalAlignment="Top" Margin="10,10,308,0" Stroke="#FF69B578">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Button x:ConnectionId='5' x:Name="friends"                        Content="Mes amis" HorizontalAlignment="Left" Margin="83,0,0,0" VerticalAlignment="Top" Height="70" Width="285" Foreground="#FF3F5461" FontSize="20" FontWeight="Bold"/>
+            </Grid>
+        </Border>
+        <Border CornerRadius="5" BorderBrush="#FFC0CCBF" BorderThickness="1" HorizontalAlignment="Left" Height="75" Margin="10,218,0,0" VerticalAlignment="Top" Width="380" Background="White">
+            <Grid>
+                <Ellipse x:Name="logo2" Height="53" VerticalAlignment="Top" Margin="10,10,308,0" Stroke="#FF69B578">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Button x:ConnectionId='4' x:Name="association"                           Content="Mes associations" HorizontalAlignment="Left" Margin="83,0,0,0" VerticalAlignment="Top" Height="70" Width="285" Foreground="#FF3F5461" FontSize="20" FontWeight="Bold"/>
+            </Grid>
+        </Border>
+        <Border CornerRadius="5" BorderBrush="#FFC0CCBF" BorderThickness="1" HorizontalAlignment="Left" Height="75" Margin="10,298,0,0" VerticalAlignment="Top" Width="380" Background="White">
+            <Grid>
+                <Ellipse x:Name="logo3" Height="53" VerticalAlignment="Top" Margin="10,10,308,0" Stroke="#FF69B578">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Button x:ConnectionId='3' x:Name="events"                      Content="Mes évènements" HorizontalAlignment="Left" Margin="83,0,0,0" VerticalAlignment="Top" Height="70" Width="285" Foreground="#FF3F5461" FontSize="20" FontWeight="Bold"/>
+            </Grid>
+        </Border>
+        <Border CornerRadius="5" BorderBrush="#FFC0CCBF" BorderThickness="1" HorizontalAlignment="Left" Height="75" Margin="10,378,0,0" VerticalAlignment="Top" Width="380" Background="White">
+            <Grid>
+                <Ellipse x:Name="logo4" Height="53" VerticalAlignment="Top" Margin="10,10,308,0" Stroke="#FF69B578">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Button x:ConnectionId='2' x:Name="invitation"                           Content="Invitation" HorizontalAlignment="Left" Margin="83,0,0,0" VerticalAlignment="Top" Height="70" Width="285" Foreground="#FF3F5461" FontSize="20" FontWeight="Bold"/>
+            </Grid>
+        </Border>
+        <Border CornerRadius="5" BorderBrush="#FFC0CCBF" BorderThickness="1" HorizontalAlignment="Left" Height="75" Margin="10,502,0,0" VerticalAlignment="Top" Width="380" Background="White">
+            <Grid>
+                <Ellipse x:Name="logo5" Height="53" VerticalAlignment="Top" Margin="10,10,308,0" Stroke="#FF69B578">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Button x:ConnectionId='1' x:Name="disconnect"                          Content="Déconnexion" HorizontalAlignment="Left" Margin="83,0,0,0" VerticalAlignment="Top" Height="70" Width="285" Foreground="#FF3F5461" FontSize="20" FontWeight="Bold"/>
+            </Grid>
+        </Border>
 
     </Grid>
 </Page>

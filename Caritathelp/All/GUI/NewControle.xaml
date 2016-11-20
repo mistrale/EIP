@@ -21,7 +21,6 @@
                     <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <TextBlock x:Name="title" HorizontalAlignment="Left" Margin="78,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="26" Width="228" Foreground="#FF3F5461" FontSize="18" FontWeight="Bold"/>
 
 
             <TextBlock x:Name="date" HorizontalAlignment="Left" Margin="78,41,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="27" Width="228" Foreground="#FFBFCACC" FontSize="14"/>
@@ -56,6 +55,9 @@
                 </Button.Background>
             </Button>
             <ScrollViewer x:Name="scroll" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="377" RenderTransformOrigin="0,0" Background="#FFECF0EB" Foreground="{x:Null}" Grid.Row="2"/>
+            <Button  Click="button_Click" x:Name="button" HorizontalAlignment="Left" Margin="65,-12,0,0" VerticalAlignment="Top" Foreground="{x:Null}" Height="8" Width="267" FontWeight="Bold" BorderBrush="{x:Null}" Background="{x:Null}">
+                <TextBlock x:Name="title" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="26" Width="243" Foreground="#FF3F5461" FontSize="18" FontWeight="Bold"/>
+            </Button>
         </Grid>
     </Border>
 </UserControl>

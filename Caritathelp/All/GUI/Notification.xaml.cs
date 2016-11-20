@@ -24,7 +24,7 @@ namespace Caritathelp.All.GUI
         private int idNotif;
         private string url;
         private string content;
-        Models.InfosModel infos;
+        private Models.Model model;
         Page page;
         object parameter;
 
@@ -35,7 +35,7 @@ namespace Caritathelp.All.GUI
             InformationNotification,
         }
 
-        public Notification(Newtonsoft.Json.Linq.JObject obj, Models.InfosModel infos, string sender_name, Page page)
+        public Notification(Newtonsoft.Json.Linq.JObject obj, Models.Model infos, string sender_name, Page page)
         {
             this.InitializeComponent();
             string type = (string)obj["notif_type"];
@@ -75,14 +75,14 @@ namespace Caritathelp.All.GUI
         private void button_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
-            Models.InfosModel tmp = (Models.InfosModel)btn.Tag;
+            Models.Model tmp = (Models.Model)btn.Tag;
             page.Frame.Navigate(typeof(Models.GenericInvitation), tmp);
         }
 
         private void ProfilClick(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
-            Models.InfosModel tmp = (Models.InfosModel)btn.Tag;
+            Models.Model tmp = (Models.Model)btn.Tag;
             page.Frame.Navigate(typeof(Models.GenericProfil), tmp);
         }
     }

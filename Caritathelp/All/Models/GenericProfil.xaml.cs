@@ -34,7 +34,6 @@ namespace Caritathelp.All.Models
     {
         private Grid newsGrid;
         private Newtonsoft.Json.Linq.JArray newsResponse;
-        private InfosModel infos;
         private Model model;
         private string notif_id;
         private bool isAdmin;
@@ -48,24 +47,29 @@ namespace Caritathelp.All.Models
         public void infosClick(object send, RoutedEventArgs e)
         {
             FormModel tmp = new FormModel();
-            tmp.id = infos.id;
-            tmp.createdModelType = infos.type;
+            tmp.id = model.getID();
+            tmp.createdModelType = model;
             tmp.isCreation = false;
-            tmp.modelType = infos.type;
+            tmp.modelType = model;
             tmp.isAdmin = isAdmin;
             Frame.Navigate(typeof(GenericCreationModel), tmp);
         }
 
         public void optionsClick(object send, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(GenericManagement), model);
+            if (model.getType().Equals("volunteer", StringComparison.Ordinal))
+                Frame.Navigate(typeof(All.Options), model);
+            else
+            {
+                Frame.Navigate(typeof(GenericManagement), model);
+            }
         }
 
         public void eventClick(object send, RoutedEventArgs e)
         {
             InfosListModel tmp = new InfosListModel();
-            tmp.id = infos.id;
-            tmp.typeModel = infos.type;
+            tmp.id = model.getID();
+            tmp.typeModel = model.getType();
             tmp.listTypeModel = "event";
             Frame.Navigate(typeof(GenericListModel), tmp);
         }
@@ -73,15 +77,15 @@ namespace Caritathelp.All.Models
         public void relatedClick(object send, RoutedEventArgs e)
         {
             InfosListModel tmp = new InfosListModel();
-            tmp.id = infos.id;
-            tmp.typeModel = infos.type;
+            tmp.id = model.getID();
+            tmp.typeModel = model.getType();
             tmp.listTypeModel = "volunteer";
             Frame.Navigate(typeof(GenericListModel), tmp);
         }
 
         public void sendUrgence(object send, RoutedEventArgs e)
         {
-            inputBox.setIdEvent(infos.id, errControl);
+            inputBox.setIdEvent(model.getID(), errControl);
             inputBox.Visibility = Visibility.Visible;
         }
 
@@ -97,10 +101,10 @@ namespace Caritathelp.All.Models
                     {
                         new KeyValuePair<string, string>("notif_id", notif_id),
                         new KeyValuePair<string, string>("acceptance", "false")
-                    }; Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[infos.type]["AcceptURL"], values, HttpHandler.TypeRequest.POST);
+                    }; Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[model.getType()]["AcceptURL"], values, HttpHandler.TypeRequest.POST);
             if ((int)jObject["status"] == 200)
             {
-                Frame.Navigate(typeof(GenericProfil), infos);
+                Frame.Navigate(typeof(GenericProfil), model);
             } else
             {
                 errControl.printMessage((string)jObject["message"], GUI.ErrorControl.Code.FAILURE);
@@ -114,10 +118,10 @@ namespace Caritathelp.All.Models
                     {
                         new KeyValuePair<string, string>("notif_id", notif_id),
                         new KeyValuePair<string, string>("acceptance", "true")
-                    }; Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[infos.type]["AcceptURL"], values, HttpHandler.TypeRequest.POST);
+                    }; Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[model.getType()]["AcceptURL"], values, HttpHandler.TypeRequest.POST);
             if ((int)jObject["status"] == 200)
             {
-                Frame.Navigate(typeof(GenericProfil), infos);
+                Frame.Navigate(typeof(GenericProfil), model);
             }
             else
             {
@@ -128,11 +132,11 @@ namespace Caritathelp.All.Models
         public async void removeClick(object send, RoutedEventArgs e)
         {
             HttpHandler http = HttpHandler.getHttp();
-            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[infos.type]["RemoveURL"]
-                + "?" + Model.Values[infos.type]["TypeID"] + "=" + infos.id, null, HttpHandler.TypeRequest.DELETE);
+            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[model.getType()]["RemoveURL"]
+                + "?" + Model.Values[model.getType()]["TypeID"] + "=" + model.getID(), null, HttpHandler.TypeRequest.DELETE);
             if ((int)jObject["status"] == 200)
             {
-                Frame.Navigate(typeof(GenericProfil), infos);
+                Frame.Navigate(typeof(GenericProfil), model);
             }
             else
             {
@@ -145,12 +149,12 @@ namespace Caritathelp.All.Models
             HttpHandler http = HttpHandler.getHttp();
             var values = new List<KeyValuePair<string, string>>
                     {
-                        new KeyValuePair<string, string>(Model.Values[infos.type]["TypeID"], infos.id.ToString())
+                        new KeyValuePair<string, string>(Model.Values[model.getType()]["TypeID"], model.getID().ToString())
                 };
-            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[infos.type]["AddURL"], values, HttpHandler.TypeRequest.POST);
+            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[model.getType()]["AddURL"], values, HttpHandler.TypeRequest.POST);
             if ((int)jObject["status"] == 200)
             {
-                Frame.Navigate(typeof(GenericProfil), infos);
+                Frame.Navigate(typeof(GenericProfil), model);
             }
             else
             {
@@ -167,16 +171,16 @@ namespace Caritathelp.All.Models
                 var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("content", publishBox.Text),
-                        new KeyValuePair<string, string>("group_id", infos.id.ToString()),
+                        new KeyValuePair<string, string>("group_id", model.getID().ToString()),
                         new KeyValuePair<string, string>("news_type", "Status"),
-                        new KeyValuePair<string, string>("group_type",Model.Values[infos.type]["Model"]),
+                        new KeyValuePair<string, string>("group_type",Model.Values[model.getType()]["Model"]),
                         new KeyValuePair<string, string>("as_group",  adminBox.IsChecked.ToString().ToLower()),
                         new KeyValuePair<string, string>("private",  privateBox.IsChecked.ToString().ToLower()),
                 };
                 Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest("/news/wall_message", values, HttpHandler.TypeRequest.POST);
                 if ((int)jObject["status"] == 200)
                 {
-                    Frame.Navigate(typeof(GenericProfil), infos);
+                    Frame.Navigate(typeof(GenericProfil), model);
                 }
                 else
                 {
@@ -195,7 +199,7 @@ namespace Caritathelp.All.Models
         private async void getNews()
         {
             HttpHandler http = HttpHandler.getHttp();
-            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[infos.type]["URL"] + model.getID() + "/news", null, HttpHandler.TypeRequest.GET);
+            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[model.getType()]["URL"] + model.getID() + "/news", null, HttpHandler.TypeRequest.GET);
             if ((int)jObject["status"] == 200)
             {
                 newsResponse = (Newtonsoft.Json.Linq.JArray)jObject["response"];
@@ -206,7 +210,7 @@ namespace Caritathelp.All.Models
                 for (int i = 0; i < newsResponse.Count; i++)
                 {
                     newsGrid.RowDefinitions.Add(new RowDefinition());
-                    GUI.NewControle btn = new GUI.NewControle((Newtonsoft.Json.Linq.JObject)(newsResponse[i]), optionsComment, errControl);
+                    GUI.NewControle btn = new GUI.NewControle((Newtonsoft.Json.Linq.JObject)(newsResponse[i]), optionsComment, errControl, this);
 
 
                     Grid.SetColumn(btn, 0);
@@ -234,7 +238,13 @@ namespace Caritathelp.All.Models
                 for (int x = 0; x < notifications.Count; x++)
                 {
                     if (((string)notifications[x]["notif_type"]).Equals("InviteMember", StringComparison.Ordinal)
-                        && infos.id.ToString().Equals((string)notifications[x]["assoc_id"], StringComparison.Ordinal))
+                        && model.getID().ToString().Equals((string)notifications[x]["assoc_id"], StringComparison.Ordinal))
+                        notif_id = (string)notifications[x]["id"];
+                    if (((string)notifications[x]["notif_type"]).Equals("AddFriend", StringComparison.Ordinal)
+                     && model.getID().ToString().Equals((string)notifications[x]["sender_id"], StringComparison.Ordinal))
+                        notif_id = (string)notifications[x]["id"];
+                    if (((string)notifications[x]["notif_type"]).Equals("InviteGuests", StringComparison.Ordinal)
+                         && model.getID().ToString().Equals((string)notifications[x]["event_id"], StringComparison.Ordinal))
                         notif_id = (string)notifications[x]["id"];
                 }
             }
@@ -244,7 +254,7 @@ namespace Caritathelp.All.Models
         private async void getInformationModel()
         {
             HttpHandler http = HttpHandler.getHttp();
-            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[infos.type]["URL"] + model.getID(), null, HttpHandler.TypeRequest.GET);
+            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[model.getType()]["URL"] + model.getID(), null, HttpHandler.TypeRequest.GET);
             if ((int)jObject["status"] != 200)
             {
                 errControl.printMessage((string)jObject["message"], GUI.ErrorControl.Code.FAILURE);
@@ -252,9 +262,9 @@ namespace Caritathelp.All.Models
             else
             {
                 jObject = (Newtonsoft.Json.Linq.JObject)jObject["response"];
-                titleBox.Text = Model.Values[infos.type]["Model"];
-                nameBox.Text = (string)jObject[Model.Values[infos.type]["NameType"]];
-                string rights = (string)jObject[Model.Values[infos.type]["RightsType"]];
+                titleBox.Text = Model.Values[model.getType()]["Name"];
+                nameBox.Text = (string)jObject[Model.Values[model.getType()]["NameType"]];
+                string rights = (string)jObject[Model.Values[model.getType()]["RightsType"]];
                 ImageBrush myBrush = new ImageBrush();
                 myBrush.ImageSource =
                     new BitmapImage(new Uri(Global.API_IRL + "" + jObject["thumb_path"], UriKind.Absolute));
@@ -276,12 +286,12 @@ namespace Caritathelp.All.Models
                     {
                         isAdmin = true;
                         optionButton.Visibility = Visibility;
-                        if (Model.Values[infos.type]["Model"].Equals("event", StringComparison.Ordinal)
-                            || Model.Values[infos.type]["Model"].Equals("assoc", StringComparison.Ordinal))
+                        if (Model.Values[model.getType()]["Model"].Equals("event", StringComparison.Ordinal)
+                            || Model.Values[model.getType()]["Model"].Equals("assoc", StringComparison.Ordinal))
                         {
                             adminBox.Visibility = Visibility.Visible;
                         }
-                        if (Model.Values[infos.type]["Model"].Equals("event", StringComparison.Ordinal)) {
+                        if (Model.Values[model.getType()]["Model"].Equals("event", StringComparison.Ordinal)) {
                             announceButton.Visibility = Visibility.Visible;
                         }
                     }
@@ -315,25 +325,28 @@ namespace Caritathelp.All.Models
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            infos = e.Parameter as InfosModel;
+            model = e.Parameter as Model;
             //informationBox.Text = "";
-            if (infos.type.Equals("assoc", StringComparison.Ordinal))
+            if (model.getType().Equals("assoc", StringComparison.Ordinal))
             {
-                model = new Association(infos.id);
                 associationButton.Visibility = Visibility.Collapsed;
             }
-            else if (infos.type.Equals("event", StringComparison.Ordinal))
+            else if (model.getType().Equals("event", StringComparison.Ordinal))
             {
-                model = new Event(infos.id);
                 associationButton.Visibility = Visibility.Collapsed;
                 eventButton.Visibility = Visibility.Collapsed;
             }
-            else
-            {
-                model = new Volunteer(infos.id);
-            }
             initProfilPage();
-            optionsComment.setCurrentPage(this, typeof(GenericProfil), infos, errControl);
+            optionsComment.setCurrentPage(this, typeof(GenericProfil), model, errControl);
+        }
+
+        private void associationButton_Click(object sender, RoutedEventArgs e)
+        {
+            InfosListModel tmp = new InfosListModel();
+            tmp.id = model.getID();
+            tmp.typeModel = model.getType();
+            tmp.listTypeModel = "assoc";
+            Frame.Navigate(typeof(GenericListModel), tmp);
         }
     }
 }

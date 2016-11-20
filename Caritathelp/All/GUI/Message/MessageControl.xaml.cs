@@ -44,9 +44,7 @@ namespace Caritathelp.All.GUI.Message
 
         private void link_Click(object sender, RoutedEventArgs e)
         {
-            Models.InfosModel tmp = new Models.InfosModel();
-            tmp.id = (int)obj["id"];
-            tmp.type = "volunteer";
+            Models.Model tmp = new Models.Association((int)obj["id"]);
             page.Frame.Navigate(typeof(Models.GenericProfil), tmp);
         }
     }

@@ -14,7 +14,7 @@
                 <Grid Margin="0.333,0.333,0,-1.833">
                     <Rectangle RadiusX="5" RadiusY="5" Fill="#FF53A634" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="38" StrokeThickness="0"/>
                     <Image x:Name="image" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="35" Source="ms-appx:///Assets/date.png" Margin="3,0,0,0"/>
-                    <TextBlock x:Name="typeDateBox" HorizontalAlignment="Left" Margin="88,7,0,0" TextWrapping="Wrap" Text="Date de debut" VerticalAlignment="Top" Foreground="#FF72888E" Height="22" Width="105" FontSize="14"/>
+                    <TextBlock x:Name="typeDateBox" HorizontalAlignment="Left" Margin="43,5,-10,0" TextWrapping="Wrap" Text="Date de debut" VerticalAlignment="Top" Foreground="#FF424849" Height="22" Width="193" FontSize="14" TextAlignment="Center"/>
                 </Grid>
             </Border>
             <DatePicker Name="dateDate" HorizontalAlignment="Left" Margin="252,0,0,0" VerticalAlignment="Top" Background="#FF53A634" Width="115"/>

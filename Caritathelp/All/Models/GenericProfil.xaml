@@ -43,7 +43,7 @@
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/event.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="associationButton" Content="" HorizontalAlignment="Left" Margin="123,218,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="59">
+        <Button Click="associationButton_Click" x:Name="associationButton" Content="" HorizontalAlignment="Left" Margin="123,218,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="59">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/assoc.png"/>
             </Button.Background>
@@ -58,12 +58,12 @@
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/checkOk.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="removeButton" Content="" Click="removeClick" HorizontalAlignment="Left" Margin="22,81,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10" Visibility="Collapsed">
+        <Button x:Name="removeButton" Content="" Click="removeClick" HorizontalAlignment="Left" Margin="50,81,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10" Visibility="Collapsed">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/leaveAssociation.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="refuseButton" Click="RefuseInvitationClick" Content="" HorizontalAlignment="Left" Margin="22,128,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10" Visibility="Collapsed">
+        <Button x:Name="refuseButton" Click="RefuseInvitationClick" Content="" HorizontalAlignment="Left" Margin="50,128,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10" Visibility="Collapsed">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/checkKO.png"/>
             </Button.Background>
@@ -74,7 +74,7 @@
             </Button.Background>
         </Button>
         <ScrollViewer x:Name="scroll" Background="#FFE4F7DD"  HorizontalAlignment="Left" Height="202" Margin="12,389,0,0" VerticalAlignment="Top" Width="379"/>
-        <Border Name="publishGrid" CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" HorizontalAlignment="Left" Height="100" Margin="11,273,0,0" VerticalAlignment="Top" Width="380" Background="White">
+        <Border x:Name="publishGrid" CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" HorizontalAlignment="Left" Height="100" Margin="11,273,0,0" VerticalAlignment="Top" Width="380" Background="White">
             <Grid>
                 <Border CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1" Margin="10,10,10,0" Height="40" VerticalAlignment="Top">
                     <TextBox x:Name="publishBox" GotFocus="TextBox_GotFocus" HorizontalAlignment="Left" Margin="-0.833,-1.833,0,-0.833" TextWrapping="Wrap" Text="Publier un message" VerticalAlignment="Top" Width="284" BorderBrush="{x:Null}" Foreground="#FFBFCACC" Height="41" Background="{x:Null}"/>
@@ -93,8 +93,8 @@
         <GUI:PopField x:Name="optionsComment" HorizontalAlignment="Left" Margin="0,9,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
         <GUI:ErrorControl x:Name="errControl" HorizontalAlignment="Left" Margin="1,10,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
 
-        <Image Name="waitingImage" HorizontalAlignment="Left" Height="42" Margin="22,115,0,0" VerticalAlignment="Top" Width="39" Source="ms-appx:///Assets/update.png" Visibility="Collapsed"/>
-        <TextBlock x:Name="titleBox" HorizontalAlignment="Left" Margin="81,14,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="22" Width="243" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
+        <Image x:Name="waitingImage" HorizontalAlignment="Left" Height="42" Margin="22,115,0,0" VerticalAlignment="Top" Width="39" Source="ms-appx:///Assets/update.png" Visibility="Collapsed"/>
+        <TextBlock x:Name="titleBox" HorizontalAlignment="Left" Margin="88,19,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="22" Width="219" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
         <Button Click="sendUrgence" x:Name="announceButton" Content="" HorizontalAlignment="Left" Margin="55,220,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="59" Visibility="Collapsed">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/announce.png"/>

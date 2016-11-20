@@ -27,6 +27,7 @@ namespace Caritathelp.All.GUI
         private Grid commentsGrid;
         private int idNews;
         private int nbComments = 0;
+        private Page page;
 
         public void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -55,7 +56,7 @@ namespace Caritathelp.All.GUI
                 }
                 nbComments++;
                 commentsGrid.RowDefinitions.Add(new RowDefinition());
-                GUI.CommentContro cmt = new CommentContro((Newtonsoft.Json.Linq.JObject)(jObject["response"]), options, err);
+                GUI.CommentContro cmt = new CommentContro((Newtonsoft.Json.Linq.JObject)(jObject["response"]), options, err, page);
 
                 Grid.SetColumn(cmt, 0);
                 Grid.SetRow(cmt, commentsGrid.RowDefinitions.Count - 1);
@@ -101,7 +102,7 @@ namespace Caritathelp.All.GUI
             for (int x = 0; x < listObj.Count; x++)
             {
                 commentsGrid.RowDefinitions.Add(new RowDefinition());
-                GUI.CommentContro cmt = new CommentContro((Newtonsoft.Json.Linq.JObject)(listObj[x]), options, err);
+                GUI.CommentContro cmt = new CommentContro((Newtonsoft.Json.Linq.JObject)(listObj[x]), options, err, page);
 
                 nbComments++;
                 Grid.SetColumn(cmt, 0);
@@ -116,7 +117,7 @@ namespace Caritathelp.All.GUI
             this.InitializeComponent();
         }
 
-        public NewControle(Newtonsoft.Json.Linq.JObject obj, GUI.PopField e, GUI.ErrorControl err)
+        public NewControle(Newtonsoft.Json.Linq.JObject obj, GUI.PopField e, GUI.ErrorControl err, Page page)
         {
             this.InitializeComponent();
             options = e;
@@ -139,12 +140,13 @@ namespace Caritathelp.All.GUI
                 thumb_path = (string)obj["volunteer_thumb_path"];
                 name = (string)obj["group_name"];
             }
+            button.Tag = Models.Model.createModel(((string)obj["group_type"]).ToLower(), (int)obj["group_id"]);
             title.Text = name;
 
             ImageBrush image = new ImageBrush();
             image.ImageSource = new BitmapImage(new Uri("http://staging.caritathelp.me" + thumb_path, UriKind.Absolute));
             logo.Fill = image;
-
+            this.page = page;
             date.Text = Convert.ToDateTime((string)obj["created_at"]).ToString();
             try
             {
@@ -164,6 +166,14 @@ namespace Caritathelp.All.GUI
             myLogo.Fill = image2;
             seeButton.Content += " (" + +(int)obj["number_comments"] + ")";
             getComments(e, err);
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            Button tb = (Button)sender;
+            Models.Model tmp = (Models.Model)tb.Tag;
+            page.Frame.Navigate(typeof(Models.GenericProfil), tmp);
+
         }
     }
 }

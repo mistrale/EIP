@@ -112,6 +112,9 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\leaveAssociation.png">
       <PackagePath>Assets\leaveAssociation.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\lock.png">
+      <PackagePath>Assets\lock.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\logo.png">
       <PackagePath>Assets\logo.png</PackagePath>
     </AppxPackagedFile>
@@ -144,6 +147,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\settings.png">
       <PackagePath>Assets\settings.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\sexe.png">
+      <PackagePath>Assets\sexe.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\SmallLogo.scale-240.png">
       <PackagePath>Assets\SmallLogo.scale-240.png</PackagePath>
@@ -187,14 +193,17 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\BasePage.xbf">
       <PackagePath>All\BasePage.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\FriendsPage.xbf">
-      <PackagePath>All\FriendsPage.xbf</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\CommentContro.xbf">
       <PackagePath>All\GUI\CommentContro.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\ConfirmControl.xbf">
       <PackagePath>All\GUI\ConfirmControl.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\CreateGUI\CheckField.xbf">
+      <PackagePath>All\GUI\CreateGUI\CheckField.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\CreateGUI\ComboBoxControl.xbf">
+      <PackagePath>All\GUI\CreateGUI\ComboBoxControl.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\CreateGUI\DateControls.xbf">
       <PackagePath>All\GUI\CreateGUI\DateControls.xbf</PackagePath>
@@ -202,8 +211,8 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\CreateGUI\DescriptionControls.xbf">
       <PackagePath>All\GUI\CreateGUI\DescriptionControls.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\CreateGUI\FileControls.xbf">
-      <PackagePath>All\GUI\CreateGUI\FileControls.xbf</PackagePath>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\CreateGUI\HourControl.xbf">
+      <PackagePath>All\GUI\CreateGUI\HourControl.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\CreateGUI\TitleContro.xbf">
       <PackagePath>All\GUI\CreateGUI\TitleContro.xbf</PackagePath>
@@ -265,68 +274,20 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericProfil.xbf">
       <PackagePath>All\Models\GenericProfil.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\VolunteerPart\PasswordChange.xbf">
+      <PackagePath>All\Models\VolunteerPart\PasswordChange.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Options.xbf">
       <PackagePath>All\Options.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\AssociationPage\AssociationProfil.xbf">
-      <PackagePath>AssociationPage\AssociationProfil.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\AssociationPage\CreateAssociation.xbf">
-      <PackagePath>AssociationPage\CreateAssociation.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\AssociationPage\EventAssociation.xbf">
-      <PackagePath>AssociationPage\EventAssociation.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\AssociationPage\ManageMembersAssoc.xbf">
-      <PackagePath>AssociationPage\ManageMembersAssoc.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Event\EventCreation.xbf">
-      <PackagePath>Event\EventCreation.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Event\EventGestion.xbf">
-      <PackagePath>Event\EventGestion.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Event\EventInformation.xbf">
-      <PackagePath>Event\EventInformation.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Event\EventManagerMember.xbf">
-      <PackagePath>Event\EventManagerMember.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Event\EventMember.xbf">
-      <PackagePath>Event\EventMember.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Event\EventNotification.xbf">
-      <PackagePath>Event\EventNotification.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Event\EventProfil.xbf">
-      <PackagePath>Event\EventProfil.xbf</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\FinalInscription.xbf">
       <PackagePath>All\FinalInscription.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\AssociationPage\GestionAssociation.xbf">
-      <PackagePath>AssociationPage\GestionAssociation.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\AssociationPage\InformationAssociation.xbf">
-      <PackagePath>AssociationPage\InformationAssociation.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Inscription.xbf">
       <PackagePath>All\Inscription.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\MainPage.xbf">
       <PackagePath>All\MainPage.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\AssociationPage\MemberAssociation.xbf">
-      <PackagePath>AssociationPage\MemberAssociation.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Menu.xbf">
-      <PackagePath>Menu.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Notification.xbf">
-      <PackagePath>All\Notification.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\AssociationPage\NotificationAssociation.xbf">
-      <PackagePath>AssociationPage\NotificationAssociation.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Research.xbf">
       <PackagePath>All\Research.xbf</PackagePath>
@@ -342,21 +303,6 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Message\UpdageMessage.xbf">
       <PackagePath>Message\UpdageMessage.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Volunteer\VolunteerAssociation.xbf">
-      <PackagePath>Volunteer\VolunteerAssociation.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Volunteer\VolunteerEvenement.xbf">
-      <PackagePath>Volunteer\VolunteerEvenement.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Volunteer\VolunteerFriends.xbf">
-      <PackagePath>Volunteer\VolunteerFriends.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Volunteer\VolunteerInformations.xbf">
-      <PackagePath>Volunteer\VolunteerInformations.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\Volunteer\VolunteerProfil.xbf">
-      <PackagePath>Volunteer\VolunteerProfil.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>

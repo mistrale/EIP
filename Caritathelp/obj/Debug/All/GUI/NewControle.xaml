@@ -21,7 +21,6 @@
                     <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <TextBlock x:Name="title" HorizontalAlignment="Left" Margin="78,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="26" Width="228" Foreground="#FF3F5461" FontSize="18" FontWeight="Bold"/>
 
 
             <TextBlock x:Name="date" HorizontalAlignment="Left" Margin="78,41,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="27" Width="228" Foreground="#FFBFCACC" FontSize="14"/>
@@ -33,15 +32,15 @@
             <Border Name="commentBorder" CornerRadius="5" Background="#FFECF0EB" BorderBrush="#FFC0CCBF" BorderThickness="0,1.5,0,0" HorizontalAlignment="Left" Height="106" Margin="0,61.667,0,0" VerticalAlignment="Top" Width="376" Grid.Row="1" Grid.RowSpan="2">
                 <Border Background="White" CornerRadius="5" BorderBrush="#FFC0CCBF" BorderThickness="1" Margin="75,13.333,16.833,52.333">
                     <Grid Margin="-62.833,0.167,-1.5,-44.167">
-                        <TextBox x:ConnectionId='2' x:Name="commentBox"                             HorizontalAlignment="Left" TextWrapping="Wrap" Text="Votre commentaire ..." VerticalAlignment="Top" Width="232" FontSize="16" Height="7" Margin="67,4,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFB7BCBC"/>
+                        <TextBox x:ConnectionId='3' x:Name="commentBox"                             HorizontalAlignment="Left" TextWrapping="Wrap" Text="Votre commentaire ..." VerticalAlignment="Top" Width="232" FontSize="16" Height="7" Margin="67,4,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFB7BCBC"/>
                         <Border  CornerRadius="5" BorderThickness="0" HorizontalAlignment="Left" Height="36" Margin="288,0,0,0" VerticalAlignment="Top" Width="57" Background="#FF53A634">
-                            <Button x:ConnectionId='4'                          x:Name="sendButton" Content="Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="-23,-10,-29.333,1" BorderBrush="{x:Null}" BorderThickness="0" Foreground="{x:Null}">
+                            <Button x:ConnectionId='5'                          x:Name="sendButton" Content="Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="-23,-10,-29.333,1" BorderBrush="{x:Null}" BorderThickness="0" Foreground="{x:Null}">
                                 <Button.Background>
                                     <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/send.png"/>
                                 </Button.Background>
                             </Button>
                         </Border>
-                        <Button x:ConnectionId='3'                         x:Name="seeButton" Content="Voir les commentaires" HorizontalAlignment="Left" Margin="18,31,0,-6" VerticalAlignment="Top" BorderThickness="0" Height="47" Foreground="#FF3F5461" Width="272" FontSize="14"/>
+                        <Button x:ConnectionId='4'                         x:Name="seeButton" Content="Voir les commentaires" HorizontalAlignment="Left" Margin="18,31,0,-6" VerticalAlignment="Top" BorderThickness="0" Height="47" Foreground="#FF3F5461" Width="272" FontSize="14"/>
                     </Grid>
                 </Border>
             </Border>
@@ -56,6 +55,9 @@
                 </Button.Background>
             </Button>
             <ScrollViewer x:Name="scroll" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="377" RenderTransformOrigin="0,0" Background="#FFECF0EB" Foreground="{x:Null}" Grid.Row="2"/>
+            <Button x:ConnectionId='2'                       x:Name="button" HorizontalAlignment="Left" Margin="65,-12,0,0" VerticalAlignment="Top" Foreground="{x:Null}" Height="8" Width="267" FontWeight="Bold" BorderBrush="{x:Null}" Background="{x:Null}">
+                <TextBlock x:Name="title" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="26" Width="243" Foreground="#FF3F5461" FontSize="18" FontWeight="Bold"/>
+            </Button>
         </Grid>
     </Border>
 </UserControl>

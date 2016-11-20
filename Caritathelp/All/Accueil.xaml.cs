@@ -98,7 +98,7 @@ namespace Caritathelp.All
                 for (int i = 0; i <  newsResponse.Count; i++)
                 {
                     newsGrid.RowDefinitions.Add(new RowDefinition());
-                    GUI.NewControle btn = new GUI.NewControle((Newtonsoft.Json.Linq.JObject)(newsResponse[i]), optionsComment, errorControl);
+                    GUI.NewControle btn = new GUI.NewControle((Newtonsoft.Json.Linq.JObject)(newsResponse[i]), optionsComment, errorControl, this);
                     Grid.SetColumn(btn, 0);
                     Grid.SetRow(btn, i);
                     newsGrid.Children.Add(btn);

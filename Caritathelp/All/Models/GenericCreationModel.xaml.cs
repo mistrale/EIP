@@ -45,7 +45,6 @@ namespace Caritathelp.All.Models
         private FormModel infos;
         private string responseString;
         private Grid formsGrid;
-        string Base64String;
 
         public GenericCreationModel()
         {
@@ -58,37 +57,6 @@ namespace Caritathelp.All.Models
             tb.Text = string.Empty;
             tb.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 114, 136, 142));
         }
-
-
-
-
-
-
-
-        private async void uploadLogo(InfosModel tmp)
-        {
-            string Base64String = "";
-
-            HttpHandler http = HttpHandler.getHttp();
-            string url = Global.API_IRL + "/pictures/";
-            var values = new List<KeyValuePair<string, string>>
-                    {
-                        new KeyValuePair<string, string>("file", Base64String),
-                        new KeyValuePair<string, string>("filename", ""),
-                        new KeyValuePair<string, string>(Model.Values[infos.createdModelType]["TypeID"], tmp.id.ToString()),
-                        new KeyValuePair<string, string>("token", (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"])
-                    };
-            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest("/pictures/", values, HttpHandler.TypeRequest.POST);
-            if ((int)jObject["status"] != 200)
-            {
-                err.printMessage((string)jObject["message"], GUI.ErrorControl.Code.FAILURE);
-            }
-            else
-            {
-                Frame.Navigate(typeof(GenericProfil), tmp);
-            }
-        }
-
 
         private bool checkPassword(int row, string type, out string field)
         {
@@ -133,21 +101,27 @@ namespace Caritathelp.All.Models
                         if (!((GUI.CreateGUI.DateControls)(elements[i])).checkField(entry.Key, out field))
                             return false;
                         break;
-                    case FormControlType.FILE:
-                        //if (!((GUI.CreateGUI.FileControls)(elements[i])).checkField(entry.Key, out field))
-                        //{
-                        //    Base64String = field;
-                        //    return false;
-                        //}
+                    case FormControlType.CHECKFIELD:
+                        if (!((GUI.CreateGUI.CheckField)(elements[i])).checkField(entry.Key, out field))
+                            return false;
                         break;
-
+                    case FormControlType.COMBOX:
+                        if (!((GUI.CreateGUI.ComboBoxControl)(elements[i])).checkField(entry.Key, out field))
+                            return false;
+                        break;
+                    case FormControlType.HOUR:
+                        if (!((GUI.CreateGUI.HourControl)(elements[i])).checkField(entry.Key, out field))
+                            return false;
+                        break;
                 }
-                if (Model.Values[infos.createdModelType].ContainsKey(entry.Key))
-                    values.Add(new KeyValuePair<string, string>(Model.Values[infos.createdModelType][entry.Key], field));
+                if (Model.Values[typeSearch.getType()].ContainsKey(entry.Key))
+                    values.Add(new KeyValuePair<string, string>(Model.Values[typeSearch.getType()][entry.Key], field));
                 else
                     Debug.WriteLine("field : " + field);
                 i++;
             }
+            values.Add(new KeyValuePair<string, string>(Model.Values[model.getType()]["TypeID"], model.getID().ToString()));
+
             return true;
         }
 
@@ -165,44 +139,32 @@ namespace Caritathelp.All.Models
             }
             HttpHandler http = HttpHandler.getHttp();
             Newtonsoft.Json.Linq.JObject jObject = null;
+
             if (infos.isCreation)
-                jObject = await http.sendRequest((string)Model.Values[infos.createdModelType]["URL"], values, HttpHandler.TypeRequest.POST);
+                jObject = await http.sendRequest((string)Model.Values[typeSearch.getType()]["URL"], values, HttpHandler.TypeRequest.POST);
             else
-                jObject = await http.sendRequest((string)Model.Values[infos.createdModelType]["URL"] + infos.id.ToString(), values, HttpHandler.TypeRequest.PUT);
+            {
+                if (infos.modelType.getType().Equals("volunteer", StringComparison.Ordinal))
+                {
+                    jObject = await http.sendRequest("/auth", values, HttpHandler.TypeRequest.PUT);
+
+                }
+                else
+                {
+                    jObject = await http.sendRequest((string)Model.Values[typeSearch.getType()]["URL"] + infos.id.ToString(), values, HttpHandler.TypeRequest.PUT);
+                }
+
+            }
             if ((int)jObject["status"] != 200)
             {
                 err.printMessage((string)jObject["message"], GUI.ErrorControl.Code.FAILURE);
             }
             else
             {
-                InfosModel tmp = new InfosModel();
-                tmp.id = (int)jObject["response"]["id"];
-                tmp.type = infos.createdModelType;
-                //uploadLogo(tmp);
+                typeSearch.id = (int)jObject["response"]["id"];
+                this.Frame.Navigate(typeof(GenericProfil), typeSearch);
             }
         }
-
-        public Grid addCheckField(string hour, Grid tmp)
-        {
-
-
-            return tmp;
-        }
-
-        public Grid addPasswordType(string hour, Grid tmp)
-        {
-
-
-            return tmp;
-        }
-
-        public Grid addHourType(string hour, Grid tmp)
-        {
-
-
-            return tmp;
-        }
-
 
         public void createButtonType(Grid tmp, int i)
         {
@@ -224,44 +186,28 @@ namespace Caritathelp.All.Models
 
         async Task<List<KeyValuePair<string, string>>> getInfos()
         {
-            string token = (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["token"];
-            if (token == null || infos.isCreation == true)
+            Debug.WriteLine("values : " + infos.isCreation);
+            if (infos.isCreation == true)
             {
                 return null;
             }
             var values = new List<KeyValuePair<string, string>>();
-            var httpClient = new HttpClient(new HttpClientHandler());
-            try
+            HttpHandler http = HttpHandler.getHttp();
+            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[model.getType()]["URL"] + model.getID(), null, HttpHandler.TypeRequest.GET);
+            if ((int)jObject["status"] != 200)
             {
-                var template = new UriTemplate(Global.API_IRL + Model.Values[infos.modelType]["URL"] + model.getID() + "{?token}");
-                template.AddParameter("token", token);
-                var uri = template.Resolve();
-                Debug.WriteLine(uri);
-
-                HttpResponseMessage response = await httpClient.GetAsync(uri);
-                response.EnsureSuccessStatusCode();
-                responseString = await response.Content.ReadAsStringAsync();
-                System.Diagnostics.Debug.WriteLine(responseString.ToString());
-                Newtonsoft.Json.Linq.JObject jObject = Newtonsoft.Json.Linq.JObject.Parse(responseString);
-                if ((int)jObject["status"] != 200)
+                err.printMessage((string)jObject["message"], GUI.ErrorControl.Code.FAILURE);                
+            }
+            else
+            {
+                jObject = (Newtonsoft.Json.Linq.JObject)jObject["response"];
+                foreach (var x in jObject)
                 {
-                    err.printMessage((string)jObject["message"], GUI.ErrorControl.Code.FAILURE);
-                }
-                else
-                {
-                    jObject = (Newtonsoft.Json.Linq.JObject)jObject["response"];
-                    foreach (var x in jObject)
-                    {
-                        values.Add(new KeyValuePair<string, string>(x.Key, (string)x.Value));
-                        Debug.WriteLine("Key : " + x.Key + " Value : " + x.Value);
+                    values.Add(new KeyValuePair<string, string>(x.Key, (string)x.Value));
+                    Debug.WriteLine("Key : " + x.Key + " Value : " + x.Value);
 
-                    }
                 }
             }
-            catch (HttpRequestException e)
-            {
-            }
-
             return values;
         }
 
@@ -280,24 +226,32 @@ namespace Caritathelp.All.Models
                     continue;
                 string resources = entry.Key;
                 UserControl ctls = null;
+                Debug.WriteLine("asdsad " + entry.Key);
+
                 if (values != null)
                 {
                     //resources = values[(string)(Model.Values[infos.createdModelType][entry.Key]).ToSt];
-                    resources = values.First(x => x.Key.Equals((string)(Model.Values[infos.createdModelType][entry.Key]), StringComparison.Ordinal)).Value;
+                    resources = values.First(x => x.Key.Equals((string)(Model.Values[typeSearch.getType()][entry.Key]), StringComparison.Ordinal)).Value;
                 }
                 switch (entry.Value)
                 {
                     case FormControlType.FIELD:
-                        ctls = new GUI.CreateGUI.TitleContro(resources, entry.Key, err);
+                        ctls = new GUI.CreateGUI.TitleContro(entry.Key, resources, err);
                         break;
                     case FormControlType.DESCRIPTION:
-                        ctls = new GUI.CreateGUI.DescriptionControls(resources, entry.Key, err);
+                        ctls = new GUI.CreateGUI.DescriptionControls(entry.Key, resources, err);
                         break;
                     case FormControlType.DATE:
-                        ctls = new GUI.CreateGUI.DateControls(resources, entry.Key, err);
+                        ctls = new GUI.CreateGUI.DateControls(entry.Key, resources, err);
                         break;
-                    case FormControlType.FILE:
-                        ctls = new GUI.CreateGUI.FileControls(resources, entry.Key, err);
+                    case FormControlType.CHECKFIELD:
+                        ctls = new GUI.CreateGUI.CheckField(entry.Key, resources, err);
+                        break;
+                    case FormControlType.COMBOX:
+                        ctls = new GUI.CreateGUI.ComboBoxControl(entry.Key, resources, err);
+                        break;
+                    case FormControlType.HOUR:
+                        ctls = new GUI.CreateGUI.HourControl(entry.Key, resources, err);
                         break;
                 }
 
@@ -323,26 +277,11 @@ namespace Caritathelp.All.Models
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             infos = e.Parameter as FormModel;
-
-            if (infos.createdModelType.Equals("assoc", StringComparison.Ordinal))
-            {
-                typeSearch = new Association(infos.id);
-            }
-            else if (infos.createdModelType.Equals("event", StringComparison.Ordinal))
-            {
-                typeSearch = new Event(infos.id);
-            }
-            if (infos.modelType.Equals("assoc", StringComparison.Ordinal))
-            {
-                model = new Association(infos.id);
-            }
-            else if (infos.modelType.Equals("event", StringComparison.Ordinal))
-            {
-                model = new Event(infos.id);
-            }
+            typeSearch = infos.createdModelType;
+            model = infos.modelType;
             if (infos.isCreation)
             {
-                typeBox.Text = Model.Values[infos.createdModelType]["CreationType"];
+                typeBox.Text = Model.Values[typeSearch.getType()]["CreationType"];
             }
             else
             {

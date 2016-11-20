@@ -22,7 +22,7 @@ namespace Caritathelp.All.GUI
     {
         Page currentPage;
 
-        public void setItem(string thumb_path, string name, string type, Page page, Models.InfosModel model)
+        public void setItem(string thumb_path, string name, string type, Page page, Models.Model model)
         {
             titleButton.Content = name;
             ImageBrush image = new ImageBrush();
@@ -41,7 +41,7 @@ namespace Caritathelp.All.GUI
         private void ResearchButtonClick(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            All.Models.InfosModel infos = (All.Models.InfosModel)(button.Tag);
+            All.Models.Model infos = (All.Models.Model)(button.Tag);
             currentPage.Frame.Navigate(typeof(All.Models.GenericProfil), infos);
             // identify which button was clicked and perform necessary actions
         }

@@ -85,7 +85,7 @@ namespace Caritathelp.All
 
         public void moreButtonClick(object sender, RoutedEventArgs e)
         {
-            ((Frame)Window.Current.Content).Navigate(typeof(All.Options));
+            ((Frame)Window.Current.Content).Navigate(typeof(All.Models.GenericManagement), new Models.Volunteer((int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"]));
         }
 
         public void homeButtonClick(object sender, RoutedEventArgs e)

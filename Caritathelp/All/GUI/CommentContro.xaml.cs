@@ -23,6 +23,7 @@ namespace Caritathelp.All.GUI
         private GUI.PopField options;
         private GUI.ErrorControl err;
         private int idComment;
+        private Page page;
 
         public void optionsClick(object sender, RoutedEventArgs e)
         {
@@ -34,9 +35,10 @@ namespace Caritathelp.All.GUI
             options.setObject(obj);
         }
 
-        public CommentContro(Newtonsoft.Json.Linq.JObject obj, GUI.PopField e, GUI.ErrorControl err)
+        public CommentContro(Newtonsoft.Json.Linq.JObject obj, GUI.PopField e, GUI.ErrorControl err, Page page)
         {
             this.InitializeComponent();
+            this.page = page;
             options = e;
             this.err = err;
             userTitle.Text = (string)obj["firstname"] + " " + (string)obj["lastname"];
@@ -44,11 +46,19 @@ namespace Caritathelp.All.GUI
             ImageBrush image2 = new ImageBrush();
             image2.ImageSource = new BitmapImage(new Uri("http://staging.caritathelp.me" + (string)obj["thumb_path"], UriKind.Absolute));
             myLogo.Fill = image2;
+            button.Tag = new Models.Volunteer((int)obj["volunteer_id"]);
             idComment = (int)obj["id"];
             if ((int)obj["volunteer_id"] != (int)Windows.Storage.ApplicationData.Current.LocalSettings.Values["id"])
             {
                 optionsButton.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            Button tb = (Button)sender;
+            Models.Model tmp = (Models.Model)tb.Tag;
+            page.Frame.Navigate(typeof(Models.GenericProfil), tmp);
         }
     }
 }

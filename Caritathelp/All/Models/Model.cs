@@ -13,7 +13,7 @@ namespace Caritathelp.All.Models
         FIELD,
         DATE,
         HOUR,
-        FILE,
+        COMBOX,
         DESCRIPTION,
         PASSWORD,
         CHECKFIELD
@@ -33,8 +33,8 @@ namespace Caritathelp.All.Models
     public class FormModel
     {
         public int id { get; set; }
-        public string modelType { get; set; }
-        public string createdModelType { get; set; }
+        public Model modelType { get; set; }
+        public Model createdModelType { get; set; }
         public bool isCreation { get; set; }
         public bool isAdmin { get; set; }
     }
@@ -46,14 +46,25 @@ namespace Caritathelp.All.Models
         public string listTypeModel { get; set; }
     }
 
-    public class InfosModel
-    {
-        public string type { get; set; }
-        public int id { get; set; }
-    }
-
     public class Model
     {
+        public static Model createModel(string type, int id)
+        {
+            if (type.Equals("volunteer", StringComparison.Ordinal))
+            {
+                return new Volunteer(id);
+            }
+            if (type.Equals("assoc", StringComparison.Ordinal))
+            {
+                return new Association(id);
+            }
+            if (type.Equals("event", StringComparison.Ordinal))
+            {
+                return new Event(id);
+            }
+            return null;
+        }
+
         public static Dictionary<string, Dictionary<string, string>> Values = new Dictionary<string, Dictionary<string, string>>
         {
             {"assoc", new Dictionary<string, string>
@@ -61,6 +72,7 @@ namespace Caritathelp.All.Models
                     { "Name", "Association"},
                     { "NameType", "name"},
                     { "URL", "/associations/"},
+                    { "DeleteURL", "/associations"},
                     { "Model", "assoc"},
                     { "TypeID", "assoc_id"},
                     { "CancelTypeID", "volunteer_id"},
@@ -82,10 +94,10 @@ namespace Caritathelp.All.Models
                     { "SendInvitation", "/membership/invited" },
 
                     // creation / update assoc
-                    { "CreationType", "Creation d'association"},
+                    { "CreationType", "Création d'association"},
                     { "Titre", "name" },
                     { "Description", "description" },
-                    { "Date de creation", "birthday" },
+                    { "Date de création", "birthday" },
                     { "Ville", "city" },
                     { "Logo", "thumb_path" }
             }
@@ -95,6 +107,8 @@ namespace Caritathelp.All.Models
                     { "Name", "Volontaire"},
                     { "NameType", "fullname"},
                     { "URL", "/volunteers/"},
+                     { "DeleteURL", "/auth/sign_out"},
+
                     { "Model", "volunteer"},
                     { "TypeID", "volunteer_id"},
                     { "CancelTypeID", "volunteer_id"},
@@ -109,7 +123,7 @@ namespace Caritathelp.All.Models
                     { "UpgradeURL", "" },
                     { "KickURL", "/friendship/remove" },
 
-                    { "NbRelationType", "nb_friends"},
+                    { "NbRelationType", "nb_common_friends"},
                     { "ResourceURL", "/friends"},
                     { "RightsType", "friendship" },
                     { "WaitingInvitation", "/friendship/received_invitations" },
@@ -117,11 +131,14 @@ namespace Caritathelp.All.Models
 
                     // creation / update assoc
                     { "CreationType", "Creation d'association"},
-                    { "Titre", "name" },
-                    { "Description", "description" },
-                    { "Date de creation", "birthday" },
+                    { "Prénom", "firstname" },
+                    { "Nom", "lastname" },
+                    { "Date de naissance", "birthday" },
                     { "Ville", "city" },
-                    { "Logo", "thumb_path" }
+                    { "Sexe", "gender" },
+                    { "Email", "email" },
+                    { "Recevoir les notifications", "allow_notifications" },
+                    { "Activer la géolocalisation", "allowgps" }
             }
          },
             { "event", new Dictionary<string, string>
@@ -129,22 +146,41 @@ namespace Caritathelp.All.Models
                     { "Name", "Evenement"},
                     { "NameType", "title"},
                     { "URL", "/events/"},
+                    { "DeleteURL", "/events"},
+
                     { "Model", "event"},
                     { "TypeID", "event_id"},
+                    { "CancelTypeID", "volunteer_id"},
+                    { "ResourceManagement", "guests"},
+
                     { "AddURL", "/guests/join"},
                     { "RemoveURL", "/guests/leave"},
                     { "AcceptURL", "/guests/reply_invite"},
+                    { "AcceptInvitation", "/guests/reply_guest"},
+                    { "InviteURL", "/guests/invite"},
+                    { "CancelInviteURL", "/guests/uninvite" },
+                    { "UpgradeURL", "/guests/upgrade" },
+                    { "KickURL", "/guests/remove" },
+
                     { "NbRelationType", "nb_friends_members"},
                     { "ResourceURL", "/events"},
                     { "RightsType", "rights" },
+                    { "WaitingInvitation", "/guests/waiting" },
+                    { "SendInvitation", "/guests/invited" },
 
-
+                    // creation / update assoc
+                    { "CreationType", "Création d'évènement"},
+                    { "Titre", "title" },
+                    { "Description", "description" },
+                    { "début", "begin" },
+                    { "fin", "end" },
+                    { "Lieu", "place" }
                 }
 
              }
         }; 
 
-        protected Dictionary<string, ButtonManagement> mngButton;
+        protected Dictionary<string, Dictionary<string, ButtonManagement>> mngButton;
         protected Dictionary<string, FormControlType> typeControls;
 
         public int id { get; set; }
@@ -168,7 +204,7 @@ namespace Caritathelp.All.Models
             return typeControls;
         }
 
-        virtual public Dictionary<string, ButtonManagement> getButtonsManagement()
+        virtual public Dictionary<string, Dictionary<string, ButtonManagement> > getButtonsManagement()
         {
             return mngButton;
         }

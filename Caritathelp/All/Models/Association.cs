@@ -12,13 +12,18 @@ namespace Caritathelp.All.Models
     {
         public Association(int id) : base(id)
         {
-            mngButton = new Dictionary<string, ButtonManagement>
+            mngButton = new Dictionary<string, Dictionary<string, ButtonManagement>>
             {
-                {"Creer un evenement", ButtonManagement.CREATE_RESOURCE },
-                {"Supprimer l'association", ButtonManagement.DELETE_RESOURCE },
-                {"Gerer les membres", ButtonManagement.MANAGE_RELATION },
-                {"Gerer les invitations", ButtonManagement.MANAGE_INVITATION },
-                {"Notifications", ButtonManagement.GET_NOTIFICATION }
+                { "Créer un évènement", new Dictionary<string, ButtonManagement> { { "event", ButtonManagement.CREATE_RESOURCE } } },
+                { "Gérer les membres", new Dictionary<string, ButtonManagement> { { "volunteer", ButtonManagement.MANAGE_RELATION } } },
+ //               { "Gérer les centres", new Dictionary<string, ButtonManagement> { { "assoc", ButtonManagement.MANAGE_RELATION } } },
+
+                { "Gérer les invitations", new Dictionary<string, ButtonManagement> { { "volunteer", ButtonManagement.MANAGE_INVITATION } } },
+
+
+         //       { "Modifier mon mot de passe", new Dictionary<string, ButtonManagement> { { "", ButtonManagement.DELETE_RESOURCE } } },
+                { "Notifications", new Dictionary<string, ButtonManagement> { { "", ButtonManagement.GET_NOTIFICATION } } },
+                { "Supprimer l'association", new Dictionary<string, ButtonManagement> { { "", ButtonManagement.DELETE_RESOURCE } } }
             };
 
             typeControls = new Dictionary<string, FormControlType>
@@ -26,8 +31,7 @@ namespace Caritathelp.All.Models
                 { "Titre", FormControlType.FIELD },
                 { "Description", FormControlType.DESCRIPTION},
                 { "Ville", FormControlType.FIELD },
-                { "Date de creation", FormControlType.DATE},
-                { "Logo", FormControlType.FILE},
+                { "Date de création", FormControlType.DATE}
             };
         }
 
