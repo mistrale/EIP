@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Caritathelp.All.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -42,7 +43,20 @@ namespace Caritathelp.All.GUI
         {
             Button button = sender as Button;
             All.Models.Model infos = (All.Models.Model)(button.Tag);
-            currentPage.Frame.Navigate(typeof(All.Models.GenericProfil), infos);
+            if (infos.getType().Equals("shelter", StringComparison.Ordinal))
+            {
+                FormModel form = new FormModel();
+                form.id = infos.getID();
+                form.createdModelType = infos;
+                form.isCreation = false;
+                form.modelType = infos;
+                form.isAdmin = false;
+                currentPage.Frame.Navigate(typeof(All.Models.GenericCreationModel), form);
+            }
+            else
+            {
+                currentPage.Frame.Navigate(typeof(All.Models.GenericProfil), infos);
+            }
             // identify which button was clicked and perform necessary actions
         }
     }

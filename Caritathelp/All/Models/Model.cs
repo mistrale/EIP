@@ -62,8 +62,36 @@ namespace Caritathelp.All.Models
             {
                 return new Event(id);
             }
+            if (type.Equals("shelter", StringComparison.Ordinal))
+            {
+                return new Shelter(id);
+            }
             return null;
         }
+
+        public static Dictionary<string, Dictionary<string, string>> resourcesTables = new Dictionary<string, Dictionary<string, string>>
+            {
+                {"assoc", new Dictionary<string, string>
+                    {
+                        { "volunteer", "/members"},
+                        { "shelter", "/shelters"},
+                         { "event", "/events"},
+
+                    }
+                },
+                {"volunteer", new Dictionary<string, string>
+                    {
+                        { "volunteer", "/friends"},
+                        { "assoc", "/associations"},
+                        { "event", "/events"},
+                    }
+                },
+                {"event", new Dictionary<string, string>
+                    {
+                        { "volunteer", "/guests"},
+                    }
+                }
+           };
 
         public static Dictionary<string, Dictionary<string, string>> Values = new Dictionary<string, Dictionary<string, string>>
         {
@@ -175,6 +203,46 @@ namespace Caritathelp.All.Models
                     { "début", "begin" },
                     { "fin", "end" },
                     { "Lieu", "place" }
+                }
+
+             },
+            { "shelter", new Dictionary<string, string>
+                {
+                    { "Name", "Centre"},
+                    { "NameType", "name"},
+                    { "URL", "/shelters/"},
+                    { "DeleteURL", "/shelters"},
+
+                    { "Model", "shelter"},
+                    { "TypeID", "shelter_id"},
+                    //{ "CancelTypeID", "volunteer_id"},
+                    //{ "ResourceManagement", "guests"},
+
+                    //{ "AddURL", "/guests/join"},
+                    //{ "RemoveURL", "/guests/leave"},
+                    //{ "AcceptURL", "/guests/reply_invite"},
+                    //{ "AcceptInvitation", "/guests/reply_guest"},
+                    //{ "InviteURL", "/guests/invite"},
+                    //{ "CancelInviteURL", "/guests/uninvite" },
+                    //{ "UpgradeURL", "/guests/upgrade" },
+                    //{ "KickURL", "/guests/remove" },
+
+                    //{ "NbRelationType", "nb_friends_members"},
+                    //{ "ResourceURL", "/events"},
+                    //{ "RightsType", "rights" },
+                    //{ "WaitingInvitation", "/guests/waiting" },
+                    //{ "SendInvitation", "/guests/invited" },
+
+                    // creation / update assoc
+                    { "CreationType", "Création de centre"},
+                    { "Nom", "name" },
+                    { "Adresse", "address" },
+                    { "Code postal", "zipcode" },
+                    { "Ville", "city" },
+                    { "Nombre de places total", "total_places" },
+                    { "Nombre de places libres", "free_places" },
+                    { "Téléphone", "phone" },
+                    { "Description", "description" },
                 }
 
              }

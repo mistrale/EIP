@@ -45,6 +45,7 @@ namespace Caritathelp.All.Models
         private FormModel infos;
         private string responseString;
         private Grid formsGrid;
+        Newtonsoft.Json.Linq.JObject jObject;
 
         public GenericCreationModel()
         {
@@ -138,31 +139,47 @@ namespace Caritathelp.All.Models
                 Debug.WriteLine("Key : " + na.Key + " value : " + na.Value);
             }
             HttpHandler http = HttpHandler.getHttp();
-            Newtonsoft.Json.Linq.JObject jObject = null;
+            Newtonsoft.Json.Linq.JObject jObject1 = null;
 
             if (infos.isCreation)
-                jObject = await http.sendRequest((string)Model.Values[typeSearch.getType()]["URL"], values, HttpHandler.TypeRequest.POST);
+                jObject1 = await http.sendRequest((string)Model.Values[typeSearch.getType()]["URL"], values, HttpHandler.TypeRequest.POST);
             else
             {
                 if (infos.modelType.getType().Equals("volunteer", StringComparison.Ordinal))
                 {
-                    jObject = await http.sendRequest("/auth", values, HttpHandler.TypeRequest.PUT);
-
+                    jObject1 = await http.sendRequest("/auth", values, HttpHandler.TypeRequest.PUT);
                 }
-                else
+                else if (!infos.modelType.getType().Equals("shelter", StringComparison.Ordinal))
                 {
-                    jObject = await http.sendRequest((string)Model.Values[typeSearch.getType()]["URL"] + infos.id.ToString(), values, HttpHandler.TypeRequest.PUT);
+                    jObject1 = await http.sendRequest((string)Model.Values[typeSearch.getType()]["URL"] + infos.id.ToString(), values, HttpHandler.TypeRequest.PUT);
+                } else
+                {
+                    values.Add(new KeyValuePair<string, string>("assoc_id", jObject["assoc_id"].ToString()));
+                    jObject1 = await http.sendRequest((string)Model.Values[typeSearch.getType()]["URL"] + infos.id.ToString(), values, HttpHandler.TypeRequest.PUT);
                 }
 
             }
-            if ((int)jObject["status"] != 200)
+            if ((int)jObject1["status"] != 200)
             {
-                err.printMessage((string)jObject["message"], GUI.ErrorControl.Code.FAILURE);
+                err.printMessage((string)jObject1["message"], GUI.ErrorControl.Code.FAILURE);
             }
             else
             {
-                typeSearch.id = (int)jObject["response"]["id"];
-                this.Frame.Navigate(typeof(GenericProfil), typeSearch);
+                typeSearch.id = (int)jObject1["response"]["id"];
+                if (typeSearch.getType().Equals("shelter", StringComparison.Ordinal))
+                {
+                    FormModel form = new FormModel();
+                    form.id = typeSearch.getID();
+                    form.createdModelType = typeSearch;
+                    form.isCreation = false;
+                    form.modelType = typeSearch;
+                    form.isAdmin = true;
+                    Frame.Navigate(typeof(GenericCreationModel), form);
+                }
+                else
+                {
+                    Frame.Navigate(typeof(GenericProfil), typeSearch);
+                }
             }
         }
 
@@ -193,7 +210,7 @@ namespace Caritathelp.All.Models
             }
             var values = new List<KeyValuePair<string, string>>();
             HttpHandler http = HttpHandler.getHttp();
-            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[model.getType()]["URL"] + model.getID(), null, HttpHandler.TypeRequest.GET);
+            jObject = await http.sendRequest(Model.Values[model.getType()]["URL"] + model.getID(), null, HttpHandler.TypeRequest.GET);
             if ((int)jObject["status"] != 200)
             {
                 err.printMessage((string)jObject["message"], GUI.ErrorControl.Code.FAILURE);                
@@ -203,7 +220,10 @@ namespace Caritathelp.All.Models
                 jObject = (Newtonsoft.Json.Linq.JObject)jObject["response"];
                 foreach (var x in jObject)
                 {
+                    if (x.Key.Equals("tags", StringComparison.Ordinal))
+                        continue;
                     values.Add(new KeyValuePair<string, string>(x.Key, (string)x.Value));
+
                     Debug.WriteLine("Key : " + x.Key + " Value : " + x.Value);
 
                 }

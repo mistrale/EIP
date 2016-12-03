@@ -1,0 +1,35 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Caritathelp.Message"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Caritathelp="using:Caritathelp"
+    xmlns:All="using:Caritathelp.All"
+    x:Class="Caritathelp.Message.MessageProfil"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <All:BasePage HorizontalAlignment="Left" Height="640" VerticalAlignment="Top" Width="399.999969482422"/>
+        <ScrollViewer Name="scroll" HorizontalAlignment="Left" Height="441" Margin="10,58,0,0" VerticalAlignment="Top" Width="380"/>
+        <Border CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" Background="White" HorizontalAlignment="Left" Height="63" Margin="10,513,0,0" VerticalAlignment="Top" Width="380">
+            <Grid>
+                <Border CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" Background="White" HorizontalAlignment="Left" Height="40" Margin="10,10,0,0" VerticalAlignment="Top" Width="357">
+                    <Grid>
+                        <Rectangle HorizontalAlignment="Left" Height="37" Margin="303,0,0,0" VerticalAlignment="Top" Width="50" Fill="#FF53A634" RadiusX="5" RadiusY="5" StrokeThickness="0"/>
+                        <Button x:ConnectionId='1'                          x:Name="button" Content="" HorizontalAlignment="Left" Margin="278,-10,-34,-10" VerticalAlignment="Top" BorderThickness="0" Foreground="{x:Null}" BorderBrush="{x:Null}">
+                            <Button.Background>
+                                <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/send.png"/>
+                            </Button.Background>
+                        </Button>
+                        <TextBox x:ConnectionId='2'                             x:Name="msgBox" HorizontalAlignment="Right" TextWrapping="Wrap" Text="Votre message ..." VerticalAlignment="Top" Width="303" Background="{x:Null}" Foreground="#FFBFCACC" Margin="0,0,50,0"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+        <TextBlock x:Name="nameBox" HorizontalAlignment="Left" Margin="44,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Height="33" Width="283" TextAlignment="Center"/>
+
+    </Grid>
+</Page>
+

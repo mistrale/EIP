@@ -34,18 +34,11 @@ namespace Caritathelp.All.Models
         private Newtonsoft.Json.Linq.JArray searchList;
         private Grid searchGrid;
 
-        private void EventButtonClick(object sender, RoutedEventArgs e)
-        {
-            Button button = sender as Button;
-
-            Models.Model tmp = (Models.Model)button.Tag;
-            Frame.Navigate(typeof(GenericProfil), tmp);
-        }
-
         private async void initListModel()
         {
+            Debug.WriteLine("type model : " + infos.typeModel + " id : " + infos.id + " list type model : " + infos.listTypeModel);
             var url = Model.Values[infos.typeModel]["URL"]
-                    + infos.id + Model.Values[infos.listTypeModel]["ResourceURL"];
+                    + infos.id + Models.Model.resourcesTables[infos.typeModel][infos.listTypeModel];
             HttpHandler http = HttpHandler.getHttp();
             Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(url, null, HttpHandler.TypeRequest.GET);
             if ((int)jObject["status"] != 200)
@@ -64,8 +57,15 @@ namespace Caritathelp.All.Models
                     GUI.SearchItem controls = new GUI.SearchItem();
 
                     Models.Model tmp = Model.createModel(Model.Values[infos.listTypeModel]["Model"], (int)searchList[x]["id"]);
-                    controls.setItem((string)searchList[x]["thumb_path"], (string)searchList[x][Model.Values[infos.listTypeModel]["NameType"]],
-                         (string)searchList[x][Model.Values[infos.listTypeModel]["NbRelationType"]] + " amis en commun ", this, tmp);
+                    if (tmp.getType().Equals("shelter", StringComparison.Ordinal))
+                    {
+                        controls.setItem((string)searchList[x]["thumb_path"], (string)searchList[x][Model.Values[infos.listTypeModel]["NameType"]], (string)searchList[x]["zipcode"], this, tmp);                       
+                    } else
+                    {
+                        controls.setItem((string)searchList[x]["thumb_path"], (string)searchList[x][Model.Values[infos.listTypeModel]["NameType"]],
+                     (string)searchList[x][Model.Values[infos.listTypeModel]["NbRelationType"]] + " amis en commun ", this, tmp);
+                    }
+
 
                     Grid.SetColumn(controls, 0);
                     Grid.SetRow(controls, x);
@@ -98,9 +98,13 @@ namespace Caritathelp.All.Models
             else if (infos.listTypeModel.Equals("event", StringComparison.Ordinal))
             {
                 titleBox.Text = "Evenements";
-            } else
+            } else if (infos.listTypeModel.Equals("volunteer", StringComparison.Ordinal))
             {
                 titleBox.Text = "Volontaires";
+            }
+            else if (infos.listTypeModel.Equals("shelter", StringComparison.Ordinal))
+            {
+                titleBox.Text = "Centres";
             }
             initListModel();
         }

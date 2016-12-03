@@ -15,8 +15,10 @@ namespace Caritathelp.All.Models
             mngButton = new Dictionary<string, Dictionary<string, ButtonManagement>>
             {
                 { "Créer un évènement", new Dictionary<string, ButtonManagement> { { "event", ButtonManagement.CREATE_RESOURCE } } },
+                { "Ajouter un centre", new Dictionary<string, ButtonManagement> { { "shelter", ButtonManagement.CREATE_RESOURCE } } },
+
                 { "Gérer les membres", new Dictionary<string, ButtonManagement> { { "volunteer", ButtonManagement.MANAGE_RELATION } } },
- //               { "Gérer les centres", new Dictionary<string, ButtonManagement> { { "assoc", ButtonManagement.MANAGE_RELATION } } },
+                { "Gérer les centres", new Dictionary<string, ButtonManagement> { { "shelter", ButtonManagement.MANAGE_RELATION } } },
 
                 { "Gérer les invitations", new Dictionary<string, ButtonManagement> { { "volunteer", ButtonManagement.MANAGE_INVITATION } } },
 

@@ -43,7 +43,7 @@
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/event.png"/>
             </Button.Background>
         </Button>
-        <Button Click="associationButton_Click" x:Name="associationButton" Content="" HorizontalAlignment="Left" Margin="123,218,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="59">
+        <Button Click="associationButton_Click" x:Name="associationButton" Content="" HorizontalAlignment="Left" Margin="123,216,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="59">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/assoc.png"/>
             </Button.Background>
@@ -101,5 +101,10 @@
             </Button.Background>
         </Button>
         <GUI:InputBox x:Name="inputBox" HorizontalAlignment="Left" Margin="7,-8,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
+        <Button Click="associationButton_Copy_Click"  x:Name="associationButton_Copy" Content="" HorizontalAlignment="Left" Margin="127,218,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="59" Visibility="Collapsed">
+            <Button.Background>
+                <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/home.png"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Page>

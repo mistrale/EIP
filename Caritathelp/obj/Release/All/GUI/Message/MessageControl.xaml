@@ -1,0 +1,32 @@
+﻿<UserControl
+    x:Class="Caritathelp.All.GUI.Message.MessageControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Caritathelp.All.GUI.Message"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignWidth="380" Height="92.412">
+
+    <Border Name="container" CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" Margin="0,0,0,0.667">
+        <Border.Background>
+            <SolidColorBrush Color="#FF53A634" Opacity="0.22"/>
+        </Border.Background>
+
+        <Grid>
+            <Ellipse Name="logo" HorizontalAlignment="Left" Height="69" Margin="10,10,0,0" Stroke="#FF69B578" VerticalAlignment="Top" Width="70">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <HyperlinkButton x:ConnectionId='1'                    Name="link" HorizontalAlignment="Left" Margin="91,6,0,0" VerticalAlignment="Top" Height="28" Width="276" Foreground="#FF72888E" FontSize="16" FontWeight="Bold">
+                <TextBlock x:Name="userBox" TextWrapping="Wrap" Text="TextBlock" Width="275" Foreground="#FF3F5461"/>
+            </HyperlinkButton>
+            <ScrollViewer HorizontalAlignment="Left" Height="43" Margin="91,36,0,0" VerticalAlignment="Top" Width="276">
+                <TextBlock x:Name="contentBox" TextWrapping="Wrap" Text="TextBlock" Foreground="#FF72888E" FontSize="14"/>
+            </ScrollViewer>
+
+        </Grid>
+    </Border>
+</UserControl>
+

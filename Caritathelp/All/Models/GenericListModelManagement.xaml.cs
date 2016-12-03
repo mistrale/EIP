@@ -36,30 +36,8 @@ namespace Caritathelp.All.Models
 
         private async void initListModel()
         {
-           var routes = new   Dictionary<string, Dictionary<string, string>>
-            {
-                {"assoc", new Dictionary<string, string>
-                    {
-                        { "volunteer", "/members"},
-                        { "shelter", "/shelters"},
-                    }
-                },
-                {"volunteer", new Dictionary<string, string>
-                    {
-                        { "volunteer", "/friends"},
-                        { "assoc", "/associations"},
-                        { "event", "/events"},
-                    }
-                },
-                {"event", new Dictionary<string, string>
-                    {
-                        { "volunteer", "/guests"},
-                    }
-                }
-           };
-
             var url = Model.Values[infos.typeModel]["URL"]
-                    + infos.id + routes[infos.typeModel][infos.listTypeModel];
+                    + infos.id + Models.Model.resourcesTables[infos.typeModel][infos.listTypeModel];
             HttpHandler http = HttpHandler.getHttp();
             Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(url, null, HttpHandler.TypeRequest.GET);
             if ((int)jObject["status"] != 200)

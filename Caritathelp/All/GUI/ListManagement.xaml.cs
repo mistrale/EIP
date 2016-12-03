@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Caritathelp.All.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -35,7 +36,20 @@ namespace Caritathelp.All.GUI
         {
             Button button = sender as Button;
             Models.Model tmp = (Models.Model)button.Tag;
-            page.Frame.Navigate(typeof(Models.GenericProfil), tmp);
+            if (tmp.getType().Equals("shelter", StringComparison.Ordinal))
+            {
+                FormModel form = new FormModel();
+                form.id = tmp.getID();
+                form.createdModelType = tmp;
+                form.isCreation = false;
+                form.modelType = tmp;
+                form.isAdmin = true;
+                page.Frame.Navigate(typeof(All.Models.GenericCreationModel), form);
+            }
+            else
+            {
+                page.Frame.Navigate(typeof(All.Models.GenericProfil), tmp);
+            }
         }
 
         private async void KickButtonClick(object sender, RoutedEventArgs e)
@@ -63,7 +77,11 @@ namespace Caritathelp.All.GUI
            };
 
             string url = "";
-            if (!infos.typeModel.Equals("volunteer", StringComparison.Ordinal))
+            if (infos.listTypeModel.Equals("shelter", StringComparison.Ordinal))
+            {
+                url = "/shelters/" + idUser + "?assoc_id=" + infos.id;
+            }
+            else if (!infos.typeModel.Equals("volunteer", StringComparison.Ordinal))
             {
                  url = routes[infos.typeModel][infos.listTypeModel] + "?" + Models.Model.Values[infos.typeModel]["TypeID"]
                     + "=" + infos.id + "&volunteer_id=" + idUser;
@@ -133,8 +151,16 @@ namespace Caritathelp.All.GUI
             }
             comboBox.SelectionChanged += new SelectionChangedEventHandler(selectedIndexChanged);
             ImageBrush myBrush = new ImageBrush();
-            myBrush.ImageSource =
-                new BitmapImage(new Uri(Global.API_IRL + "" + obj["thumb_path"], UriKind.Absolute));
+            if (obj["thumb_path"] != null)
+            {
+                myBrush.ImageSource =
+                    new BitmapImage(new Uri(Global.API_IRL + "" + obj["thumb_path"], UriKind.Absolute));
+            } else
+            {
+                myBrush.ImageSource =
+                    new BitmapImage(new Uri(Global.API_IRL + "" + "/uploads/picture/logo_caritathelp.png", UriKind.Absolute));
+            }
+
             logo.Fill = myBrush;
         }
 

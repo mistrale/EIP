@@ -169,6 +169,7 @@
       <DependentUpon>GenericProfil.xaml</DependentUpon>
     </Compile>
     <Compile Include="All\Models\Model.cs" />
+    <Compile Include="All\Models\Shelter.cs" />
     <Compile Include="All\Models\Volunteer.cs" />
     <Compile Include="All\Models\VolunteerPart\PasswordChange.xaml.cs">
       <DependentUpon>PasswordChange.xaml</DependentUpon>

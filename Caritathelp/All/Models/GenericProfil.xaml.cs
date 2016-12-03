@@ -290,7 +290,8 @@ namespace Caritathelp.All.Models
                             announceButton.Visibility = Visibility.Visible;
                         }
                     }
-                    removeButton.Visibility = Visibility.Visible;
+                    if (!rights.Equals("yourself", StringComparison.Ordinal))
+                        removeButton.Visibility = Visibility.Visible;
                 }
                 if (model.isInvited(rights))
                 {
@@ -325,6 +326,7 @@ namespace Caritathelp.All.Models
             if (model.getType().Equals("assoc", StringComparison.Ordinal))
             {
                 associationButton.Visibility = Visibility.Collapsed;
+                associationButton_Copy.Visibility = Visibility.Visible;
             }
             else if (model.getType().Equals("event", StringComparison.Ordinal))
             {
@@ -341,6 +343,15 @@ namespace Caritathelp.All.Models
             tmp.id = model.getID();
             tmp.typeModel = model.getType();
             tmp.listTypeModel = "assoc";
+            Frame.Navigate(typeof(GenericListModel), tmp);
+        }
+
+        private void associationButton_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            InfosListModel tmp = new InfosListModel();
+            tmp.id = model.getID();
+            tmp.typeModel = model.getType();
+            tmp.listTypeModel = "shelter";
             Frame.Navigate(typeof(GenericListModel), tmp);
         }
     }
