@@ -56,7 +56,6 @@
                   Width="161" Height="175" Foreground="#FF4F4D4D" 
                   Background="White" SelectedIndex="0"
                   BorderBrush="#FF110808" BorderThickness="2.5,2.5,2.5,1">
-            <TextBlock Text="M. / Mme."/>
             <TextBlock Text="Femme"/>
             <TextBlock Text="Homme"/>
         </ComboBox>

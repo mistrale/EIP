@@ -46,6 +46,22 @@ namespace Caritathelp.All.GUI
 
                 return;
             }
+            foreach (char c in textBox.Text)
+            {
+                if (!(c >= '0' && c <= '9'))
+                {
+                    err.printMessage("Champs 'Nombre de volontaire' : nombre incorrect.", ErrorControl.Code.FAILURE);
+                    return ;
+                }
+            }
+            foreach (char c in textBox2.Text)
+            {
+                if (!(c >= '0' && c <= '9'))
+                {
+                    err.printMessage("Champs 'Distance' : nombre incorrect.", ErrorControl.Code.FAILURE);
+                    return;
+                }
+            }
 
             var url = "/events/" + id + "/raise_emergency";
             HttpHandler http = HttpHandler.getHttp();
@@ -62,7 +78,7 @@ namespace Caritathelp.All.GUI
             else
             {
                 this.Visibility = Visibility.Collapsed;
-                err.printMessage((string)jObject["message"], GUI.ErrorControl.Code.FAILURE);
+                err.printMessage("L'évènement doit avoir une longitude et une latitude pour lever une urgence.", GUI.ErrorControl.Code.FAILURE);
             }
         }
 

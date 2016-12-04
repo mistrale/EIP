@@ -18,11 +18,11 @@ namespace Caritathelp.All.Models
             {
                 { "Nom", FormControlType.FIELD },
                 { "Adresse", FormControlType.FIELD},
-                { "Code postal", FormControlType.FIELD },
+                { "Code postal", FormControlType.NUMBER },
                 { "Ville", FormControlType.FIELD},
-                { "Nombre de places total", FormControlType.FIELD},
-                { "Nombre de places libres", FormControlType.FIELD},
-                { "Téléphone", FormControlType.FIELD},
+                { "Nombre de places total", FormControlType.NUMBER},
+                { "Nombre de places libres", FormControlType.NUMBER},
+                { "Téléphone", FormControlType.NUMBER},
                 { "Description", FormControlType.DESCRIPTION}
             };
         }

@@ -21,11 +21,19 @@ namespace Caritathelp.All.GUI.Message
     public sealed partial class ListMessageControl : UserControl
     {
         Page _page;
+        private ConfirmBox cfBox;
         GUI.ErrorControl err;
         Newtonsoft.Json.Linq.JObject obj;
         Caritathelp.Message.MessageInfos _infos { get; set; }
 
-        private async void leaveConversation(object sender, RoutedEventArgs e)
+        private  void leaveConversation(object sender, RoutedEventArgs e)
+        {
+            cfBox.Visibility = Visibility.Visible;
+            cfBox.setRoutedEvent(leaveConversation_real);
+        }
+
+
+        private async void leaveConversation_real(object sender, RoutedEventArgs e)
         {
             HttpHandler http = HttpHandler.getHttp();
             Newtonsoft.Json.Linq.JObject obj = await http.sendRequest("/chatrooms/" + _infos.id + "/leave", null, HttpHandler.TypeRequest.DELETE);
@@ -48,10 +56,11 @@ namespace Caritathelp.All.GUI.Message
             _page.Frame.Navigate(typeof(Caritathelp.Message.MessageProfil), _infos);
         }
 
-        public ListMessageControl(Caritathelp.Message.MessageInfos infos, Page page, GUI.ErrorControl err)
+        public ListMessageControl(Caritathelp.Message.MessageInfos infos, Page page, GUI.ErrorControl err, ConfirmBox cf)
         {
             this.InitializeComponent();
             this._infos = infos;
+            this.cfBox = cf;
             this._page = page;
             this.err = err;
             conversationButton.Content = _infos.name;

@@ -19,7 +19,7 @@
                     <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <Button Click="UserButtonClick" x:Name="userName" Content="Button" HorizontalAlignment="Left" Margin="63,0,0,0" VerticalAlignment="Top" Foreground="#FF72888E" BorderBrush="{x:Null}" BorderThickness="0" Height="61" Width="158"/>
+            <Button Click="UserButtonClick" x:Name="userName" Content="Button" HorizontalAlignment="Left" Margin="63,0,0,0" VerticalAlignment="Top" Foreground="#FF72888E" BorderBrush="{x:Null}" BorderThickness="0" Height="61" Width="144"/>
             <Border  BorderBrush="#FFBFCACC"  CornerRadius="5"  BorderThickness="1" HorizontalAlignment="Left" Height="49" Margin="9.5,11,0,0" VerticalAlignment="Top" Width="55" Background="#FFFF6E6E" Grid.Column="1">
                 <Button Click="KickButtonClick" x:Name="button1" Content="Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="-27.833,-3.833,-27.833,-6.667" BorderThickness="0" BorderBrush="{x:Null}" Foreground="{x:Null}">
                     <Button.Background>
@@ -28,10 +28,7 @@
                 </Button>
             </Border>
             <ComboBox DropDownOpened="comboBox_DropDownOpened"
-                      DropDownClosed="comboBox_DropDownClosed" x:Name="comboBox" HorizontalAlignment="Left" Margin="220,8,0,-80" VerticalAlignment="Top" Width="83" BorderBrush="#FF53A634" Foreground="#FF53A634" Height="142" SelectedIndex="0" FontSize="16" IsSynchronizedWithCurrentItem="False" Grid.ColumnSpan="2">
-                <x:String>Member</x:String>
-                <x:String>Admin</x:String>
-                <x:String>Owner</x:String>
+                      DropDownClosed="comboBox_DropDownClosed" x:Name="comboBox" HorizontalAlignment="Left" Margin="203,8,0,-80" VerticalAlignment="Top" Width="100" BorderBrush="#FF53A634" Foreground="#FF53A634" Height="142" SelectedIndex="-1" FontSize="16" IsSynchronizedWithCurrentItem="False" Grid.ColumnSpan="2">
             </ComboBox>
 
         </Grid>

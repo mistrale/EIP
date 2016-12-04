@@ -984,3 +984,13 @@ C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\GUI\PictureControl.xaml
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericAlbum.xaml
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\GUI\PictureControl.xbf
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericAlbum.xbf
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\PasswordManagement.xbf
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\PasswordManagement.g.i.cs
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\PasswordManagement.g.cs
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\PasswordManagement.xaml
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\PasswordManagement.xbf
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\GUI\ConfirmBox.g.i.cs
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\GUI\ConfirmBox.g.cs
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\GUI\ConfirmBox.xaml
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\GUI\ConfirmBox.xbf
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\ConfirmBox.xbf

@@ -11,6 +11,7 @@ namespace Caritathelp.All.Models
     public enum FormControlType
     {
         FIELD,
+        NUMBER,
         DATE,
         HOUR,
         COMBOX,
@@ -28,7 +29,8 @@ namespace Caritathelp.All.Models
         MANAGE_RELATION = 5,
         GET_RESOURCES = 6,
         GET_NOTIFICATION = 7,
-        MANAGE_ALBUM = 8
+        MANAGE_ALBUM = 8,
+        UPDATE_PASSWORD = 9
     }
 
     public class PictureModel
@@ -146,7 +148,7 @@ namespace Caritathelp.All.Models
 
                     { "Model", "volunteer"},
                     { "TypeID", "volunteer_id"},
-                    { "CancelTypeID", "volunteer_id"},
+                    { "CancelTypeID", "none"},
                     { "ResourceManagement", "friendship"},
 
                     { "AddURL", "/friendship/add"},
@@ -154,7 +156,7 @@ namespace Caritathelp.All.Models
                     { "AcceptURL", "/friendship/reply"},
                     { "AcceptInvitation", "/friendship/reply"},
                     { "InviteURL", "/friendship/add"},
-                    { "CancelInviteURL", "/friendship/cancel" },
+                    { "CancelInviteURL", "/friendship/cancel_request" },
                     { "UpgradeURL", "" },
                     { "KickURL", "/friendship/remove" },
 

@@ -23,6 +23,7 @@ namespace Caritathelp.All.GUI
         public delegate bool Navigate(object content, object extraData);
 
         private Page currentPage;
+        private ConfirmBox cfBox;
         private System.Type type;
         private object parameter;
         private GUI.ErrorControl err;
@@ -35,6 +36,10 @@ namespace Caritathelp.All.GUI
 
         public async void updateClick(object sender, RoutedEventArgs e)
         {
+            if (contentBox.Text.Equals("", StringComparison.Ordinal))
+            {
+                return;
+            }
             HttpHandler http = HttpHandler.getHttp();
             string url = (string)obj["url"] + (int)obj["id"];
             var values = new List<KeyValuePair<string, string>>
@@ -53,8 +58,14 @@ namespace Caritathelp.All.GUI
                 currentPage.Frame.Navigate(type, parameter);
             }
         }
+        public void deleteClick(object sender, RoutedEventArgs e)
+        {
+            cfBox.Visibility = Visibility.Visible;
+            cfBox.setRoutedEvent(deleteClick_real);
+        }
 
-        public async void deleteClick(object sender, RoutedEventArgs e)
+
+        public async void deleteClick_real(object sender, RoutedEventArgs e)
         {
             HttpHandler http = HttpHandler.getHttp();
             Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest((string)obj["url"] + (int)obj["id"], 
@@ -74,9 +85,10 @@ namespace Caritathelp.All.GUI
             contentBox.Text = (string)obj["content"];
         }
 
-        public void setCurrentPage(Page page, System.Type type, object parameter, GUI.ErrorControl err)
+        public void setCurrentPage(Page page, System.Type type, object parameter, GUI.ErrorControl err, ConfirmBox cf)
         {
             currentPage = page;
+            cfBox = cf;
             this.type = type;
             this.err = err;
             this.parameter = parameter;

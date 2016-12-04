@@ -1,6 +1,7 @@
 ﻿using Caritathelp.All.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -21,11 +22,21 @@ namespace Caritathelp.All.GUI
 {
     public sealed partial class ListManagement : UserControl
     {
+        private ConfirmBox cfBox;
         Page page;
         private GUI.ErrorControl err;
         private Models.InfosListModel infos;
         private int idUser;
 
+        private Dictionary<string, string> keysRights = new Dictionary<string, string>()
+        {
+            {"Membre", "member" },
+            {"Invité", "guest" },
+
+            {"Administrateur", "admin" },
+            {"Propriétaire", "owner" },
+            {"Hôte", "host" },
+        };
 
         public ListManagement()
         {
@@ -52,7 +63,13 @@ namespace Caritathelp.All.GUI
             }
         }
 
-        private async void KickButtonClick(object sender, RoutedEventArgs e)
+        private void KickButtonClick(object sender, RoutedEventArgs e)
+        {
+            cfBox.Visibility = Visibility.Visible;
+            cfBox.setRoutedEvent(KickButtonClick_real);
+        }
+
+        private async void KickButtonClick_real(object sender, RoutedEventArgs e)
         {
             var routes = new Dictionary<string, Dictionary<string, string>>
             {
@@ -111,11 +128,12 @@ namespace Caritathelp.All.GUI
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>(Models.Model.Values[infos.typeModel]["TypeID"], infos.id.ToString()),
-                        new KeyValuePair<string, string>("rights", selected.ToLower()),
+                        new KeyValuePair<string, string>("rights", keysRights[selected]),
                         new KeyValuePair<string, string>("volunteer_id", idUser.ToString()),
                     };
             HttpHandler http = HttpHandler.getHttp();
             Newtonsoft.Json.Linq.JObject obj = await http.sendRequest(url, values, HttpHandler.TypeRequest.PUT);
+            Debug.WriteLine("status : " + (int)obj["status"]);
             if ((int)obj["status"] != 200)
             {
                 err.printMessage((string)obj["message"], ErrorControl.Code.FAILURE);
@@ -125,9 +143,10 @@ namespace Caritathelp.All.GUI
             }
         }
 
-        public ListManagement(Models.InfosListModel tmp, Newtonsoft.Json.Linq.JObject obj, GUI.ErrorControl err, Page page, bool canUpgrade)
+        public ListManagement(Models.InfosListModel tmp, Newtonsoft.Json.Linq.JObject obj, GUI.ErrorControl err, Page page, bool canUpgrade, ConfirmBox cf)
         {
             this.InitializeComponent();
+            cfBox = cf;
             this.err = err;
             infos = tmp;
             this.page = page;
@@ -142,12 +161,28 @@ namespace Caritathelp.All.GUI
                 userName.Width = 240;
             } else
             {
+                if (tmp.listTypeModel.Equals("event", StringComparison.Ordinal))
+                {
+                    comboBox.Items.Add("Invité");
+                    comboBox.Items.Add("Administrateur");
+                    comboBox.Items.Add("Hôte");
+
+                }
+                else
+                {
+                    comboBox.Items.Add("Membre");
+                    comboBox.Items.Add("Administrateur");
+                    comboBox.Items.Add("Propriétaire");
+
+                }
                 if (((string)obj["rights"]).Equals("member", StringComparison.Ordinal))
                     comboBox.SelectedIndex = 0;
                 else if (((string)obj["rights"]).Equals("admin", StringComparison.Ordinal))
                     comboBox.SelectedIndex = 1;
                 else
+                {
                     comboBox.SelectedIndex = 2;
+                }
             }
             comboBox.SelectionChanged += new SelectionChangedEventHandler(selectedIndexChanged);
             ImageBrush myBrush = new ImageBrush();

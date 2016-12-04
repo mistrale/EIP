@@ -172,7 +172,7 @@ namespace Caritathelp.All.Models
                 for (int i = 0; i < newsResponse.Count; i++)
                 {
                     sendGrid.RowDefinitions.Add(new RowDefinition());
-                    GUI.InvitationWaiting btn = new GUI.InvitationWaiting(model, (Newtonsoft.Json.Linq.JObject)(newsResponse[i]));
+                    GUI.InvitationWaiting btn = new GUI.InvitationWaiting(model, (Newtonsoft.Json.Linq.JObject)(newsResponse[i]), cfBox);
                     btn.Margin = new Thickness(0, 0, 0, 20);
                     Grid.SetColumn(btn, 0);
                     Grid.SetRow(btn, i);

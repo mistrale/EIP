@@ -46,6 +46,7 @@ All\Accueil.xbf
 All\BasePage.xbf
 All\FinalInscription.xbf
 All\GUI\CommentContro.xbf
+All\GUI\ConfirmBox.xbf
 All\GUI\ConfirmControl.xbf
 All\GUI\CreateGUI\CheckField.xbf
 All\GUI\CreateGUI\ComboBoxControl.xbf
@@ -77,6 +78,7 @@ All\Models\GenericManagement.xbf
 All\Models\GenericNotification.xbf
 All\Models\GenericProfil.xbf
 All\Models\VolunteerPart\PasswordChange.xbf
+All\PasswordManagement.xbf
 All\Research.xbf
 App.xbf
 Caritathelp.xr.xml

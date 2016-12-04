@@ -28,6 +28,8 @@ namespace Caritathelp.All.GUI
         private int idNews;
         private int nbComments = 0;
         private Page page;
+        private bool hasClickSeeComment = false;
+        private ConfirmBox cfBox;
 
         public void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -70,8 +72,11 @@ namespace Caritathelp.All.GUI
 
         public void seeCommentClick(object sender, RoutedEventArgs e)
         {
-            scroll.Height += nbComments * 54;
-            this.Height += nbComments * 54;
+            if (!hasClickSeeComment)
+            {
+                getComments();
+                hasClickSeeComment = true;
+            }
         }
 
         public void optionsClick(object sender, RoutedEventArgs e)
@@ -84,7 +89,7 @@ namespace Caritathelp.All.GUI
             options.setObject(obj);
         }
 
-        private async void getComments(GUI.PopField e, GUI.ErrorControl err)
+        private async void getComments()
         {
             HttpHandler http = HttpHandler.getHttp();
             string url = "/news/" + idNews + "/comments";
@@ -108,8 +113,11 @@ namespace Caritathelp.All.GUI
                 Grid.SetColumn(cmt, 0);
                 Grid.SetRow(cmt, x);
                 commentsGrid.Children.Add(cmt);
+                scroll.Height +=  54;
+                this.Height += 54;
             }
             scroll.Content = commentsGrid;
+
         }
 
         public NewControle()
@@ -165,7 +173,6 @@ namespace Caritathelp.All.GUI
             image2.ImageSource = new BitmapImage(new Uri("http://staging.caritathelp.me" + (string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["thumb_path"], UriKind.Absolute));
             myLogo.Fill = image2;
             seeButton.Content += " (" + +(int)obj["number_comments"] + ")";
-            getComments(e, err);
         }
 
         private void button_Click(object sender, RoutedEventArgs e)

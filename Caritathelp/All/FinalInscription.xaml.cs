@@ -94,7 +94,7 @@ namespace Caritathelp.All
         private async void createNewUser()
         {
             var settings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            string url = Global.API_IRL + "/volunteers/";
+            string url = Global.API_IRL + "/auth/";
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("lastname", (string)settings.Values["lastname"]),
@@ -102,7 +102,7 @@ namespace Caritathelp.All
                         new KeyValuePair<string, string>("gender", (string)settings.Values["genre"]),
                         new KeyValuePair<string, string>("city", (string)settings.Values["city"]),
                         new KeyValuePair<string, string>("allowgps", geolocalisationBox.IsChecked.ToString().ToLower()),
-                        new KeyValuePair<string, string>("mail", EmailTextBox.Text),
+                        new KeyValuePair<string, string>("email", EmailTextBox.Text),
                         new KeyValuePair<string, string>("birthday", (string)settings.Values["birthday"]),
                         new KeyValuePair<string, string>("password", PasswordPasswordBox.Password)
                     };

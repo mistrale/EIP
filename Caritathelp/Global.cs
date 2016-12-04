@@ -97,7 +97,7 @@ namespace Caritathelp
                     httpClient.DefaultRequestHeaders.Add("access-token", token);
                     httpClient.DefaultRequestHeaders.Add("client", client_id);
                     httpClient.DefaultRequestHeaders.Add("uid", uuid);
-                    return (Newtonsoft.Json.Linq.JObject)jObject["response"];
+                    return jObject;
                 }
                 return jObject;
             }

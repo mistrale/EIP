@@ -54,7 +54,7 @@ namespace Caritathelp.All.Models
                 {
                     gridUser.RowDefinitions.Add(new RowDefinition());
                     GUI.ListManagement controls = new GUI.ListManagement(infos, (Newtonsoft.Json.Linq.JObject)searchList[x], err,
-                        this, infos.listTypeModel.Equals("volunteer") && !infos.typeModel.Equals("volunteer"));
+                        this, infos.listTypeModel.Equals("volunteer") && !infos.typeModel.Equals("volunteer"), cfBox);
                     controls.Margin = new Thickness(0, 0, 0, 15);
                     Grid.SetColumn(controls, 0);
                     Grid.SetRow(controls, x);

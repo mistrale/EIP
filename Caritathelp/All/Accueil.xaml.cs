@@ -86,10 +86,12 @@ namespace Caritathelp.All
 
         private async void getNews()
         {
+            int j = 0;
             HttpHandler http = HttpHandler.getHttp();
             Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest("/news", null, HttpHandler.TypeRequest.GET);
             if ((int)jObject["status"] == 200)
             {
+
                 newsResponse = (Newtonsoft.Json.Linq.JArray)jObject["response"];
                 newsGrid = new Grid();
                 newsGrid.ColumnDefinitions.Add(new ColumnDefinition());
@@ -97,6 +99,10 @@ namespace Caritathelp.All
                 newsGrid.VerticalAlignment = VerticalAlignment.Top;
                 for (int i = 0; i <  newsResponse.Count; i++)
                 {
+                    if (i > 50)
+                    {
+                        break;
+                    }
                     newsGrid.RowDefinitions.Add(new RowDefinition());
                     GUI.NewControle btn = new GUI.NewControle((Newtonsoft.Json.Linq.JObject)(newsResponse[i]), optionsComment, errorControl, this);
                     Grid.SetColumn(btn, 0);
@@ -114,7 +120,7 @@ namespace Caritathelp.All
         {
             this.InitializeComponent();
             getNews();
-            optionsComment.setCurrentPage(this, typeof(Accueil), null, errorControl);
+            optionsComment.setCurrentPage(this, typeof(Accueil), null, errorControl, cfBox);
         }
 
         /// <summary>

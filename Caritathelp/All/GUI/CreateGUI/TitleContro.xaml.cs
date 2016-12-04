@@ -20,6 +20,13 @@ namespace Caritathelp.All.GUI.CreateGUI
 {
     public sealed partial class TitleContro :  UserControl
     {
+        public enum Type
+        {
+            STRING,
+            NUMBER
+        }
+
+        private Type type;
         GUI.ErrorControl err;
 
         private void searchTextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -38,14 +45,30 @@ namespace Caritathelp.All.GUI.CreateGUI
                 err.printMessage("Champs '" + type + "' vide.", ErrorControl.Code.FAILURE);
                 return false;
             }
+            if (this.type == Type.STRING)
+            {
+                field = Content.Text;
+                return true;
+            }
+            foreach (char c in Content.Text)
+            {
+                if (!(c >= '0' && c <= '9'))
+                {
+                    field = "";
+                    err.printMessage("Champs '" + type + "' invalide, vérifier que le nombre soit correct.", ErrorControl.Code.FAILURE);
+                    return false;
+
+                }
+            }
             field = Content.Text;
             return true;
         }
 
-        public TitleContro(string title, string content, GUI.ErrorControl err)
+        public TitleContro(string title, string content, GUI.ErrorControl err, Type type)
         {
             this.InitializeComponent();
             titleBloc.Text = title;
+            this.type = type;
 
             if (content != null)
             {

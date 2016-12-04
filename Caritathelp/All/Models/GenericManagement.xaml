@@ -15,5 +15,6 @@
         <ScrollViewer x:Name="scrollButton" Background="#FFE4F7DD" HorizontalAlignment="Left" Height="526" Margin="10,70,0,0" VerticalAlignment="Top" Width="380"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="95,15,0,0" TextWrapping="Wrap" Text="Options" VerticalAlignment="Top" Height="39" Width="218" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
         <GUI:ErrorControl x:Name="err" HorizontalAlignment="Left" Margin="1,10,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
+        <GUI:ConfirmBox x:Name="cfBox" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
     </Grid>
 </Page>

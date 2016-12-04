@@ -50,8 +50,8 @@
       <RootProperty Name="BorderBrush" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="Width" />
-      <RootProperty Name="FontWeight" />
       <RootProperty Name="Height" />
+      <RootProperty Name="FontWeight" />
       <RootProperty Name="FontSize" />
       <RootEvent Name="Click" />
     </RootType>
@@ -134,6 +134,13 @@
       <RootProperty Name="LineHeight" />
       <RootProperty Name="FontStyle" />
       <RootProperty Name="RenderTransformOrigin" />
+    </RootType>
+    <RootType FullName="Caritathelp.All.GUI.ConfirmBox">
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Visibility" />
+      <RootProperty Name="Width" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.Tools.DirectUI.ProxyTypes.NullExtension" />
     <RootType FullName="Windows.UI.Xaml.Media.ImageBrush">
@@ -345,6 +352,7 @@
     <RootType FullName="Caritathelp.All.FinalInscription" />
     <RootType FullName="Caritathelp.All.Inscription" />
     <RootType FullName="Caritathelp.MainPage" />
+    <RootType FullName="Caritathelp.All.PasswordManagement" />
     <RootType FullName="Caritathelp.All.Research" />
     <RootType FullName="Caritathelp.Message.CreateMessage" />
     <RootType FullName="Caritathelp.Message.Message" />

@@ -23,10 +23,12 @@ namespace Caritathelp.All.GUI
     {
         public int id { get; set; }
         public Models.PictureModel infos;
+        private ConfirmBox cfBox;
 
-        public PictureControl(Newtonsoft.Json.Linq.JObject jObject,  Models.PictureModel infos)
+        public PictureControl(Newtonsoft.Json.Linq.JObject jObject,  Models.PictureModel infos, ConfirmBox cf)
         {
             this.InitializeComponent();
+            this.cfBox = cf;
             this.id = (int)jObject["id"];
             this.infos = infos;
             if (!infos.isAdmin)
@@ -41,7 +43,13 @@ namespace Caritathelp.All.GUI
             image.Fill = myBrush;
         }
 
-        private async void delete_Click(object sender, RoutedEventArgs e)
+        private void delete_Click(object sender, RoutedEventArgs e)
+        {
+            cfBox.Visibility = Visibility.Visible;
+            cfBox.setRoutedEvent(delete_Click_real);
+        }
+
+        private async void delete_Click_real(object sender, RoutedEventArgs e)
         {
             HttpHandler http = HttpHandler.getHttp();
             Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest("/pictures/" + id.ToString(), null, HttpHandler.TypeRequest.DELETE);

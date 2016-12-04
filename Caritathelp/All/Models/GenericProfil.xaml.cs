@@ -37,6 +37,7 @@ namespace Caritathelp.All.Models
         private Model model;
         private string notif_id;
         private bool isAdmin;
+        private Newtonsoft.Json.Linq.JObject infosModel;
 
         public GenericProfil()
         {
@@ -124,7 +125,13 @@ namespace Caritathelp.All.Models
             }
         }
 
-        public async void removeClick(object send, RoutedEventArgs e)
+        public void removeClick(object send, RoutedEventArgs e)
+        {
+            cfBox.Visibility = Visibility.Visible;
+            cfBox.setRoutedEvent(removeClick_real);
+        }
+
+        public async void removeClick_real(object send, RoutedEventArgs e)
         {
             HttpHandler http = HttpHandler.getHttp();
             Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[model.getType()]["RemoveURL"]
@@ -246,23 +253,48 @@ namespace Caritathelp.All.Models
         }
 
 
+        private void printRights(string rights)
+        {
+            if (rights == null)
+                return;
+            Debug.WriteLine("rights : " + rights);
+            if (rights.Equals("waiting", StringComparison.Ordinal))
+                nameBox.Text += " (En attente de confirmation)";
+            if (rights.Equals("friend", StringComparison.Ordinal))
+                nameBox.Text += " (Ami)";
+
+            if (rights.Equals("member", StringComparison.Ordinal))
+                nameBox.Text += " (Membre)";
+            if (rights.Equals("admin", StringComparison.Ordinal))
+                nameBox.Text += " (Administrateur)";
+            if (rights.Equals("owner", StringComparison.Ordinal))
+                nameBox.Text += " (Proriétaire)";
+
+            if (rights.Equals("guest", StringComparison.Ordinal))
+                nameBox.Text += " (Invité)";
+            if (rights.Equals("admin", StringComparison.Ordinal))
+                nameBox.Text += "(Administrateur)";
+            if (rights.Equals("host", StringComparison.Ordinal))
+                nameBox.Text += " (Hôte)";
+        }
+
         private async void getInformationModel()
         {
             HttpHandler http = HttpHandler.getHttp();
-            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[model.getType()]["URL"] + model.getID(), null, HttpHandler.TypeRequest.GET);
-            if ((int)jObject["status"] != 200)
+            infosModel = await http.sendRequest(Model.Values[model.getType()]["URL"] + model.getID(), null, HttpHandler.TypeRequest.GET);
+            if ((int)infosModel["status"] != 200)
             {
-                errControl.printMessage((string)jObject["message"], GUI.ErrorControl.Code.FAILURE);
+                errControl.printMessage((string)infosModel["message"], GUI.ErrorControl.Code.FAILURE);
             }
             else
             {
-                jObject = (Newtonsoft.Json.Linq.JObject)jObject["response"];
+                infosModel = (Newtonsoft.Json.Linq.JObject)infosModel["response"];
                 titleBox.Text = Model.Values[model.getType()]["Name"];
-                nameBox.Text = (string)jObject[Model.Values[model.getType()]["NameType"]];
-                string rights = (string)jObject[Model.Values[model.getType()]["RightsType"]];
+                nameBox.Text = (string)infosModel[Model.Values[model.getType()]["NameType"]];
+                string rights = (string)infosModel[Model.Values[model.getType()]["RightsType"]];
                 ImageBrush myBrush = new ImageBrush();
                 myBrush.ImageSource =
-                    new BitmapImage(new Uri(Global.API_IRL + "" + jObject["thumb_path"], UriKind.Absolute));
+                    new BitmapImage(new Uri(Global.API_IRL + "" + infosModel["thumb_path"], UriKind.Absolute));
                 logo.Fill = myBrush;
                 if (model.isUnknown(rights))
                 {
@@ -303,6 +335,7 @@ namespace Caritathelp.All.Models
                 {
                     waitingImage.Visibility = Visibility.Visible;
                 }
+                printRights(rights);
             }
         }
 
@@ -334,7 +367,7 @@ namespace Caritathelp.All.Models
                 eventButton.Visibility = Visibility.Collapsed;
             }
             initProfilPage();
-            optionsComment.setCurrentPage(this, typeof(GenericProfil), model, errControl);
+            optionsComment.setCurrentPage(this, typeof(GenericProfil), model, errControl, cfBox);
         }
 
         private void associationButton_Click(object sender, RoutedEventArgs e)

@@ -53,6 +53,11 @@ namespace Caritathelp.All.Models
             this.Frame.Navigate(typeof(GenericAlbum), infos);
         }
 
+        public void updatePasswordClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(PasswordManagement), model);
+        }
+
         public void manageInvitationClick(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(GenericInvitation), model);
@@ -73,7 +78,14 @@ namespace Caritathelp.All.Models
             this.Frame.Navigate(typeof(GenericListModelManagement), tmp);
         }
 
-        public async void deleteRessourceClick(object sender, RoutedEventArgs e)
+        public void deleteRessourceClick(object sender, RoutedEventArgs e)
+        {
+            cfBox.Visibility = Visibility.Visible;
+            cfBox.setRoutedEvent(deleteRessourceClick_real);
+        }
+
+
+        public async void deleteRessourceClick_real(object sender, RoutedEventArgs e)
         {
             HttpHandler http = HttpHandler.getHttp();
             Newtonsoft.Json.Linq.JObject jObject;
@@ -128,6 +140,9 @@ namespace Caritathelp.All.Models
                 {
                     case ButtonManagement.CREATE_RESOURCE:
                         btn.setControls(entry.Key, createRessourceClick, entry.Value.First().Key);
+                        break;
+                    case ButtonManagement.UPDATE_PASSWORD:
+                        btn.setControls(entry.Key, updatePasswordClick, entry.Value.First().Key);
                         break;
                     case ButtonManagement.DELETE_RESOURCE:
                         btn.setControls(entry.Key, deleteRessourceClick, entry.Value.First().Key);

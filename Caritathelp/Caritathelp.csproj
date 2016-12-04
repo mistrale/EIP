@@ -88,6 +88,9 @@
     <Compile Include="All\GUI\CommentContro.xaml.cs">
       <DependentUpon>CommentContro.xaml</DependentUpon>
     </Compile>
+    <Compile Include="All\GUI\ConfirmBox.xaml.cs">
+      <DependentUpon>ConfirmBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="All\GUI\ConfirmControl.xaml.cs">
       <DependentUpon>ConfirmControl.xaml</DependentUpon>
     </Compile>
@@ -179,6 +182,9 @@
     <Compile Include="All\Models\Volunteer.cs" />
     <Compile Include="All\Models\VolunteerPart\PasswordChange.xaml.cs">
       <DependentUpon>PasswordChange.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="All\PasswordManagement.xaml.cs">
+      <DependentUpon>PasswordManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="All\Pictures.cs" />
     <Compile Include="App.xaml.cs">
@@ -281,6 +287,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="All\GUI\CommentContro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="All\GUI\ConfirmBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -411,6 +421,10 @@
     <Page Include="All\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="All\PasswordManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="All\Research.xaml">
       <SubType>Designer</SubType>

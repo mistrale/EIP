@@ -98,6 +98,10 @@ namespace Caritathelp.All.Models
                         if (!((GUI.CreateGUI.TitleContro)(elements[i])).checkField(entry.Key, out field))
                             return false;
                         break;
+                    case FormControlType.NUMBER:
+                        if (!((GUI.CreateGUI.TitleContro)(elements[i])).checkField(entry.Key, out field))
+                            return false;
+                        break;
                     case FormControlType.DATE:
                         if (!((GUI.CreateGUI.DateControls)(elements[i])).checkField(entry.Key, out field))
                             return false;
@@ -246,8 +250,6 @@ namespace Caritathelp.All.Models
                     continue;
                 string resources = entry.Key;
                 UserControl ctls = null;
-                Debug.WriteLine("asdsad " + entry.Key);
-
                 if (values != null)
                 {
                     //resources = values[(string)(Model.Values[infos.createdModelType][entry.Key]).ToSt];
@@ -256,7 +258,10 @@ namespace Caritathelp.All.Models
                 switch (entry.Value)
                 {
                     case FormControlType.FIELD:
-                        ctls = new GUI.CreateGUI.TitleContro(entry.Key, resources, err);
+                        ctls = new GUI.CreateGUI.TitleContro(entry.Key, resources, err, GUI.CreateGUI.TitleContro.Type.STRING);
+                        break;
+                    case FormControlType.NUMBER:
+                        ctls = new GUI.CreateGUI.TitleContro(entry.Key, resources, err, GUI.CreateGUI.TitleContro.Type.NUMBER);
                         break;
                     case FormControlType.DESCRIPTION:
                         ctls = new GUI.CreateGUI.DescriptionControls(entry.Key, resources, err);

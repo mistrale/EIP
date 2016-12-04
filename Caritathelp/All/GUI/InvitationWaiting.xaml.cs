@@ -24,6 +24,7 @@ namespace Caritathelp.All.GUI
         Models.Model infos;
         private int idNotif;
         private int idUser;
+        private ConfirmBox cfBox;
 
         private void viewProfil(object sender, RoutedEventArgs e)
         {
@@ -31,11 +32,25 @@ namespace Caritathelp.All.GUI
             ((Frame)Window.Current.Content).Navigate(typeof(Models.GenericProfil), tmp);
         }
 
-        private async void cancelRequest(object sender, RoutedEventArgs e)
+        private void cancelRequest(object sender, RoutedEventArgs e)
         {
+            cfBox.Visibility = Visibility.Visible;
+            cfBox.setRoutedEvent(cancelRequest_real);
+        }
+
+        private async void cancelRequest_real(object sender, RoutedEventArgs e)
+        {
+
             HttpHandler http = HttpHandler.getHttp();
-            var url = Models.Model.Values[infos.getType()]["CancelInviteURL"] + "?" + Models.Model.Values[infos.getType()]["CancelTypeID"]
-                + "=" + idNotif.ToString() + "&" + Models.Model.Values[infos.getType()]["TypeID"] + "=" + infos.id.ToString();
+            string url = "";
+            if (infos.getType().Equals("volunteer", StringComparison.Ordinal))
+            {
+                url = Models.Model.Values[infos.getType()]["CancelInviteURL"] + "?notif_id=" + idNotif;
+            } else
+            {
+                url = Models.Model.Values[infos.getType()]["CancelInviteURL"] + "?" + Models.Model.Values[infos.getType()]["CancelTypeID"]
+                    + "=" + idNotif.ToString() + "&" + Models.Model.Values[infos.getType()]["TypeID"] + "=" + infos.id.ToString();
+            }
             Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(url, null, HttpHandler.TypeRequest.DELETE);
             if ((int)jObject["status"] != 200)
             {
@@ -47,9 +62,10 @@ namespace Caritathelp.All.GUI
             }
         }
 
-        public InvitationWaiting(Models.Model tmp, Newtonsoft.Json.Linq.JObject obj)
+        public InvitationWaiting(Models.Model tmp, Newtonsoft.Json.Linq.JObject obj, ConfirmBox cfBox)
         {
             this.InitializeComponent();
+            this.cfBox = cfBox;
             if (obj["notif_id"] != null)
             {
                 idNotif = (int)obj["notif_id"];

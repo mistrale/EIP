@@ -130,7 +130,7 @@ namespace Caritathelp.All.Models
                 for (int i = 0; i < newsResponse.Count; i++)
                 {
                     grid.RowDefinitions.Add(new RowDefinition());
-                    GUI.PictureControl pic = new GUI.PictureControl((Newtonsoft.Json.Linq.JObject)(newsResponse[i]), infos);
+                    GUI.PictureControl pic = new GUI.PictureControl((Newtonsoft.Json.Linq.JObject)(newsResponse[i]), infos, cfBox);
                     pic.Margin = new Thickness(0, 0, 0, 20);
                     Grid.SetColumn(pic, 0);
                     Grid.SetRow(pic, i);

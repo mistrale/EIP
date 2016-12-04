@@ -199,6 +199,9 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\CommentContro.xbf">
       <PackagePath>All\GUI\CommentContro.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\ConfirmBox.xbf">
+      <PackagePath>All\GUI\ConfirmBox.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\ConfirmControl.xbf">
       <PackagePath>All\GUI\ConfirmControl.xbf</PackagePath>
     </AppxPackagedFile>
@@ -294,6 +297,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\MainPage.xbf">
       <PackagePath>All\MainPage.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\PasswordManagement.xbf">
+      <PackagePath>All\PasswordManagement.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Research.xbf">
       <PackagePath>All\Research.xbf</PackagePath>

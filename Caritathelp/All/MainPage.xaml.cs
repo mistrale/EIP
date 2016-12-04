@@ -59,28 +59,32 @@ namespace Caritathelp
                 Loading.IsActive = false;
                 return;
             }
-            if (jObject == null && (int)jObject["status"] != 200)
+            Debug.WriteLine(jObject);
+            if ((int)jObject["status"] != 200)
             {
                 Debug.WriteLine("failed to connect");
                 Loading.IsActive = false;
-                warningTextBox.Text = (string)jObject["message"];
+                warningTextBox.Text = "Identifiants invalides.";
                 return;
             }
-            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            jObject = (Newtonsoft.Json.Linq.JObject)jObject["response"];
             try
             {
+                var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
                 localSettings.Values["password"] = (string)Password.Password;
                 localSettings.Values["id"] = (int)jObject["id"];
                 localSettings.Values["thumb_path"] = (string)jObject["thumb_path"];
                 localSettings.Values["mail"] = Email.Text;
                 localSettings.Values["allowgps"] = (bool)jObject["allowgps"];
-                //SocketHandler.getWS();
                 Loading.IsActive = false;
                 this.Frame.Navigate(typeof(All.Accueil));
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e);
+                Loading.IsActive = false;
+                warningTextBox.Text = "Identifiants invalides.";
             }
 
         }

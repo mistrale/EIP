@@ -86,7 +86,7 @@ namespace Caritathelp.Message
                 }
                 Debug.WriteLine("AFTER get message name : " + msgInfos.name + " id : " + msgInfos.id);
 
-                All.GUI.Message.ListMessageControl ctls = new All.GUI.Message.ListMessageControl(msgInfos, this, err);
+                All.GUI.Message.ListMessageControl ctls = new All.GUI.Message.ListMessageControl(msgInfos, this, err,  cfBox);
                 ctls.Margin = new Thickness(0, 0, 0, 10);
                 listMsg.Add(msgInfos);
                 Grid.SetColumn(ctls, 0);

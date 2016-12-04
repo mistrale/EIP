@@ -91,26 +91,27 @@
             </Grid>
         </Border>
         <GUI:PopField x:Name="optionsComment" HorizontalAlignment="Left" Margin="0,9,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
-        <GUI:ErrorControl x:Name="errControl" HorizontalAlignment="Left" Margin="1,10,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
 
         <Image x:Name="waitingImage" HorizontalAlignment="Left" Height="42" Margin="22,115,0,0" VerticalAlignment="Top" Width="39" Source="ms-appx:///Assets/update.png" Visibility="Collapsed"/>
         <TextBlock x:Name="titleBox" HorizontalAlignment="Left" Margin="88,19,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="22" Width="219" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
-        <Button x:ConnectionId='10'                     x:Name="announceButton" Content="" HorizontalAlignment="Left" Margin="55,220,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="59" Visibility="Collapsed">
+        <Button x:ConnectionId='10' x:Name="photoButton"                            Content="" HorizontalAlignment="Left" Margin="50,218,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10">
+            <Button.Background>
+                <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/picture.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:ConnectionId='11'                     x:Name="announceButton" Content="" HorizontalAlignment="Left" Margin="127,219,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="59" Visibility="Collapsed">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/announce.png"/>
             </Button.Background>
         </Button>
         <GUI:InputBox x:Name="inputBox" HorizontalAlignment="Left" Margin="7,-8,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
-        <Button x:ConnectionId='11'                                       x:Name="associationButton_Copy" Content="" HorizontalAlignment="Left" Margin="196,217,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="59" Visibility="Collapsed">
+        <Button x:ConnectionId='12'                                       x:Name="associationButton_Copy" Content="" HorizontalAlignment="Left" Margin="196,217,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="59" Visibility="Collapsed">
             <Button.Background>
                 <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/home.png"/>
             </Button.Background>
         </Button>
-        <Button x:ConnectionId='12' x:Name="photoButton"                            Content="" HorizontalAlignment="Left" Margin="50,218,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Height="10">
-            <Button.Background>
-                <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/picture.png"/>
-            </Button.Background>
-        </Button>
+        <GUI:ErrorControl x:Name="errControl" HorizontalAlignment="Left" Margin="1,10,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
+        <GUI:ConfirmBox x:Name="cfBox" HorizontalAlignment="Left" Margin="0,6,0,0" VerticalAlignment="Top" Width="398" Visibility="Collapsed"/>
     </Grid>
 </Page>
 
