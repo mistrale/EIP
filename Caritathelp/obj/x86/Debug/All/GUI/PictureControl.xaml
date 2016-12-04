@@ -1,0 +1,33 @@
+﻿<UserControl
+    x:Class="Caritathelp.All.GUI.PictureControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Caritathelp.All.GUI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="380"
+    d:DesignWidth="380">
+
+    <Border CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" Background="White" Margin="0,0,0,0.667">
+
+        <Grid>
+            <Ellipse Name="image" HorizontalAlignment="Left" Height="324" Margin="10,43,0,0" Stroke="#FFACB8AE" VerticalAlignment="Top" Width="357">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="ms-appx:/Assets/Logo.png"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Border CornerRadius="5" BorderBrush="#FFC2C2C2" BorderThickness="0,1,1,1" HorizontalAlignment="Left" Height="38" Margin="318,0,0,0" VerticalAlignment="Top" Width="59" Background="#FFFF6E6E">
+            </Border>
+            <Button x:ConnectionId='1' x:Name="delete"                       Content="" HorizontalAlignment="Left" Margin="294,-10,-26,0" VerticalAlignment="Top" Width="58" BorderThickness="0" BorderBrush="{x:Null}">
+                <Button.Background>
+                    <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/delete.png"/>
+                </Button.Background>
+            </Button>
+            <Border CornerRadius="5" BorderBrush="#FFB3B3B3" BorderThickness="1" HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="318" Background="#FF53A634">
+                <Button x:ConnectionId='2' x:Name="defaut"                       Content="Définir comme image par défaut" HorizontalAlignment="Left" Margin="-0.833,-10.833,-0.5,-9.5" VerticalAlignment="Top" Width="318" BorderBrush="{x:Null}"/>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>
+

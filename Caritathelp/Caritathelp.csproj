@@ -136,6 +136,9 @@
     <Compile Include="All\GUI\Notification.xaml.cs">
       <DependentUpon>Notification.xaml</DependentUpon>
     </Compile>
+    <Compile Include="All\GUI\PictureControl.xaml.cs">
+      <DependentUpon>PictureControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="All\GUI\PopField.xaml.cs">
       <DependentUpon>PopField.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,9 @@
     </Compile>
     <Compile Include="All\Models\Association.cs" />
     <Compile Include="All\Models\Event.cs" />
+    <Compile Include="All\Models\GenericAlbum.xaml.cs">
+      <DependentUpon>GenericAlbum.xaml</DependentUpon>
+    </Compile>
     <Compile Include="All\Models\GenericCreationModel.xaml.cs">
       <DependentUpon>GenericCreationModel.xaml</DependentUpon>
     </Compile>
@@ -246,6 +252,7 @@
     <Content Include="Assets\message.png" />
     <Content Include="Assets\messageON.png" />
     <Content Include="Assets\more.png" />
+    <Content Include="Assets\picture.png" />
     <Content Include="Assets\plusbutton.png" />
     <Content Include="Assets\search.png" />
     <Content Include="Assets\send.png" />
@@ -341,6 +348,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="All\GUI\PictureControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="All\GUI\PopField.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -350,6 +361,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="All\GUI\SearchItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="All\Models\GenericAlbum.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

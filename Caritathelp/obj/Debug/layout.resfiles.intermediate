@@ -28,6 +28,7 @@ Assets\member.png
 Assets\message.png
 Assets\messageON.png
 Assets\more.png
+Assets\picture.png
 Assets\plusbutton.png
 Assets\search.png
 Assets\send.png
@@ -61,11 +62,13 @@ All\GUI\Message\ListMessageControl.xbf
 All\GUI\Message\MessageControl.xbf
 All\GUI\NewControle.xbf
 All\GUI\Notification.xbf
+All\GUI\PictureControl.xbf
 All\GUI\PopField.xbf
 All\GUI\ReceivedInviation.xbf
 All\GUI\SearchItem.xbf
 All\Inscription.xbf
 All\MainPage.xbf
+All\Models\GenericAlbum.xbf
 All\Models\GenericCreationModel.xbf
 All\Models\GenericInvitation.xbf
 All\Models\GenericListModel.xbf

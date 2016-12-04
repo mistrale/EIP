@@ -974,3 +974,13 @@ C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\GUI\CreateGUI\HourControl
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\GUI\CreateGUI\HourControl.g.cs
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\GUI\CreateGUI\HourControl.xaml
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\GUI\CreateGUI\HourControl.xbf
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\PictureControl.xbf
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericAlbum.xbf
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\GUI\PictureControl.g.i.cs
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\GUI\PictureControl.g.cs
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericAlbum.g.i.cs
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericAlbum.g.cs
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\GUI\PictureControl.xaml
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericAlbum.xaml
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\GUI\PictureControl.xbf
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\GenericAlbum.xbf

@@ -284,8 +284,10 @@
     </RootType>
     <RootType FullName="Caritathelp.All.GUI.NewControle" />
     <RootType FullName="Caritathelp.All.GUI.Notification" />
+    <RootType FullName="Caritathelp.All.GUI.PictureControl" />
     <RootType FullName="Caritathelp.All.GUI.ReceivedInviation" />
     <RootType FullName="Caritathelp.All.GUI.SearchItem" />
+    <RootType FullName="Caritathelp.All.Models.GenericAlbum" />
     <RootType FullName="Caritathelp.All.Models.GenericCreationModel" />
     <RootType FullName="Windows.UI.Xaml.Controls.RadioButton">
       <RootProperty Name="Content" />

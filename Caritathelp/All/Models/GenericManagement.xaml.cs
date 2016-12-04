@@ -45,6 +45,14 @@ namespace Caritathelp.All.Models
             Frame.Navigate(typeof(GenericCreationModel), tmp);
         }
 
+        public void managePhotos(object sender, RoutedEventArgs e)
+        {
+            PictureModel infos = new PictureModel();
+            infos.isAdmin = true;
+            infos.model = model;
+            this.Frame.Navigate(typeof(GenericAlbum), infos);
+        }
+
         public void manageInvitationClick(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(GenericInvitation), model);
@@ -132,6 +140,9 @@ namespace Caritathelp.All.Models
                         break;
                     case ButtonManagement.GET_NOTIFICATION:
                         btn.setControls(entry.Key, getNotification, entry.Value.First().Key);
+                        break;
+                    case ButtonManagement.MANAGE_ALBUM:
+                        btn.setControls(entry.Key, managePhotos, entry.Value.First().Key);
                         break;
                 }
                 Grid.SetColumn(btn, 1);

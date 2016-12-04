@@ -231,3 +231,14 @@ C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\x86\Debug\MultipleQualifiersPerDime
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\x86\Debug\Caliburn.Micro.Extensions.pri.xml
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\x86\Debug\Caliburn.Micro.Platform.pri.xml
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\x86\Debug\ProjectArchitectures.txt
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\x86\Debug\All\GUI\PictureControl.xbf
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\x86\Debug\All\Models\GenericAlbum.xbf
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\x86\Debug\Caritathelp.csprojResolveAssemblyReference.cache
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\x86\Debug\All\GUI\PictureControl.g.i.cs
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\x86\Debug\All\GUI\PictureControl.g.cs
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\x86\Debug\All\Models\GenericAlbum.g.i.cs
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\x86\Debug\All\Models\GenericAlbum.g.cs
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\x86\Debug\All\GUI\PictureControl.xaml
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\x86\Debug\All\Models\GenericAlbum.xaml
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\x86\Debug\All\GUI\PictureControl.xbf
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\x86\Debug\All\Models\GenericAlbum.xbf

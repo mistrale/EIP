@@ -22,6 +22,7 @@ namespace Caritathelp.All.Models
 
                 { "Gérer les invitations", new Dictionary<string, ButtonManagement> { { "volunteer", ButtonManagement.MANAGE_INVITATION } } },
 
+                { "Gérer les photos", new Dictionary<string, ButtonManagement> { { "assoc", ButtonManagement.MANAGE_ALBUM } } },
 
          //       { "Modifier mon mot de passe", new Dictionary<string, ButtonManagement> { { "", ButtonManagement.DELETE_RESOURCE } } },
                 { "Notifications", new Dictionary<string, ButtonManagement> { { "", ButtonManagement.GET_NOTIFICATION } } },

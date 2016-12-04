@@ -28,6 +28,13 @@ namespace Caritathelp.All.Models
         MANAGE_RELATION = 5,
         GET_RESOURCES = 6,
         GET_NOTIFICATION = 7,
+        MANAGE_ALBUM = 8
+    }
+
+    public class PictureModel
+    {
+        public bool isAdmin { get; set; }
+        public Model model { get; set; }
     }
 
     public class FormModel

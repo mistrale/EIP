@@ -354,5 +354,13 @@ namespace Caritathelp.All.Models
             tmp.listTypeModel = "shelter";
             Frame.Navigate(typeof(GenericListModel), tmp);
         }
+
+        private void photoButton_Click(object sender, RoutedEventArgs e)
+        {
+            PictureModel tmp = new PictureModel();
+            tmp.isAdmin = false;
+            tmp.model = model;
+            Frame.Navigate(typeof(GenericAlbum), tmp);
+        }
     }
 }

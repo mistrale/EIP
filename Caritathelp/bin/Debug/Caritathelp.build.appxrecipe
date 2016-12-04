@@ -136,6 +136,9 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\more.png">
       <PackagePath>Assets\more.png</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\picture.png">
+      <PackagePath>Assets\picture.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\Assets\plusbutton.png">
       <PackagePath>Assets\plusbutton.png</PackagePath>
     </AppxPackagedFile>
@@ -244,6 +247,9 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\Notification.xbf">
       <PackagePath>All\GUI\Notification.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\PictureControl.xbf">
+      <PackagePath>All\GUI\PictureControl.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\PopField.xbf">
       <PackagePath>All\GUI\PopField.xbf</PackagePath>
     </AppxPackagedFile>
@@ -252,6 +258,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\SearchItem.xbf">
       <PackagePath>All\GUI\SearchItem.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericAlbum.xbf">
+      <PackagePath>All\Models\GenericAlbum.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericCreationModel.xbf">
       <PackagePath>All\Models\GenericCreationModel.xbf</PackagePath>
