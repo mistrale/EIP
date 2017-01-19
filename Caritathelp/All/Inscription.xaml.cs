@@ -36,18 +36,18 @@ namespace Caritathelp.All
         {
             if (NameTextBox.Text == String.Empty || NameTextBox.Text.Equals("Nom", StringComparison.Ordinal))
             {
-                warningTextBlock.Text = "Name empty.";
+                warningTextBlock.Text = "Champs 'nom' vide.";
                 return false;
             }
             
             if (FirstNameTextBox.Text == String.Empty || FirstNameTextBox.Text.Equals("Prénom", StringComparison.Ordinal))
             {
-                warningTextBlock.Text = "FirstName empty.";
+                warningTextBlock.Text = "Champs 'prénom' vide.";
                 return false;
             }
             if (City.Text == String.Empty || City.Text.Equals("Ville", StringComparison.Ordinal))
             {
-                warningTextBlock.Text = "City empty.";
+                warningTextBlock.Text = "Champs 'ville' vide.";
                 return false;
             }
             TextBlock obj = (TextBlock)(GenreBox.SelectedItem);
@@ -108,6 +108,11 @@ namespace Caritathelp.All
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+        }
+
+        private void RegisterButton_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
         }
     }
 }

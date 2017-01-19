@@ -24,6 +24,9 @@ using System.Diagnostics;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Documents;
 using Windows.UI.Text;
+using Windows.Services.Maps;
+using Windows.Devices.Geolocation;
+using Windows.Web.Http;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -86,6 +89,8 @@ namespace Caritathelp.All
 
         private async void getNews()
         {
+            // The address or business to geocode.
+
             int j = 0;
             HttpHandler http = HttpHandler.getHttp();
             Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest("/news", null, HttpHandler.TypeRequest.GET);
@@ -119,6 +124,7 @@ namespace Caritathelp.All
         public Accueil()
         {
             this.InitializeComponent();
+
             getNews();
             optionsComment.setCurrentPage(this, typeof(Accueil), null, errorControl, cfBox);
         }

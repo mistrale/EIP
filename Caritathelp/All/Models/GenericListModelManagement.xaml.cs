@@ -72,7 +72,23 @@ namespace Caritathelp.All.Models
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             infos = e.Parameter as InfosListModel;
-            title.Text = infos.listTypeModel;
+            if (infos.listTypeModel.Equals("assoc", StringComparison.Ordinal))
+            {
+                title.Text = "Associations";
+
+            }
+            else if (infos.listTypeModel.Equals("event", StringComparison.Ordinal))
+            {
+                title.Text = "Evenements";
+            }
+            else if (infos.listTypeModel.Equals("volunteer", StringComparison.Ordinal))
+            {
+                title.Text = "Volontaires";
+            }
+            else if (infos.listTypeModel.Equals("shelter", StringComparison.Ordinal))
+            {
+                title.Text = "Centres";
+            }
             initListModel();
         }
     }

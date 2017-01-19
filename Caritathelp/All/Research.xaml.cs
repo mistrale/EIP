@@ -65,7 +65,7 @@ namespace Caritathelp.All
                 GUI.SearchItem controls = new GUI.SearchItem();
                 
                 Models.Model infos = Models.Model.createModel((string)searchList[x]["result_type"], (int)searchList[x]["id"]);
-                controls.setItem((string)searchList[x]["thumb_path"], (string)searchList[x]["name"], (string)searchList[x]["result_type"], this, infos);
+                controls.setItem((string)searchList[x]["thumb_path"], (string)searchList[x]["name"], Models.Model.Values[(string)searchList[x]["result_type"]]["Name"], this, infos);
 
                 Grid.SetColumn(controls, 0);
                 Grid.SetRow(controls, x);

@@ -45,7 +45,7 @@ namespace Caritathelp.All
         {
             if (passwordBox1.Password.Equals((string)Windows.Storage.ApplicationData.Current.LocalSettings.Values["password"], StringComparison.Ordinal))
             {
-                err.printMessage("Vous devew choisir un mot de passe différent de l'ancien.", GUI.ErrorControl.Code.FAILURE);
+                err.printMessage("Vous devez choisir un mot de passe différent de l'ancien.", GUI.ErrorControl.Code.FAILURE);
                 return;
             }
             if (!passwordBox1.Password.Equals(passwordBox2.Password, StringComparison.Ordinal))

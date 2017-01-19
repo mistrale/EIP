@@ -44,6 +44,7 @@ namespace Caritathelp.All.GUI
 
         private async void responseToNotification(bool isTrue)
         {
+            Debug.WriteLine("STATUS : " + isTrue);
             var values = new List<KeyValuePair<string, string>>
                         {
                             new KeyValuePair<string, string>("notif_id", idNotif.ToString()),

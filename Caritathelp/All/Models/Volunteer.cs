@@ -12,6 +12,7 @@ namespace Caritathelp.All.Models
         {
             mngButton = new Dictionary<string, Dictionary<string, ButtonManagement>>
             {
+                { "Mon profil", new Dictionary<string, ButtonManagement> { { "volunteer", ButtonManagement.MY_PROFIL } } },
                 { "Créer une association", new Dictionary<string, ButtonManagement> { { "assoc", ButtonManagement.CREATE_RESOURCE } } },
 
                 { "Mes associations", new Dictionary<string, ButtonManagement> { { "assoc", ButtonManagement.MANAGE_RELATION } } },

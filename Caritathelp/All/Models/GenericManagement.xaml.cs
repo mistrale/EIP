@@ -68,6 +68,11 @@ namespace Caritathelp.All.Models
             this.Frame.Navigate(typeof(GenericNotification), model);
         }
 
+        public void seeMyProfil(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(GenericProfil), model);
+        }
+
         public void manageRelationClick(object sender, RoutedEventArgs e)
         {
             InfosListModel tmp = new InfosListModel();
@@ -84,6 +89,10 @@ namespace Caritathelp.All.Models
             cfBox.setRoutedEvent(deleteRessourceClick_real);
         }
 
+        public void seeEmergencyResponse(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(EmergencyResponse), model.getID().ToString());
+        }
 
         public async void deleteRessourceClick_real(object sender, RoutedEventArgs e)
         {
@@ -158,6 +167,12 @@ namespace Caritathelp.All.Models
                         break;
                     case ButtonManagement.MANAGE_ALBUM:
                         btn.setControls(entry.Key, managePhotos, entry.Value.First().Key);
+                        break;
+                    case ButtonManagement.SEE_EMERGENCY:
+                        btn.setControls(entry.Key, seeEmergencyResponse, entry.Value.First().Key);
+                        break;
+                    case ButtonManagement.MY_PROFIL:
+                        btn.setControls(entry.Key, seeMyProfil, entry.Value.First().Key);
                         break;
                 }
                 Grid.SetColumn(btn, 1);

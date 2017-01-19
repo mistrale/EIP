@@ -262,6 +262,9 @@
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\SearchItem.xbf">
       <PackagePath>All\GUI\SearchItem.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\EmergencyResponse.xbf">
+      <PackagePath>All\Models\EmergencyResponse.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\GenericAlbum.xbf">
       <PackagePath>All\Models\GenericAlbum.xbf</PackagePath>
     </AppxPackagedFile>

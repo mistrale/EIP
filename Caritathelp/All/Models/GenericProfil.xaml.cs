@@ -110,11 +110,13 @@ namespace Caritathelp.All.Models
         private async void accepteInvit()
         {
             HttpHandler http = HttpHandler.getHttp();
+            Debug.WriteLine("notif id : " + notif_id);
             var values = new List<KeyValuePair<string, string>>
                     {
                         new KeyValuePair<string, string>("notif_id", notif_id),
                         new KeyValuePair<string, string>("acceptance", "true")
-                    }; Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[model.getType()]["AcceptURL"], values, HttpHandler.TypeRequest.POST);
+                    };
+            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(Model.Values[model.getType()]["AcceptURL"], values, HttpHandler.TypeRequest.POST);
             if ((int)jObject["status"] == 200)
             {
                 Frame.Navigate(typeof(GenericProfil), model);
@@ -245,7 +247,7 @@ namespace Caritathelp.All.Models
                     if (((string)notifications[x]["notif_type"]).Equals("AddFriend", StringComparison.Ordinal)
                      && model.getID().ToString().Equals((string)notifications[x]["sender_id"], StringComparison.Ordinal))
                         notif_id = (string)notifications[x]["id"];
-                    if (((string)notifications[x]["notif_type"]).Equals("InviteGuests", StringComparison.Ordinal)
+                    if (((string)notifications[x]["notif_type"]).Equals("InviteGuest", StringComparison.Ordinal)
                          && model.getID().ToString().Equals((string)notifications[x]["event_id"], StringComparison.Ordinal))
                         notif_id = (string)notifications[x]["id"];
                 }

@@ -21,6 +21,7 @@
         </Button>
         <ScrollViewer x:Name="scroll" Background="{x:Null}" HorizontalAlignment="Left" Height="522" Margin="10,70,0,0" VerticalAlignment="Top" Width="380"/>
         <GUI:ErrorControl x:Name="err"  HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
+        <GUI:ConfirmBox x:Name="cfBox" HorizontalAlignment="Left" Margin="0,9,0,0" VerticalAlignment="Top" Width="400" Visibility="Collapsed"/>
     </Grid>
 </Page>
 

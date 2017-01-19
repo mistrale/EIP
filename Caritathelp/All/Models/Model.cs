@@ -30,7 +30,9 @@ namespace Caritathelp.All.Models
         GET_RESOURCES = 6,
         GET_NOTIFICATION = 7,
         MANAGE_ALBUM = 8,
-        UPDATE_PASSWORD = 9
+        UPDATE_PASSWORD = 9,
+        SEE_EMERGENCY = 10,
+        MY_PROFIL = 11,
     }
 
     public class PictureModel
@@ -224,25 +226,7 @@ namespace Caritathelp.All.Models
 
                     { "Model", "shelter"},
                     { "TypeID", "shelter_id"},
-                    //{ "CancelTypeID", "volunteer_id"},
-                    //{ "ResourceManagement", "guests"},
 
-                    //{ "AddURL", "/guests/join"},
-                    //{ "RemoveURL", "/guests/leave"},
-                    //{ "AcceptURL", "/guests/reply_invite"},
-                    //{ "AcceptInvitation", "/guests/reply_guest"},
-                    //{ "InviteURL", "/guests/invite"},
-                    //{ "CancelInviteURL", "/guests/uninvite" },
-                    //{ "UpgradeURL", "/guests/upgrade" },
-                    //{ "KickURL", "/guests/remove" },
-
-                    //{ "NbRelationType", "nb_friends_members"},
-                    //{ "ResourceURL", "/events"},
-                    //{ "RightsType", "rights" },
-                    //{ "WaitingInvitation", "/guests/waiting" },
-                    //{ "SendInvitation", "/guests/invited" },
-
-                    // creation / update assoc
                     { "CreationType", "Création de centre"},
                     { "Nom", "name" },
                     { "Adresse", "address" },

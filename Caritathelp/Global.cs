@@ -49,6 +49,11 @@ namespace Caritathelp
             return http;
         }
 
+        public static void setHeaderUuid(string uuid)
+        {
+            httpClient.DefaultRequestHeaders.Add("uid", uuid);
+        }
+
         public async Task<Newtonsoft.Json.Linq.JObject> sendRequest(string url, List<KeyValuePair<string, string> > values, TypeRequest req)
         {
             Newtonsoft.Json.Linq.JObject err = new Newtonsoft.Json.Linq.JObject();

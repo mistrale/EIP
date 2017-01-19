@@ -22,11 +22,9 @@ namespace Caritathelp.All.GUI
     public sealed partial class Notification : UserControl
     {
         private int idNotif;
-        private string url;
-        private string content;
-        private Models.Model model;
         Page page;
-        object parameter;
+        private ConfirmBox conf;
+        private ErrorControl err;
 
 
         public enum NotificationType
@@ -35,19 +33,26 @@ namespace Caritathelp.All.GUI
             InformationNotification,
         }
 
-        public Notification(Newtonsoft.Json.Linq.JObject obj, Models.Model infos, string sender_name, Page page)
+        public Notification(Newtonsoft.Json.Linq.JObject obj, Models.Model infos, string sender_name, Page page, ConfirmBox confir, ErrorControl err)
         {
             this.InitializeComponent();
             string type = (string)obj["notif_type"];
-
+            idNotif = (int)obj["id"];
+            conf = confir;
+            this.err = err;
             if (type.Equals("NewMember", StringComparison.Ordinal)
                 || type.Equals("NewGuest", StringComparison.Ordinal)
-                || type.Equals("Emergency", StringComparison.Ordinal))
+                || type.Equals("InviteMember", StringComparison.Ordinal)
+                || type.Equals("InviteGuest", StringComparison.Ordinal))
             {
                 button.Click += ProfilClick;
                 Debug.WriteLine("OKKKK");
             }
-            else
+            else if (type.Equals("Emergency", StringComparison.Ordinal))
+            {
+                button.Click += emergency_Click;
+            }
+            else 
             {
                 button.Click += button_Click;
             }
@@ -70,6 +75,33 @@ namespace Caritathelp.All.GUI
             myBrush.ImageSource =
                 new BitmapImage(new Uri(Global.API_IRL + "" + obj["sender_thumb_path"], UriKind.Absolute));
             logo.Fill = myBrush;
+        }
+
+        private void emergency_Click(object sender, RoutedEventArgs e)
+        {
+            conf.Visibility = Visibility.Visible;
+            conf.setRoutedEvent(emergency_confirm, "Voulez-vous confirmer votre présence à cet évènement ?");
+        }
+
+
+        private async void emergency_confirm(object sender, RoutedEventArgs e) {
+            HttpHandler http = HttpHandler.getHttp();
+            Debug.WriteLine("on test ici ");
+            string url = "/notifications/" + idNotif + "/reply_emergency";
+            var values = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("id", idNotif.ToString()),
+                        new KeyValuePair<string, string>("accept", "true")
+                    };
+
+            Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest(url, values, HttpHandler.TypeRequest.PUT);
+            if ((int)jObject["status"] != 200)
+            {
+                err.printMessage((string)jObject["message"], ErrorControl.Code.FAILURE);
+            } else
+            {
+                err.printMessage((string)jObject["response"], ErrorControl.Code.SUCCESS);
+            }
         }
 
         private void button_Click(object sender, RoutedEventArgs e)

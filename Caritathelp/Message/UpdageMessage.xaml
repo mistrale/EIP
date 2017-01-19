@@ -12,7 +12,7 @@
     <Grid>
 
         <All:BasePage/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="24,10,0,0" TextWrapping="Wrap" Text="Nouvelle conversation" VerticalAlignment="Top" Height="24" Width="325" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="24,10,0,0" TextWrapping="Wrap" Text="Informations" VerticalAlignment="Top" Height="24" Width="325" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
         <Border  CornerRadius="5" BorderBrush="#FFBFCACC" BorderThickness="1.5" HorizontalAlignment="Left" Height="77" Margin="10,62,0,0" VerticalAlignment="Top" Width="380" Background="White">
             <Grid>
                 <Border CornerRadius="5" BorderBrush="#FFBFCACC" HorizontalAlignment="Left" Height="53" Margin="10,10,0,0" VerticalAlignment="Top" Width="357" BorderThickness="1">

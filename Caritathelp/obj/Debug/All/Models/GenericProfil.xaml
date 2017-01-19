@@ -86,7 +86,7 @@
                         <ImageBrush Stretch="Uniform" ImageSource="ms-appx:///Assets/send.png"/>
                     </Button.Background>
                 </Button>
-                <CheckBox x:Name="privateBox" Content="prive" HorizontalAlignment="Left" Margin="16,44,0,-5" VerticalAlignment="Top" Height="58" Background="{x:Null}" BorderBrush="#FF53A634" Foreground="#FF72888E"/>
+                <CheckBox x:Name="privateBox" Content="prive" HorizontalAlignment="Left" Margin="16,44,0,-5" VerticalAlignment="Top" Height="58" Background="#FF44CB1C" BorderBrush="#FF53A634" Foreground="#FF72888E"/>
 
             </Grid>
         </Border>

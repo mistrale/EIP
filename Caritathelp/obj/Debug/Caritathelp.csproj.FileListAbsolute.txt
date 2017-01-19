@@ -994,3 +994,8 @@ C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\GUI\ConfirmBox.g.cs
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\GUI\ConfirmBox.xaml
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\GUI\ConfirmBox.xbf
 C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\GUI\ConfirmBox.xbf
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\bin\Debug\All\Models\EmergencyResponse.xbf
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\EmergencyResponse.g.i.cs
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\EmergencyResponse.g.cs
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\EmergencyResponse.xaml
+C:\Users\Sikorav\Desktop\EIP\Caritathelp\obj\Debug\All\Models\EmergencyResponse.xbf

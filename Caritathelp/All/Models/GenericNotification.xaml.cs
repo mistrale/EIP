@@ -87,11 +87,11 @@ namespace Caritathelp.All.Models
                                 + (string)newsResponse[i]["event_name"];
                             break;
                         case "InviteMember":
-                            tmp = new Volunteer(model.getID());
+                            tmp = new Association((int)newsResponse[i]["assoc_id"]);
                             sender_name = "Vous avez ete invite a rejoindre l'association " + (string)newsResponse[i]["assoc_name"];
                             break;
                         case "InviteGuest":
-                            tmp = new Association(model.getID());
+                            tmp = new Event((int)newsResponse[i]["event_id"]);
                             sender_name = "Vous avez ete invite a participer a l'evenement " + (string)newsResponse[i]["event_name"];
                             break;
                         case "NewMember":
@@ -112,7 +112,7 @@ namespace Caritathelp.All.Models
                     }
 
                     newsGrid.RowDefinitions.Add(new RowDefinition());
-                    GUI.Notification btn = new GUI.Notification((Newtonsoft.Json.Linq.JObject)(newsResponse[i]), tmp, sender_name, this);
+                    GUI.Notification btn = new GUI.Notification((Newtonsoft.Json.Linq.JObject)(newsResponse[i]), tmp, sender_name, this, cfBox, err);
                     btn.Margin = new Thickness(0, 0, 0, 20);
                     Grid.SetColumn(btn, 0);
                     Grid.SetRow(btn, i);

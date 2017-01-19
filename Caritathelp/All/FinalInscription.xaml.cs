@@ -47,33 +47,33 @@ namespace Caritathelp.All
         {
             if (EmailTextBox.Text == String.Empty || EmailTextBox.Text.Equals("Email", StringComparison.Ordinal))
             {
-                warningTextBlock.Text = "Email empty.";
+                warningTextBlock.Text = "Champs 'email' vide.";
                 return false;
             }
             if (!ValidateEmail(EmailTextBox.Text))
             {
-                warningTextBlock.Text = "Invalid email.";
+                warningTextBlock.Text = "Champs 'email' invalide.";
                 return false;
             }
             if (PasswordPasswordBox.Password == String.Empty || PasswordPasswordBox.Password.Equals("Password", StringComparison.Ordinal))
             {
-                warningTextBlock.Text = "Password empty.";
+                warningTextBlock.Text = "Champs 'password' vide.";
                 return false;
             }
             if (PasswordConfirmationPasswordBox.Password == String.Empty
                 || PasswordConfirmationPasswordBox.Password.Equals("Confirmation Password", StringComparison.Ordinal))
             {
-                warningTextBlock.Text = "CofirmationPassword empty.";
+                warningTextBlock.Text = "Champs 'confirmation mot de passe' vide.";
                 return false;
             }
             if (!PasswordPasswordBox.Password.Equals(PasswordConfirmationPasswordBox.Password, StringComparison.Ordinal))
             {
-                warningTextBlock.Text = "Password doesn't match.";
+                warningTextBlock.Text = "Champs 'mot de passe' invalide avec 'confirmation'.";
                 return false;
             }
             if (conditionBox.IsChecked == false)
             {
-                warningTextBlock.Text = "Conditions not checked";
+                warningTextBlock.Text = "Conditions non acceptées.";
                 return false;
             }
             return true;
@@ -161,6 +161,11 @@ namespace Caritathelp.All
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+        }
+
+        private void RegisterButton_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
         }
     }
 }

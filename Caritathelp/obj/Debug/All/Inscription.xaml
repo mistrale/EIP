@@ -68,12 +68,17 @@
         	Text="Naissance" VerticalAlignment="Top" 
         	Height="40" Width="161" FontSize="32" Foreground="White" TextAlignment="Center"/>
         <TextBlock x:Name="warningTextBlock" 
-                   HorizontalAlignment="Left" Margin="25,568,0,0"
+                   HorizontalAlignment="Left" Margin="25,607,0,0"
                    TextWrapping="Wrap" VerticalAlignment="Top" 
-                   Height="44" Width="353" Foreground="#FFF31919"
+                   Height="32" Width="353" Foreground="#FFF31919"
                    FontSize="24" TextAlignment="Center"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="84" Margin="18,11,0,0" VerticalAlignment="Top" Width="92" Source="ms-appx:///Assets/2017_logo_caritathelp.png"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="99,31,0,0" TextWrapping="Wrap" Text="Caritathelp" VerticalAlignment="Top" Height="56" Width="235" FontSize="36" TextAlignment="Center" FontWeight="Bold"/>
+        <Button x:ConnectionId='5' x:Name="RegisterButton_Copy"
+            Content="Annuler" HorizontalAlignment="Left" 
+            Margin="25,539,0,0" VerticalAlignment="Top"
+                                             
+            Height="73" Width="353" Background="#FF4C4949" BorderThickness="0"/>
     </Grid>
 </Page>
 

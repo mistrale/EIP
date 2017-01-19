@@ -152,6 +152,9 @@
       <DependentUpon>SearchItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="All\Models\Association.cs" />
+    <Compile Include="All\Models\EmergencyResponse.xaml.cs">
+      <DependentUpon>EmergencyResponse.xaml</DependentUpon>
+    </Compile>
     <Compile Include="All\Models\Event.cs" />
     <Compile Include="All\Models\GenericAlbum.xaml.cs">
       <DependentUpon>GenericAlbum.xaml</DependentUpon>
@@ -371,6 +374,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="All\GUI\SearchItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="All\Models\EmergencyResponse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

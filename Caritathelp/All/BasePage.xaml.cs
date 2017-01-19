@@ -237,7 +237,6 @@ namespace Caritathelp.All
                     {
                         Debug.WriteLine("failed to connect");
                     }
-                    Debug.WriteLine("x : " + geoposition.Coordinate.Latitude.ToString("0.00") + " et y : " + geoposition.Coordinate.Longitude.ToString("0.00"));
                     //With this 2 lines of code, the app is able to write on a Text Label the Latitude and the Longitude, given by {{Icode|geoposition}}
                 }
                 //If an error is catch 2 are the main causes: the first is that you forgot to include ID_CAP_LOCATION in your app manifest. 
@@ -246,7 +245,7 @@ namespace Caritathelp.All
                 {
                     Debug.WriteLine("Failed getting position : " + ex.Message);
                 }
-                await Task.Delay(300000);
+                await Task.Delay(1500000);
             }
 
         }

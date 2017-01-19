@@ -40,6 +40,11 @@ namespace Caritathelp.All.GUI
 
         public async void sendCommentClick(object sender, RoutedEventArgs e)
         {
+            seeComment(true);
+        }
+
+        public async void writesComments()
+        {
             if (!commentBox.Text.Equals("Votre commentaire ...", StringComparison.Ordinal)
                            && !commentBox.Text.Equals("", StringComparison.Ordinal))
             {
@@ -72,9 +77,15 @@ namespace Caritathelp.All.GUI
 
         public void seeCommentClick(object sender, RoutedEventArgs e)
         {
+            seeComment(false);
+
+        }
+
+        public async void seeComment(bool write)
+        {
             if (!hasClickSeeComment)
             {
-                getComments();
+                getComments(write);
                 hasClickSeeComment = true;
             }
         }
@@ -89,7 +100,7 @@ namespace Caritathelp.All.GUI
             options.setObject(obj);
         }
 
-        private async void getComments()
+        private async void getComments(bool write)
         {
             HttpHandler http = HttpHandler.getHttp();
             string url = "/news/" + idNews + "/comments";
@@ -117,6 +128,10 @@ namespace Caritathelp.All.GUI
                 this.Height += 54;
             }
             scroll.Content = commentsGrid;
+            if (write == true)
+            {
+                writesComments();
+            }
 
         }
 

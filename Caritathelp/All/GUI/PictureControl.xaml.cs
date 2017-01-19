@@ -24,13 +24,17 @@ namespace Caritathelp.All.GUI
         public int id { get; set; }
         public Models.PictureModel infos;
         private ConfirmBox cfBox;
+        private ErrorControl err;
+        private bool isMain;
 
-        public PictureControl(Newtonsoft.Json.Linq.JObject jObject,  Models.PictureModel infos, ConfirmBox cf)
+        public PictureControl(Newtonsoft.Json.Linq.JObject jObject,  Models.PictureModel infos, ConfirmBox cf, GUI.ErrorControl err)
         {
             this.InitializeComponent();
             this.cfBox = cf;
             this.id = (int)jObject["id"];
+            this.isMain = (bool)jObject["is_main"];
             this.infos = infos;
+            this.err = err;
             if (!infos.isAdmin)
             {
                 grid.Visibility = Visibility.Collapsed;
@@ -51,6 +55,11 @@ namespace Caritathelp.All.GUI
 
         private async void delete_Click_real(object sender, RoutedEventArgs e)
         {
+            if (this.isMain)
+            {
+                err.printMessage("Vous ne pouvez pas supprimer la photo principale.", ErrorControl.Code.FAILURE);
+                return;
+            }
             HttpHandler http = HttpHandler.getHttp();
             Newtonsoft.Json.Linq.JObject jObject = await http.sendRequest("/pictures/" + id.ToString(), null, HttpHandler.TypeRequest.DELETE);
             if ((int)jObject["status"] != 200)

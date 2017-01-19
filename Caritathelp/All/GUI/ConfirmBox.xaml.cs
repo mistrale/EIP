@@ -26,10 +26,11 @@ namespace Caritathelp.All.GUI
             this.InitializeComponent();
         }
 
-        public void setRoutedEvent(RoutedEventHandler e)
+        public void setRoutedEvent(RoutedEventHandler e, string text = "Etes-vous sûr d'effectuer cette action ?")
         {
             yesButton.Click += e;
             evt = e;
+            errorBlock.Text = text;
         }
 
         private void noButton_Click(object sender, RoutedEventArgs e)

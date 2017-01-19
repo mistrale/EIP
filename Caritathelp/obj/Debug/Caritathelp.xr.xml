@@ -294,6 +294,7 @@
     <RootType FullName="Caritathelp.All.GUI.PictureControl" />
     <RootType FullName="Caritathelp.All.GUI.ReceivedInviation" />
     <RootType FullName="Caritathelp.All.GUI.SearchItem" />
+    <RootType FullName="Caritathelp.All.Models.EmergencyResponse" />
     <RootType FullName="Caritathelp.All.Models.GenericAlbum" />
     <RootType FullName="Caritathelp.All.Models.GenericCreationModel" />
     <RootType FullName="Windows.UI.Xaml.Controls.RadioButton">

@@ -62,8 +62,35 @@ namespace Caritathelp.All.Models
                         controls.setItem((string)searchList[x]["thumb_path"], (string)searchList[x][Model.Values[infos.listTypeModel]["NameType"]], (string)searchList[x]["zipcode"], this, tmp);                       
                     } else
                     {
-                        controls.setItem((string)searchList[x]["thumb_path"], (string)searchList[x][Model.Values[infos.listTypeModel]["NameType"]],
-                     (string)searchList[x][Model.Values[infos.listTypeModel]["NbRelationType"]] + " amis en commun ", this, tmp);
+                        string test = (string)searchList[x]["rights"];
+                        if (test != null) {
+                            string rights = "";
+                            if (test.Equals("waiting", StringComparison.Ordinal))
+                                rights = " (En attente de confirmation)";
+                            if (test.Equals("friend", StringComparison.Ordinal))
+                                rights = " (Ami)";
+
+                            if (test.Equals("member", StringComparison.Ordinal))
+                                rights = " (Membre)";
+                            if (test.Equals("admin", StringComparison.Ordinal))
+                                rights = " (Administrateur)";
+                            if (test.Equals("owner", StringComparison.Ordinal))
+                                rights = " (Proriétaire)";
+
+                            if (test.Equals("guest", StringComparison.Ordinal))
+                                rights = " (Invité)";
+                            if (test.Equals("admin", StringComparison.Ordinal))
+                                rights = "(Administrateur)";
+                            if (test.Equals("host", StringComparison.Ordinal))
+                                rights = " (Hôte)";
+                            controls.setItem((string)searchList[x]["thumb_path"], (string)searchList[x][Model.Values[infos.listTypeModel]["NameType"]],
+rights, this, tmp);
+                        } else
+                        {
+                            controls.setItem((string)searchList[x]["thumb_path"], (string)searchList[x][Model.Values[infos.listTypeModel]["NameType"]],
+                            "", this, tmp);
+                        }
+
                     }
 
 
@@ -97,7 +124,7 @@ namespace Caritathelp.All.Models
             }
             else if (infos.listTypeModel.Equals("event", StringComparison.Ordinal))
             {
-                titleBox.Text = "Evenements";
+                titleBox.Text = "Evènements";
             } else if (infos.listTypeModel.Equals("volunteer", StringComparison.Ordinal))
             {
                 titleBox.Text = "Volontaires";

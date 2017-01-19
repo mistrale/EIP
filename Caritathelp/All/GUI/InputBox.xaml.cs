@@ -39,7 +39,7 @@ namespace Caritathelp.All.GUI
         public async void confirmeSender(object send, RoutedEventArgs e)
         {
             Regex regex = new Regex("[^0-9.-]+"); //regex that matches disallowed text
-            if (textBox.Text.Equals("") || textBox.Text.Equals("Nombre de volontaires a inviter")
+            if (textBox.Text.Equals("") || textBox.Text.Equals("Nombre de volontaires à inviter")
                 || textBox2.Text.Equals("") || textBox2.Text.Equals("Distance maximum(km2)")
                 )
             {
@@ -73,7 +73,7 @@ namespace Caritathelp.All.GUI
             if ((int)jObject["status"] == 200)
             {
                 this.Visibility = Visibility.Collapsed;
-                err.printMessage("Demandes envoyees a " + ((Newtonsoft.Json.Linq.JArray)jObject["response"]).Count + " volontaires", GUI.ErrorControl.Code.SUCCESS);
+                err.printMessage("Demandes envoyées à " + ((Newtonsoft.Json.Linq.JArray)jObject["response"]).Count + " volontaires", GUI.ErrorControl.Code.SUCCESS);
             }
             else
             {

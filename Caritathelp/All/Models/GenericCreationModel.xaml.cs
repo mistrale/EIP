@@ -1,30 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Net.Http;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Tavis.UriTemplates;
-using Windows.ApplicationModel.Activation;
-using Windows.ApplicationModel.Core;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Storage;
-using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
+using Windows.Devices.Geolocation;
+using Windows.Services.Maps;
 using Windows.UI;
-using Windows.UI.Core;
-using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -80,7 +64,43 @@ namespace Caritathelp.All.Models
             return true;
         }
 
+        private async Task addLocation(List<KeyValuePair<string, string>> values, string place)
+        {
+            try
+            {
+                string addressToGeocode = "Paris";
+                double lat = 0;
+                double longi = 0;
+                System.Net.Http.HttpResponseMessage response = null;
+                System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient();
+                response = await httpClient.GetAsync("https://maps.googleapis.com/maps/api/geocode/json?address=" + place + "&key=AIzaSyD_-W6ZlmJ36TyvN_hdbos9LEwGI6UWYTc");
+                response.EnsureSuccessStatusCode();
 
+                string responseString = await response.Content.ReadAsStringAsync();
+
+                Newtonsoft.Json.Linq.JObject jObject = Newtonsoft.Json.Linq.JObject.Parse(responseString);
+
+                if ((string)jObject["status"] == "OK")
+                {
+                    Newtonsoft.Json.Linq.JObject result = (Newtonsoft.Json.Linq.JObject)((Newtonsoft.Json.Linq.JArray)jObject["results"])[0];
+
+                    Newtonsoft.Json.Linq.JObject location = (Newtonsoft.Json.Linq.JObject)((Newtonsoft.Json.Linq.JObject)result["geometry"])["location"];
+
+                    lat = (double)location["lat"];
+
+                    longi = (double)location["lng"];
+                }
+                values.Add(new KeyValuePair<string, string>("latitude", lat.ToString()));
+                values.Add(new KeyValuePair<string, string>("longitude", longi.ToString()));
+
+
+                Debug.WriteLine("lat : " + lat + " et long : " + longi);
+            } catch (Exception e)
+            {
+                Debug.WriteLine("wtf : " + e.Message);
+            }
+
+        }
 
         private bool checkField(List<KeyValuePair<string, string>> values)
         {
@@ -138,10 +158,14 @@ namespace Caritathelp.All.Models
                 Debug.WriteLine("test ca marche pas");
                 return;
             }
-            foreach(KeyValuePair<string, string> na in values)
+            for (int i = 0; i < values.Count; i++ )
             {
-                Debug.WriteLine("Key : " + na.Key + " value : " + na.Value);
+                if (values[i].Key.Equals("place", StringComparison.Ordinal) || values[i].Key.Equals("address", StringComparison.Ordinal))
+                {
+                    await addLocation(values, values[i].Value);
+                }
             }
+
             HttpHandler http = HttpHandler.getHttp();
             Newtonsoft.Json.Linq.JObject jObject1 = null;
 
@@ -152,6 +176,7 @@ namespace Caritathelp.All.Models
                 if (infos.modelType.getType().Equals("volunteer", StringComparison.Ordinal))
                 {
                     jObject1 = await http.sendRequest("/auth", values, HttpHandler.TypeRequest.PUT);
+
                 }
                 else if (!infos.modelType.getType().Equals("shelter", StringComparison.Ordinal))
                 {
@@ -165,6 +190,8 @@ namespace Caritathelp.All.Models
             }
             if ((int)jObject1["status"] != 200)
             {
+
+  
                 err.printMessage((string)jObject1["message"], GUI.ErrorControl.Code.FAILURE);
             }
             else
@@ -182,7 +209,19 @@ namespace Caritathelp.All.Models
                 }
                 else
                 {
-                    Frame.Navigate(typeof(GenericProfil), typeSearch);
+                    if (infos.modelType.getType().Equals("volunteer", StringComparison.Ordinal))
+                    {
+                        Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("password");
+                        Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("id");
+                        Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("thumb_path");
+                        Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("mail");
+                        Windows.Storage.ApplicationData.Current.LocalSettings.Values.Remove("allowgps");
+                        HttpHandler.resetHttp();
+                        this.Frame.Navigate(typeof(MainPage));
+                    } else
+                    {
+                        Frame.Navigate(typeof(GenericProfil), typeSearch);
+                    }
                 }
             }
         }
